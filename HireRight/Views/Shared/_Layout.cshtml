@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <title>@ViewBag.Title - Hire Right</title>
+    @Scripts.Render("~/bundles/scripts") @* -- All jquery/bootstrap is loaded properly in this single bundle -- *@
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default" style="z-index: 5000">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarLinks" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">HireRight</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbarLinks">
+                    <ul class="nav navbar-nav" style="display: inline;">
+                        <li style="display: list-item">@Html.ActionLink("New Clients", "NewClients", "Client")</li>
+                        <li style="display: list-item">@Html.ActionLink("Custom Solutions", "CustomSolutions", "Home")</li>
+                        <li style="display: list-item">@Html.ActionLink("Get in Touch", "Contact", "Contact")</li>
+                        <li style="display: list-item">@Html.ActionLink("Order", "Order", "Order")</li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </header>
+    <div class="body-content container-fluid" >
+        @RenderBody()
+        <hr />
+        <footer>
+            &copy; 2016 - @DateTime.Now.Year <br />
+            Hire Right Consultants&trade;
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

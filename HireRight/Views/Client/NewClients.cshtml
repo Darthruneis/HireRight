@@ -1,0 +1,58 @@
+﻿@model HireRight.Models.NewClientsViewModel
+
+@{
+    ViewBag.Title = "Hire Right, with Hire Right";
+}
+<div class="container-fluid">
+    <div class="row panel">
+        <div class="panel-head">
+            <h2>Hire Right the first time</h2>
+        </div>
+        <p>Janet and Diana are very interested in your company and your needs. Schedule a free 30 minute consultation to discuss your specific needs, issues and frustrations. We will assist you in identifying the types of testing and solutions that will work best for you. Our menu includes both standardized testing, which often has norms for your roles and custom screening for positions. Our highly experienced consultants can assist you with many frustrating issues faced in today’s business world.</p>
+        <p>In addition to testing, we offer:</p>
+        <ul>
+            <li>Custom hiring solutions for any position</li>
+            <li>Identification and resolution suggestions for issues leading to turnover</li>
+            <li>Structured interviews</li>
+            <li>Staff training</li>
+            <li>Executive coaching and selection</li>
+        </ul>
+        @using (Html.BeginForm("SubmitNewClients", "Client", FormMethod.Post, new { style = "margin: 0; padding: 0;" }))
+        {
+            <b>What would you like to do? Check all that apply.</b>
+            <br />
+
+            <div>
+                @Html.CheckBoxFor(x => x.ToTalkToConsultant) Contact Us to talk with a Consultant <br />
+                @Html.CheckBoxFor(x => x.ToScheduleDemo) Schedule a DEMO<br />
+                @Html.CheckBoxFor(x => x.ToTakeSampleAssesment) Take a Sample Assesment<br />
+                @Html.CheckBoxFor(x => x.ToReceiveSample) Receive a Sample Report<br />
+                <div class="panel container-fluid">
+                    <div class="panel panel-head">
+                        <h2>Details</h2>
+                    </div>
+                    To help us service your needs, please provide us with the following information so that we can reply to your needs:<br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">@Html.ValidatedEditorWithLabelFor(x => x.Name)</div>
+                        <div class="col-xs-12 col-sm-4">@Html.ValidatedEditorWithLabelFor(x => x.Email)</div>
+                        <div class="col-xs-12 col-sm-4">@Html.ValidatedEditorWithLabelFor(x => x.Phone)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">@Html.ValidatedEditorWithLabelFor(x => x.Company)</div>
+                        <div class="col-xs-12 col-sm-4">@Html.ValidatedEditorWithLabelFor(x => x.CompanyPosition)</div>
+                        <div class="col-xs-12 col-sm-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>Additional Information (optional)</h2>
+                            @Html.TextAreaFor(x => Model.AdditionalInfo, new { style = "resize: none;", placeholder = "Anything else you'd like us to know?", rows = "5", cols = "150", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div style="margin: 0 auto; width: 100px;">
+                    <input type="submit" value="Send" class="btn btn-Primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

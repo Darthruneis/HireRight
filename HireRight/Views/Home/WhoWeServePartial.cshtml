@@ -1,0 +1,23 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4" style="text-align: center;">
+            <h3>Eight Major Categories</h3>
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("ManufacturingInformationPartial");}</div>
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("StartUpInformationPartial");}</div>
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("AdministrationAndClericalInformationPartial");}</div>
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("CustomerServiceInformationPartial");}</div>
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("ProfessionalServicesInformationPartial"); }</div>
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("MedicalInformationPartial");}</div>
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("OtherIndustriesInformationPartial");}</div>
+        <div class="col-xs-6 col-lg-4">@{ Html.RenderPartial("ManagersInformationPartial");}</div>
+    </div>
+    <div style="margin: 0 auto; width: 200px;">
+        <input type="button" value="Back" onclick="displayIntroDiv();" class="btn btn-primary"/>
+    </div>
+</div>
+<script src="~/Scripts/showHideDiv.js"></script>

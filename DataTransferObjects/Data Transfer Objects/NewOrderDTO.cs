@@ -1,0 +1,23 @@
+﻿using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Models;
+using System;
+using System.Runtime.Serialization;
+
+namespace DataTransferObjects.Data_Transfer_Objects
+{
+    [Serializable]
+    public class NewOrderDTO : DataTransferObjectBase
+    {
+        [DataMember]
+        public CompanyDTO Company { get; set; }
+
+        [DataMember]
+        public OrderDetailsDTO Order { get; set; }
+
+        [DataMember]
+        public ContactDTO PrimaryContact { get; set; }
+
+        [DataMember]
+        public ContactDTO SecondaryContact { get; set; }
+    }
+}

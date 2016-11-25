@@ -1,0 +1,46 @@
+﻿@model HireRight.Models.ContactUsViewModel
+<div class="panel panel-head">
+    <h2>How can we help you?</h2>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        @Html.ValidatedEditorWithLabelFor(x => Model.CompanyName)
+    </div>
+    <div class="col-xs-12 col-md-6">
+        @Html.ValidatedEditorWithLabelFor(x => Model.PositionAtCompany)
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        @Html.ValidatedEditorWithLabelFor(x => Model.FirstName)
+    </div>
+    <div class="col-xs-12 col-md-6">
+        @Html.ValidatedEditorWithLabelFor(x => Model.LastName)
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-4">
+        @Html.ValidatedEditorWithLabelFor(x => Model.Email)
+    </div>
+    <div class="col-xs-12 col-md-4">
+        @Html.ValidatedEditorWithLabelFor(x => Model.OfficePhone)
+    </div>
+    <div class="col-xs-12 col-md-4">
+        @Html.ValidatedEditorWithLabelFor(x => Model.CellPhone)
+    </div>
+</div>
+<div class="row">
+    @{ Html.RenderPartial("~/Views/Shared/_addressInputsPartial.cshtml", new ViewDataDictionary(Model.Address));}
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @Html.LabelFor(x => Model.Message)
+        <br />
+        @Html.TextAreaFor(x => Model.Message, new { @class = "form-control", style = "resize=none;", placeholder = "I would like help with...", required = true, rows = 12, cols = 200 })
+        <br />
+        @Html.ValidationMessageFor(x => Model.Message)
+    </div>
+</div>
+<div style="text-align: center; clear: both;">
+    <input type="submit" style="text-align: center;" value="Send" class="btn btn-primary" />
+</div>

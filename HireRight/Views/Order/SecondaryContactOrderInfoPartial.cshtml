@@ -1,0 +1,13 @@
+﻿@model HireRight.Models.AdminViewModel
+
+<div class="panel panel-head">
+    <h2>Secondary Contact (optional)</h2>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">@Html.ValidatedEditorWithLabelFor(x => Model.FirstName)</div>
+        <div class="col-xs-12 col-md-6">@Html.ValidatedEditorWithLabelFor(x => Model.LastName)</div>
+        <div class="col-xs-12 col-md-6">@Html.ValidatedEditorWithLabelFor(x => Model.Email)</div>
+        <div class="col-xs-12 col-md-6">@Html.ValidatedEditorWithLabelFor(x => Model.PhoneNumber)</div>
+    </div>
+</div>

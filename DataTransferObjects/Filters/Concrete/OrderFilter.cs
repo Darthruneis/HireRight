@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using DataTransferObjects.Filters.Abstract;
+using HireRight.EntityFramework.CodeFirst.Models;
+
+namespace DataTransferObjects.Filters.Concrete
+{
+    public enum DateTimeSearchComparators
+    {
+        [DataMember]
+        Before,
+
+        [DataMember]
+        DayOf,
+
+        [DataMember]
+        HourOf,
+
+        [DataMember]
+        Exactly,
+
+        [DataMember]
+        After
+    }
+
+    [Serializable]
+    public class OrderFilter : Filter<Order>
+    {
+        [DataMember]
+        public CompanyFilter CompanyFilter { get; set; }
+
+        [DataMember]
+        public DateTime? Completed { get; set; }
+
+        [DataMember]
+        public DateTimeSearchComparators? CompletedComparator { get; set; }
+
+        [DataMember]
+        public string Notes { get; set; }
+
+        [DataMember]
+        public IEnumerable<OrderStatus> OrderStatus { get; set; }
+
+        [DataMember]
+        public List<string> PositionsOfInterest { get; set; }
+
+        [DataMember]
+        public ProductFilter ProductFilter { get; set; }
+
+        [DataMember]
+        public int? Quantity { get; set; }
+
+        [DataMember]
+        public NumericSearchComparators? QuantityComparator { get; set; }
+
+        public OrderFilter(int page, int size, params Guid[] itemGuids) : base(page, size, itemGuids)
+        { }
+    }
+}

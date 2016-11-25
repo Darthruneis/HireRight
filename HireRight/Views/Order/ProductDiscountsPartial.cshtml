@@ -1,0 +1,36 @@
+﻿@model List<DiscountDTO>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6">
+            Discount
+        </div>
+        <div class="col-xs-6">
+            Quantity
+        </div>
+    </div>
+    @foreach (DiscountDTO discount in Model)
+    {
+        <div class="row">
+            @if (discount.IsPercent)
+            {
+                decimal percentage = discount.Amount * 100;
+                <div class="col-xs-6">
+                    @percentage%
+                </div>
+                <div class="col-xs-6">
+                    @discount.Threshold
+                </div>
+            }
+            else
+            {
+                <div class="col-xs-6">
+                    $@discount.Amount/ea
+                </div>
+                <div class="col-xs-6">
+                    @discount.Threshold
+                </div>
+            }
+        </div>
+    }
+</div>

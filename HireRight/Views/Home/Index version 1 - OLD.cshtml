@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/indexDivScripts.js"></script>
+
+<style>
+    .titleRow{
+        border: 2px dotted red;
+        margin: 5px;
+        padding: 5px;
+    }
+    li {        
+        margin-right: 10px;
+        display: inline;
+        width: 20%;
+        padding: 0;        
+    }
+
+    ol {
+        width: 100%;
+    }
+</style>
+
+<div class="jumbotron" style="margin-bottom: 0; padding-bottom: 10px; margin-bottom:5px; background-color:lightblue">
+    <h1>Hire Right Testing</h1>
+    <p class="lead">Hire Right, the First Time</p>
+</div>
+<div class="row" style="width:85%; border:2px dotted green; margin-left: 5px; text-align: center;">
+    <ol>
+        <li class="btn btn-default" onclick="displayInfoDiv('Consultants');">Consultants</li>
+        <li class="btn btn-default" onclick="displayInfoDiv('Medical');">Medical</li>
+    </ol>
+    <ol>
+        <li class="btn btn-default" onclick="displayInfoDiv('CustomerService');">Customer Service & Sales</li>
+        <li class="btn btn-default" onclick="displayInfoDiv('Managers');">Managers</li>
+        <li class="btn btn-default" onclick="displayInfoDiv('Manufacturing');">Manufacturing</li>
+        <li class="btn btn-default" onclick="displayInfoDiv('NonProfit');">Non-Profit</li>
+    </ol>
+</div>
+<div id="infoDiv" hidden="hidden">
+
+</div>
+<div id="introDiv">
+    <div class="row titleRow" style="float:left;">
+        <p>Turnover costs companies thousands of dollars per employee.  The average cost is 25% of the annual compensation (SHRM).</p>
+        <p>This takes your managers and staff away from doing their jobs.</p>
+    </div>
+    <div class="row titleRow" style="float:right;">
+        <p>
+            Unqualified and disgrunted employees poison both your staff and your customers, causing irreparable damage to your revenue stream
+            and the culture of your company.
+        </p>
+    </div>
+    <div class="row titleRow" style="float:left; clear:both;">
+        <p>Hire Right Consultants can help you get it right the first time.  Our testing includes discussion with our experienced consultants to identify the best assessments for you.</p>
+    </div>
+    <div class="row titleRow" style="float:right; clear:both;">
+        <p>
+            Hire Right provides pre-employment testing targetted to your industry and specific positions in your business.  We assess the traits that impact your specific organization.
+        </p>
+        <p>
+            Our custom profiles measure skills, abilities, knowledge, and personal characteristics that are directly related to being a top performer.
+        </p>
+    </div>
+</div>
+<div id="Medical" hidden="hidden">
+    @{ Html.RenderPartial("MedicalInformationPartial"); }
+</div>
+<div id="Manufacturing" hidden="hidden">
+    @{ Html.RenderPartial("ManufacturingInformationPartial");}
+</div>
+<div id="CustomerService" hidden="hidden">
+    @{ Html.RenderPartial("CustomerServiceInformationPartial");}
+</div>
+<div id="Managers" hidden="hidden">
+    @{ Html.RenderPartial("ManagersInformationPartial");}
+</div>
+<div id="NonProfit" hidden="hidden">
+    @{ Html.RenderPartial("NonprofitsInformationPartial");}
+</div>
+<div id="Consultants" hidden="hidden">
+    @{ Html.RenderPartial("ConsultantsInformationPartial");}
+</div>

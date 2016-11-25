@@ -1,0 +1,24 @@
+﻿<script src="~/Scripts/indexDivScripts.js"></script>
+<div class="row" style="width:85%; border:2px dotted green; margin-left: 5px; text-align: center;">
+    <ol>
+        <li class="btn btn-default" onclick="displaySubInfoDiv('Dental');">Dental</li>
+        <li class="btn btn-default" onclick="displaySubInfoDiv('Healthcare');">Healthcare</li>
+        <li class="btn btn-default" onclick="displaySubInfoDiv('Pharmacy');">Pharmacy</li>
+        <li class="btn btn-default" onclick="displaySubInfoDiv('Veterinarian');">Veterinarian</li>
+    </ol>
+</div>
+<div id="subInfoDiv" hidden="hidden">
+
+</div>
+<div id="Dental" hidden="hidden">
+    @{ Html.RenderPartial("DentalInformationPartial"); }
+</div>
+<div id="Healthcare" hidden="hidden">
+    @{ Html.RenderPartial("HealthcareInformationPartial"); }
+</div>
+<div id="Pharmacy" hidden="hidden">
+    @{ Html.RenderPartial("PharmacyInformationPartial"); }
+</div>
+<div id="Veterinarian" hidden="hidden">
+    @{ Html.RenderPartial("VeterinariansInformationPartial"); }
+</div>

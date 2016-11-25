@@ -1,0 +1,31 @@
+﻿@import "_variables.scss";
+
+%centered {
+    margin: 0 auto;
+}
+
+%headerText {
+    color: $black;
+    font-weight: bold;
+}
+
+%listItemBefore {
+    li:before {
+        content: "* ";
+        color: $darkRed;
+        font-size: 30px;
+        vertical-align: middle;
+    }
+}
+
+%site_main_background {
+    background-color: $site_background;
+}
+
+%site_side_colors {
+    background-color: $site_side_background;
+}
+
+%site_highlight_color {
+    background-color: $site_highlights_background;
+}

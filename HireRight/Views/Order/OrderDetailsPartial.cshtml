@@ -1,0 +1,72 @@
+﻿@model HireRight.Models.OrdersViewModel
+
+<div class="container-fluid">
+    <div class="panel" style="width: 100%;">
+        <div class="panel panel-head">
+            <h2>Order Details</h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-lg-4">
+                @Html.ValidatedEditorWithLabelFor(x => Model.PositionsToFill)
+            </div>
+            <div class="col-xs-12 col-lg-3">
+                @Html.LabelFor(x => x.Products) <br />
+                @Html.DropDownListFor(x => x.SelectedProductId,
+                                      Model.Products.Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }).ToList(),
+                                      new { id = "listOfProducts", @class = "form-control", style = "font-size: 12pt;" }) <br />
+                @Html.ValidationMessageFor(x => x.SelectedProductId)
+            </div>
+            <div class="col-xs-6 col-lg-2">
+                <div class="container-fluid">
+                    <div class="col-xs-12">
+                        @Html.ValidatedEditorWithLabelFor(x => Model.Quantity)
+                        <div id="orderTotal" style="width: 100%;">
+                            Total: $0.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-lg-3" id="productDiscounts">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Notes (optional)</h2>
+                @Html.TextAreaFor(x => Model.Notes, new { style = "resize: none;", rows = "5", cols = "150", @class = "form-control" })
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function updateDiscounts() {
+        $.ajax({
+            method: "GET",
+            url: "/Order/GetDiscounts?itemSelected=" + $("#listOfProducts option:selected").val(),
+            dataType: "html",
+            beforeSend: function () {
+                $("#productDiscounts").html("loading...");
+            }
+        }).done(function (response) {
+            $("#productDiscounts").html(response);
+        });
+    }
+
+    function updateTotal() {
+        $.ajax({
+            method: "GET",
+            url: "/Order/GetTotalPrice?itemSelected=" + $("#listOfProducts option:selected").val() + "&quantity=" + $("#Quantity").val(),
+            dataType: "html",
+            beforeSend: function () {
+                $("#orderTotal").html("loading...");
+            }
+        }).done(function (response) {
+            $("#orderTotal").html(response);
+        });
+    }
+
+    $().ready(function () {
+        updateDiscounts();
+        $("#listOfProducts").change(updateDiscounts);
+        $("#Quantity").change(updateTotal);
+    });
+</script>

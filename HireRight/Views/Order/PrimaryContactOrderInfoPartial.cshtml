@@ -1,0 +1,27 @@
+﻿@model PrimaryContactViewModel
+
+<div class="panel panel-head">
+    <h2>Primary Contact</h2>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            @Html.ValidatedEditorWithLabelFor(x => Model.FirstName)
+        </div>
+        <div class="col-xs-12 col-md-4">
+            @Html.ValidatedEditorWithLabelFor(x => Model.LastName)
+        </div>
+        <div class="col-xs-12 col-md-4">
+            @Html.ValidatedEditorWithLabelFor(x => Model.Email)
+        </div>
+    </div>
+    <div class="row">@{ Html.RenderPartial("~/Views/Shared/_addressInputsPartial.cshtml", new ViewDataDictionary(Model.Address));}</div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            @Html.ValidatedEditorWithLabelFor(x => Model.OfficePhone)
+        </div>
+        <div class="col-xs-12 col-md-6">
+            @Html.ValidatedEditorWithLabelFor(x => Model.CellPhone)
+        </div>
+    </div>
+</div>

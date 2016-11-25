@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-xs-8 col-md-4">
+            <h1 class="text-shadow-gray">Hire Right Testing</h1>
+            <h3 class="text-shadow-gray" style="padding-left: 60px;">
+                <i>Hire Right, the First Time</i>
+            </h3>
+        </div>
+        <div class="col-xs-4 col-md-8">
+            <h4>Hire Right Consultants can help you get it right the first time. Our testing includes discussion with our experienced consultants to identify the best assessments for you.</h4>
+        </div>
+    </div>
+</div>
+<div class="row visible-md visible-lg" style="margin: 0 2%;">
+    <ul class="list-item-no-bullet">
+        <li class="btn btn-default col-md-4" onclick="displayInfoDiv('WhyUseHireRight');">Why Use Hire Right?</li>
+        <li class="btn btn-default col-md-3" onclick="displayInfoDiv('Consultants');">Consultants</li>
+        <li class="btn btn-default col-md-4" onclick="displayInfoDiv('WhoWeServe');">Occupational Categories</li>
+    </ul>
+</div>
+<div class="row visible-xs visible-sm" style="margin: 0 2%;">
+    <ul class="list-item-no-bullet" style="margin: 0; padding: 0;">
+        <li style="margin-top:3px; margin-bottom:3px;" class="btn btn-default col-xs-12" onclick="displayInfoDiv('WhyUseHireRight');">Why Use Hire Right?</li>
+        <li style="margin-top:3px; margin-bottom:3px;" class="btn btn-default col-xs-12" onclick="displayInfoDiv('Consultants');">Consultants</li>
+        <li style="margin-top:3px; margin-bottom:3px;" class="btn btn-default col-xs-12" onclick="displayInfoDiv('WhoWeServe');">Occupational Categories</li>
+    </ul>
+</div>
+<div id="infoDiv" hidden="hidden">
+</div>
+<div id="introDiv" class="row" style="width: 100%;">
+    <div class="col-xs-12 col-md-6 col-md-push-3" style="border: 2px dotted red;">
+        <p>
+            Hire Right provides pre-employment testing targetted to your industry and specific positions in your business. We assess the traits that impact your specific organization.
+        </p>
+        <p>
+            Our custom profiles measure skills, abilities, knowledge, and personal characteristics that are directly related to being a top performer.
+        </p>
+        <img src="~/Content/indexPicture.jpg" alt="indexImage" />
+    </div>
+    <div class="col-xs-6 col-md-3 col-md-pull-6" style="border: 2px dotted red;">
+        <p>
+            Unqualified and disgrunted employees poison both your staff and your customers, causing irreparable damage to your revenue stream
+            and the culture of your company.
+        </p>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <p>Turnover costs companies thousands of dollars per employee. The average cost is 25% of the annual compensation (SHRM).</p>
+        <p>This takes your managers and staff away from doing their jobs.</p>
+    </div>
+</div>
+<div id="WhoWeServe" hidden="hidden">
+    @{ Html.RenderPartial("WhoWeServePartial"); }
+</div>
+<div id="Consultants" hidden="hidden">
+    @{ Html.RenderPartial("ConsultantsInformationPartial");}
+</div>
+<div id="WhyUseHireRight" hidden="hidden">
+    @{ Html.RenderPartial("WhyUseHireRightPartial");}
+</div>
+
+<script src="~/Scripts/indexDivScripts.js"></script>
