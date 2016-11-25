@@ -13,12 +13,16 @@ namespace HireRight.Models
         public PrimaryContactViewModel Primary { get; set; }
         public Guid ProductSelected { get; set; }
 
-        public CreateOrderViewModel(params ProductDTO[] products)
+        public CreateOrderViewModel(params ProductDTO[] products) : this()
+        {
+            Order = new OrdersViewModel(products);
+        }
+
+        public CreateOrderViewModel()
         {
             Company = new CompanyViewModel();
             Primary = new PrimaryContactViewModel();
             Admin = new AdminViewModel();
-            Order = new OrdersViewModel(products);
         }
 
         public NewOrderDTO ConvertToNewOrderDTO()

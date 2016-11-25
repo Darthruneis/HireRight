@@ -274,6 +274,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\orderDetailsUpdates.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -291,7 +292,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Contact\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -315,35 +315,28 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Order\Order.cshtml" />
-    <Content Include="Views\Home\DentalInformationPartial.cshtml" />
-    <Content Include="Views\Home\PharmacyInformationPartial.cshtml" />
-    <Content Include="Views\Home\VeterinariansInformationPartial.cshtml" />
     <Content Include="Views\Home\ManufacturingInformationPartial.cshtml" />
-    <Content Include="Views\Home\HealthcareInformationPartial.cshtml" />
     <Content Include="Views\Home\CustomerServiceInformationPartial.cshtml" />
     <Content Include="Views\Home\ManagersInformationPartial.cshtml" />
-    <Content Include="Views\Home\NonprofitsInformationPartial.cshtml" />
     <Content Include="Views\Home\MedicalInformationPartial.cshtml" />
     <Content Include="Views\Home\ConsultantsInformationPartial.cshtml" />
-    <Content Include="Views\Home\Index version 1 - OLD.cshtml" />
     <Content Include="Views\Home\WhoWeServePartial.cshtml" />
     <Content Include="Views\Home\StartUpInformationPartial.cshtml" />
     <Content Include="Views\Home\AdministrationAndClericalInformationPartial.cshtml" />
     <Content Include="Views\Home\ProfessionalServicesInformationPartial.cshtml" />
     <Content Include="Views\Home\OtherIndustriesInformationPartial.cshtml" />
-    <Content Include="Views\Home\MedicalInformationPartial version 1 - OLD.cshtml" />
     <Content Include="Views\Client\NewClients.cshtml" />
     <Content Include="Views\Home\WhyUseHireRightPartial.cshtml" />
-    <Content Include="Views\Order\CompanyOrderInfoPartial.cshtml" />
-    <Content Include="Views\Order\PrimaryContactOrderInfoPartial.cshtml" />
-    <Content Include="Views\Order\SecondaryContactOrderInfoPartial.cshtml" />
-    <Content Include="Views\Order\OrderDetailsPartial.cshtml" />
     <Content Include="Views\Contact\ContactUsInfoPartial.cshtml" />
     <Content Include="Views\Contact\Success.cshtml" />
     <Content Include="Views\Client\Success.cshtml" />
     <Content Include="Views\Order\ProductDiscountsPartial.cshtml" />
     <Content Include="Views\Shared\_addressInputsPartial.cshtml" />
     <Content Include="Views\Order\_productQuantityWithDiscountsPartial.cshtml" />
+    <Content Include="Views\Order\EditorTemplates\OrdersViewModel.cshtml" />
+    <Content Include="Views\Order\EditorTemplates\CompanyViewModel.cshtml" />
+    <Content Include="Views\Order\EditorTemplates\PrimaryContactViewModel.cshtml" />
+    <Content Include="Views\Order\EditorTemplates\AdminViewModel.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>

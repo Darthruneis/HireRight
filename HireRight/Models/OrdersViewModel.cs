@@ -13,7 +13,7 @@ namespace HireRight.Models
         public string Notes { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public List<string> Positions { get; set; }
+        public List<string> Positions => PositionsToFill.Split(',').Select(x => x.Trim()).ToList();
 
         [Required]
         [Display(Name = "Positions to fill (separated by commas)")]
@@ -28,6 +28,10 @@ namespace HireRight.Models
 
         public ProductDTO SelectedProduct { get; set; }
         public Guid SelectedProductId { get; set; }
+
+        public OrdersViewModel()
+        {
+        }
 
         public OrdersViewModel(params ProductDTO[] products)
         {

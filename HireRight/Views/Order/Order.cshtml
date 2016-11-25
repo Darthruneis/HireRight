@@ -12,12 +12,12 @@
 {
     <div style="width: 100%;">
         <div class="panel" style="width:100%; padding: 0;">
-            <div class="row">@{Html.RenderPartial("CompanyOrderInfoPartial", Model.Company);}</div>
+            <div class="row">@Html.EditorFor(x => x.Company)</div>
             <div class="row">
-                <div class="col-xs-12 col-md-8">@{Html.RenderPartial("PrimaryContactOrderInfoPartial", Model.Primary);}</div>
-                <div class="col-xs-12 col-md-4">@{Html.RenderPartial("SecondaryContactOrderInfoPartial", Model.Admin);}</div>
+                <div class="col-xs-12 col-md-8">@Html.EditorFor(x => x.Primary)</div>
+                <div class="col-xs-12 col-md-4">@Html.EditorFor(x => x.Admin)</div>
             </div>
-            <div class="row">@{Html.RenderPartial("OrderDetailsPartial", Model.Order);}</div>
+            <div class="row">@Html.EditorFor(x => x.Order)</div>
             <div style="text-align:center;">
                 <input type="submit" value="Place Order" class="btn btn-primary" style="width: 250px;" />
             </div>
