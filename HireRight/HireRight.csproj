@@ -338,6 +338,7 @@
     <Content Include="Views\Order\EditorTemplates\PrimaryContactViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\AdminViewModel.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
+    <Content Include="Views\Shared\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

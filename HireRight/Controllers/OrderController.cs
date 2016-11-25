@@ -63,31 +63,29 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Order(CreateOrderViewModel model)
+        public async Task<ViewResult> Order(CreateOrderViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            NewOrderDTO dto = model.ConvertToNewOrderDTO();
-
-            ProductFilter productFilter = new ProductFilter(1, 1);
-            productFilter.Title = "Assessment Test";
-
-            List<ProductDTO> products = await _productsSDK.GetProducts(productFilter);
-
             try
             {
-                //CompanyDTO company = await _companiesSDK.AddCompany(dto.Company);
+                ProductFilter productFilter = new ProductFilter(1, 1);
+                productFilter.Title = "Assessment Test";
+                List<ProductDTO> products = await _productsSDK.GetProducts(productFilter);
 
-                //dto.PrimaryContact.CompanyId = company.Id;
-                //dto.SecondaryContact.CompanyId = company.Id;
-                //dto.Order.CompanyId = company.Id;
-                //dto.Order.ProductId = product.Id;
+                NewOrderDTO dto = model.ConvertToNewOrderDTO();
+                CompanyDTO company = await _companiesSDK.AddCompany(dto.Company);
 
-                //Task<ContactDTO> primaryContactTask = _contactsSDK.AddContact(dto.PrimaryContact);
-                //Task<ContactDTO> secondaryContactTask = _contactsSDK.AddContact(dto.SecondaryContact);
-                //Task<OrderDetailsDTO> orderTask = _ordersSDK.AddOrder(dto.Order);
+                dto.PrimaryContact.CompanyId = company.Id;
+                dto.SecondaryContact.CompanyId = company.Id;
+                dto.Order.CompanyId = company.Id;
+                dto.Order.ProductId = products.First().Id;
 
-                //await Task.WhenAll(orderTask, primaryContactTask, secondaryContactTask);
+                Task<ContactDTO> primaryContactTask = _contactsSDK.AddContact(dto.PrimaryContact);
+                Task<ContactDTO> secondaryContactTask = _contactsSDK.AddContact(dto.SecondaryContact);
+                Task<OrderDetailsDTO> orderTask = _ordersSDK.AddOrder(dto.Order);
+
+                await Task.WhenAll(orderTask, primaryContactTask, secondaryContactTask);
             }
             catch (Exception ex)
             {
@@ -96,7 +94,7 @@ namespace HireRight.Controllers
 
             if (!ModelState.IsValid) return View(model);
 
-            return RedirectToAction("Order");
+            return View("Success");
         }
     }
 }
