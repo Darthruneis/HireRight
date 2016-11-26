@@ -6,7 +6,7 @@ namespace HireRight.Controllers
     {
         public ActionResult CustomSolutions()
         {
-            return View("Index");
+            return View();
         }
 
         public ActionResult Index()

@@ -344,6 +344,8 @@
     <Content Include="Views\Order\ProductDiscountsPartial.cshtml" />
     <Content Include="Views\Shared\_addressInputsPartial.cshtml" />
     <Content Include="Views\Order\_productQuantityWithDiscountsPartial.cshtml" />
+    <Content Include="Views\Order\About.cshtml" />
+    <Content Include="Views\Home\CustomSolutions.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
