@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
-    <title>@ViewBag.Title - Hire Right</title>
+    <title>@ViewBag.Title - Hire Right Testing</title>
     @Scripts.Render("~/bundles/scripts") @* -- All jquery/bootstrap is loaded properly in this single bundle -- *@
     @Styles.Render("~/Content/css")
 </head>
@@ -19,7 +19,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">HireRight</a>
+                    <a class="navbar-brand" href="/">Hire Right Testing</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,8 +27,9 @@
                     <ul class="nav navbar-nav" style="display: inline;">
                         <li style="display: list-item">@Html.ActionLink("New Clients", "NewClients", "Client")</li>
                         <li style="display: list-item">@Html.ActionLink("Custom Solutions", "CustomSolutions", "Home")</li>
+                        <li style="display: list-item">@Html.ActionLink("Order Info", "About", "Order")</li>
+                        <li style="display: list-item">@Html.ActionLink("Make a Purchase", "Order", "Order")</li>
                         <li style="display: list-item">@Html.ActionLink("Get in Touch", "Contact", "Contact")</li>
-                        <li style="display: list-item">@Html.ActionLink("Order", "Order", "Order")</li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

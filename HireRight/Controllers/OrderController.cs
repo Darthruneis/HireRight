@@ -27,6 +27,12 @@ namespace HireRight.Controllers
         }
 
         [HttpGet]
+        public ViewResult About()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public async Task<PartialViewResult> GetDiscounts(Guid itemSelected)
         {
             ProductDTO product = await _productsSDK.GetProduct(itemSelected);
