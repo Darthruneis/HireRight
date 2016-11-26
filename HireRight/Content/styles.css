@@ -118,6 +118,13 @@ a:hover {
   color: #C5DFF0;
   text-shadow: #000000 2px 0px 1px; }
 
+.navbar-default .navbar-nav > li > a.current {
+  color: white; }
+
+.navbar-default .navbar-nav > li > a.current:hover {
+  color: #000000;
+  text-shadow: white 2px 0px 1px; }
+
 .navbar-default .navbar-brand {
   font-size: 20pt;
   font-weight: bold; }
