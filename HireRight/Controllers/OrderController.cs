@@ -37,7 +37,7 @@ namespace HireRight.Controllers
         {
             ProductDTO product = await _productsSDK.GetProduct(itemSelected);
 
-            return PartialView("ProductDiscountsPartial", product.Discounts);
+            return PartialView("ProductDiscountsPartial", product);
         }
 
         [HttpGet]

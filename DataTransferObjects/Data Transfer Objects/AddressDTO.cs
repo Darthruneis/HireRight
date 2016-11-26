@@ -17,11 +17,11 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public string GetFullAddress =>
             $"{StreetAddress} {UnitNumber}, {City}, {State} {PostalCode}";
 
-        [DataMember, Required, Display(Name = "ZIP")]
+        [DataMember, Required, Display(Name = "ZIP or Postal Code")]
         [StringLength(10, MinimumLength = 5)]
         public string PostalCode { get; set; }
 
-        [DataMember, Required]
+        [DataMember, Required, Display(Name = "State or Province")]
         public string State { get; set; }
 
         [DataMember, Required]
@@ -29,7 +29,7 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public string StreetAddress { get; set; }
 
         [DataMember]
-        [Display(Name = "Unit")]
+        [Display(Name = "Apt, Suite, Unit")]
         public string UnitNumber { get; set; }
 
         public AddressDTO(Address address)

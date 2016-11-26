@@ -208,7 +208,6 @@
     </Compile>
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\ContactUsViewModel.cs" />
