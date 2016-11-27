@@ -35,9 +35,12 @@ namespace HireRight.Controllers
                 if (model.ToTalkToConsultant)
                     await SendContactConsultantEmail(model);
             }
-            catch
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "An error ocurred while sending the message.  Please try again later.");
+#if DEBUG
+                ModelState.AddModelError("", ex.Message);
+#endif
             }
 
             if (!ModelState.IsValid)

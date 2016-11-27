@@ -1,5 +1,4 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.Models;
 using SDK.Abstract;
@@ -80,15 +79,24 @@ namespace HireRight.Controllers
                 List<ProductDTO> products = await _productsSDK.GetProducts(productFilter);
 
                 NewOrderDTO dto = model.ConvertToNewOrderDTO();
-                CompanyDTO company = await _companiesSDK.AddCompany(dto.Company);
+
+                CompanyFilter companyFilter = new CompanyFilter(1, 10);
+                companyFilter.Name = dto.Company.Name;
+
+                List<CompanyDTO> companies = await _companiesSDK.GetCompanies(companyFilter);
+
+                CompanyDTO company = companies.All(x => x.Name != dto.Company.Name)
+                                         ? await _companiesSDK.AddCompany(dto.Company)
+                                         : companies.First(x => x.Name != dto.Company.Name);
 
                 dto.PrimaryContact.CompanyId = company.Id;
+                Task<ContactDTO> primaryContactTask = _contactsSDK.AddContact(dto.PrimaryContact);
+
                 dto.SecondaryContact.CompanyId = company.Id;
+                Task<ContactDTO> secondaryContactTask = _contactsSDK.AddContact(dto.SecondaryContact);
+
                 dto.Order.CompanyId = company.Id;
                 dto.Order.ProductId = products.First().Id;
-
-                Task<ContactDTO> primaryContactTask = _contactsSDK.AddContact(dto.PrimaryContact);
-                Task<ContactDTO> secondaryContactTask = _contactsSDK.AddContact(dto.SecondaryContact);
                 Task<OrderDetailsDTO> orderTask = _ordersSDK.AddOrder(dto.Order);
 
                 await Task.WhenAll(orderTask, primaryContactTask, secondaryContactTask);
@@ -96,9 +104,10 @@ namespace HireRight.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "An error ocurred while saving, please try again later.");
+#if DEBUG
+                ModelState.AddModelError("", ex.Message);
+#endif
             }
-
-            if (!ModelState.IsValid) return View(model);
 
             return View("Success");
         }

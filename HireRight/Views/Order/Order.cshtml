@@ -1,26 +1,20 @@
 ﻿@model CreateOrderViewModel
-
 @{
     ViewBag.Title = "Order";
 }
-<style>
-    input {
-        width: 100%;
-    }
-</style>
 @using (Html.BeginForm("Order", "Order", FormMethod.Post))
 {
-    <div style="width: 100%;">
-        <div class="panel" style="width:100%; padding: 0;">
-            <div class="row">@Html.EditorFor(x => x.Company)</div>
-            <div class="row">
-                <div class="col-xs-12 col-md-8">@Html.EditorFor(x => x.Primary)</div>
-                <div class="col-xs-12 col-md-4">@Html.EditorFor(x => x.Admin)</div>
-            </div>
-            <div class="row">@Html.EditorFor(x => x.Order)</div>
-            <div style="text-align:center;">
-                <input type="submit" value="Place Order" class="btn btn-primary" style="width: 250px;" />
-            </div>
-        </div>
+    <div class="row">
+        @Html.EditorFor(x => x.Company)
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8">@Html.EditorFor(x => x.Primary)</div>
+        <div class="col-xs-12 col-md-4">@Html.EditorFor(x => x.Admin)</div>
+    </div>
+    <div class="row">
+        @Html.EditorFor(x => x.Order)
+    </div>
+    <div style="text-align:center;">
+        <input type="submit" value="Place Order" class="btn btn-primary" style="width: 250px;" />
     </div>
 }

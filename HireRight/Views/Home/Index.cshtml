@@ -31,17 +31,19 @@
 </div>
 <div id="infoDiv" hidden="hidden">
 </div>
-<div id="introDiv" class="row" style="width: 100%;">
-    <div class="col-xs-12 col-md-6 col-md-push-3" style="border: 2px dotted red;">
+<div id="introDiv" class="row">
+    <div class="col-xs-12 col-md-6 col-md-push-3">
         <p>
             Hire Right provides pre-employment testing targetted to your industry and specific positions in your business. We assess the traits that impact your specific organization.
         </p>
         <p>
             Our custom profiles measure skills, abilities, knowledge, and personal characteristics that are directly related to being a top performer.
         </p>
-        <img src="~/Content/indexPicture.jpg" alt="indexImage" />
+        <div>
+            <img src="~/Content/indexPicture.jpg" alt="indexImage"/>
+        </div>
     </div>
-    <div class="col-xs-6 col-md-3 col-md-pull-6" style="border: 2px dotted red;">
+    <div class="col-xs-6 col-md-3 col-md-pull-6">
         <p>
             Unqualified and disgrunted employees poison both your staff and your customers, causing irreparable damage to your revenue stream
             and the culture of your company.
@@ -61,5 +63,4 @@
 <div id="WhyUseHireRight" hidden="hidden">
     @{ Html.RenderPartial("WhyUseHireRightPartial");}
 </div>
-
 <script src="~/Scripts/indexDivScripts.js"></script>

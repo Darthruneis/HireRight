@@ -6,9 +6,5 @@
 
 @using (Html.BeginForm("SubmitContact", "Contact", FormMethod.Post))
 {
-    <div class="panel">
-        <div class="container-fluid">
-            @{ Html.RenderPartial("ContactUsInfoPartial", Model);}
-        </div>
-    </div>
-                }
+    Html.RenderPartial("ContactUsInfoPartial", Model);
+}
