@@ -56,13 +56,7 @@ namespace HireRight.Controllers
         [HttpGet]
         public async Task<ActionResult> Order()
         {
-            ProductFilter assessmentTestFilter = new ProductFilter(1, 10);
-            assessmentTestFilter.Title = "test";
-
-            List<ProductDTO> tests = await _productsSDK.GetProducts(assessmentTestFilter);
-
-            CreateOrderViewModel viewModel = new CreateOrderViewModel(tests.ToArray());
-            viewModel.Order.SelectedProduct = tests.First();
+            CreateOrderViewModel viewModel = await GetProductListForModel();
 
             return View(viewModel);
         }
@@ -107,9 +101,28 @@ namespace HireRight.Controllers
 #if DEBUG
                 ModelState.AddModelError("", ex.Message);
 #endif
+
+                //add product information back to model before returning it with modelstate errors.
+                return View(await GetProductListForModel(model));
             }
 
             return View("Success");
+        }
+
+        private async Task<CreateOrderViewModel> GetProductListForModel(CreateOrderViewModel model = null)
+        {
+            if (model == null)
+                model = new CreateOrderViewModel();
+
+            ProductFilter assessmentTestFilter = new ProductFilter(1, 10);
+            assessmentTestFilter.Title = "test";
+            List<ProductDTO> products = await _productsSDK.GetProducts(assessmentTestFilter);
+
+            model.Order.Products = products;
+
+            model.Order.SelectedProduct = model.Order.Products.First();
+
+            return model;
         }
     }
 }

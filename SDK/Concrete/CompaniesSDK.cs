@@ -1,12 +1,12 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
+﻿using DataTransferObjects;
+using DataTransferObjects.Data_Transfer_Objects;
+using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using SDK.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects;
-using DataTransferObjects.Filters;
-using DataTransferObjects.Filters.Concrete;
 
 namespace SDK.Concrete
 {
@@ -29,7 +29,8 @@ namespace SDK.Concrete
 
         public async Task<List<CompanyDTO>> GetCompanies(CompanyFilter filter)
         {
-            ApiResponse<CompanyDTO> response = await _client.GetAsync(filter.CreateQuery());
+            string query = filter.CreateQuery();
+            ApiResponse<CompanyDTO> response = await _client.GetAsync(query);
 
             return response.Results.ToList();
         }

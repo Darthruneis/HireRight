@@ -1,5 +1,4 @@
 ﻿@model PrimaryContactViewModel
-
 <div class="panel panel-head">
     <h2>Primary Contact</h2>
 </div>
@@ -15,7 +14,7 @@
             @Html.ValidatedEditorWithLabelFor(x => Model.Email)
         </div>
     </div>
-    <div class="row">@{ Html.RenderPartial("~/Views/Shared/_addressInputsPartial.cshtml", new ViewDataDictionary(Model.Address));}</div>
+    <div class="row">@Html.EditorFor(x => x.Address)</div>
     <div class="row">
         <div class="col-xs-12 col-md-6">
             @Html.ValidatedEditorWithLabelFor(x => Model.OfficePhone)

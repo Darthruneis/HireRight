@@ -18,7 +18,7 @@ namespace HireRight.API.Handlers
             {
                 HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
-                ObjectContent content = response.Content as ObjectContent;
+                dynamic content = response.Content;
 
                 if (content == null)
                     return response;
@@ -26,7 +26,7 @@ namespace HireRight.API.Handlers
                 if (content.ObjectType.FullName.Contains(typeof(ApiResponse<>).FullName))
                     return response;
 
-                if (content.ObjectType.FullName.Equals(typeof(decimal).FullName))
+                if (content.ObjectType == typeof(decimal) || content is ObjectContent<HttpError>)
                     return response;
 
                 throw new ApplicationException("Unsupported response type: " + content.ObjectType.FullName);

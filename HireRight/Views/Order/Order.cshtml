@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Order";
 }
+
+@Html.ValidationSummary(true)
+
 @using (Html.BeginForm("Order", "Order", FormMethod.Post))
 {
     <div class="row">

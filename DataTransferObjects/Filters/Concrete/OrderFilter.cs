@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DataTransferObjects.Filters.Abstract;
+using HireRight.EntityFramework.CodeFirst.Models;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using DataTransferObjects.Filters.Abstract;
-using HireRight.EntityFramework.CodeFirst.Models;
+using System.Text;
 
 namespace DataTransferObjects.Filters.Concrete
 {
@@ -56,5 +57,15 @@ namespace DataTransferObjects.Filters.Concrete
 
         public OrderFilter(int page, int size, params Guid[] itemGuids) : base(page, size, itemGuids)
         { }
+
+        public OrderFilter() : base(1, 10)
+        {
+        }
+
+        public override string CreateQuery(bool addBaseQuery = true)
+        {
+            StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
+            return query.ToString();
+        }
     }
 }

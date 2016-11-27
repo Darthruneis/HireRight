@@ -2,6 +2,7 @@
 using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace DataTransferObjects.Filters.Concrete
 {
@@ -19,5 +20,15 @@ namespace DataTransferObjects.Filters.Concrete
 
         public ClientFilter(int page, int size, params Guid[] itemGuids) : base(page, size, itemGuids)
         { }
+
+        public ClientFilter() : base(1, 10)
+        {
+        }
+
+        public override string CreateQuery(bool addBaseQuery = true)
+        {
+            StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
+            return query.ToString();
+        }
     }
 }

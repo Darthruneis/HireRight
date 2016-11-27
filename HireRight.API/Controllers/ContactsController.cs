@@ -1,5 +1,6 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using HireRight.API.Models;
 using HireRight.BusinessLogic.Abstract;
 using System;
@@ -8,7 +9,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.API.Controllers
 {
@@ -42,7 +42,7 @@ namespace HireRight.API.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetContacts(ContactFilter filter)
+        public async Task<HttpResponseMessage> GetContacts([FromUri] ContactFilter filter)
         {
             return await GetMultipleBase(_getPage(filter));
         }

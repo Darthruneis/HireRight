@@ -23,6 +23,7 @@ namespace HireRight.Models
             Company = new CompanyViewModel();
             Primary = new PrimaryContactViewModel();
             Admin = new AdminViewModel();
+            Order = new OrdersViewModel();
         }
 
         public NewOrderDTO ConvertToNewOrderDTO()

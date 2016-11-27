@@ -331,7 +331,7 @@
     <Content Include="Views\Contact\Success.cshtml" />
     <Content Include="Views\Client\Success.cshtml" />
     <Content Include="Views\Order\ProductDiscountsPartial.cshtml" />
-    <Content Include="Views\Shared\_addressInputsPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AddressDTO.cshtml" />
     <Content Include="Views\Order\_productQuantityWithDiscountsPartial.cshtml" />
     <Content Include="Views\Order\About.cshtml" />
     <Content Include="Views\Home\CustomSolutions.cshtml" />

@@ -32,7 +32,7 @@
     </div>
 </div>
 <div class="row">
-    @{ Html.RenderPartial("~/Views/Shared/_addressInputsPartial.cshtml", new ViewDataDictionary(Model.Address));}
+    @Html.EditorFor(x => x.Address)
 </div>
 <div class="row">
     <div class="col-xs-12">

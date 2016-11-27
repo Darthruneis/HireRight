@@ -20,13 +20,14 @@ namespace HireRight.Models
         public string PositionsToFill { get; set; }
 
         [Display(Name = "Product")]
-        public List<ProductDTO> Products { get; }
+        public List<ProductDTO> Products { get; set; }
 
         [Required]
         [Range(1, 100000, ErrorMessage = "Order Quantity must be between 1 and 100,000.")]
         public uint Quantity { get; set; }
 
         public ProductDTO SelectedProduct { get; set; }
+
         public Guid SelectedProductId { get; set; }
 
         public OrdersViewModel()
