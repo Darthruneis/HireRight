@@ -29,7 +29,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models
 
     /// <summary>
     /// </summary>
-    public class Order : PocoBase
+    public class Order : PocoBase, IContainingCompany, IContainingProduct
     {
         public virtual Company Company { get; set; }
 

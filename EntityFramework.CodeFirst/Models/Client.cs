@@ -7,7 +7,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models
     /// <summary>
     /// A Client is a reference to an Account and up to two Contacts related to the Account.
     /// </summary>
-    public class Client : PocoBase
+    public class Client : PocoBase, IContainingAccount, IContainingAdmin, IContainingContact
     {
         public virtual Account Account { get; set; }
 

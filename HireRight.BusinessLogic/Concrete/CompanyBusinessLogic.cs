@@ -1,5 +1,6 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Extensions;
 using HireRight.EntityFramework.CodeFirst.Models;
@@ -8,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.BusinessLogic.Concrete
 {
@@ -34,7 +34,7 @@ namespace HireRight.BusinessLogic.Concrete
             model.Id = dto.Id;
             model.CreatedUtc = dto.CreatedUtc;
             model.Name = dto.Name;
-            model.BillingAddress = dto.BillingAddress.ConvertDtoToModel();
+            model.Address = dto.BillingAddress.ConvertDtoToModel();
 
             return model;
         }
@@ -45,7 +45,7 @@ namespace HireRight.BusinessLogic.Concrete
             dto.Id = model.Id;
             dto.CreatedUtc = model.CreatedUtc;
             dto.Name = model.Name;
-            dto.BillingAddress = model.BillingAddress.ConvertModelToDto();
+            dto.BillingAddress = model.Address.ConvertModelToDto();
 
             return dto;
         }

@@ -1,4 +1,5 @@
-﻿using DataTransferObjects.Filters.Abstract;
+﻿using DataTransferObjects.Data_Transfer_Objects;
+using DataTransferObjects.Filters.Abstract;
 using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Runtime.Serialization;
@@ -10,7 +11,7 @@ namespace DataTransferObjects.Filters.Concrete
     public class CompanyFilter : Filter<Company>
     {
         [DataMember]
-        public string BillingAddress { get; set; }
+        public AddressDTO BillingAddress { get; set; }
 
         [DataMember]
         public ClientFilter ClientFilter { get; set; }
@@ -32,8 +33,8 @@ namespace DataTransferObjects.Filters.Concrete
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery(true) : "");
 
-            if (!string.IsNullOrWhiteSpace(BillingAddress))
-                query.Append($"&filter.{nameof(BillingAddress)}={BillingAddress}");
+            if (BillingAddress != null)
+                query.Append(BillingAddress.CreateQuery(nameof(BillingAddress)));
 
             if (ClientFilter != null)
                 query.Append(ClientFilter.CreateQuery(false));

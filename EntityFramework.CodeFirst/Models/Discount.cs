@@ -9,7 +9,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models
     /// <summary>
     /// A discount is a reduction in total cost or individual price of a threshold of sales. Generally thought of as a bulk discount for large orders of Tests.
     /// </summary>
-    public class Discount : PocoBase
+    public class Discount : PocoBase, IContainingProduct
     {
         /// <summary>
         /// The discount amount to apply. A percentage discount will reduce the entire cost of the order by the specified amount (this amount should then

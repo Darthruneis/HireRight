@@ -1,9 +1,9 @@
-﻿using HireRight.EntityFramework.CodeFirst.Models;
+﻿using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
+using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Repository.Abstract
 {
@@ -11,7 +11,7 @@ namespace HireRight.Repository.Abstract
     {
         Task<Product> Add(Product itemToAdd);
 
-        Task<List<Product>> Get(ProductFilter filterParameters);
+        Task<List<Product>> Get(ProductFilter filter);
 
         Task<Product> Get(Guid itemGuid);
 

@@ -1,4 +1,5 @@
-﻿using DataTransferObjects.Filters.Abstract;
+﻿using DataTransferObjects.Data_Transfer_Objects;
+using DataTransferObjects.Filters.Abstract;
 using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Runtime.Serialization;
@@ -10,7 +11,7 @@ namespace DataTransferObjects.Filters.Concrete
     public class ContactFilter : Filter<Contact>
     {
         [DataMember]
-        public string Address { get; set; }
+        public AddressDTO Address { get; set; }
 
         [DataMember]
         public string CellNumber { get; set; }
@@ -46,6 +47,10 @@ namespace DataTransferObjects.Filters.Concrete
         public override string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
+
+            if (Address != null)
+                query.Append(Address.CreateQuery(nameof(Address)));
+
             return query.ToString();
         }
     }

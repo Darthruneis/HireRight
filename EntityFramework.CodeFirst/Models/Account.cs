@@ -9,7 +9,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models
     /// <summary>
     /// An account is a relationship between a Company and its Clients and Orders.
     /// </summary>
-    public class Account : PocoBase
+    public class Account : PocoBase, IContainingCompany, IContainingClients
     {
         public virtual ICollection<Client> Clients { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
 using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.Repository.Abstract;
@@ -7,7 +8,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Repository.Concrete
 {
@@ -36,7 +36,8 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Account> accountsQuery = context.Accounts.Include(x => x.Company).Include(x => x.Clients);
 
-                accountsQuery = RepositoryQueryFilterer.FilterAccountQuery(accountsQuery, filter);
+                //accountsQuery = RepositoryQueryFilterer.FilterByClients<Account>(accountsQuery, filter.);
+                accountsQuery = accountsQuery.Where(x => string.IsNullOrWhiteSpace(filter.Notes) || x.Notes.Contains(filter.Notes));
 
                 accountsFound = await _repositoryBase.TakePage(accountsQuery, filter).ConfigureAwait(false);
             }

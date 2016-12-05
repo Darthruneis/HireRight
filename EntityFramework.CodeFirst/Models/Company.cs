@@ -7,13 +7,13 @@ namespace HireRight.EntityFramework.CodeFirst.Models
     /// <summary>
     /// A company is a named relationship between a primary billing address, and a collection of clients and locations (if there are more than a single location).
     /// </summary>
-    public class Company : PocoBase
+    public class Company : PocoBase, IContainingClients, IContainingAddress
     {
         /// <summary>
         /// The billing address is the primary location for the business, e.g. a corporate office.
         /// </summary>
         [Required]
-        public Address BillingAddress { get; set; }
+        public Address Address { get; set; }
 
         public virtual ICollection<Client> Clients { get; set; }
 

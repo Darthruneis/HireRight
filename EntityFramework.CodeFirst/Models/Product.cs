@@ -7,7 +7,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models
     /// <summary>
     /// A product is an item which can be purchased through HireRight.
     /// </summary>
-    public class Product : PocoBase
+    public class Product : PocoBase, IContainingDiscounts
     {
         /// <summary>
         /// A collection of discounts which can be applied to this product based on volume.

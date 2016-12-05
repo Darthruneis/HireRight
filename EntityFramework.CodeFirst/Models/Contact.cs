@@ -8,7 +8,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models
     /// <summary>
     /// A Contact is an individual that is part of a Company and/or Client, and can optionally be a Primary contact or an Administrator.
     /// </summary>
-    public class Contact : PocoBase
+    public class Contact : PocoBase, IContainingClient, IContainingCompany, IContainingAddress
     {
         public Address Address { get; set; }
 

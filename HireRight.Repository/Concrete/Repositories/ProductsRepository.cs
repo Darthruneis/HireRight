@@ -1,4 +1,6 @@
-﻿using HireRight.EntityFramework.CodeFirst.Database_Context;
+﻿using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
+using HireRight.EntityFramework.CodeFirst.Database_Context;
 using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.Repository.Abstract;
 using System;
@@ -6,8 +8,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Repository.Concrete
 {
@@ -28,7 +28,7 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<List<Product>> Get(ProductFilter filterParameters)
+        public async Task<List<Product>> Get(ProductFilter filter)
         {
             List<Product> products;
 
@@ -36,9 +36,9 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Product> productsQuery = context.Products.Include(x => x.Discounts);
 
-                productsQuery = RepositoryQueryFilterer.FilterProductQuery(productsQuery, filterParameters);
+                productsQuery = productsQuery.FilterByDiscounts(filter.DiscountFilter);
 
-                products = await _repositoryBase.TakePage(productsQuery, filterParameters).ConfigureAwait(false);
+                products = await _repositoryBase.TakePage(productsQuery, filter).ConfigureAwait(false);
             }
 
             return products;

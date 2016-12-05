@@ -8,7 +8,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models
     /// <summary>
     /// A location is a physical address where a company does business. For example, a call center, or corporate office, or retail store.
     /// </summary>
-    public class CompanyLocation : PocoBase
+    public class CompanyLocation : PocoBase, IContainingCompany, IContainingAddress
     {
         /// <summary>
         /// The physical address of the location.
