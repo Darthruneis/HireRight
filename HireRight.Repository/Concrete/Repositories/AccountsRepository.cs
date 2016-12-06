@@ -36,8 +36,9 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Account> accountsQuery = context.Accounts.Include(x => x.Company).Include(x => x.Clients);
 
-                //accountsQuery = RepositoryQueryFilterer.FilterByClients<Account>(accountsQuery, filter.);
-                accountsQuery = accountsQuery.Where(x => string.IsNullOrWhiteSpace(filter.Notes) || x.Notes.Contains(filter.Notes));
+                accountsQuery = accountsQuery.FilterByCompany(filter.CompanyFilter)
+                                             .Where(x => string.IsNullOrWhiteSpace(filter.Notes)
+                                                         || x.Notes.Contains(filter.Notes));
 
                 accountsFound = await _repositoryBase.TakePage(accountsQuery, filter).ConfigureAwait(false);
             }

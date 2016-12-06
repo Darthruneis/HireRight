@@ -36,7 +36,21 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Contact> contactsQuery = context.Contacts.Include(x => x.Client).Include(x => x.Company);
 
-                contactsQuery = contactsQuery.FilterByCompany(filter.CompanyFilter);
+                contactsQuery = contactsQuery.FilterByCompany(filter.CompanyFilter)
+                                             .FilterByAddress(filter.AddressFilter)
+                                             .FilterByClient(filter.ClientFilter);
+
+                contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.CellNumber) || x.CellNumber.Contains(filter.CellNumber));
+
+                contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.Email) || x.Email.Contains(filter.Email));
+
+                contactsQuery = contactsQuery.Where(x => filter.IsAdmin == null || x.IsAdmin == filter.IsAdmin.Value);
+
+                contactsQuery = contactsQuery.Where(x => filter.IsPrimary == null || x.IsPrimary == filter.IsPrimary.Value);
+
+                contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.Name) || x.Name.Contains(filter.Name));
+
+                contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.OfficeNumber) || x.OfficeNumber.Contains(filter.OfficeNumber));
 
                 contacts = await _repositoryBase.TakePage(contactsQuery, filter).ConfigureAwait(false);
             }

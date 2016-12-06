@@ -1,4 +1,5 @@
 ﻿using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
 using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.Repository.Abstract;
@@ -7,7 +8,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Repository.Concrete
 {
@@ -36,6 +36,17 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Order> ordersQuery = context.Orders.Include(x => x.Product).Include(x => x.Company);
 
+                ordersQuery = ordersQuery.FilterByCompany(filter.CompanyFilter).FilterByProduct(filter.ProductFilter);
+
+                ordersQuery = ordersQuery.Where(x => string.IsNullOrWhiteSpace(filter.Notes) || x.Notes.Contains(filter.Notes));
+
+                ordersQuery = ordersQuery.Where(x => filter.PositionsOfInterest == null
+                                                    || !filter.PositionsOfInterest.Any()
+                                                    || x.PositionsOfInterest.Any(y => filter.PositionsOfInterest.Contains(y)));
+
+                ordersQuery = FilterByQuantity(ordersQuery, filter.Quantity, filter.QuantityComparator);
+                ordersQuery = FilterByDateCompleted(ordersQuery, filter.Completed, filter.CompletedComparator);
+
                 orders = await _repositoryBase.TakePage(ordersQuery, filter).ConfigureAwait(false);
             }
 
@@ -59,6 +70,58 @@ namespace HireRight.Repository.Concrete
             using (HireRightDbContext context = new HireRightDbContext())
             {
                 return await _repositoryBase.UpdateBase(itemToUpdate, context.Orders).ConfigureAwait(false);
+            }
+        }
+
+        private IQueryable<Order> FilterByDateCompleted(IQueryable<Order> query, DateTime? value, DateTimeSearchComparators? comparator)
+        {
+            if (value == null || comparator == null) return query;
+
+            switch (comparator)
+            {
+                case DateTimeSearchComparators.After:
+                    return query.Where(x => x.Completed > value);
+
+                case DateTimeSearchComparators.Before:
+                    return query.Where(x => x.Completed > value);
+
+                case DateTimeSearchComparators.DayOf:
+                    return query.Where(x => x.Completed > value);
+
+                case DateTimeSearchComparators.Exactly:
+                    return query.Where(x => x.Completed > value);
+
+                case DateTimeSearchComparators.HourOf:
+                    return query.Where(x => x.Completed > value);
+
+                default:
+                    return query;
+            }
+        }
+
+        private IQueryable<Order> FilterByQuantity(IQueryable<Order> query, decimal? value, NumericSearchComparators? comparator)
+        {
+            if (value == null || comparator == null) return query;
+
+            switch (comparator)
+            {
+                case NumericSearchComparators.GreaterThan:
+                    return query.Where(x => x.Quantity > value.Value);
+
+                case NumericSearchComparators.GreaterThanOrEqualTo:
+                    return query.Where(x => x.Quantity >= value.Value);
+
+                case NumericSearchComparators.EqualTo:
+                    return query.Where(x => x.Quantity == value.Value);
+
+                case NumericSearchComparators.LessThanOrEqualTo:
+                    return query.Where(x => x.Quantity <= value.Value);
+
+                case NumericSearchComparators.LessThan:
+                    return query.Where(x => x.Quantity < value.Value);
+
+                default:
+                    return query;
             }
         }
     }

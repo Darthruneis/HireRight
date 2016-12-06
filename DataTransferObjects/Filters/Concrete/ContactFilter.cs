@@ -11,7 +11,7 @@ namespace DataTransferObjects.Filters.Concrete
     public class ContactFilter : Filter<Contact>
     {
         [DataMember]
-        public AddressDTO Address { get; set; }
+        public AddressFilter AddressFilter { get; set; }
 
         [DataMember]
         public string CellNumber { get; set; }
@@ -26,10 +26,10 @@ namespace DataTransferObjects.Filters.Concrete
         public string Email { get; set; }
 
         [DataMember]
-        public bool IsAdmin { get; set; }
+        public bool? IsAdmin { get; set; }
 
         [DataMember]
-        public bool IsPrimary { get; set; }
+        public bool? IsPrimary { get; set; }
 
         [DataMember]
         public string Name { get; set; }
@@ -48,8 +48,8 @@ namespace DataTransferObjects.Filters.Concrete
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
 
-            if (Address != null)
-                query.Append(Address.CreateQuery(nameof(Address)));
+            if (AddressFilter != null)
+                query.Append(AddressFilter.CreateQuery(false));
 
             return query.ToString();
         }

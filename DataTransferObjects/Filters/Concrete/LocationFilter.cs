@@ -10,7 +10,7 @@ namespace DataTransferObjects.Filters.Concrete
     public class LocationFilter : Filter<CompanyLocation>
     {
         [DataMember]
-        public Address Address { get; set; }
+        public AddressFilter AddressFilter { get; set; }
 
         [DataMember]
         public CompanyFilter CompanyFilter { get; set; }
@@ -32,8 +32,8 @@ namespace DataTransferObjects.Filters.Concrete
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
 
-            if (Address != null)
-                query.Append(Address.CreateQuery(nameof(Address)));
+            if (AddressFilter != null)
+                query.Append(AddressFilter.CreateQuery(false);
 
             return query.ToString();
         }

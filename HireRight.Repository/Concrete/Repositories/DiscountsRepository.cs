@@ -38,6 +38,12 @@ namespace HireRight.Repository.Concrete
 
                 discountsQuery = discountsQuery.FilterByProduct(filter.ProductFilter);
 
+                discountsQuery = FilterByAmount(discountsQuery, filter.Amount, filter.AmountComparator);
+
+                discountsQuery = FilterByThreshold(discountsQuery, filter.Threshold, filter.ThresholdComparator);
+
+                discountsQuery = discountsQuery.Where(x => filter.IsPercent == null || x.IsPercent == filter.IsPercent.Value);
+
                 discounts = await _repositoryBase.TakePage(discountsQuery, filter).ConfigureAwait(false);
             }
 
@@ -61,6 +67,58 @@ namespace HireRight.Repository.Concrete
             using (HireRightDbContext context = new HireRightDbContext())
             {
                 return await _repositoryBase.UpdateBase(itemToUpdate, context.Discounts).ConfigureAwait(false);
+            }
+        }
+
+        private IQueryable<Discount> FilterByAmount(IQueryable<Discount> query, decimal? value, NumericSearchComparators? comparator)
+        {
+            if (value == null || comparator == null) return query;
+
+            switch (comparator)
+            {
+                case NumericSearchComparators.GreaterThan:
+                    return query.Where(x => x.Threshold > value.Value);
+
+                case NumericSearchComparators.GreaterThanOrEqualTo:
+                    return query.Where(x => x.Threshold >= value.Value);
+
+                case NumericSearchComparators.EqualTo:
+                    return query.Where(x => x.Threshold == value.Value);
+
+                case NumericSearchComparators.LessThanOrEqualTo:
+                    return query.Where(x => x.Threshold <= value.Value);
+
+                case NumericSearchComparators.LessThan:
+                    return query.Where(x => x.Threshold < value.Value);
+
+                default:
+                    return query;
+            }
+        }
+
+        private IQueryable<Discount> FilterByThreshold(IQueryable<Discount> query, int? value, NumericSearchComparators? comparator)
+        {
+            if (value == null || comparator == null) return query;
+
+            switch (comparator)
+            {
+                case NumericSearchComparators.GreaterThan:
+                    return query.Where(x => x.Amount > value.Value);
+
+                case NumericSearchComparators.GreaterThanOrEqualTo:
+                    return query.Where(x => x.Amount >= value.Value);
+
+                case NumericSearchComparators.EqualTo:
+                    return query.Where(x => x.Amount == value.Value);
+
+                case NumericSearchComparators.LessThanOrEqualTo:
+                    return query.Where(x => x.Amount <= value.Value);
+
+                case NumericSearchComparators.LessThan:
+                    return query.Where(x => x.Amount < value.Value);
+
+                default:
+                    return query;
             }
         }
     }

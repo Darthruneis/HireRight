@@ -10,6 +10,9 @@ namespace DataTransferObjects.Filters.Concrete
     public class AccountFilter : Filter<Account>
     {
         [DataMember]
+        public CompanyFilter CompanyFilter { get; set; }
+
+        [DataMember]
         public string Notes { get; set; }
 
         public AccountFilter(int page, int size, string notesText, params Guid[] itemGuids) : base(page, size, itemGuids)

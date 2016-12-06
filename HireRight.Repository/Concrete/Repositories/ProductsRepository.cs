@@ -38,6 +38,10 @@ namespace HireRight.Repository.Concrete
 
                 productsQuery = productsQuery.FilterByDiscounts(filter.DiscountFilter);
 
+                productsQuery = productsQuery.Where(x => string.IsNullOrWhiteSpace(filter.Title) || x.Title.Contains(filter.Title));
+
+                productsQuery = FilterByPrice(productsQuery, filter.Price, filter.PriceComparator);
+
                 products = await _repositoryBase.TakePage(productsQuery, filter).ConfigureAwait(false);
             }
 
@@ -61,6 +65,32 @@ namespace HireRight.Repository.Concrete
             using (HireRightDbContext context = new HireRightDbContext())
             {
                 return await _repositoryBase.UpdateBase(itemToUpdate, context.Products).ConfigureAwait(false);
+            }
+        }
+
+        private IQueryable<Product> FilterByPrice(IQueryable<Product> query, decimal? value, NumericSearchComparators? comparator)
+        {
+            if (value == null || comparator == null) return query;
+
+            switch (comparator)
+            {
+                case NumericSearchComparators.GreaterThan:
+                    return query.Where(x => x.Price > value.Value);
+
+                case NumericSearchComparators.GreaterThanOrEqualTo:
+                    return query.Where(x => x.Price >= value.Value);
+
+                case NumericSearchComparators.EqualTo:
+                    return query.Where(x => x.Price == value.Value);
+
+                case NumericSearchComparators.LessThanOrEqualTo:
+                    return query.Where(x => x.Price <= value.Value);
+
+                case NumericSearchComparators.LessThan:
+                    return query.Where(x => x.Price < value.Value);
+
+                default:
+                    return query;
             }
         }
     }

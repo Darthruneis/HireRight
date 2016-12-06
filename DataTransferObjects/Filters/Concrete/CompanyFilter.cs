@@ -11,7 +11,7 @@ namespace DataTransferObjects.Filters.Concrete
     public class CompanyFilter : Filter<Company>
     {
         [DataMember]
-        public AddressDTO BillingAddress { get; set; }
+        public AddressFilter BillingAddressFilter { get; set; }
 
         [DataMember]
         public ClientFilter ClientFilter { get; set; }
