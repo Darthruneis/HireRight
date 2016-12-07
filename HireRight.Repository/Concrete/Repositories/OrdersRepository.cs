@@ -86,13 +86,13 @@ namespace HireRight.Repository.Concrete
                     return query.Where(x => x.Completed > value);
 
                 case DateTimeSearchComparators.DayOf:
-                    return query.Where(x => x.Completed > value);
+                    return query.Where(x => x.Completed >= (value - TimeSpan.FromDays(1)) && x.Completed <= (value + TimeSpan.FromDays(1)));
 
                 case DateTimeSearchComparators.Exactly:
-                    return query.Where(x => x.Completed > value);
+                    return query.Where(x => x.Completed == value);
 
                 case DateTimeSearchComparators.HourOf:
-                    return query.Where(x => x.Completed > value);
+                    return query.Where(x => x.Completed >= (value - TimeSpan.FromHours(1)) && x.Completed <= (value + TimeSpan.FromHours(1)));
 
                 default:
                     return query;

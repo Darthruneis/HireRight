@@ -49,7 +49,7 @@ namespace DataTransferObjects.Filters.Concrete
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
 
             if (AddressFilter != null)
-                query.Append(AddressFilter.CreateQuery(false));
+                query.Append(AddressFilter.CreateQuery(nameof(AddressFilter)));
 
             return query.ToString();
         }

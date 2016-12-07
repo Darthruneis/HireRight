@@ -30,10 +30,10 @@ namespace DataTransferObjects.Filters.Concrete
 
         public override string CreateQuery(bool addBaseQuery = true)
         {
-            StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
+            StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery(true) : "");
 
             if (AddressFilter != null)
-                query.Append(AddressFilter.CreateQuery(false);
+                query.Append(AddressFilter.CreateQuery(nameof(AddressFilter)));
 
             return query.ToString();
         }

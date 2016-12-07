@@ -33,8 +33,8 @@ namespace DataTransferObjects.Filters.Concrete
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery(true) : "");
 
-            if (BillingAddress != null)
-                query.Append(BillingAddress.CreateQuery(nameof(BillingAddress)));
+            if (BillingAddressFilter != null)
+                query.Append(BillingAddressFilter.CreateQuery(nameof(BillingAddressFilter)));
 
             if (ClientFilter != null)
                 query.Append(ClientFilter.CreateQuery(false));

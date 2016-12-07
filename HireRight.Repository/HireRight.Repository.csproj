@@ -86,7 +86,6 @@
     <Compile Include="Concrete\Repositories\ProductsRepository.cs" />
     <Compile Include="Concrete\RepositoryQueryFilterer.cs" />
     <Compile Include="Concrete\RepositoryResponseObject.cs" />
-    <Compile Include="Extensions\IQueryableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +101,9 @@
       <Project>{0abe87b8-761f-4d4c-9391-27034ad058d9}</Project>
       <Name>HireRight.EntityFramework.CodeFirst</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
