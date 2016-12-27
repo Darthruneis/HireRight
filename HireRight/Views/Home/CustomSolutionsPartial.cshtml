@@ -1,0 +1,35 @@
+﻿@model IList<JobAnalysisCategoryViewModel>
+<style>
+    .borderLessDivTableblackBorderedDivTable {
+        border: 2px solid black;
+        display: table;
+    }
+
+    .borderLessDivTable {
+        border: none;
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+<div class="row blackBorderedDivTable">
+    <div class="col-xs-12 col-lg-3 borderLessDivTable">
+        <h3>Category</h3>
+    </div>
+    <div class="col-xs-12 col-lg-6 borderLessDivTable">
+        <h3>Description of Category</h3>
+    </div>
+    <div class="col-xs-12 col-lg-3 borderLessDivTable">
+        <h3>Importance</h3>
+    </div>
+</div>
+@for (int i = 0; i < Model.Count; i++)
+{
+    <div class="row blackBorderedDivTable">
+        <div class="col-xs-12 col-lg-3 borderLessDivTable">@Model[i].Title</div>
+        @Html.HiddenFor(x => Model[i].Title)
+        <div class="col-xs-12 col-lg-6 borderLessDivTable">@Model[i].Description</div>
+        @Html.HiddenFor(x => Model[i].Description)
+        <div class="col-xs-12 col-lg-3 borderLessDivTable">@Html.EnumDropDownListFor(x => Model[i].Importance, new { @class = "form-control" })</div>
+        @Html.HiddenFor(x => Model[i].Importance)
+    </div>
+}

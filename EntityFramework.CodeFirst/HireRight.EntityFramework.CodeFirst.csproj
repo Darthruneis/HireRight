@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201611240652244_fixingDiscountMapping.Designer.cs">
       <DependentUpon>201611240652244_fixingDiscountMapping.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612262259048_hardDriveChanged.cs" />
+    <Compile Include="Migrations\201612262259048_hardDriveChanged.Designer.cs">
+      <DependentUpon>201612262259048_hardDriveChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Value Objects\Address.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611240652244_fixingDiscountMapping.resx">
       <DependentUpon>201611240652244_fixingDiscountMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612262259048_hardDriveChanged.resx">
+      <DependentUpon>201612262259048_hardDriveChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

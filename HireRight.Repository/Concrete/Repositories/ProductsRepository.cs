@@ -30,22 +30,30 @@ namespace HireRight.Repository.Concrete
 
         public async Task<List<Product>> Get(ProductFilter filter)
         {
-            List<Product> products;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            try
             {
-                IQueryable<Product> productsQuery = context.Products.Include(x => x.Discounts);
+                List<Product> products;
 
-                productsQuery = productsQuery.FilterByDiscounts(filter.DiscountFilter);
+                using (HireRightDbContext context = new HireRightDbContext())
+                {
+                    IQueryable<Product> productsQuery = context.Products.Include(x => x.Discounts);
 
-                productsQuery = productsQuery.Where(x => string.IsNullOrWhiteSpace(filter.Title) || x.Title.Contains(filter.Title));
+                    productsQuery = productsQuery.FilterByDiscounts(filter.DiscountFilter);
 
-                productsQuery = FilterByPrice(productsQuery, filter.Price, filter.PriceComparator);
+                    if (!string.IsNullOrWhiteSpace(filter.Title))
+                        productsQuery = productsQuery.Where(x => x.Title.Contains(filter.Title));
 
-                products = await _repositoryBase.TakePage(productsQuery, filter).ConfigureAwait(false);
+                    productsQuery = FilterByPrice(productsQuery, filter.Price, filter.PriceComparator);
+
+                    products = await _repositoryBase.TakePage(productsQuery, filter).ConfigureAwait(false);
+                }
+
+                return products;
             }
-
-            return products;
+            catch (Exception ex)
+            {
+                throw new AggregateException("Database issue encountered.", ex);
+            }
         }
 
         public async Task<Product> Get(Guid itemGuid)

@@ -1,17 +1,24 @@
-﻿@{
+﻿@model IList<JobAnalysisCategoryViewModel>
+@{
     ViewBag.Title = "Custom Solutions";
 }
-
-<div class="row">
-    <div class="col-xs-12"><h2>Custom Solutions with Hire Right</h2></div>
-</div>
-<div class="row">
-    <div class="col-xs-12">Custom Solutions for your hiring needs with Hire Right.</div>
-</div>
 <div class="row">
     <div class="col-xs-12">
-        <div style="margin: 0 auto; width: 200px;">
-            @Html.ActionLink("Ready to place an Order?", "About", new { controller = "Order" }, new { @class = "btn btn-primary" })
-        </div>
+        <h2>Job Analysis</h2>
     </div>
 </div>
+@using (Html.BeginForm("CustomSolutions", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-xs-12">Explanation of form and what it is supposed to accomplish.</div>
+    </div>
+    Html.RenderPartial("CustomSolutionsPartial", model: Model);
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="margin: 0 auto; width: 200px;">
+                <input type="submit" value="Continue" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}

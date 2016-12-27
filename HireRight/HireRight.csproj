@@ -213,6 +213,7 @@
     <Compile Include="Models\ContactUsViewModel.cs" />
     <Compile Include="Models\CreateOrderViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JobAnalysisCategoryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NewClientsViewModel.cs" />
     <Compile Include="Models\OrdersViewModel.cs" />
@@ -339,6 +340,7 @@
     <Content Include="Views\Order\EditorTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\PrimaryContactViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\AdminViewModel.cshtml" />
+    <Content Include="Views\Home\CustomSolutionsPartial.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
   </ItemGroup>
