@@ -8,6 +8,7 @@ namespace HireRight.EntityFramework.CodeFirst.Database_Context
     public class HireRightDbContext : DbContext
     {
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<ScaleCategory> Categories { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
@@ -15,11 +16,6 @@ namespace HireRight.EntityFramework.CodeFirst.Database_Context
         public virtual DbSet<CompanyLocation> Locations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-
-        static HireRightDbContext()
-        {
-            Database.SetInitializer(new HireRightDbContextInitializer());
-        }
 
         public HireRightDbContext() : base("HireRightDb")
         { }

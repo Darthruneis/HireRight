@@ -1,5 +1,10 @@
 using HireRight.EntityFramework.CodeFirst.Database_Context;
+using System;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace HireRight.EntityFramework.CodeFirst.Migrations
 {
@@ -30,12 +35,51 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             context.Products.AddOrUpdate(product);
             context.SaveChanges();
 
-            // This method will be called after migrating to the latest version.
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(@"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\EntityFramework.CodeFirst\test.xml");
 
-            // You can use the DbSet<T>.AddOrUpdate() helper extension method to avoid creating duplicate seed data. E.g.
-            //
-            // context.People.AddOrUpdate( p => p.FullName, new Person { FullName = "Andrew Peters" }, new Person { FullName = "Brice Lambson" }, new Person {
-            // FullName = "Rowan Miller" } );
+            XmlNodeList nodeList = xDoc.GetElementsByTagName("tr");
+
+            List<ScaleCategory> categories = new List<ScaleCategory>();
+
+            AggregateException exceptions = null;
+
+            foreach (XmlNode node in nodeList)
+            {
+                try
+                {
+                    if (!node.HasChildNodes) continue;
+
+                    string[] nodes = new string[2];
+
+                    for (int i = 0; i < 2; i++)
+                        nodes[i] = node.ChildNodes[i].FirstChild.InnerText;
+
+                    string title = nodes[0];
+                    string description = nodes[1];
+
+                    categories.Add(new ScaleCategory(title, description));
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    if (exceptions == null)
+                        exceptions = new AggregateException(ex);
+
+                    exceptions = new AggregateException(ex, exceptions);
+                }
+            }
+
+            if (exceptions != null)
+                throw exceptions;
+
+            foreach (ScaleCategory scaleCategory in categories)
+            {
+                context.Categories.AddOrUpdate(scaleCategory);
+            }
+
+            context.SaveChanges();
         }
     }
 }

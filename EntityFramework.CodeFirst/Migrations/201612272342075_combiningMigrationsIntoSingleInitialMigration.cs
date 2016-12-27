@@ -3,7 +3,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialMigration : DbMigration
+    public partial class combiningMigrationsIntoSingleInitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -76,12 +76,12 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
-                        BillingAddress_City = c.String(nullable: false),
-                        BillingAddress_Country = c.String(nullable: false),
-                        BillingAddress_PostalCode = c.String(nullable: false, maxLength: 10),
-                        BillingAddress_State = c.String(nullable: false, maxLength: 2),
-                        BillingAddress_StreetAddress = c.String(nullable: false),
-                        BillingAddress_UnitNumber = c.String(),
+                        Address_City = c.String(nullable: false),
+                        Address_Country = c.String(nullable: false),
+                        Address_PostalCode = c.String(nullable: false, maxLength: 10),
+                        Address_State = c.String(nullable: false, maxLength: 2),
+                        Address_StreetAddress = c.String(nullable: false),
+                        Address_UnitNumber = c.String(),
                         Name = c.String(nullable: false),
                         CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
                         TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
@@ -149,14 +149,28 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
+                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         IsPercent = c.Boolean(nullable: false),
                         ProductId = c.Guid(nullable: false),
+                        Threshold = c.Int(nullable: false),
                         CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
                         TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Product", t => t.ProductId)
                 .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.ScaleCategory",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
+                        Description = c.String(nullable: false),
+                        Title = c.String(nullable: false),
+                        CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
+                        TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    })
+                .PrimaryKey(t => t.Id);
             
         }
         
@@ -186,6 +200,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             DropIndex("dbo.Client", new[] { "AdminContactId" });
             DropIndex("dbo.Client", new[] { "AccountId" });
             DropIndex("dbo.Account", new[] { "CompanyId" });
+            DropTable("dbo.ScaleCategory");
             DropTable("dbo.Discount");
             DropTable("dbo.Product");
             DropTable("dbo.Order");
