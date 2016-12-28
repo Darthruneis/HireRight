@@ -77,6 +77,7 @@ namespace HireRight.API.App_Start
             kernel.Bind<ILocationsRepository>().To<LocationsRepository>();
             kernel.Bind<IOrdersRepository>().To<OrdersRepository>();
             kernel.Bind<IProductsRepository>().To<ProductsRepository>();
+            kernel.Bind<ICategoriesRepository>().To<CategoriesRepository>();
 
             //business logic bindings
             kernel.Bind<IAccountsBusinessLogic>().To<AccountsBusinessLogic>();
@@ -86,6 +87,7 @@ namespace HireRight.API.App_Start
             kernel.Bind<ILocationsBusinessLogic>().To<LocationsBusinessLogic>();
             kernel.Bind<IOrdersBusinessLogic>().To<OrdersBusinessLogic>();
             kernel.Bind<IProductsBusinessLogic>().To<ProductsBusinessLogic>();
+            kernel.Bind<ICategoriesBusinessLogic>().To<CategoriesBusinessLogic>();
         }
     }
 }
