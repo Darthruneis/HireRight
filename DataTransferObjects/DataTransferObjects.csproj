@@ -45,6 +45,7 @@
     <Compile Include="ApiResponse.cs" />
     <Compile Include="Data Transfer Objects\AccountDTO.cs" />
     <Compile Include="Data Transfer Objects\AddressDTO.cs" />
+    <Compile Include="Data Transfer Objects\CategoryDTO.cs" />
     <Compile Include="Data Transfer Objects\ClientDTO.cs" />
     <Compile Include="Data Transfer Objects\CompanyDTO.cs" />
     <Compile Include="Data Transfer Objects\ContactDTO.cs" />
