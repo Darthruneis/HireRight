@@ -10,7 +10,7 @@ namespace HireRight.Controllers
 {
     public class HomeController : Controller
     {
-        private ICategoriesSDK _categoriesSDK;
+        private readonly ICategoriesSDK _categoriesSDK;
 
         public HomeController(ICategoriesSDK sdk)
         {
@@ -41,6 +41,7 @@ namespace HireRight.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
