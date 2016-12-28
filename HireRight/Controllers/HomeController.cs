@@ -1,21 +1,28 @@
-﻿using HireRight.Models;
+﻿using DataTransferObjects.Data_Transfer_Objects;
+using HireRight.Models;
+using SDK.Abstract;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace HireRight.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
-        public ActionResult CustomSolutions()
+        private ICategoriesSDK _categoriesSDK;
+
+        public HomeController(ICategoriesSDK sdk)
         {
-            List<JobAnalysisCategoryViewModel> testingModel = new List<JobAnalysisCategoryViewModel>();
-            JobAnalysisCategoryViewModel testModel = new JobAnalysisCategoryViewModel();
-            testModel.Title = "Achievement Drive";
-            testModel.Description = "Achievement Drive measures the degree to which the individual is likely to be competitive and driven to be the best. This characteristic is important for jobs where the attainment of established goals and benchmarks are important (e.g., sales jobs). It is also important for jobs where there may be competition within departments or between coworkers and positions where the individual is expected to grow and advance to higher levels within the organization.";
-            testModel.Importance = CategoryImportance.HighImportance;
-            testingModel.Add(testModel);
+            _categoriesSDK = sdk;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> CustomSolutions()
+        {
+            List<CategoryDTO> categories = await _categoriesSDK.GetCategories();
+
+            List<JobAnalysisCategoryViewModel> testingModel = categories.Select(x => new JobAnalysisCategoryViewModel() { Description = x.Description, Title = x.Title }).ToList();
 
             return View(testingModel);
         }

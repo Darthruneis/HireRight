@@ -55,6 +55,7 @@ namespace HireRight
             kernel.Bind<ILocationsSDK>().To<LocationsSDK>();
             kernel.Bind<IOrdersSDK>().To<OrdersSDK>();
             kernel.Bind<IProductsSDK>().To<ProductsSDK>();
+            kernel.Bind<ICategoriesSDK>().To<CategoriesSDK>();
         }
     }
 }
