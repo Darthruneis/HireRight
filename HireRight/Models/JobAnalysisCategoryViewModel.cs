@@ -25,7 +25,7 @@ namespace HireRight.Models
 
         public JobAnalysisCategoryViewModel()
         {
-            Importance = CategoryImportance.NormalImportance;
+            Importance = CategoryImportance.Irrelevant;
         }
     }
 }

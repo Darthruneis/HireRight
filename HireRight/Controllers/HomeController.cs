@@ -24,7 +24,7 @@ namespace HireRight.Controllers
 
             List<JobAnalysisCategoryViewModel> testingModel = categories.Select(x => new JobAnalysisCategoryViewModel() { Description = x.Description, Title = x.Title }).ToList();
 
-            return View(testingModel);
+            return View(testingModel.OrderBy(x => x.Title).ToList());
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace HireRight.Controllers
             if (models == null || !ModelState.IsValid)
                 return View(models);
 
-            List<JobAnalysisCategoryViewModel> model = models.ToList();
+            List<JobAnalysisCategoryViewModel> model = models.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList();
 
             List<JobAnalysisCategoryViewModel> low = model.Where(x => x.Importance == CategoryImportance.LowImportance).ToList();
             List<JobAnalysisCategoryViewModel> normal = model.Where(x => x.Importance == CategoryImportance.NormalImportance).ToList();
@@ -41,26 +41,18 @@ namespace HireRight.Controllers
 
             List<JobAnalysisCategoryViewModel> listToReturn = new List<JobAnalysisCategoryViewModel>();
 
-            if (low.Count > 15)
+            int total = low.Count + normal.Count + high.Count;
+
+            if (total > 15)
             {
-                ModelState.AddModelError("", "Please narrow down your selections to fewer than 15 Low Importance categories.");
+                ModelState.AddModelError("", $"Please narrow down your selections to fewer than 15 Important categories.  You have selected {total - 15} too many.");
                 listToReturn.AddRange(low);
-            }
-
-            if (normal.Count > 15)
-            {
-                ModelState.AddModelError("", "Please narrow down your selections to fewer than 15 Normal Importance categories.");
                 listToReturn.AddRange(normal);
-            }
-
-            if (high.Count > 15)
-            {
-                ModelState.AddModelError("", "Please narrow down your selections to fewer than 15 High Importance categories.");
                 listToReturn.AddRange(high);
             }
 
             if (!ModelState.IsValid)
-                return View(listToReturn);
+                return View(listToReturn.OrderBy(x => x.Importance).ThenBy(x => x.Title).ToList());
 
             return RedirectToAction("Index");
         }
