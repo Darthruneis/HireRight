@@ -1,11 +1,16 @@
 ﻿function hideDiv(divId) {
-    document.getElementById(divId).hidden = true;
+    $(divId).hide();
 }
 
 function showDiv(divId) {
-    document.getElementById(divId).hidden = false;
+    $(divId).show();
 }
 
 function toggleDiv(divId) {
-    document.getElementById(divId).hidden = !document.getElementById(divId).hidden;
+    $(divId).toggle();
+}
+
+function toggleMultiple(show, hide) {
+    $(show).toggle();
+    $(hide).toggle();
 }

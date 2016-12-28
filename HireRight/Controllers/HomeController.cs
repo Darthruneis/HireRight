@@ -33,23 +33,7 @@ namespace HireRight.Controllers
             if (models == null || !ModelState.IsValid)
                 return View(models);
 
-            List<JobAnalysisCategoryViewModel> model = models.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList();
-
-            List<JobAnalysisCategoryViewModel> low = model.Where(x => x.Importance == CategoryImportance.LowImportance).ToList();
-            List<JobAnalysisCategoryViewModel> normal = model.Where(x => x.Importance == CategoryImportance.NormalImportance).ToList();
-            List<JobAnalysisCategoryViewModel> high = model.Where(x => x.Importance == CategoryImportance.HighImportance).ToList();
-
-            List<JobAnalysisCategoryViewModel> listToReturn = new List<JobAnalysisCategoryViewModel>();
-
-            int total = low.Count + normal.Count + high.Count;
-
-            if (total > 15)
-            {
-                ModelState.AddModelError("", $"Please narrow down your selections to fewer than 15 Important categories.  You have selected {total - 15} too many.");
-                listToReturn.AddRange(low);
-                listToReturn.AddRange(normal);
-                listToReturn.AddRange(high);
-            }
+            List<JobAnalysisCategoryViewModel> listToReturn = EnforceConstraints(models.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList());
 
             if (!ModelState.IsValid)
                 return View(listToReturn.OrderBy(x => x.Importance).ThenBy(x => x.Title).ToList());
@@ -60,6 +44,33 @@ namespace HireRight.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        private List<JobAnalysisCategoryViewModel> EnforceConstraints(IList<JobAnalysisCategoryViewModel> model)
+        {
+            List<JobAnalysisCategoryViewModel> low = model.Where(x => x.Importance == CategoryImportance.LowImportance).ToList();
+            List<JobAnalysisCategoryViewModel> normal = model.Where(x => x.Importance == CategoryImportance.NormalImportance).ToList();
+            List<JobAnalysisCategoryViewModel> high = model.Where(x => x.Importance == CategoryImportance.HighImportance).ToList();
+
+            List<JobAnalysisCategoryViewModel> listToReturn = new List<JobAnalysisCategoryViewModel>();
+
+            int total = low.Count + normal.Count + high.Count;
+            const int minimum = 3;
+            const int maximum = 15;
+
+            if (total < minimum)
+            {
+                ModelState.AddModelError("", $"Please select at least {minimum - total} additional Important categories.");
+            }
+            else if (total > maximum)
+            {
+                ModelState.AddModelError("", $"Please narrow down your selections to fewer than 15 Important categories.  You have selected {total - maximum} too many.");
+                listToReturn.AddRange(low);
+                listToReturn.AddRange(normal);
+                listToReturn.AddRange(high);
+            }
+
+            return listToReturn;
         }
     }
 }
