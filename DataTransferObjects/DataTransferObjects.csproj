@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiResponse.cs" />
+    <Compile Include="CategoryImportance.cs" />
     <Compile Include="Data Transfer Objects\AccountDTO.cs" />
     <Compile Include="Data Transfer Objects\AddressDTO.cs" />
     <Compile Include="Data Transfer Objects\CategoryDTO.cs" />

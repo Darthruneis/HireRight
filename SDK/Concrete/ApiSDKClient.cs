@@ -2,6 +2,7 @@
 using DataTransferObjects.Data_Transfer_Objects;
 using SDK.Abstract;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -11,8 +12,7 @@ using System.Threading.Tasks;
 
 namespace SDK.Concrete
 {
-    public sealed class ApiSDKClient<TDto> : IApiSDKClient<TDto>
-        where TDto : DataTransferObjectBase
+    public sealed class ApiSDKClient : IApiSDKClient
     {
         public Uri BaseAddress { get; set; }
 
@@ -23,25 +23,32 @@ namespace SDK.Concrete
             Client = new HttpClient();
         }
 
-        public async Task<ApiResponse<TDto>> GetAsync(string query)
+        public async Task<ApiResponse<TDto>> GetAsync<TDto>(string query)
         {
             HttpRequestMessage request = CreateGetRequest(query);
 
-            return await ReadApiResponse(request);
+            return await ReadApiResponse<TDto>(request);
         }
 
-        public async Task<ApiResponse<TDto>> PostAsync(TDto content)
+        public async Task<ApiResponse<TDto>> PostAsync<TDto>(TDto content)
         {
             HttpRequestMessage request = CreateRequest(HttpMethod.Post, string.Empty, content);
 
-            return await ReadApiResponse(request);
+            return await ReadApiResponse<TDto>(request);
         }
 
-        public async Task<ApiResponse<TDto>> PutAsync(TDto content)
+        public async Task<ApiResponse<TDto>> PostAsync<TDto>(IList<TDto> content)
+        {
+            HttpRequestMessage request = CreateRequest(HttpMethod.Post, string.Empty, content);
+
+            return await ReadApiResponse<TDto>(request);
+        }
+
+        public async Task<ApiResponse<TDto>> PutAsync<TDto>(TDto content)
         {
             HttpRequestMessage request = CreateRequest(HttpMethod.Put, string.Empty, content);
 
-            return await ReadApiResponse(request);
+            return await ReadApiResponse<TDto>(request);
         }
 
         private HttpRequestMessage CreateGetRequest(string query = null)
@@ -49,7 +56,7 @@ namespace SDK.Concrete
             return new HttpRequestMessage(HttpMethod.Get, BaseAddress + query);
         }
 
-        private HttpRequestMessage CreateRequest(HttpMethod method, string query, TDto content = null)
+        private HttpRequestMessage CreateRequest<TDto>(HttpMethod method, string query, TDto content)
         {
             if (method == HttpMethod.Get)
                 return CreateGetRequest(query);
@@ -63,7 +70,7 @@ namespace SDK.Concrete
             return request;
         }
 
-        private async Task<ApiResponse<TDto>> ReadApiResponse(HttpRequestMessage request)
+        private async Task<ApiResponse<TDto>> ReadApiResponse<TDto>(HttpRequestMessage request)
         {
             HttpResponseMessage response = await SendAsync(request);
 

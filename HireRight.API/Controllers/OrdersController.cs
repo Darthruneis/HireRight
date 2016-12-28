@@ -1,4 +1,5 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
+﻿using DataTransferObjects;
+using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
@@ -51,6 +52,17 @@ namespace HireRight.API.Controllers
         public async Task<HttpResponseMessage> GetOrders([FromUri] OrderFilter filter)
         {
             return await GetMultipleBase(_getPage(filter));
+        }
+
+        [Route("cards")]
+        [HttpPost]
+        public HttpResponseMessage SubmitCards(IList<CategoryDTO> categories)
+        {
+            _ordersBusinessLogic.SubmitCards(categories);
+
+            ApiResponse<CategoryDTO> response = new ApiResponse<CategoryDTO>(HttpStatusCode.OK, 0);
+
+            return Request.CreateResponse(response);
         }
 
         [HttpPut]

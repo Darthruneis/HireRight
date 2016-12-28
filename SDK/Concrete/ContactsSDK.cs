@@ -1,4 +1,7 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
+﻿using DataTransferObjects;
+using DataTransferObjects.Data_Transfer_Objects;
+using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using SDK.Abstract;
 using System;
 using System.Collections.Generic;
@@ -6,17 +9,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
-using DataTransferObjects;
-using DataTransferObjects.Filters;
-using DataTransferObjects.Filters.Concrete;
 
 namespace SDK.Concrete
 {
     public class ContactsSDK : IContactsSDK
     {
-        private readonly IApiSDKClient<ContactDTO> _client;
+        private readonly IApiSDKClient _client;
 
-        public ContactsSDK(IApiSDKClient<ContactDTO> client)
+        public ContactsSDK(IApiSDKClient client)
         {
             _client = client;
             _client.BaseAddress = new Uri(ConfigurationConstants.ApiUrl + typeof(ContactsSDK).Name.Replace("SDK", string.Empty));
@@ -31,14 +31,14 @@ namespace SDK.Concrete
 
         public async Task<ContactDTO> GetContact(Guid contactGuid)
         {
-            ApiResponse<ContactDTO> response = await _client.GetAsync($"?{nameof(contactGuid)}={contactGuid}");
+            ApiResponse<ContactDTO> response = await _client.GetAsync<ContactDTO>($"?{nameof(contactGuid)}={contactGuid}");
 
             return response.Results.First();
         }
 
         public async Task<List<ContactDTO>> GetContacts(ContactFilter filter)
         {
-            ApiResponse<ContactDTO> response = await _client.GetAsync(filter.CreateQuery());
+            ApiResponse<ContactDTO> response = await _client.GetAsync<ContactDTO>(filter.CreateQuery());
 
             return response.Results.ToList();
         }

@@ -10,10 +10,14 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public string Description { get; set; }
 
         [DataMember]
+        public CategoryImportance Importance { get; set; }
+
+        [DataMember]
         public string Title { get; set; }
 
         public CategoryDTO()
         {
+            Importance = CategoryImportance.Irrelevant;
         }
 
         public CategoryDTO(string title, string description)

@@ -9,7 +9,6 @@ namespace DataTransferObjects
 {
     [DataContract]
     public class ApiResponse<TDto>
-        where TDto : DataTransferObjectBase
     {
         [DataMember]
         public string ErrorMessage { get; private set; }

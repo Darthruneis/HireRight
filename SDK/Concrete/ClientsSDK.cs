@@ -1,20 +1,20 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
+﻿using DataTransferObjects;
+using DataTransferObjects.Data_Transfer_Objects;
+using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using SDK.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects;
-using DataTransferObjects.Filters;
-using DataTransferObjects.Filters.Concrete;
 
 namespace SDK.Concrete
 {
     public class ClientsSDK : IClientsSDK
     {
-        private readonly IApiSDKClient<ClientDTO> _client;
+        private readonly IApiSDKClient _client;
 
-        public ClientsSDK(IApiSDKClient<ClientDTO> client)
+        public ClientsSDK(IApiSDKClient client)
         {
             _client = client;
             _client.BaseAddress = new Uri(ConfigurationConstants.ApiUrl + typeof(ClientsSDK).Name.Replace("SDK", string.Empty));
@@ -29,14 +29,14 @@ namespace SDK.Concrete
 
         public async Task<ClientDTO> GetClient(Guid clientGuid)
         {
-            ApiResponse<ClientDTO> response = await _client.GetAsync($"?{nameof(clientGuid)}={clientGuid}");
+            ApiResponse<ClientDTO> response = await _client.GetAsync<ClientDTO>($"?{nameof(clientGuid)}={clientGuid}");
 
             return response.Results.First();
         }
 
         public async Task<List<ClientDTO>> GetClients(ClientFilter filter)
         {
-            ApiResponse<ClientDTO> response = await _client.GetAsync(filter.CreateQuery());
+            ApiResponse<ClientDTO> response = await _client.GetAsync<ClientDTO>(filter.CreateQuery());
 
             return response.Results.ToList();
         }

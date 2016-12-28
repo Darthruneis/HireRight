@@ -1,9 +1,9 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters.Concrete;
 
 namespace SDK.Abstract
 {
@@ -16,6 +16,8 @@ namespace SDK.Abstract
         Task<OrderDetailsDTO> GetOrder(Guid orderGuid);
 
         Task<List<OrderDetailsDTO>> GetOrders(OrderFilter filter);
+
+        Task SubmitCards(IList<CategoryDTO> categories);
 
         Task<OrderDetailsDTO> UpdateOrder(OrderDetailsDTO orderToUpdate);
     }

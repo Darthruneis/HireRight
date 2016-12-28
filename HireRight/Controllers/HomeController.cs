@@ -1,4 +1,5 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
+﻿using DataTransferObjects;
+using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.Models;
 using SDK.Abstract;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace HireRight.Controllers
     public class HomeController : Controller
     {
         private readonly ICategoriesSDK _categoriesSDK;
+        private readonly IOrdersSDK _ordersSDK;
 
-        public HomeController(ICategoriesSDK sdk)
+        public HomeController(ICategoriesSDK categoriesSdk, IOrdersSDK ordersSdk)
         {
-            _categoriesSDK = sdk;
+            _categoriesSDK = categoriesSdk;
+            _ordersSDK = ordersSdk;
         }
 
         [HttpGet]
@@ -28,7 +31,7 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public ActionResult CustomSolutions(IList<JobAnalysisCategoryViewModel> models)
+        public async Task<ActionResult> CustomSolutions(IList<JobAnalysisCategoryViewModel> models)
         {
             if (models == null || !ModelState.IsValid)
                 return View(models);
@@ -37,6 +40,8 @@ namespace HireRight.Controllers
 
             if (!ModelState.IsValid)
                 return View(listToReturn.OrderBy(x => x.Importance).ThenBy(x => x.Title).ToList());
+
+            await _ordersSDK.SubmitCards(listToReturn.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance }).ToList());
 
             return RedirectToAction("Index");
         }
@@ -62,14 +67,15 @@ namespace HireRight.Controllers
             if (total < minimum)
             {
                 ModelState.AddModelError("", $"Please select at least {minimum - total} additional Important categories.");
+                return model.ToList();
             }
-            else if (total > maximum)
-            {
+
+            if (total > maximum)
                 ModelState.AddModelError("", $"Please narrow down your selections to fewer than 15 Important categories.  You have selected {total - maximum} too many.");
-                listToReturn.AddRange(lowImportanceModels);
-                listToReturn.AddRange(normalImportanceModels);
-                listToReturn.AddRange(highImportanceModels);
-            }
+
+            listToReturn.AddRange(lowImportanceModels);
+            listToReturn.AddRange(normalImportanceModels);
+            listToReturn.AddRange(highImportanceModels);
 
             return listToReturn;
         }

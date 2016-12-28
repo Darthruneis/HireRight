@@ -12,9 +12,9 @@ namespace SDK.Concrete
 {
     public class CompaniesSDK : ICompaniesSDK
     {
-        private readonly IApiSDKClient<CompanyDTO> _client;
+        private readonly IApiSDKClient _client;
 
-        public CompaniesSDK(IApiSDKClient<CompanyDTO> client)
+        public CompaniesSDK(IApiSDKClient client)
         {
             _client = client;
             _client.BaseAddress = new Uri(ConfigurationConstants.ApiUrl + typeof(CompaniesSDK).Name.Replace("SDK", string.Empty));
@@ -30,14 +30,14 @@ namespace SDK.Concrete
         public async Task<List<CompanyDTO>> GetCompanies(CompanyFilter filter)
         {
             string query = filter.CreateQuery();
-            ApiResponse<CompanyDTO> response = await _client.GetAsync(query);
+            ApiResponse<CompanyDTO> response = await _client.GetAsync<CompanyDTO>(query);
 
             return response.Results.ToList();
         }
 
         public async Task<CompanyDTO> GetCompany(Guid companyGuid)
         {
-            ApiResponse<CompanyDTO> response = await _client.GetAsync($"?{nameof(companyGuid)}={companyGuid}");
+            ApiResponse<CompanyDTO> response = await _client.GetAsync<CompanyDTO>($"?{nameof(companyGuid)}={companyGuid}");
 
             return response.Results.First();
         }

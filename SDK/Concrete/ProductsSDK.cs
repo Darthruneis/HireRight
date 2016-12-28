@@ -12,9 +12,9 @@ namespace SDK.Concrete
 {
     public class ProductsSDK : IProductsSDK
     {
-        private readonly IApiSDKClient<ProductDTO> _client;
+        private readonly IApiSDKClient _client;
 
-        public ProductsSDK(IApiSDKClient<ProductDTO> client)
+        public ProductsSDK(IApiSDKClient client)
         {
             _client = client;
             _client.BaseAddress = new Uri(ConfigurationConstants.ApiUrl + typeof(ProductsSDK).Name.Replace("SDK", string.Empty));
@@ -29,14 +29,14 @@ namespace SDK.Concrete
 
         public async Task<ProductDTO> GetProduct(Guid productGuid)
         {
-            ApiResponse<ProductDTO> response = await _client.GetAsync($"?{nameof(productGuid)}={productGuid}");
+            ApiResponse<ProductDTO> response = await _client.GetAsync<ProductDTO>($"?{nameof(productGuid)}={productGuid}");
 
             return response.Results.First();
         }
 
         public async Task<List<ProductDTO>> GetProducts(ProductFilter filterParameters)
         {
-            ApiResponse<ProductDTO> response = await _client.GetAsync(filterParameters.CreateQuery());
+            ApiResponse<ProductDTO> response = await _client.GetAsync<ProductDTO>(filterParameters.CreateQuery());
 
             return response.Results.ToList();
         }

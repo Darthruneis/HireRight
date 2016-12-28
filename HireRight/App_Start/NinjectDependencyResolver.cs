@@ -47,7 +47,7 @@ namespace HireRight
         /// <param name="kernel"></param>
         private static void AddBindings(IKernel kernel)
         {
-            kernel.Bind(typeof(IApiSDKClient<>)).To(typeof(ApiSDKClient<>));
+            kernel.Bind<IApiSDKClient>().To<ApiSDKClient>();
             kernel.Bind<IAccountsSDK>().To<AccountsSDK>();
             kernel.Bind<IClientsSDK>().To<ClientsSDK>();
             kernel.Bind<ICompaniesSDK>().To<CompaniesSDK>();

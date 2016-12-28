@@ -1,4 +1,5 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
+﻿using DataTransferObjects;
+using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
@@ -24,6 +25,22 @@ namespace HireRight.BusinessLogic.Concrete
         {
             _ordersRepository = repo;
             _productsBusinessLogic = productBll;
+        }
+
+        public static void SendFormattedEmail(string email, string greeting, string message, string subject, string replyTo = null)
+        {
+            string body;
+
+            const string path = @"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\HireRight.BusinessLogic\Models\EmailBase.cshtml";
+
+            using (StreamReader reader = new StreamReader(path))
+            {
+                body = reader.ReadToEnd();
+            }
+
+            string messageBody = string.Format(body, greeting, message);
+
+            SendEmail(email, messageBody, subject, replyTo);
         }
 
         public async Task<OrderDetailsDTO> Add(OrderDetailsDTO objectDto)
@@ -95,11 +112,7 @@ namespace HireRight.BusinessLogic.Concrete
 
             StringBuilder message = new StringBuilder(greetingLine);
 
-            ProductDTO dto = await _productsBusinessLogic.Get(Guid.NewGuid()).ConfigureAwait(false);
-
-            List<Discount> discounts = dto.Discounts.Select(x => x.ConvertDtoToModel()).ToList();
-
-            Product product = new Product(dto.Title, dto.Price, discounts);
+            ProductDTO dto = await _productsBusinessLogic.Get(model.Order.ProductId).ConfigureAwait(false);
 
             message.AppendLine($"Quantity: {model.Order.Quantity}")
                    .AppendLine($"Subtotal: {CalculatePrice(dto.Id, model.Order.Quantity)}")
@@ -124,6 +137,8 @@ namespace HireRight.BusinessLogic.Concrete
             if (model.Order.Notes != null)
                 message.AppendLine("<br />The customer has left the following notes for you:")
                        .AppendLine(model.Order.Notes);
+
+            EmailConsultants(message.ToString(), "New Order Placed!");
         }
 
         public async Task<OrderDetailsDTO> Get(Guid orderGuid)
@@ -140,20 +155,30 @@ namespace HireRight.BusinessLogic.Concrete
             return orders.Select(ConvertModelToDto).ToList();
         }
 
-        public void SendFormattedEmail(string email, string greeting, string message, string subject, string replyTo = null)
+        public void SubmitCards(IList<CategoryDTO> categories)
         {
-            string body;
+            categories = categories.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList();
 
-            const string path = @"C:\Users\Chris\documents\visual studio 2015\Projects\HireRight\HireRight.BusinessLogic\Models\EmailBase.cshtml";
+            StringBuilder message = new StringBuilder("A new custom test profile has been created by ...");
 
-            using (StreamReader reader = new StreamReader(path))
-            {
-                body = reader.ReadToEnd();
-            }
+            //add the client's information to the message...
 
-            string messageBody = string.Format(body, greeting, message);
+            message.AppendLine();
+            message.AppendLine("The following categories were marked as <b>High Importance</b>:");
+            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.HighImportance))
+                message.AppendLine("• " + categoryDTO.Title);
 
-            SendEmail(messageBody, email, subject, replyTo);
+            message.AppendLine();
+            message.AppendLine("The following categories were marked as <b>Normal Importance</b>:");
+            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.NormalImportance))
+                message.AppendLine("• " + categoryDTO.Title);
+
+            message.AppendLine();
+            message.AppendLine("The following categories were marked as <b>Low Importance</b>:");
+            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.LowImportance))
+                message.AppendLine("• " + categoryDTO.Title);
+
+            EmailConsultants(message.ToString(), "New Custom Test Request");
         }
 
         public async Task<OrderDetailsDTO> Update(OrderDetailsDTO objectDto)
@@ -161,6 +186,12 @@ namespace HireRight.BusinessLogic.Concrete
             Order orderToUpdate = ConvertDtoToModel(objectDto);
 
             return ConvertModelToDto(await _ordersRepository.Update(orderToUpdate).ConfigureAwait(false));
+        }
+
+        private static void EmailConsultants(string message, string subject, string replyTo = null)
+        {
+            SendFormattedEmail("silverasoc@aol.com", "Diana", message, subject, replyTo);
+            SendFormattedEmail("janet@something.com", "Janet", message, subject, replyTo);
         }
 
         private static void SendEmail(string recipient, string body, string subject, string replyTo = null)
@@ -177,7 +208,7 @@ namespace HireRight.BusinessLogic.Concrete
 
                 if (replyTo != null) mailMessage.ReplyToList.Add(replyTo);
 
-                emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight Test Emails";
+                emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight\HireRight Test Emails";
                 emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
 
                 emailClient.Send(mailMessage);

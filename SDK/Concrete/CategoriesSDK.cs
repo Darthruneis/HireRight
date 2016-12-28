@@ -10,9 +10,9 @@ namespace SDK.Concrete
 {
     public class CategoriesSDK : ICategoriesSDK
     {
-        private readonly IApiSDKClient<CategoryDTO> _client;
+        private readonly IApiSDKClient _client;
 
-        public CategoriesSDK(IApiSDKClient<CategoryDTO> client)
+        public CategoriesSDK(IApiSDKClient client)
         {
             _client = client;
             client.BaseAddress = new Uri(ConfigurationConstants.ApiUrl + typeof(CategoriesSDK).Name.Replace("SDK", string.Empty));
@@ -27,14 +27,14 @@ namespace SDK.Concrete
 
         public async Task<List<CategoryDTO>> GetCategories()
         {
-            ApiResponse<CategoryDTO> response = await _client.GetAsync(string.Empty);
+            ApiResponse<CategoryDTO> response = await _client.GetAsync<CategoryDTO>(string.Empty);
 
             return response.Results.ToList();
         }
 
         public async Task<CategoryDTO> GetCategory(Guid categoryGuid)
         {
-            var response = await _client.GetAsync($"?{nameof(categoryGuid)}={categoryGuid}");
+            ApiResponse<CategoryDTO> response = await _client.GetAsync<CategoryDTO>($"?{nameof(categoryGuid)}={categoryGuid}");
 
             return response.Results.First();
         }

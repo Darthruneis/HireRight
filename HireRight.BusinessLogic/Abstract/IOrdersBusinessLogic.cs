@@ -1,10 +1,10 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters;
+using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.BusinessLogic.Abstract
 {
@@ -17,6 +17,8 @@ namespace HireRight.BusinessLogic.Abstract
         Task<OrderDetailsDTO> Get(Guid orderGuid);
 
         Task<List<OrderDetailsDTO>> Get(OrderFilter filter);
+
+        void SubmitCards(IList<CategoryDTO> categories);
 
         Task<OrderDetailsDTO> Update(OrderDetailsDTO orderDto);
     }
