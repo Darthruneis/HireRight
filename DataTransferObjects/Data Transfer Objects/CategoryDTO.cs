@@ -13,6 +13,9 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public CategoryImportance Importance { get; set; }
 
         [DataMember]
+        public bool IsInTopTwelve { get; set; }
+
+        [DataMember]
         public string Title { get; set; }
 
         public CategoryDTO()

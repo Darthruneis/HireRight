@@ -8,9 +8,12 @@ using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -164,21 +167,21 @@ namespace HireRight.BusinessLogic.Concrete
             //add the client's information to the message...
 
             message.AppendLine();
-            message.AppendLine("The following categories were marked as <b>High Importance</b>:");
+            message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.HighImportance)}</b>:");
             foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.HighImportance))
-                message.AppendLine("• " + categoryDTO.Title);
+                if (categoryDTO.IsInTopTwelve)
+                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
+                else
+                    message.AppendLine("• " + categoryDTO.Title);
 
-            message.AppendLine();
-            message.AppendLine("The following categories were marked as <b>Normal Importance</b>:");
-            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.NormalImportance))
-                message.AppendLine("• " + categoryDTO.Title);
-
-            message.AppendLine();
-            message.AppendLine("The following categories were marked as <b>Low Importance</b>:");
+            message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.LowImportance)}</b>:");
             foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.LowImportance))
-                message.AppendLine("• " + categoryDTO.Title);
+                if (categoryDTO.IsInTopTwelve)
+                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
+                else
+                    message.AppendLine("• " + categoryDTO.Title);
 
-            EmailConsultants(message.ToString(), "New Custom Test Request");
+            EmailConsultants(message.ToString().Replace("\r\n", "<br/><br/>"), "New Custom Test Request");
         }
 
         public async Task<OrderDetailsDTO> Update(OrderDetailsDTO objectDto)
@@ -202,6 +205,7 @@ namespace HireRight.BusinessLogic.Concrete
                     "Hire Right Testing Admin Admin@HireRightTesting.com",
                     recipient,
                     subject,
+                    //Replace normal line breaks with HTML break statements
                     body);
 
                 mailMessage.IsBodyHtml = true;
@@ -213,6 +217,14 @@ namespace HireRight.BusinessLogic.Concrete
 
                 emailClient.Send(mailMessage);
             }
+        }
+
+        private string GetEnumName(CategoryImportance level)
+        {
+            Type type = typeof(CategoryImportance);
+            MemberInfo[] memberInfo = type.GetMember(level.ToString());
+            object[] attributes = memberInfo.First().GetCustomAttributes(typeof(DisplayAttribute), false);
+            return ((DisplayAttribute)attributes.First()).Name;
         }
     }
 }

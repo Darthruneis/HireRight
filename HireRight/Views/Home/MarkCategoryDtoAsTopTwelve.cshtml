@@ -1,0 +1,14 @@
+﻿@model System.Collections.Generic.List<DataTransferObjects.Data_Transfer_Objects.CategoryDTO>
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    <div class="row">
+        <div class="col-xs-12 col-lg-4">@Model[i].Title</div>
+        @Html.HiddenFor(x => Model[i].Title)
+        <div class="col-xs-12 col-lg-6">@Model[i].Description</div>
+        @Html.HiddenFor(x => Model[i].Description)
+        <div class="col-xs-12 col-lg-2">@Html.CheckBoxFor(x => Model[i].IsInTopTwelve)</div>
+        @Html.HiddenFor(x => Model[i].IsInTopTwelve)
+        @Html.HiddenFor(x => Model[i].Importance)
+    </div>
+}

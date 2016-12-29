@@ -7,13 +7,10 @@ namespace DataTransferObjects
         [Display(Name = "Not Important")]
         Irrelevant,
 
-        [Display(Name = "Low Importance")]
+        [Display(Name = "Nice To Have")]
         LowImportance,
 
-        [Display(Name = "Normal Importance")]
-        NormalImportance,
-
-        [Display(Name = "High Importance")]
+        [Display(Name = "Critical for Success")]
         HighImportance,
     }
 }

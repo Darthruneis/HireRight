@@ -1,0 +1,19 @@
+﻿@model System.Collections.Generic.List<DataTransferObjects.Data_Transfer_Objects.CategoryDTO>
+
+@{
+    ViewBag.Title = "Please select the most important categories";
+}
+
+@using (Html.BeginForm("TopTwelve", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-xs-12 col-lg-4">Title</div>
+        <div class="col-xs-12 col-lg-6">Description</div>
+        <div class="col-xs-12 col-lg-2">Highest Importance</div>
+    </div>
+    Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model);
+    <div style="margin: 0 auto; width: 200px;">
+        <input type="submit" class="btn btn-Primary" value="Finish" />
+    </div>
+}

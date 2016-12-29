@@ -41,9 +41,7 @@ namespace HireRight.Controllers
             if (!ModelState.IsValid)
                 return View(listToReturn.OrderBy(x => x.Importance).ThenBy(x => x.Title).ToList());
 
-            await _ordersSDK.SubmitCards(listToReturn.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance }).ToList());
-
-            return RedirectToAction("Index");
+            return TopTwelve(listToReturn);
         }
 
         [HttpGet]
@@ -52,17 +50,30 @@ namespace HireRight.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> TopTwelve(IList<CategoryDTO> models)
+        {
+            if (models.Count(x => x.IsInTopTwelve) > 12)
+            {
+                ModelState.AddModelError("", "Please narrow down your selections to 12 or fewer.");
+                return View("SelectTopTwelve", models.ToList());
+            }
+
+            await _ordersSDK.SubmitCards(models);
+
+            return RedirectToAction("Index");
+        }
+
         private List<JobAnalysisCategoryViewModel> EnforceConstraints(IList<JobAnalysisCategoryViewModel> model)
         {
             List<JobAnalysisCategoryViewModel> lowImportanceModels = model.Where(x => x.Importance == CategoryImportance.LowImportance).ToList();
-            List<JobAnalysisCategoryViewModel> normalImportanceModels = model.Where(x => x.Importance == CategoryImportance.NormalImportance).ToList();
             List<JobAnalysisCategoryViewModel> highImportanceModels = model.Where(x => x.Importance == CategoryImportance.HighImportance).ToList();
 
             List<JobAnalysisCategoryViewModel> listToReturn = new List<JobAnalysisCategoryViewModel>();
 
-            int total = lowImportanceModels.Count + normalImportanceModels.Count + highImportanceModels.Count;
+            int total = lowImportanceModels.Count + highImportanceModels.Count;
             const int minimum = 3;
-            const int maximum = 15;
+            const int maximum = 20;
 
             if (total < minimum)
             {
@@ -70,14 +81,26 @@ namespace HireRight.Controllers
                 return model.ToList();
             }
 
-            if (total > maximum)
-                ModelState.AddModelError("", $"Please narrow down your selections to fewer than 15 Important categories.  You have selected {total - maximum} too many.");
+            if (lowImportanceModels.Count > maximum)
+                ModelState.AddModelError("", $"Please narrow down your selections to fewer than {maximum} Nice To Have categories.  You have selected {lowImportanceModels.Count - maximum} too many.");
+
+            if (highImportanceModels.Count > maximum)
+                ModelState.AddModelError("", $"Please narrow down your selections to fewer than {maximum} Nice To Have categories.  You have selected {highImportanceModels.Count - maximum} too many.");
 
             listToReturn.AddRange(lowImportanceModels);
-            listToReturn.AddRange(normalImportanceModels);
             listToReturn.AddRange(highImportanceModels);
 
             return listToReturn;
+        }
+
+        private ActionResult TopTwelve(IList<JobAnalysisCategoryViewModel> models)
+        {
+            if (models == null || !ModelState.IsValid)
+                return View("CustomSolutions", models);
+
+            List<CategoryDTO> dtos = models.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance }).ToList();
+
+            return View("SelectTopTwelve", dtos);
         }
     }
 }
