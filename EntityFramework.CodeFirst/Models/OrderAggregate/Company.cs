@@ -17,10 +17,19 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         [Required]
         public Address Address { get; set; }
 
+        /// <summary>
+        /// The set of clients related to this company.
+        /// </summary>
         public virtual ICollection<Client> Clients { get; set; }
 
+        /// <summary>
+        /// The set of locations this company uses to do business.
+        /// </summary>
         public virtual ICollection<CompanyLocation> Locations { get; set; }
 
+        /// <summary>
+        /// The name of this company.
+        /// </summary>
         [Required]
         public string Name { get; set; }
     }

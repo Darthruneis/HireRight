@@ -62,6 +62,10 @@
     <Compile Include="Abstract\PocoBase.cs" />
     <Compile Include="BaseMigrationCodeGenerator.cs" />
     <Compile Include="Database Context\HireRightDbContext.cs" />
+    <Compile Include="Migrations\201701012051551_initialWithImmutableAddress.cs" />
+    <Compile Include="Migrations\201701012051551_initialWithImmutableAddress.Designer.cs">
+      <DependentUpon>201701012051551_initialWithImmutableAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OrderAggregate\Account.cs" />
     <Compile Include="Models\OrderAggregate\ScaleCategory.cs" />
@@ -80,9 +84,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="test.xml">
+    <Content Include="InitialScaleCategories.xml">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701012051551_initialWithImmutableAddress.resx">
+      <DependentUpon>201701012051551_initialWithImmutableAddress.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

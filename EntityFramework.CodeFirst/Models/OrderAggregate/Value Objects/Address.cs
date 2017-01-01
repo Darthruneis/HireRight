@@ -15,37 +15,37 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         /// The city for this address.
         /// </summary>
         [Required, Column("City")]
-        public string City { get; }
+        public string City { get; private set; }
 
         /// <summary>
         /// The country this address resides in.
         /// </summary>
         [Required, Column("Country")]
-        public string Country { get; }
+        public string Country { get; private set; }
 
         /// <summary>
         /// The postal code of this address.
         /// </summary>
         [Required, StringLength(10, MinimumLength = 5), Column("PostalCode")]
-        public string PostalCode { get; }
+        public string PostalCode { get; private set; }
 
         /// <summary>
         /// The state or province of this address.
         /// </summary>
         [Required, StringLength(2, MinimumLength = 2), Column("State")]
-        public string State { get; }
+        public string State { get; private set; }
 
         /// <summary>
         /// The street and street number of this address/
         /// </summary>
         [Required, Column("StreetAddress")]
-        public string StreetAddress { get; }
+        public string StreetAddress { get; private set; }
 
         /// <summary>
         /// Optional. If there is an assosciated unit with the address, such as an appartment or room number, include it here.
         /// </summary>
         [Column("UnitNumber")]
-        public string UnitNumber { get; }
+        public string UnitNumber { get; private set; }
 
         /// <summary>
         /// Creates a new <see cref="Address" /> in the United States.

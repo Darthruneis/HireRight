@@ -17,8 +17,14 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         [Required]
         public Address Address { get; set; }
 
+        /// <summary>
+        /// The company this location is for.
+        /// </summary>
         public virtual Company Company { get; set; }
 
+        /// <summary>
+        /// Foreign key for the company this location is for.
+        /// </summary>
         [ForeignKey("Company")]
         public Guid CompanyId { get; set; }
 

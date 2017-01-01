@@ -38,7 +38,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             context.SaveChanges();
 
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(@"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\EntityFramework.CodeFirst\test.xml");
+            xDoc.Load(@"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\EntityFramework.CodeFirst\InitialScaleCategories.xml");
 
             XmlNodeList nodeList = xDoc.GetElementsByTagName("tr");
 
