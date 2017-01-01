@@ -48,11 +48,8 @@ namespace HireRight
         private static void AddBindings(IKernel kernel)
         {
             kernel.Bind<IApiSDKClient>().To<ApiSDKClient>();
-            kernel.Bind<IAccountsSDK>().To<AccountsSDK>();
-            kernel.Bind<IClientsSDK>().To<ClientsSDK>();
             kernel.Bind<ICompaniesSDK>().To<CompaniesSDK>();
             kernel.Bind<IContactsSDK>().To<ContactsSDK>();
-            kernel.Bind<ILocationsSDK>().To<LocationsSDK>();
             kernel.Bind<IOrdersSDK>().To<OrdersSDK>();
             kernel.Bind<IProductsSDK>().To<ProductsSDK>();
             kernel.Bind<ICategoriesSDK>().To<CategoriesSDK>();

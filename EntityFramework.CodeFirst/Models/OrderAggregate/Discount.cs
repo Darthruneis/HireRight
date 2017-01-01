@@ -1,10 +1,10 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HireRight.EntityFramework.CodeFirst.Models
+namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
 {
     /// <summary>
     /// A discount is a reduction in total cost or individual price of a threshold of sales. Generally thought of as a bulk discount for large orders of Tests.

@@ -66,24 +66,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IAccountsRepository.cs" />
     <Compile Include="Abstract\ICategoriesRepository.cs" />
-    <Compile Include="Abstract\IClientsRepository.cs" />
     <Compile Include="Abstract\ICompanyRepository.cs" />
     <Compile Include="Abstract\IContactsRepository.cs" />
     <Compile Include="Abstract\IDiscountsRepository.cs" />
-    <Compile Include="Abstract\ILocationsRepository.cs" />
     <Compile Include="Abstract\IProductsRepository.cs" />
     <Compile Include="Abstract\IRepositoryBase.cs" />
     <Compile Include="Concrete\Repositories\CategoriesRepository.cs" />
     <Compile Include="Concrete\RepositoryBase.cs" />
-    <Compile Include="Concrete\Repositories\AccountsRepository.cs" />
-    <Compile Include="Concrete\Repositories\ClientsRepository.cs" />
     <Compile Include="Concrete\Repositories\CompanyRepository.cs" />
     <Compile Include="Concrete\Repositories\ContactsRepository.cs" />
     <Compile Include="Abstract\IOrdersRepository.cs" />
     <Compile Include="Concrete\Repositories\DiscountsRepository.cs" />
-    <Compile Include="Concrete\Repositories\LocationsRepository.cs" />
     <Compile Include="Concrete\Repositories\OrdersRepository.cs" />
     <Compile Include="Concrete\Repositories\ProductsRepository.cs" />
     <Compile Include="Concrete\RepositoryQueryFilterer.cs" />

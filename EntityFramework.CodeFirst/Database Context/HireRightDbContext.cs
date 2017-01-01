@@ -2,6 +2,7 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.EntityFramework.CodeFirst.Database_Context
 {

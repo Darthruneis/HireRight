@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.BusinessLogic.Tests
 {

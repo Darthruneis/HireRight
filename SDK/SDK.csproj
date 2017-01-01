@@ -52,22 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IAccountsSDK.cs" />
     <Compile Include="Abstract\ICategoriesSDK.cs" />
-    <Compile Include="Abstract\IClientsSDK.cs" />
     <Compile Include="Abstract\ICompaniesSDK.cs" />
     <Compile Include="Abstract\IContactsSDK.cs" />
-    <Compile Include="Abstract\ILocationsSDK.cs" />
     <Compile Include="Abstract\IOrdersSDK.cs" />
     <Compile Include="Abstract\IProductsSDK.cs" />
-    <Compile Include="Concrete\AccountsSDK.cs" />
     <Compile Include="Concrete\ApiSDKClient.cs" />
     <Compile Include="Concrete\CategoriesSDK.cs" />
-    <Compile Include="Concrete\ClientsSDK.cs" />
     <Compile Include="Concrete\ContactsSDK.cs" />
     <Compile Include="Concrete\CompaniesSDK.cs" />
     <Compile Include="Abstract\IApiSDKClient.cs" />
-    <Compile Include="Concrete\LocationsSDK.cs" />
     <Compile Include="Concrete\OrdersSDK.cs" />
     <Compile Include="Concrete\ProductsSDK.cs" />
     <Compile Include="ConfigurationConstants.cs" />

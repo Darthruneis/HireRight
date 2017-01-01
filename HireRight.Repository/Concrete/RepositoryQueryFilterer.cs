@@ -3,6 +3,8 @@ using HireRight.EntityFramework.CodeFirst.Abstract;
 using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Linq;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingCollections;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 
 namespace HireRight.Repository.Concrete
 {

@@ -1,4 +1,5 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Models;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.BusinessLogic.Models
 {

@@ -1,5 +1,6 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.EntityFramework.CodeFirst.Models;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.BusinessLogic.Extensions
 {

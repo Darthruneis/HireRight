@@ -70,21 +70,15 @@ namespace HireRight.API.App_Start
         {
             //repository bindings
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
-            kernel.Bind<IAccountsRepository>().To<AccountsRepository>();
-            kernel.Bind<IClientsRepository>().To<ClientsRepository>();
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
             kernel.Bind<IContactsRepository>().To<ContactsRepository>();
-            kernel.Bind<ILocationsRepository>().To<LocationsRepository>();
             kernel.Bind<IOrdersRepository>().To<OrdersRepository>();
             kernel.Bind<IProductsRepository>().To<ProductsRepository>();
             kernel.Bind<ICategoriesRepository>().To<CategoriesRepository>();
 
             //business logic bindings
-            kernel.Bind<IAccountsBusinessLogic>().To<AccountsBusinessLogic>();
-            kernel.Bind<IClientsBusinessLogic>().To<ClientsBusinessLogic>();
             kernel.Bind<ICompanyBusinessLogic>().To<CompanyBusinessLogic>();
             kernel.Bind<IContactsBusinessLogic>().To<ContactsBusinessLogic>();
-            kernel.Bind<ILocationsBusinessLogic>().To<LocationsBusinessLogic>();
             kernel.Bind<IOrdersBusinessLogic>().To<OrdersBusinessLogic>();
             kernel.Bind<IProductsBusinessLogic>().To<ProductsBusinessLogic>();
             kernel.Bind<ICategoriesBusinessLogic>().To<CategoriesBusinessLogic>();

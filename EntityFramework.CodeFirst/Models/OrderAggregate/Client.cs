@@ -1,8 +1,9 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HireRight.EntityFramework.CodeFirst.Models
+namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
 {
     /// <summary>
     /// A Client is a reference to an Account and up to two Contacts related to the Account.

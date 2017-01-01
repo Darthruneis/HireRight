@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace DataTransferObjects.Data_Transfer_Objects
 {

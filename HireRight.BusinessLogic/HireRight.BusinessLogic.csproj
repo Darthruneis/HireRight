@@ -53,21 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICategoriesBusinessLogic.cs" />
-    <Compile Include="Concrete\BusinessLogicBase.cs" />
-    <Compile Include="Abstract\IAccountsBusinessLogic.cs" />
     <Compile Include="Abstract\IBusinessLogicBase.cs" />
-    <Compile Include="Abstract\IClientsBusinessLogic.cs" />
     <Compile Include="Abstract\ICompanyBusinessLogic.cs" />
     <Compile Include="Abstract\IContactsBusinessLogic.cs" />
-    <Compile Include="Abstract\ILocationsBusinessLogic.cs" />
-    <Compile Include="Concrete\AccountsBusinessLogic.cs" />
     <Compile Include="Concrete\CategoriesBusinessLogic.cs" />
-    <Compile Include="Concrete\ClientsBusinessLogic.cs" />
     <Compile Include="Concrete\CompanyBusinessLogic.cs" />
     <Compile Include="Concrete\ContactsBusinessLogic.cs" />
     <Compile Include="Abstract\IOrdersBusinessLogic.cs" />
     <Compile Include="Abstract\IProductsBusinessLogic.cs" />
-    <Compile Include="Concrete\LocationsBusinessLogic.cs" />
     <Compile Include="Concrete\ProductsBusinessLogic.cs" />
     <Compile Include="Extensions\AddressConversionExtensions.cs" />
     <Compile Include="Extensions\DiscountConversionExtensions.cs" />

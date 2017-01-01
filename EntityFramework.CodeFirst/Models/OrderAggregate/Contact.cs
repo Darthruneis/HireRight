@@ -1,9 +1,10 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HireRight.EntityFramework.CodeFirst.Models
+namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
 {
     /// <summary>
     /// A Contact is an individual that is part of a Company and/or Client, and can optionally be a Primary contact or an Administrator.

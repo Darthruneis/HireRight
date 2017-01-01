@@ -1,10 +1,12 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingCollections;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HireRight.EntityFramework.CodeFirst.Models
+namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
 {
     /// <summary>
     /// An account is a relationship between a Company and its Clients and Orders.

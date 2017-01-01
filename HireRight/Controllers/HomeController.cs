@@ -31,7 +31,7 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CustomSolutions(IList<JobAnalysisCategoryViewModel> models)
+        public ActionResult CustomSolutions(IList<JobAnalysisCategoryViewModel> models)
         {
             if (models == null || !ModelState.IsValid)
                 return View(models);

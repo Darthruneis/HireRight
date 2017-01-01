@@ -67,16 +67,16 @@
       <DependentUpon>201612272342075_combiningMigrationsIntoSingleInitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\ScaleCategory.cs" />
-    <Compile Include="Models\Value Objects\Address.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Company.cs" />
-    <Compile Include="Models\CompanyLocation.cs" />
-    <Compile Include="Models\Contact.cs" />
-    <Compile Include="Models\Discount.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\OrderAggregate\Account.cs" />
+    <Compile Include="Models\OrderAggregate\ScaleCategory.cs" />
+    <Compile Include="Models\OrderAggregate\Value Objects\Address.cs" />
+    <Compile Include="Models\OrderAggregate\Client.cs" />
+    <Compile Include="Models\OrderAggregate\Company.cs" />
+    <Compile Include="Models\OrderAggregate\CompanyLocation.cs" />
+    <Compile Include="Models\OrderAggregate\Contact.cs" />
+    <Compile Include="Models\OrderAggregate\Discount.cs" />
+    <Compile Include="Models\OrderAggregate\Order.cs" />
+    <Compile Include="Models\OrderAggregate\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
