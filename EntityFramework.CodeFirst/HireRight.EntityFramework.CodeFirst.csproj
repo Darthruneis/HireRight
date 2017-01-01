@@ -62,10 +62,6 @@
     <Compile Include="Abstract\PocoBase.cs" />
     <Compile Include="BaseMigrationCodeGenerator.cs" />
     <Compile Include="Database Context\HireRightDbContext.cs" />
-    <Compile Include="Migrations\201612272342075_combiningMigrationsIntoSingleInitialMigration.cs" />
-    <Compile Include="Migrations\201612272342075_combiningMigrationsIntoSingleInitialMigration.Designer.cs">
-      <DependentUpon>201612272342075_combiningMigrationsIntoSingleInitialMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OrderAggregate\Account.cs" />
     <Compile Include="Models\OrderAggregate\ScaleCategory.cs" />
@@ -87,11 +83,6 @@
     <Content Include="test.xml">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612272342075_combiningMigrationsIntoSingleInitialMigration.resx">
-      <DependentUpon>201612272342075_combiningMigrationsIntoSingleInitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

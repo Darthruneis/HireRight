@@ -1,11 +1,11 @@
 using HireRight.EntityFramework.CodeFirst.Database_Context;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 using System;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.EntityFramework.CodeFirst.Migrations
 {
@@ -18,6 +18,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
             CodeGenerator = new BaseMigrationCodeGenerator();
         }
 
