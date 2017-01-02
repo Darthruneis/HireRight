@@ -55,6 +55,7 @@
     <Compile Include="Data Transfer Objects\DiscountDTO.cs" />
     <Compile Include="Data Transfer Objects\LocationDTO.cs" />
     <Compile Include="Data Transfer Objects\NewOrderDTO.cs" />
+    <Compile Include="Data Transfer Objects\NotesPositionsDto.cs" />
     <Compile Include="Data Transfer Objects\OrderDetailsDTO.cs" />
     <Compile Include="Data Transfer Objects\ProductDTO.cs" />
     <Compile Include="Filters\Concrete\AddressFilter.cs" />

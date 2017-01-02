@@ -1,10 +1,9 @@
-﻿@model System.Collections.Generic.List<DataTransferObjects.Data_Transfer_Objects.CategoryDTO>
-
+﻿@model CustomSolutionsViewModel
 @{
     ViewBag.Title = "Please select the most important categories";
 }
 
-@using (Html.BeginForm("TopTwelve", "Home", FormMethod.Post))
+@using (Html.BeginForm("TopTwelve", "CustomSolutions", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
     <div class="row">

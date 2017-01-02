@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\CustomSolutionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\ContactUsViewModel.cs" />
     <Compile Include="Models\CreateOrderViewModel.cs" />
+    <Compile Include="Models\CustomSolutionsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JobAnalysisCategoryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -247,6 +249,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\customSolutions.js" />
     <Content Include="Scripts\indexDivScripts.js" />
     <Content Include="Content\sass\_mobile-default.scss" />
     <Content Include="Content\sass\_tablet.scss" />
@@ -335,14 +338,14 @@
     <Content Include="Views\Shared\EditorTemplates\AddressDTO.cshtml" />
     <Content Include="Views\Order\_productQuantityWithDiscountsPartial.cshtml" />
     <Content Include="Views\Order\About.cshtml" />
-    <Content Include="Views\Home\CustomSolutions.cshtml" />
+    <Content Include="Views\CustomSolutions\Index.cshtml" />
     <Content Include="Views\Order\EditorTemplates\OrdersViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\PrimaryContactViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\AdminViewModel.cshtml" />
-    <Content Include="Views\Home\CustomSolutionsPartial.cshtml" />
-    <Content Include="Views\Home\SelectTopTwelve.cshtml" />
-    <Content Include="Views\Home\MarkCategoryDtoAsTopTwelve.cshtml" />
+    <Content Include="Views\CustomSolutions\CustomSolutionsPartial.cshtml" />
+    <Content Include="Views\CustomSolutions\SelectTopTwelve.cshtml" />
+    <Content Include="Views\CustomSolutions\MarkCategoryDtoAsTopTwelve.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
   </ItemGroup>

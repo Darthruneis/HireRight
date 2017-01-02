@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="bootstrap.js" />
+/// <reference path="customsolutions.js" />
 /// <reference path="indexDivScripts.js" />
 /// <reference path="jquery.unobtrusive-ajax.min.js" />
 /// <reference path="jquery.validate.js" />

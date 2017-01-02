@@ -13,10 +13,7 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public Guid CompanyId { get; set; }
 
         [DataMember]
-        public string Notes { get; set; }
-
-        [DataMember]
-        public List<string> PositionsOfInterest { get; set; }
+        public NotesPositionsDTO NotesAndPositions { get; set; }
 
         [DataMember]
         public Guid ProductId { get; set; }

@@ -43,9 +43,9 @@ namespace HireRight.Models
         {
             OrderDetailsDTO dto = new OrderDetailsDTO();
 
-            dto.Notes = Notes;
+            dto.NotesAndPositions.Notes = Notes;
             dto.Quantity = (int)Quantity;
-            dto.PositionsOfInterest = Positions;
+            dto.NotesAndPositions.PositionsOfInterest = Positions;
             dto.ProductId = SelectedProductId;
 
             return dto;

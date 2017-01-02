@@ -7,7 +7,13 @@ namespace DataTransferObjects.Data_Transfer_Objects
     public class CategoryDTO : DataTransferObjectBase
     {
         [DataMember]
+        public ContactDTO Contact { get; set; }
+
+        [DataMember]
         public string Description { get; set; }
+
+        [DataMember]
+        public NotesPositionsDTO Details { get; set; }
 
         [DataMember]
         public CategoryImportance Importance { get; set; }

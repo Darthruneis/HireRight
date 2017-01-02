@@ -1,0 +1,44 @@
+﻿@model CustomSolutionsViewModel
+    <script src="~/Scripts/showHideDiv.js"></script>
+    <div class="row">
+        <div class="col-xs-12 col-lg-3">
+            <h3>Category</h3>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            <h3>Description of Category</h3>
+        </div>
+        <div class="col-xs-8 col-lg-2">
+            <h3>Importance</h3>
+        </div>
+        <div class="col-xs-4 col-lg-1">
+            <h3>Show/ Hide</h3>
+        </div>
+    </div>
+    @for (int i = 0; i < Model.Categories.Count; i++)
+    {
+        <div class="row">
+            @{
+                string hiddenRowId = "hiddenRow_" + i;
+                string shownRowId = "shownRow_" + i;
+            }
+            <div id="@hiddenRowId" class="col-xs-12" hidden="hidden">
+                <div class="row">
+                    <div class="col-xs-11">Press the <span class="glyphicon glyphicon-plus-sign"></span> button to show this row again.</div>
+                    <div class="col-xs-1"><button class="btn btn-default glyphicon glyphicon-plus-sign" type="button" onclick="toggleMultiple(@shownRowId, @hiddenRowId)"></button></div>
+                </div>
+            </div>
+            <div id="@shownRowId" class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-3">@Model.Categories[i].Title</div>
+                    @Html.HiddenFor(x => Model.Categories[i].Title)
+                    <div class="col-xs-12 col-lg-6">@Model.Categories[i].Description</div>
+                    @Html.HiddenFor(x => Model.Categories[i].Description)
+                    <div class="col-xs-8 col-lg-2">@Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control" })</div>
+                    @Html.HiddenFor(x => Model.Categories[i].Importance)
+                    <div class="col-xs-4 col-lg-1">
+                        <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button" onclick="toggleMultiple(@hiddenRowId, @shownRowId)"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                }

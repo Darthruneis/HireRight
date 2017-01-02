@@ -18,11 +18,5 @@ namespace DataTransferObjects.Data_Transfer_Objects
 
         [DataMember]
         public string OfficePhone { get; set; }
-
-        [DataMember]
-        public string State { get; set; }
-
-        [DataMember]
-        public string ZIP { get; set; }
     }
 }

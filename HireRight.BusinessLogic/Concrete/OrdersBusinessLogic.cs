@@ -5,6 +5,7 @@ using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Extensions;
 using HireRight.EntityFramework.CodeFirst.Models;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,6 @@ using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
 {
@@ -89,8 +89,8 @@ namespace HireRight.BusinessLogic.Concrete
             model.CreatedUtc = dto.CreatedUtc;
             model.CompanyId = dto.CompanyId;
             model.ProductId = dto.ProductId;
-            model.Notes = dto.Notes;
-            model.PositionsOfInterest = dto.PositionsOfInterest;
+            model.Notes = dto.NotesAndPositions.Notes;
+            model.PositionsOfInterest = dto.NotesAndPositions.PositionsOfInterest;
             model.Quantity = dto.Quantity;
 
             return model;
@@ -104,8 +104,8 @@ namespace HireRight.BusinessLogic.Concrete
             dto.Quantity = model.Quantity;
             dto.ProductId = model.ProductId;
             dto.CompanyId = model.CompanyId;
-            dto.Notes = model.Notes;
-            dto.PositionsOfInterest = model.PositionsOfInterest;
+            dto.NotesAndPositions.Notes = model.Notes;
+            dto.NotesAndPositions.PositionsOfInterest = model.PositionsOfInterest;
 
             return dto;
         }
@@ -121,7 +121,7 @@ namespace HireRight.BusinessLogic.Concrete
             message.AppendLine($"Quantity: {model.Order.Quantity}")
                    .AppendLine($"Subtotal: {CalculatePrice(dto.Id, model.Order.Quantity)}")
                    .AppendLine("Positions of Interest:");
-            foreach (string position in model.Order.PositionsOfInterest) message.AppendLine(position);
+            foreach (string position in model.Order.NotesAndPositions.PositionsOfInterest) message.AppendLine(position);
 
             message.AppendLine("<br /><br />")
                    .AppendLine("Primary Contact:")
@@ -138,9 +138,9 @@ namespace HireRight.BusinessLogic.Concrete
                        .AppendLine(model.SecondaryContact.CellNumber)
                        .AppendLine(model.SecondaryContact.Address.GetFullAddress);
 
-            if (model.Order.Notes != null)
+            if (model.Order.NotesAndPositions.Notes != null)
                 message.AppendLine("<br />The customer has left the following notes for you:")
-                       .AppendLine(model.Order.Notes);
+                       .AppendLine(model.Order.NotesAndPositions.Notes);
 
             EmailConsultants(message.ToString(), "New Order Placed!");
         }
