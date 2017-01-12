@@ -57,10 +57,10 @@ namespace SDK.Concrete
             return response.Results.ToList();
         }
 
-        public async Task SubmitCards(IList<CategoryDTO> categories)
+        public async Task SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
             _client.BaseAddress = new Uri(_client.BaseAddress + "/cards");
-            await _client.PostAsync(categories);
+            await _client.PostAsync(cardsToSubmit);
         }
 
         public async Task<OrderDetailsDTO> UpdateOrder(OrderDetailsDTO orderToUpdate)

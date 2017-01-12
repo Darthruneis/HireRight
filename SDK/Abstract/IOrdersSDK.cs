@@ -17,7 +17,7 @@ namespace SDK.Abstract
 
         Task<List<OrderDetailsDTO>> GetOrders(OrderFilter filter);
 
-        Task SubmitCards(IList<CategoryDTO> categories);
+        Task SubmitCards(SubmitCardsDTO cardsToSubmit);
 
         Task<OrderDetailsDTO> UpdateOrder(OrderDetailsDTO orderToUpdate);
     }

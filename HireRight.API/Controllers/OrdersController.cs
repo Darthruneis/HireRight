@@ -56,9 +56,9 @@ namespace HireRight.API.Controllers
 
         [Route("cards")]
         [HttpPost]
-        public HttpResponseMessage SubmitCards(IList<CategoryDTO> categories)
+        public HttpResponseMessage SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
-            _ordersBusinessLogic.SubmitCards(categories);
+            _ordersBusinessLogic.SubmitCards(cardsToSubmit);
 
             ApiResponse<CategoryDTO> response = new ApiResponse<CategoryDTO>(HttpStatusCode.OK, 0);
 

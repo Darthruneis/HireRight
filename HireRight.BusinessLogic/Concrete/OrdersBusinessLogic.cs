@@ -159,30 +159,11 @@ namespace HireRight.BusinessLogic.Concrete
             return orders.Select(ConvertModelToDto).ToList();
         }
 
-        public void SubmitCards(IList<CategoryDTO> categories)
+        public void SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
-            categories = categories.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList();
+            string message = CreateEmailMessageFromDto(cardsToSubmit);
 
-            StringBuilder message = new StringBuilder("A new custom test profile has been created by ...");
-
-            //add the client's information to the message...
-
-            message.AppendLine();
-            message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.HighImportance)}</b>:");
-            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.HighImportance))
-                if (categoryDTO.IsInTopTwelve)
-                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
-                else
-                    message.AppendLine("• " + categoryDTO.Title);
-
-            message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.LowImportance)}</b>:");
-            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.LowImportance))
-                if (categoryDTO.IsInTopTwelve)
-                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
-                else
-                    message.AppendLine("• " + categoryDTO.Title);
-
-            EmailConsultants(message.ToString().Replace("\r\n", "<br/><br/>"), "New Custom Test Request");
+            EmailConsultants(message, "New Custom Test Request");
         }
 
         public async Task<OrderDetailsDTO> Update(OrderDetailsDTO objectDto)
@@ -220,12 +201,60 @@ namespace HireRight.BusinessLogic.Concrete
             }
         }
 
+        private string CreateEmailMessageFromDto(SubmitCardsDTO cards)
+        {
+            StringBuilder message = new StringBuilder("A new custom test profile has been created by ");
+
+            message.Append(cards.Contact.FullName + ". ");
+            message.Append($"This custom test profile would be used to help {cards.CompanyName} fill the following positions: ");
+            message.AppendLine();
+            message.AppendLine(string.Join("," + Environment.NewLine, cards.Positions.Select(x => " • " + x)));
+            message.AppendLine();
+            message.AppendLine($"{cards.Contact.FullName} can be reached in the following ways:");
+            if (!string.IsNullOrWhiteSpace(cards.Contact.Email))
+                message.AppendLine("Email: " + cards.Contact.Email);
+            if (!string.IsNullOrWhiteSpace(cards.Contact.OfficeNumber))
+                message.AppendLine("Office: " + cards.Contact.OfficeNumber);
+            if (!string.IsNullOrWhiteSpace(cards.Contact.CellNumber))
+                message.AppendLine("Personal: " + cards.Contact.CellNumber);
+
+            if (!string.IsNullOrWhiteSpace(cards.Notes))
+                message.AppendLine().AppendLine("The following additional information was provided:").AppendLine(cards.Notes);
+
+            message.AppendLine();
+
+            WriteCategoryInfoToStringBuilder(cards.Categories.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList(), ref message);
+
+            return message.ToString().Replace("\r\n", "<br/>");
+        }
+
         private string GetEnumName(CategoryImportance level)
         {
             Type type = typeof(CategoryImportance);
             MemberInfo[] memberInfo = type.GetMember(level.ToString());
             object[] attributes = memberInfo.First().GetCustomAttributes(typeof(DisplayAttribute), false);
             return ((DisplayAttribute)attributes.First()).Name;
+        }
+
+        private void WriteCategoryInfoToStringBuilder(IList<CategoryDTO> categories, ref StringBuilder message)
+        {
+            message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.HighImportance)}</b>:");
+            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.HighImportance).OrderBy(x => x.IsInTopTwelve))
+                if (categoryDTO.IsInTopTwelve)
+                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
+                else
+                    message.AppendLine("• " + categoryDTO.Title);
+
+            message.AppendLine();
+
+            message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.LowImportance)}</b>:");
+            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.LowImportance).OrderBy(x => x.IsInTopTwelve))
+                if (categoryDTO.IsInTopTwelve)
+                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
+                else
+                    message.AppendLine("• " + categoryDTO.Title);
+
+            message.AppendLine();
         }
     }
 }

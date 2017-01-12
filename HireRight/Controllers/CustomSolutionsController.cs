@@ -23,7 +23,7 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CustomSolutions(CustomSolutionsViewModel model)
+        public async Task<ActionResult> Index(CustomSolutionsViewModel model)
         {
             if (model == null || !ModelState.IsValid)
                 return View(model);
@@ -32,7 +32,11 @@ namespace HireRight.Controllers
 
             model.Categories = listToReturn.OrderBy(x => x.Importance).ThenBy(x => x.Title).ToList();
 
-            return !ModelState.IsValid ? View(model) : await TopTwelve(model);
+            return !ModelState.IsValid
+                        ? View(model)
+                        : model.Categories.Count > 12
+                            ? View("SelectTopTwelve", model)
+                            : await TopTwelve(model);
         }
 
         [HttpGet]
@@ -60,18 +64,14 @@ namespace HireRight.Controllers
                 return View("SelectTopTwelve", model);
             }
 
-            await _ordersSDK.SubmitCards(model.Categories
-                .Select(x => new CategoryDTO(x.Title, x.Description)
-                {
-                    Importance = x.Importance,
-                    Contact = model.Contact,
-                    IsInTopTwelve = x.IsInTopTwelve,
-                    Details = new NotesPositionsDTO
-                    {
-                        Notes = model.Notes,
-                        PositionsOfInterest = model.Positions
-                    }
-                }).ToList());
+            SubmitCardsDTO dto = new SubmitCardsDTO();
+            dto.Categories = model.Categories.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, IsInTopTwelve = x.IsInTopTwelve }).ToList();
+            dto.CompanyName = model.CompanyName;
+            dto.Positions = model.Positions;
+            dto.Contact = model.Contact;
+            dto.Notes = model.Notes;
+
+            await _ordersSDK.SubmitCards(dto);
 
             return RedirectToAction("Index", "Home");
         }

@@ -11,6 +11,15 @@
         <div class="col-xs-12 col-lg-6">Description</div>
         <div class="col-xs-12 col-lg-2">Highest Importance</div>
     </div>
+    @Html.HiddenFor(x => x.CompanyName)
+    @Html.HiddenFor(x => x.Contact.CellNumber)
+    @Html.HiddenFor(x => x.Contact.OfficeNumber)
+    @Html.HiddenFor(x => x.Contact.FirstName)
+    @Html.HiddenFor(x => x.Contact.LastName)
+    @Html.HiddenFor(x => x.Contact.Email)
+    @Html.HiddenFor(x => x.Notes)
+    @Html.HiddenFor(x => x.PositionsToFill)
+
     Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model);
     <div style="margin: 0 auto; width: 200px;">
         <input type="submit" class="btn btn-Primary" value="Finish" />
