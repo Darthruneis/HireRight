@@ -6,10 +6,10 @@
 @using (Html.BeginForm("TopTwelve", "CustomSolutions", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
-    <div class="row">
-        <div class="col-xs-12 col-lg-4">Title</div>
-        <div class="col-xs-12 col-lg-6">Description</div>
-        <div class="col-xs-12 col-lg-2">Highest Importance</div>
+    <div class="row borderedRow">
+        <div class="col-xs-12 col-lg-4"><h3>Title</h3></div>
+        <div class="col-xs-12 col-lg-6"><h3>Description</h3></div>
+        <div class="col-xs-12 col-lg-2"><h3>Highest Importance</h3></div>
     </div>
     @Html.HiddenFor(x => x.CompanyName)
     @Html.HiddenFor(x => x.Contact.CellNumber)
@@ -20,7 +20,10 @@
     @Html.HiddenFor(x => x.Notes)
     @Html.HiddenFor(x => x.PositionsToFill)
 
-    Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model);
+    <div style="max-height: 70vh; overflow-y: scroll; overflow-x: hidden;">
+        @{ Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model); }
+    </div>
+    <br/>
     <div style="margin: 0 auto; width: 200px;">
         <input type="submit" class="btn btn-Primary" value="Finish" />
     </div>

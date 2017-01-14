@@ -66,8 +66,12 @@
             <button id="hideContactAndCompanyInfo" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
         </div>
     </div>
-    Html.RenderPartial("CustomSolutionsPartial", model: Model);
-    <br/>
+    <div class="row">
+        <div class="col-xs-12">
+            @{Html.RenderPartial("CustomSolutionsPartial", model: Model);}
+        </div>
+    </div>
+    <br />
     <div class="row">
         <div class="col-xs-12">
             <div style="margin: 0 auto; width: 200px;">
@@ -75,4 +79,4 @@
             </div>
         </div>
     </div>
-        }
+                }
