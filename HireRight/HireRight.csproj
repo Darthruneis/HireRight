@@ -346,6 +346,8 @@
     <Content Include="Views\CustomSolutions\CustomSolutionsPartial.cshtml" />
     <Content Include="Views\CustomSolutions\SelectTopTwelve.cshtml" />
     <Content Include="Views\CustomSolutions\MarkCategoryDtoAsTopTwelve.cshtml" />
+    <Content Include="Views\Home\IntroductionPartial.cshtml" />
+    <Content Include="Views\Home\BackButtonPartial.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
   </ItemGroup>

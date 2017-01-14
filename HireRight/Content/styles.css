@@ -99,9 +99,9 @@ span .image-text-overlay {
   transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
   overflow: hidden; }
 
-div {
-  border: 2px dotted red; }
-
+/*div {
+    border: 2px dotted red;
+}*/
 a {
   color: #993333; }
 
@@ -168,9 +168,6 @@ h3 {
 h4 {
   font-size: 20pt; }
 
-h4 {
-  font-size: 18pt; }
-
 .list-item-no-bullet li:before {
   display: none; }
 
@@ -189,6 +186,9 @@ h4 {
 
 .validation-summary-valid {
   display: none; }
+
+.borderedRow {
+  border: 3px solid #335060; }
 
 html, body, .centered {
   margin: 0 auto; }

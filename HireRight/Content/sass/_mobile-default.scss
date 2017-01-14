@@ -42,7 +42,7 @@ body {
     color: $text_default;
 }
 
-span .image-text-overlay{
+span .image-text-overlay {
     position: absolute;
     top: 200px;
     left: 0;
@@ -110,9 +110,9 @@ span .image-text-overlay{
     overflow: hidden;
 }
 
-div {
+/*div {
     border: 2px dotted red;
-}
+}*/
 
 a {
     color: $darkRed;
@@ -138,7 +138,7 @@ a:hover {
     color: white;
 }
 
-.navbar-default .navbar-nav > li > a.current:hover{
+.navbar-default .navbar-nav > li > a.current:hover {
     color: $black;
     text-shadow: white 2px 0px 1px;
 }
@@ -205,11 +205,6 @@ h4 {
     font-size: 20pt;
 }
 
-h4 {
-    @extend %headerText;
-    font-size: 18pt;
-}
-
 .list-item-no-bullet {
     li:before {
         display: none;
@@ -244,4 +239,8 @@ h4 {
 
 .validation-summary-valid {
     display: none;
+}
+
+.borderedRow {
+    border: 3px solid $darkNavyBlue;
 }

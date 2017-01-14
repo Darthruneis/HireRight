@@ -4,19 +4,19 @@
 }
 
 @Html.ValidationSummary(true)
-
 @using (Html.BeginForm("Order", "Order", FormMethod.Post))
 {
-    <div class="row">
+    <div class="row borderedRow">
         @Html.EditorFor(x => x.Company)
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-8">@Html.EditorFor(x => x.Primary)</div>
-        <div class="col-xs-12 col-md-4">@Html.EditorFor(x => x.Admin)</div>
+        <div class="col-xs-12 col-md-8 borderedRow">@Html.EditorFor(x => x.Primary)</div>
+        <div class="col-xs-12 col-md-4 borderedRow">@Html.EditorFor(x => x.Admin)</div>
     </div>
-    <div class="row">
+    <div class="row borderedRow">
         @Html.EditorFor(x => x.Order)
     </div>
+    <br/>
     <div style="text-align:center;">
         <input type="submit" value="Place Order" class="btn btn-primary" style="width: 250px;" />
     </div>
