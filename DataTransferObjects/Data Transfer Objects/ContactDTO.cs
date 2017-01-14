@@ -1,6 +1,7 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Abstract;
 using HireRight.EntityFramework.CodeFirst.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -13,15 +14,18 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public AddressDTO Address { get; set; }
 
         [DataMember]
+        [Display(Name = "Personal Phone")]
         public string CellNumber { get; set; }
 
         [DataMember]
         public Guid CompanyId { get; set; }
 
         [DataMember]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [DataMember]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [DataMember]
@@ -34,9 +38,11 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public bool IsPrimary { get; set; }
 
         [DataMember]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [DataMember]
+        [Display(Name = "Office Phone")]
         public string OfficeNumber { get; set; }
     }
 }

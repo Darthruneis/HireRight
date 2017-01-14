@@ -9,8 +9,14 @@ namespace HireRight.Models
     public class CustomSolutionsViewModel
     {
         public IList<JobAnalysisCategoryViewModel> Categories { get; set; }
+
+        [Required]
+        [Display(Name = "Company Name")]
         public string CompanyName { get; set; }
+
         public ContactDTO Contact { get; set; }
+
+        [Required]
         public string Notes { get; set; }
 
         [HiddenInput(DisplayValue = false)]
