@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
 {
     /// <summary>
-    /// A discount is a reduction in total cost or individual price of a threshold of sales. Generally thought of as a bulk discount for large orders of Tests.
+    /// A discount is a reduction in total cost or individual price of a threshold of sales. Generally thought of as a bulk discount for large orders.
     /// </summary>
     public class Discount : PocoBase, IContainingProduct
     {
