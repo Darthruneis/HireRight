@@ -190,6 +190,14 @@ h4 {
 .borderedRow {
   border: 3px solid #335060; }
 
+.borderedHorizontal {
+  border-Top: 3px solid #335060;
+  border-Bottom: 3px solid #335060; }
+
+.borderedVertical {
+  border-Left: 3px solid #335060;
+  border-Right: 3px solid #335060; }
+
 html, body, .centered {
   margin: 0 auto; }
 

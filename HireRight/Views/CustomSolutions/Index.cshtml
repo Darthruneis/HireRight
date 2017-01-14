@@ -15,10 +15,10 @@
 @using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
-    <div class="row">
+    <div class="row borderedRow">
         <div class="col-xs-12">Explanation of form and what it is supposed to accomplish.</div>
     </div>
-    <div id="contactAndCompanyInfo">
+    <div id="contactAndCompanyInfo" class="row borderedRow">
         <div class="row">
             <div class="col-xs-11">
                 <label>Required Information</label>
@@ -60,13 +60,14 @@
             </div>
         </div>
     </div>
-    <div class="row" id="collapsedCompanyAndContactInfo" hidden="hidden">
+    <div class="row borderedRow" id="collapsedCompanyAndContactInfo" hidden="hidden">
         <div class="col-xs-11">Press the <span class="glyphicon glyphicon-plus-sign"></span> button to show <b>Required Information</b> again.</div>
         <div class="col-xs-1">
             <button id="hideContactAndCompanyInfo" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
         </div>
     </div>
     Html.RenderPartial("CustomSolutionsPartial", model: Model);
+    <br/>
     <div class="row">
         <div class="col-xs-12">
             <div style="margin: 0 auto; width: 200px;">

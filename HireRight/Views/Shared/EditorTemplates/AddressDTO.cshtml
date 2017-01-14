@@ -1,16 +1,15 @@
 ﻿@model DataTransferObjects.Data_Transfer_Objects.AddressDTO
-
 <div name="addressInputs">
     <div class="row">
-            <div class="col-xs-12 col-md-6">
-                @Html.ValidatedEditorWithLabelFor(x => Model.StreetAddress)
-            </div>
-            <div class="col-xs-12 col-md-3">
-                @Html.ValidatedEditorWithLabelFor(x => Model.City)
-            </div>
-            <div class="col-xs-12 col-md-3">
-                @Html.ValidatedEditorWithLabelFor(x => Model.Country)
-            </div>
+        <div class="col-xs-12 col-md-6">
+            @Html.ValidatedEditorWithLabelFor(x => Model.StreetAddress)
+        </div>
+        <div class="col-xs-12 col-md-3">
+            @Html.ValidatedEditorWithLabelFor(x => Model.City)
+        </div>
+        <div class="col-xs-12 col-md-3">
+            @Html.ValidatedEditorWithLabelFor(x => Model.Country)
+        </div>
     </div>
     <div class="row">
         <div class="col-xs-4">

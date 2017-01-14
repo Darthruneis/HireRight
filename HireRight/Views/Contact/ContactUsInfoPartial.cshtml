@@ -4,7 +4,7 @@
         <h2>How can we help you?</h2>
     </div>
 </div>
-<div class="row">
+<div class="row borderedRow">
     <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => Model.CompanyName)
     </div>
@@ -12,15 +12,13 @@
         @Html.ValidatedEditorWithLabelFor(x => Model.PositionAtCompany)
     </div>
 </div>
-<div class="row">
+<div class="row borderedRow">
     <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => Model.FirstName)
     </div>
     <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => Model.LastName)
     </div>
-</div>
-<div class="row">
     <div class="col-xs-12 col-md-4">
         @Html.ValidatedEditorWithLabelFor(x => Model.Email)
     </div>
@@ -31,10 +29,10 @@
         @Html.ValidatedEditorWithLabelFor(x => Model.CellPhone)
     </div>
 </div>
-<div class="row">
+<div class="row borderedRow" style="padding-left: 15px; padding-right: 15px;">
     @Html.EditorFor(x => x.Address)
 </div>
-<div class="row">
+<div class="row borderedRow">
     <div class="col-xs-12">
         @Html.LabelFor(x => Model.Message)
         <br />

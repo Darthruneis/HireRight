@@ -244,3 +244,13 @@ h4 {
 .borderedRow {
     border: 3px solid $darkNavyBlue;
 }
+
+.borderedHorizontal {
+    border-Top: 3px solid $darkNavyBlue;
+    border-Bottom: 3px solid $darkNavyBlue;
+}
+
+.borderedVertical {
+    border-Left: 3px solid $darkNavyBlue;
+    border-Right: 3px solid $darkNavyBlue;
+}
