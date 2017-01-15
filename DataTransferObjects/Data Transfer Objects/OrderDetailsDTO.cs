@@ -3,7 +3,6 @@ using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace DataTransferObjects.Data_Transfer_Objects
 {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Abstract
 {

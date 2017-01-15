@@ -3,7 +3,7 @@ using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Abstract
 {

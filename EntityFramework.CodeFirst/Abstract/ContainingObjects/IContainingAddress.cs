@@ -1,9 +1,9 @@
-﻿using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+﻿using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects
 {
     /// <summary>
-    /// Defines an entity which contains an <see cref="HireRight.EntityFramework.CodeFirst.Models.OrderAggregate.Address" />.
+    /// Defines an entity which contains an <see cref="Models.CompanyAggregate.Address" />.
     /// </summary>
     public interface IContainingAddress
     {

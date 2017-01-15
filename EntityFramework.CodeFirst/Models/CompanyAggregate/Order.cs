@@ -1,11 +1,11 @@
-﻿using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
+namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// Possible states for an Order to be in.

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Concrete
 {

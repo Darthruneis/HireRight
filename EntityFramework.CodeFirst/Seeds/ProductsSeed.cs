@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.EntityFramework.CodeFirst.Seeds
 {

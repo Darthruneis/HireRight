@@ -1,10 +1,10 @@
-﻿using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
-using System;
+﻿using System;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects
 {
     /// <summary>
-    /// Defines an entity which contains a navigation property for a <see cref="Models.OrderAggregate.Product" />
+    /// Defines an entity which contains a navigation property for a <see cref="Models.CompanyAggregate.Product" />
     /// </summary>
     public interface IContainingProduct
     {

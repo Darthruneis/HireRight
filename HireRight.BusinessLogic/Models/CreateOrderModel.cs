@@ -1,5 +1,5 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Models;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Models
 {

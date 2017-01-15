@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
+namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// The address of a company or contact. This is a value object.

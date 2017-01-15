@@ -67,14 +67,14 @@
       <DependentUpon>201701150500117_modelSimplifications.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\OrderAggregate\ScaleCategory.cs" />
-    <Compile Include="Models\OrderAggregate\Value Objects\Address.cs" />
-    <Compile Include="Models\OrderAggregate\Company.cs" />
-    <Compile Include="Models\OrderAggregate\CompanyLocation.cs" />
-    <Compile Include="Models\OrderAggregate\Contact.cs" />
-    <Compile Include="Models\OrderAggregate\Discount.cs" />
-    <Compile Include="Models\OrderAggregate\Order.cs" />
-    <Compile Include="Models\OrderAggregate\Product.cs" />
+    <Compile Include="Models\CompanyAggregate\ScaleCategory.cs" />
+    <Compile Include="Models\CompanyAggregate\Value Objects\Address.cs" />
+    <Compile Include="Models\CompanyAggregate\Company.cs" />
+    <Compile Include="Models\CompanyAggregate\CompanyLocation.cs" />
+    <Compile Include="Models\CompanyAggregate\Contact.cs" />
+    <Compile Include="Models\CompanyAggregate\Discount.cs" />
+    <Compile Include="Models\CompanyAggregate\Order.cs" />
+    <Compile Include="Models\CompanyAggregate\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seeds\ProductsSeed.cs" />
     <Compile Include="Seeds\ScaleCategorySeed.cs" />

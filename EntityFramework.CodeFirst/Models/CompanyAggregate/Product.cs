@@ -1,9 +1,9 @@
-﻿using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingCollections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Abstract.ContainingCollections;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
+namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// A product is an item which can be purchased through HireRight.

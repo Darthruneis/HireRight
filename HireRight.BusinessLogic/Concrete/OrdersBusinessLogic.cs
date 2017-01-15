@@ -5,7 +5,6 @@ using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Extensions;
 using HireRight.EntityFramework.CodeFirst.Models;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
@@ -17,6 +16,7 @@ using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
 {

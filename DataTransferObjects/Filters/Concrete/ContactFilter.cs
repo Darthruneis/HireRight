@@ -4,7 +4,7 @@ using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace DataTransferObjects.Filters.Concrete
 {

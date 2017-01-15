@@ -1,7 +1,7 @@
-﻿using HireRight.EntityFramework.CodeFirst.Abstract;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using HireRight.EntityFramework.CodeFirst.Abstract;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
+namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// A Scale Category is a type of expertise or personal trait that impacts job performance and eligibility.

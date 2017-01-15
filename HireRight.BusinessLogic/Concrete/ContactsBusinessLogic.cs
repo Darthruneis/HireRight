@@ -10,7 +10,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Extensions;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
 {

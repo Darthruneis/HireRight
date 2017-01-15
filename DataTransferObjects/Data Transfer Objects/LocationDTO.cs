@@ -2,7 +2,7 @@
 using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Runtime.Serialization;
-using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace DataTransferObjects.Data_Transfer_Objects
 {
