@@ -25,7 +25,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Products).ConfigureAwait(false);
+                return await _repositoryBase.AddBase(itemToAdd, context.Products, context).ConfigureAwait(false);
             }
         }
 
@@ -73,7 +73,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Products).ConfigureAwait(false);
+                return await _repositoryBase.UpdateBase(itemToUpdate, context.Products, context).ConfigureAwait(false);
             }
         }
 

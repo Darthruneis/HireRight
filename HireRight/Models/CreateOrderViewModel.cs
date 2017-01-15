@@ -30,10 +30,23 @@ namespace HireRight.Models
         {
             NewOrderDTO dto = new NewOrderDTO();
 
-            dto.Company = Company.ConvertToCompanyDTO();
             dto.PrimaryContact = Primary.ConvertToContactDTO();
             dto.SecondaryContact = Admin.ConvertToContactDTO();
             dto.Order = Order.ConvertToOrderDetailsDTO();
+            dto.Company = Company.ConvertToCompanyDTO();
+            dto.Company.Orders.Add(dto.Order);
+            dto.SecondaryContact.Address = dto.Company.BillingAddress;
+
+            if (dto.SecondaryContact.FullName == null)
+                dto.PrimaryContact.IsAdmin = true;
+            else
+                dto.SecondaryContact.IsAdmin = true;
+
+            dto.PrimaryContact.IsPrimary = true;
+            dto.SecondaryContact.OfficeNumber = dto.SecondaryContact.CellNumber;
+
+            dto.Company.Contacts.Add(dto.PrimaryContact);
+            dto.Company.Contacts.Add(dto.SecondaryContact);
 
             return dto;
         }

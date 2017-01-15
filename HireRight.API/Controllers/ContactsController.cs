@@ -47,6 +47,7 @@ namespace HireRight.API.Controllers
             return await GetMultipleBase(_getPage(filter));
         }
 
+        [Route("ContactConsultant")]
         [HttpPost]
         public async Task<HttpResponseMessage> SendContactConsultantEmail(SendContactConsultantEmailModel model)
         {
@@ -62,6 +63,7 @@ namespace HireRight.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
+        [Route("NewContact")]
         [HttpPost]
         public async Task<HttpResponseMessage> SendNewContactEmail(SendNewContactEmailModel model)
         {

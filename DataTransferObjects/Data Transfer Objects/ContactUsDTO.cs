@@ -18,5 +18,10 @@ namespace DataTransferObjects.Data_Transfer_Objects
 
         [DataMember]
         public string OfficePhone { get; set; }
+
+        public ContactUsDTO()
+        {
+            Address = new AddressDTO();
+        }
     }
 }

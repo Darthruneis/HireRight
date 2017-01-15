@@ -10,7 +10,6 @@ namespace HireRight.BusinessLogic.Extensions
         {
             Discount model = new Discount(dto.IsPercent, dto.Amount, dto.Threshold);
             model.Id = dto.Id;
-            model.ProductId = dto.ProductId;
             model.CreatedUtc = dto.CreatedUtc;
 
             return model;
@@ -21,7 +20,6 @@ namespace HireRight.BusinessLogic.Extensions
             DiscountDTO dto = new DiscountDTO();
             dto.Id = model.Id;
             dto.CreatedUtc = model.CreatedUtc;
-            dto.ProductId = model.ProductId;
             dto.Amount = model.Amount;
             dto.IsPercent = model.IsPercent;
             dto.Threshold = model.Threshold;

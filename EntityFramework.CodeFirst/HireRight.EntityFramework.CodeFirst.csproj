@@ -51,13 +51,9 @@
   <ItemGroup>
     <Compile Include="Abstract\ContainingCollections\IContainingDiscounts.cs" />
     <Compile Include="Abstract\ContainingCollections\IContainingLocations.cs" />
-    <Compile Include="Abstract\ContainingObjects\IContainingAccount.cs" />
-    <Compile Include="Abstract\ContainingCollections\IContainingClients.cs" />
     <Compile Include="Abstract\ContainingObjects\IContainingAddress.cs" />
-    <Compile Include="Abstract\ContainingObjects\IContainingClient.cs" />
     <Compile Include="Abstract\ContainingObjects\IContainingContact.cs" />
     <Compile Include="Abstract\ContainingCollections\IContainingOrders.cs" />
-    <Compile Include="Abstract\ContainingObjects\IContainingCompany.cs" />
     <Compile Include="Abstract\ContainingObjects\IContainingProduct.cs" />
     <Compile Include="Abstract\PocoBase.cs" />
     <Compile Include="BaseMigrationCodeGenerator.cs" />
@@ -66,11 +62,13 @@
     <Compile Include="Migrations\201701012051551_initialWithImmutableAddress.Designer.cs">
       <DependentUpon>201701012051551_initialWithImmutableAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701150500117_modelSimplifications.cs" />
+    <Compile Include="Migrations\201701150500117_modelSimplifications.Designer.cs">
+      <DependentUpon>201701150500117_modelSimplifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\OrderAggregate\Account.cs" />
     <Compile Include="Models\OrderAggregate\ScaleCategory.cs" />
     <Compile Include="Models\OrderAggregate\Value Objects\Address.cs" />
-    <Compile Include="Models\OrderAggregate\Client.cs" />
     <Compile Include="Models\OrderAggregate\Company.cs" />
     <Compile Include="Models\OrderAggregate\CompanyLocation.cs" />
     <Compile Include="Models\OrderAggregate\Contact.cs" />
@@ -93,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701012051551_initialWithImmutableAddress.resx">
       <DependentUpon>201701012051551_initialWithImmutableAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701150500117_modelSimplifications.resx">
+      <DependentUpon>201701150500117_modelSimplifications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

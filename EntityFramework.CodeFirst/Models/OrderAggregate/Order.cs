@@ -31,17 +31,18 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
     /// <summary>
     /// A request to purchase some number of products.
     /// </summary>
-    public class Order : PocoBase, IContainingCompany, IContainingProduct
+    public class Order : PocoBase, IContainingProduct
     {
         /// <summary>
-        /// The company that is making this order.
+        /// Navigation property.
         /// </summary>
         public virtual Company Company { get; set; }
 
         /// <summary>
-        /// Foreign key for the company making this order.
+        /// Foreign key for the Company that is making this order.
         /// </summary>
-        [ForeignKey("Company")]
+        [Required]
+        [ForeignKey(nameof(Company))]
         public Guid CompanyId { get; set; }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         /// <summary>
         /// Foreign key for the product that is being purchased.
         /// </summary>
-        [ForeignKey("Product")]
+        [ForeignKey(nameof(Product))]
         public Guid ProductId { get; set; }
 
         /// <summary>

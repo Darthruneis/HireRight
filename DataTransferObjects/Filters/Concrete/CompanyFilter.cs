@@ -15,7 +15,7 @@ namespace DataTransferObjects.Filters.Concrete
         public AddressFilter BillingAddressFilter { get; set; }
 
         [DataMember]
-        public ClientFilter ClientFilter { get; set; }
+        public ContactFilter ContactFilter { get; set; }
 
         [DataMember]
         public LocationFilter LocationFilter { get; set; }
@@ -37,8 +37,8 @@ namespace DataTransferObjects.Filters.Concrete
             if (BillingAddressFilter != null)
                 query.Append(BillingAddressFilter.CreateQuery(nameof(BillingAddressFilter)));
 
-            if (ClientFilter != null)
-                query.Append(ClientFilter.CreateQuery(false));
+            if (ContactFilter != null)
+                query.Append(ContactFilter.CreateQuery(false));
 
             if (LocationFilter != null)
                 query.Append(LocationFilter.CreateQuery(false));

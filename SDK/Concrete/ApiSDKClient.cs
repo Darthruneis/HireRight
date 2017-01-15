@@ -74,6 +74,8 @@ namespace SDK.Concrete
         {
             HttpResponseMessage response = await SendAsync(request);
 
+            string test = await response.Content.ReadAsStringAsync();
+
             try
             {
                 ApiResponse<TDto> apiResponse = await response.Content.ReadAsAsync<ApiResponse<TDto>>();

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
+using HireRight.BusinessLogic.Extensions;
 using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
@@ -44,6 +45,9 @@ namespace HireRight.BusinessLogic.Concrete
             model.OfficeNumber = dto.OfficeNumber;
             model.IsPrimary = dto.IsPrimary;
             model.IsAdmin = dto.IsAdmin;
+            model.Name = dto.FullName;
+            model.Email = dto.Email;
+            model.Address = dto.Address.ConvertDtoToModel();
 
             return model;
         }

@@ -47,7 +47,7 @@ namespace SDK.Concrete
         {
             HttpClient httpClient = new HttpClient();
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _client.BaseAddress);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _client.BaseAddress + "/ContactConsultant");
 
             request.Content = new ObjectContent(typeof(object), new { ClientEmail = clientEmail, Message = message }, new JsonMediaTypeFormatter(), "application/json");
 
@@ -61,7 +61,7 @@ namespace SDK.Concrete
         {
             HttpClient httpClient = new HttpClient();
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _client.BaseAddress);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _client.BaseAddress + "/NewContact");
 
             request.Content = new ObjectContent(typeof(object), new { Id = contactId, Message = message }, new JsonMediaTypeFormatter(), "application/json");
 

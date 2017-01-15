@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
@@ -36,6 +37,16 @@ namespace HireRight.BusinessLogic.Concrete
             model.CreatedUtc = dto.CreatedUtc;
             model.Name = dto.Name;
             model.Address = dto.BillingAddress.ConvertDtoToModel();
+            model.Notes = dto.Notes;
+
+            foreach (OrderDetailsDTO orderDetailsDTO in dto.Orders)
+                model.Orders.Add(orderDetailsDTO.ConvertDtoToModel());
+
+            foreach (LocationDTO locationDTO in dto.Locations)
+                model.Locations.Add(locationDTO.ConvertDtoToModel());
+
+            foreach (ContactDTO contactDTO in dto.Contacts)
+                model.Contacts.Add(contactDTO.ConvertDtoToModel());
 
             return model;
         }

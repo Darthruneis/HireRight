@@ -10,18 +10,6 @@ namespace HireRight.Repository.Concrete
 {
     internal static class RepositoryQueryFilterer
     {
-        internal static IQueryable<T> FilterByAccount<T>(this IQueryable<T> query, AccountFilter filter)
-            where T : PocoBase, IContainingAccount
-        {
-            if (filter == null)
-                return query;
-
-            query = query.Where(x => string.IsNullOrWhiteSpace(filter.Notes) || x.Account.Notes.Contains(filter.Notes));
-            query = query.Where(x => filter.ItemGuids == null || !filter.ItemGuids.Any() || filter.ItemGuids.Contains(x.AccountId));
-
-            return query;
-        }
-
         internal static IQueryable<T> FilterByAddress<T>(this IQueryable<T> query, AddressFilter filter)
                     where T : PocoBase, IContainingAddress
         {
@@ -50,40 +38,6 @@ namespace HireRight.Repository.Concrete
             query = query.Where(x => string.IsNullOrWhiteSpace(filter.OfficeNumber) || x.Admin.OfficeNumber.Contains(filter.OfficeNumber));
             query = query.Where(x => x.Admin.IsAdmin);
             query = query.Where(x => filter.ItemGuids == null || !filter.ItemGuids.Any() || filter.ItemGuids.Contains(x.AdminContactId));
-
-            return query;
-        }
-
-        internal static IQueryable<T> FilterByClient<T>(this IQueryable<T> query, ClientFilter filter)
-                    where T : PocoBase, IContainingClient
-        {
-            if (filter == null)
-                return query;
-
-            query = query.Where(x => filter.ItemGuids == null || !filter.ItemGuids.Any() || filter.ItemGuids.Contains(x.ClientId));
-
-            return query;
-        }
-
-        internal static IQueryable<T> FilterByClients<T>(this IQueryable<T> query, ClientFilter filter)
-                            where T : PocoBase, IContainingClients
-        {
-            if (filter == null)
-                return query;
-
-            query = query.Where(x => filter.ItemGuids == null || !filter.ItemGuids.Any() || x.Clients.Any(y => filter.ItemGuids.Contains(y.Id)));
-
-            return query;
-        }
-
-        internal static IQueryable<T> FilterByCompany<T>(this IQueryable<T> query, CompanyFilter filter)
-                    where T : PocoBase, IContainingCompany
-        {
-            if (filter == null)
-                return query;
-
-            query = query.Where(x => string.IsNullOrWhiteSpace(filter.Name) || x.Company.Name.Contains(filter.Name));
-            query = query.Where(x => filter.ItemGuids == null || !filter.ItemGuids.Any() || filter.ItemGuids.Contains(x.CompanyId));
 
             return query;
         }

@@ -19,5 +19,13 @@ namespace DataTransferObjects.Data_Transfer_Objects
 
         [DataMember]
         public ContactDTO SecondaryContact { get; set; }
+
+        public NewOrderDTO()
+        {
+            Company = new CompanyDTO();
+            Order = new OrderDetailsDTO();
+            PrimaryContact = new ContactDTO();
+            SecondaryContact = new ContactDTO();
+        }
     }
 }

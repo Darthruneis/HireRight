@@ -68,32 +68,9 @@ namespace HireRight.Controllers
 
             try
             {
-                ProductFilter productFilter = new ProductFilter(1, 1);
-                productFilter.Title = "Assessment Test";
-                List<ProductDTO> products = await _productsSDK.GetProducts(productFilter);
-
                 NewOrderDTO dto = model.ConvertToNewOrderDTO();
 
-                CompanyFilter companyFilter = new CompanyFilter(1, 10);
-                companyFilter.Name = dto.Company.Name;
-
-                List<CompanyDTO> companies = await _companiesSDK.GetCompanies(companyFilter);
-
-                CompanyDTO company = companies.All(x => x.Name != dto.Company.Name)
-                                         ? await _companiesSDK.AddCompany(dto.Company)
-                                         : companies.First(x => x.Name != dto.Company.Name);
-
-                dto.PrimaryContact.CompanyId = company.Id;
-                Task<ContactDTO> primaryContactTask = _contactsSDK.AddContact(dto.PrimaryContact);
-
-                dto.SecondaryContact.CompanyId = company.Id;
-                Task<ContactDTO> secondaryContactTask = _contactsSDK.AddContact(dto.SecondaryContact);
-
-                dto.Order.CompanyId = company.Id;
-                dto.Order.ProductId = products.First().Id;
-                Task<OrderDetailsDTO> orderTask = _ordersSDK.AddOrder(dto.Order);
-
-                await Task.WhenAll(orderTask, primaryContactTask, secondaryContactTask);
+                await _companiesSDK.AddCompany(dto.Company);
             }
             catch (Exception ex)
             {

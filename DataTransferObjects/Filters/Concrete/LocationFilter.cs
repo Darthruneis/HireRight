@@ -14,9 +14,6 @@ namespace DataTransferObjects.Filters.Concrete
         public AddressFilter AddressFilter { get; set; }
 
         [DataMember]
-        public CompanyFilter CompanyFilter { get; set; }
-
-        [DataMember]
         public string Description { get; set; }
 
         [DataMember]

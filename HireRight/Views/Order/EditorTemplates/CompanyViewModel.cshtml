@@ -1,5 +1,4 @@
 ﻿@model HireRight.Models.CompanyViewModel
-
 <div class="panel panel-head">
     <h2>Company</h2>
 </div>
@@ -10,6 +9,9 @@
         </div>
         <div class="col-xs-6">
             @Html.ValidatedEditorWithLabelFor(x => Model.CompanyPosition)
+        </div>
+        <div class="col-xs-12">
+            @Html.EditorFor(x => x.CompanyAddress)
         </div>
     </div>
 </div>

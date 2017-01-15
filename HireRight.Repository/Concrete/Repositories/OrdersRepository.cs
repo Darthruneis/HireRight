@@ -25,7 +25,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Orders).ConfigureAwait(false);
+                return await _repositoryBase.AddBase(itemToAdd, context.Orders, context).ConfigureAwait(false);
             }
         }
 
@@ -35,9 +35,9 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                IQueryable<Order> ordersQuery = context.Orders.Include(x => x.Product).Include(x => x.Company);
+                IQueryable<Order> ordersQuery = context.Orders.Include(x => x.Product);
 
-                ordersQuery = ordersQuery.FilterByCompany(filter.CompanyFilter).FilterByProduct(filter.ProductFilter);
+                ordersQuery = ordersQuery.FilterByProduct(filter.ProductFilter);
 
                 ordersQuery = ordersQuery.Where(x => string.IsNullOrWhiteSpace(filter.Notes) || x.Notes.Contains(filter.Notes));
 
@@ -60,7 +60,7 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                order = await _repositoryBase.GetBase(itemGuid, context.Orders.Include(x => x.Product).Include(x => x.Company)).ConfigureAwait(false);
+                order = await _repositoryBase.GetBase(itemGuid, context.Orders.Include(x => x.Product)).ConfigureAwait(false);
             }
 
             return order;
@@ -70,7 +70,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Orders).ConfigureAwait(false);
+                return await _repositoryBase.UpdateBase(itemToUpdate, context.Orders, context).ConfigureAwait(false);
             }
         }
 

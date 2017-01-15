@@ -18,9 +18,6 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public string CellNumber { get; set; }
 
         [DataMember]
-        public Guid CompanyId { get; set; }
-
-        [DataMember]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -44,5 +41,10 @@ namespace DataTransferObjects.Data_Transfer_Objects
         [DataMember]
         [Display(Name = "Office Phone")]
         public string OfficeNumber { get; set; }
+
+        public ContactDTO()
+        {
+            Address = new AddressDTO();
+        }
     }
 }

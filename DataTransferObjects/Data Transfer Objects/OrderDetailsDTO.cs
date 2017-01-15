@@ -3,15 +3,13 @@ using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using HireRight.EntityFramework.CodeFirst.Models.OrderAggregate;
 
 namespace DataTransferObjects.Data_Transfer_Objects
 {
     [Serializable]
     public class OrderDetailsDTO : DataTransferObjectBase
     {
-        [DataMember]
-        public Guid CompanyId { get; set; }
-
         [DataMember]
         public NotesPositionsDTO NotesAndPositions { get; set; }
 
@@ -20,5 +18,10 @@ namespace DataTransferObjects.Data_Transfer_Objects
 
         [DataMember]
         public int Quantity { get; set; }
+
+        public OrderDetailsDTO()
+        {
+            NotesAndPositions = new NotesPositionsDTO();
+        }
     }
 }

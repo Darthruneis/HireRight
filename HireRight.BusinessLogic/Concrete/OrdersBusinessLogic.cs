@@ -87,7 +87,6 @@ namespace HireRight.BusinessLogic.Concrete
             Order model = new Order();
             model.Id = dto.Id;
             model.CreatedUtc = dto.CreatedUtc;
-            model.CompanyId = dto.CompanyId;
             model.ProductId = dto.ProductId;
             model.Notes = dto.NotesAndPositions.Notes;
             model.PositionsOfInterest = dto.NotesAndPositions.PositionsOfInterest;
@@ -103,7 +102,6 @@ namespace HireRight.BusinessLogic.Concrete
             dto.CreatedUtc = model.CreatedUtc;
             dto.Quantity = model.Quantity;
             dto.ProductId = model.ProductId;
-            dto.CompanyId = model.CompanyId;
             dto.NotesAndPositions.Notes = model.Notes;
             dto.NotesAndPositions.PositionsOfInterest = model.PositionsOfInterest;
 

@@ -9,13 +9,14 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Abstract;
+using HireRight.EntityFramework.CodeFirst.Database_Context;
 
 namespace HireRight.Repository.Concrete
 {
     public class RepositoryBase<TModel> : IRepositoryBase<TModel>
         where TModel : PocoBase
     {
-        public async Task<TModel> AddBase(TModel itemToAdd, DbSet<TModel> dbSet)
+        public async Task<TModel> AddBase(TModel itemToAdd, DbSet<TModel> dbSet, HireRightDbContext context)
         {
             List<ValidationResult> errors = new List<ValidationResult>();
 
@@ -28,6 +29,8 @@ namespace HireRight.Repository.Concrete
             try
             {
                 TModel result = dbSet.Add(itemToAdd);
+
+                await context.SaveChangesAsync();
 
                 if (result.Id == Guid.Empty)
                     errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " - Id was not updated."));
@@ -65,7 +68,7 @@ namespace HireRight.Repository.Concrete
             return await query.OrderBy(x => x.Id).Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
         }
 
-        public async Task<TModel> UpdateBase(TModel itemToUpdate, DbSet<TModel> dbSet)
+        public async Task<TModel> UpdateBase(TModel itemToUpdate, DbSet<TModel> dbSet, HireRightDbContext context)
         {
             List<ValidationResult> errors = new List<ValidationResult>();
 
@@ -80,6 +83,8 @@ namespace HireRight.Repository.Concrete
                 await CheckForValidItem(dbSet, itemToUpdate.Id).ConfigureAwait(false);
 
                 dbSet.AddOrUpdate(itemToUpdate);
+                await context.SaveChangesAsync();
+
                 return itemToUpdate;
             }
             catch (Exception ex)

@@ -13,9 +13,6 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public bool IsPercent { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public Guid ProductId { get; set; }
-
-        [DataMember(EmitDefaultValue = false)]
         public int Threshold { get; set; }
     }
 }

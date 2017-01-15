@@ -9,7 +9,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
     /// <summary>
     /// A discount is a reduction in total cost or individual price of a threshold of sales. Generally thought of as a bulk discount for large orders.
     /// </summary>
-    public class Discount : PocoBase, IContainingProduct
+    public class Discount : PocoBase
     {
         /// <summary>
         /// The discount amount to apply. A percentage discount will reduce the entire cost of the order by the specified amount (this amount should then
@@ -26,16 +26,8 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         public bool IsPercent { get; private set; }
 
         /// <summary>
-        /// The Product that is being purchased.
+        /// Foreign key for the Product this Discount applies to.
         /// </summary>
-        [Required]
-        public virtual Product Product { get; set; }
-
-        /// <summary>
-        /// Foreign key for the Product.
-        /// </summary>
-        [Required]
-        [ForeignKey("Product")]
         public Guid ProductId { get; set; }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
     /// <summary>
     /// A company is a named relationship between a primary billing address, and a collection of clients and locations (if there are more than a single location).
     /// </summary>
-    public class Company : PocoBase, IContainingClients, IContainingLocations, IContainingAddress
+    public class Company : PocoBase, IContainingLocations, IContainingAddress
     {
         /// <summary>
         /// The billing address is the primary location for the business, e.g. a corporate office.
@@ -20,7 +20,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         /// <summary>
         /// The set of clients related to this company.
         /// </summary>
-        public virtual ICollection<Client> Clients { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
 
         /// <summary>
         /// The set of locations this company uses to do business.
@@ -32,5 +32,22 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         /// </summary>
         [Required]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Any notes about this account.
+        /// </summary>
+        public string Notes { get; set; }
+
+        /// <summary>
+        /// Order history for this account.
+        /// </summary>
+        public virtual ICollection<Order> Orders { get; set; }
+
+        public Company()
+        {
+            Orders = new List<Order>();
+            Locations = new List<CompanyLocation>();
+            Contacts = new List<Contact>();
+        }
     }
 }

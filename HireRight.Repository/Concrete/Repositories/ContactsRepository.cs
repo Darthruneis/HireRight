@@ -25,7 +25,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Contacts).ConfigureAwait(false);
+                return await _repositoryBase.AddBase(itemToAdd, context.Contacts, context).ConfigureAwait(false);
             }
         }
 
@@ -35,11 +35,9 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                IQueryable<Contact> contactsQuery = context.Contacts.Include(x => x.Client).Include(x => x.Company);
+                IQueryable<Contact> contactsQuery = context.Contacts;
 
-                contactsQuery = contactsQuery.FilterByCompany(filter.CompanyFilter)
-                                             .FilterByAddress(filter.AddressFilter)
-                                             .FilterByClient(filter.ClientFilter);
+                contactsQuery = contactsQuery.FilterByAddress(filter.AddressFilter);
 
                 contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.CellNumber) || x.CellNumber.Contains(filter.CellNumber));
 
@@ -65,7 +63,7 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                contact = await _repositoryBase.GetBase(itemGuid, context.Contacts.Include(x => x.Client).Include(x => x.Company)).ConfigureAwait(false);
+                contact = await _repositoryBase.GetBase(itemGuid, context.Contacts).ConfigureAwait(false);
             }
 
             return contact;
@@ -75,7 +73,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Contacts).ConfigureAwait(false);
+                return await _repositoryBase.UpdateBase(itemToUpdate, context.Contacts, context).ConfigureAwait(false);
             }
         }
     }

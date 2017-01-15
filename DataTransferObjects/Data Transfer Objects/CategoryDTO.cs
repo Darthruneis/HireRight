@@ -27,9 +27,11 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public CategoryDTO()
         {
             Importance = CategoryImportance.Irrelevant;
+            Contact = new ContactDTO();
+            Details = new NotesPositionsDTO();
         }
 
-        public CategoryDTO(string title, string description)
+        public CategoryDTO(string title, string description) : this()
         {
             Title = title;
             Description = description;

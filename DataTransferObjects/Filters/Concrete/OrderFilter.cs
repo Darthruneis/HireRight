@@ -30,9 +30,6 @@ namespace DataTransferObjects.Filters.Concrete
     public class OrderFilter : Filter<Order>
     {
         [DataMember]
-        public CompanyFilter CompanyFilter { get; set; }
-
-        [DataMember]
         public DateTime? Completed { get; set; }
 
         [DataMember]

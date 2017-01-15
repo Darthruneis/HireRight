@@ -12,19 +12,9 @@ namespace HireRight.EntityFramework.CodeFirst.Database_Context
     public class HireRightDbContext : DbContext
     {
         /// <summary>
-        /// The <see cref="Account" /> table in the database.
-        /// </summary>
-        public virtual DbSet<Account> Accounts { get; set; }
-
-        /// <summary>
         /// The <see cref="ScaleCategory" /> table in the database.
         /// </summary>
         public virtual DbSet<ScaleCategory> Categories { get; set; }
-
-        /// <summary>
-        /// The <see cref="Client" /> table in the database.
-        /// </summary>
-        public virtual DbSet<Client> Clients { get; set; }
 
         /// <summary>
         /// The <see cref="Company" /> table in the database.

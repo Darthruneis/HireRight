@@ -25,7 +25,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Companies).ConfigureAwait(false);
+                return await _repositoryBase.AddBase(itemToAdd, context.Companies, context).ConfigureAwait(false);
             }
         }
 
@@ -35,10 +35,9 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                IQueryable<Company> companiesQuery = context.Companies.Include(x => x.Clients).Include(x => x.Locations);
+                IQueryable<Company> companiesQuery = context.Companies.Include(x => x.Locations);
 
-                companiesQuery = companiesQuery.FilterByClients(filter.ClientFilter)
-                                               .FilterByLocations(filter.LocationFilter)
+                companiesQuery = companiesQuery.FilterByLocations(filter.LocationFilter)
                                                .FilterByAddress(filter.BillingAddressFilter)
                                                .Where(x => string.IsNullOrWhiteSpace(filter.Name)
                                                            || x.Name.Contains(filter.Name));
@@ -55,7 +54,7 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                company = await _repositoryBase.GetBase(itemGuid, context.Companies.Include(x => x.Clients).Include(x => x.Locations)).ConfigureAwait(false);
+                company = await _repositoryBase.GetBase(itemGuid, context.Companies.Include(x => x.Locations)).ConfigureAwait(false);
             }
 
             return company;
@@ -65,7 +64,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Companies).ConfigureAwait(false);
+                return await _repositoryBase.UpdateBase(itemToUpdate, context.Companies, context).ConfigureAwait(false);
             }
         }
     }

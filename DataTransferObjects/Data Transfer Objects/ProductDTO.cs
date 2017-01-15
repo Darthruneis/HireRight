@@ -19,5 +19,10 @@ namespace DataTransferObjects.Data_Transfer_Objects
 
         [DataMember(EmitDefaultValue = false)]
         public string Title { get; set; }
+
+        public ProductDTO()
+        {
+            Discounts = new List<DiscountDTO>();
+        }
     }
 }

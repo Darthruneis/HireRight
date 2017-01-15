@@ -18,12 +18,6 @@ namespace DataTransferObjects.Filters.Concrete
         public string CellNumber { get; set; }
 
         [DataMember]
-        public ClientFilter ClientFilter { get; set; }
-
-        [DataMember]
-        public CompanyFilter CompanyFilter { get; set; }
-
-        [DataMember]
         public string Email { get; set; }
 
         [DataMember]

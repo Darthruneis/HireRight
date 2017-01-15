@@ -25,7 +25,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Discounts).ConfigureAwait(false);
+                return await _repositoryBase.AddBase(itemToAdd, context.Discounts, context).ConfigureAwait(false);
             }
         }
 
@@ -35,9 +35,7 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                IQueryable<Discount> discountsQuery = context.Discounts.Include(x => x.Product);
-
-                discountsQuery = discountsQuery.FilterByProduct(filter.ProductFilter);
+                IQueryable<Discount> discountsQuery = context.Discounts;
 
                 discountsQuery = FilterByAmount(discountsQuery, filter.Amount, filter.AmountComparator);
 
@@ -57,7 +55,7 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                discount = await _repositoryBase.GetBase(itemGuid, context.Discounts.Include(x => x.Product)).ConfigureAwait(false);
+                discount = await _repositoryBase.GetBase(itemGuid, context.Discounts).ConfigureAwait(false);
             }
 
             return discount;
@@ -67,7 +65,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Discounts).ConfigureAwait(false);
+                return await _repositoryBase.UpdateBase(itemToUpdate, context.Discounts, context).ConfigureAwait(false);
             }
         }
 

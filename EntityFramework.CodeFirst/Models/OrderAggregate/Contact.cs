@@ -9,11 +9,12 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
     /// <summary>
     /// A Contact is an individual that is part of a Company and/or Client, and can optionally be a Primary contact or an Administrator.
     /// </summary>
-    public class Contact : PocoBase, IContainingClient, IContainingCompany, IContainingAddress
+    public class Contact : PocoBase, IContainingAddress
     {
         /// <summary>
         /// The address of this contact.
         /// </summary>
+        [Required]
         public Address Address { get; set; }
 
         /// <summary>
@@ -23,25 +24,15 @@ namespace HireRight.EntityFramework.CodeFirst.Models.OrderAggregate
         public string CellNumber { get; set; }
 
         /// <summary>
-        /// The client this contact is related to.
-        /// </summary>
-        public virtual Client Client { get; set; }
-
-        /// <summary>
-        /// Foreign key for this contact's client.
-        /// </summary>
-        [ForeignKey("Client")]
-        public Guid ClientId { get; set; }
-
-        /// <summary>
-        /// The company this contact is related to.
+        /// Navigation property.
         /// </summary>
         public virtual Company Company { get; set; }
 
         /// <summary>
-        /// Foreign key for this contact's company.
+        /// Foreign key for this Contact's Company.
         /// </summary>
-        [ForeignKey("Company")]
+        [Required]
+        [ForeignKey(nameof(Company))]
         public Guid CompanyId { get; set; }
 
         /// <summary>

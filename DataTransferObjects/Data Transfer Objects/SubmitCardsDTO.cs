@@ -26,6 +26,7 @@ namespace DataTransferObjects.Data_Transfer_Objects
         {
             Categories = new List<CategoryDTO>();
             Positions = new List<string>();
+            Contact = new ContactDTO();
         }
     }
 }
