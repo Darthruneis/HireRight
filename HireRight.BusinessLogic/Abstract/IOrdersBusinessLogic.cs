@@ -15,6 +15,8 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<decimal> CalculatePrice(Guid productGuid, long quantity);
 
+        Task CreateOrder(NewOrderDTO newOrder);
+
         Task<OrderDetailsDTO> Get(Guid orderGuid);
 
         Task<List<OrderDetailsDTO>> Get(OrderFilter filter);

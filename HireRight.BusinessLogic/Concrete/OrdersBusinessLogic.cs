@@ -110,18 +110,21 @@ namespace HireRight.BusinessLogic.Concrete
 
         public async Task CreateOrder(NewOrderDTO model)
         {
-            string greetingLine = $"An order has just been placed for assessment testing for {model.PrimaryContact.FullName} of {model.Company.Name}.  The details of this order are shown below. <br /><br />";
+            string greetingLine = $"An order has just been placed for assessment testing for {model.PrimaryContact.FullName} of {model.Company.Name}.  The details of this order are shown below.";
 
             StringBuilder message = new StringBuilder(greetingLine);
 
             ProductDTO dto = await _productsBusinessLogic.Get(model.Order.ProductId).ConfigureAwait(false);
+            decimal total = await CalculatePrice(dto.Id, model.Order.Quantity);
 
-            message.AppendLine($"Quantity: {model.Order.Quantity}")
-                   .AppendLine($"Subtotal: {CalculatePrice(dto.Id, model.Order.Quantity)}")
+            message.AppendLine()
+                   .AppendLine($"Quantity: {model.Order.Quantity}")
+                   .AppendLine($"Subtotal: {total.ToString("C2")}")
                    .AppendLine("Positions of Interest:");
-            foreach (string position in model.Order.NotesAndPositions.PositionsOfInterest) message.AppendLine(position);
+            foreach (string position in model.Order.NotesAndPositions.PositionsOfInterest)
+                message.AppendLine(position);
 
-            message.AppendLine("<br /><br />")
+            message.AppendLine().AppendLine()
                    .AppendLine("Primary Contact:")
                    .AppendLine(model.PrimaryContact.FullName)
                    .AppendLine(model.PrimaryContact.Email)
@@ -130,17 +133,20 @@ namespace HireRight.BusinessLogic.Concrete
                    .AppendLine("Cell: " + model.PrimaryContact.CellNumber);
 
             if (model.SecondaryContact.FullName != null)
-                message.AppendLine("<br />Secondary Contact:")
+                message.AppendLine().AppendLine()
+                       .AppendLine("Secondary Contact:")
                        .AppendLine(model.SecondaryContact.FullName)
                        .AppendLine(model.SecondaryContact.Email)
                        .AppendLine(model.SecondaryContact.CellNumber)
                        .AppendLine(model.SecondaryContact.Address.GetFullAddress);
 
             if (model.Order.NotesAndPositions.Notes != null)
-                message.AppendLine("<br />The customer has left the following notes for you:")
-                       .AppendLine(model.Order.NotesAndPositions.Notes);
+                message.AppendLine().AppendLine()
+                       .AppendLine("The customer has left the following notes for you:")
+                       .AppendLine(model.Order.NotesAndPositions.Notes)
+                       .AppendLine().AppendLine();
 
-            EmailConsultants(message.ToString(), "New Order Placed!");
+            EmailConsultants(message.ToString().Replace("\r\n", "<br/>"), "New Order Placed!");
         }
 
         public async Task<OrderDetailsDTO> Get(Guid orderGuid)

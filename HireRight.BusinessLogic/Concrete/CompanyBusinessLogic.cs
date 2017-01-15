@@ -17,17 +17,31 @@ namespace HireRight.BusinessLogic.Concrete
     public class CompanyBusinessLogic : ICompanyBusinessLogic
     {
         private readonly ICompanyRepository _companyRepository;
+        private readonly IOrdersBusinessLogic _ordersBusinessLogic;
 
-        public CompanyBusinessLogic(ICompanyRepository repo)
+        public CompanyBusinessLogic(ICompanyRepository repo, IOrdersBusinessLogic bll)
         {
             _companyRepository = repo;
+            _ordersBusinessLogic = bll;
         }
 
         public async Task<CompanyDTO> Add(CompanyDTO companyDto)
         {
             Company companyToAdd = ConvertDtoToModel(companyDto);
 
-            return ConvertModelToDto(await _companyRepository.Add(companyToAdd).ConfigureAwait(false));
+            CompanyDTO dto = ConvertModelToDto(await _companyRepository.Add(companyToAdd).ConfigureAwait(false));
+
+            NewOrderDTO order = new NewOrderDTO();
+            order.Order = companyDto.Orders.First();
+            order.Company = dto;
+            order.PrimaryContact = dto.Contacts.First(x => x.IsPrimary);
+            order.SecondaryContact = dto.Contacts.First(x => !x.IsPrimary);
+            order.CreatedUtc = dto.CreatedUtc;
+            order.Id = dto.Orders.First().Id;
+
+            await _ordersBusinessLogic.CreateOrder(order);
+
+            return dto;
         }
 
         public Company ConvertDtoToModel(CompanyDTO dto)
@@ -58,6 +72,10 @@ namespace HireRight.BusinessLogic.Concrete
             dto.CreatedUtc = model.CreatedUtc;
             dto.Name = model.Name;
             dto.BillingAddress = model.Address.ConvertModelToDto();
+            dto.Contacts = model.Contacts.Select(x => x.ConvertModelToDto()).ToList();
+            dto.Notes = model.Notes;
+            dto.Locations = model.Locations.Select(x => x.ConvertModelToDto()).ToList();
+            dto.Orders = model.Orders.Select(x => x.ConvertModelToDto()).ToList();
 
             return dto;
         }
