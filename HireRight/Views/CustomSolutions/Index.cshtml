@@ -1,4 +1,5 @@
-﻿@model CustomSolutionsViewModel
+﻿@using DataTransferObjects.Filters.Concrete
+@model CustomSolutionsViewModel
 @{
     ViewBag.Title = "Custom Solutions";
 }
@@ -66,6 +67,7 @@
             <button id="hideContactAndCompanyInfo" type="button" class="btn btn-default glyphicon glyphicon-plus-sign"></button>
         </div>
     </div>
+    Html.RenderPartial("CategoryFilterPartial", Model.CategoryFilter);
     <div class="row">
         <div class="col-xs-12">
             @{Html.RenderPartial("CustomSolutionsPartial", model: Model);}

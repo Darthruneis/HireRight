@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.API.Controllers
 {
@@ -14,7 +15,7 @@ namespace HireRight.API.Controllers
     public class CategoriesController : ApiControllerBase<CategoryDTO>
     {
         private readonly ICategoriesBusinessLogic _categoriesBusinessLogic;
-        private readonly Func<Task<List<CategoryDTO>>> _getPage;
+        private readonly Func<CategoryFilter, Task<List<CategoryDTO>>> _getPage;
 
         public CategoriesController(ICategoriesBusinessLogic bll)
         {
@@ -33,9 +34,9 @@ namespace HireRight.API.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetCategories()
+        public async Task<HttpResponseMessage> GetCategories([FromUri] CategoryFilter filter)
         {
-            return await GetMultipleBase(_getPage());
+            return await GetMultipleBase(_getPage(filter));
         }
 
         [HttpGet]

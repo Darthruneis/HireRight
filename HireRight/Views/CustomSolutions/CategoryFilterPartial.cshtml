@@ -1,0 +1,18 @@
+﻿@model DataTransferObjects.Filters.Concrete.CategoryFilter
+
+@using (Html.BeginForm("FilterCategories", "CustomSolutions", FormMethod.Post))
+{
+    <div class="row borderedRow" style="padding-bottom: 10px;">
+        <div class="col-xs-5">
+            @Html.ValidatedEditorWithLabelFor(x => x.TitleFilter)
+        </div>
+        <div class="col-xs-5">
+            @Html.ValidatedEditorWithLabelFor(x => x.DescriptionFilter)
+        </div>
+        <div class="col-lg-1 visible-lg hidden-md"></div>
+        <div class="col-xs-2 col-lg-1 col-lg-1">
+            <br />
+            <input formnovalidate="formnovalidate" id="FilterButton" type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </div>
+}

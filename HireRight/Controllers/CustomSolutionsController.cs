@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Controllers
 {
@@ -20,6 +21,17 @@ namespace HireRight.Controllers
         {
             _categoriesSDK = categoriesSdk;
             _ordersSDK = ordersSdk;
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public async Task<ActionResult> FilterCategories(CategoryFilter model)
+        {
+            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(model);
+
+            CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(categories);
+
+            return View("Index", newModel);
         }
 
         [HttpPost]
@@ -42,12 +54,9 @@ namespace HireRight.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            List<CategoryDTO> categories = await _categoriesSDK.GetCategories();
+            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(new CategoryFilter(1, 10));
 
-            List<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel() { Description = x.Description, Title = x.Title }).ToList();
-
-            CustomSolutionsViewModel model = new CustomSolutionsViewModel();
-            model.Categories = categoryViewModels.OrderBy(x => x.Title).ToList();
+            CustomSolutionsViewModel model = CreateViewModelFromCategoryList(categories);
 
             return View(model);
         }
@@ -74,6 +83,16 @@ namespace HireRight.Controllers
             await _ordersSDK.SubmitCards(dto);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        private CustomSolutionsViewModel CreateViewModelFromCategoryList(List<CategoryDTO> categories)
+        {
+            List<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel() { Description = x.Description, Title = x.Title }).ToList();
+
+            CustomSolutionsViewModel model = new CustomSolutionsViewModel();
+            model.Categories = categoryViewModels.OrderBy(x => x.Title).ToList();
+
+            return model;
         }
 
         private List<JobAnalysisCategoryViewModel> EnforceConstraints(IList<JobAnalysisCategoryViewModel> model)

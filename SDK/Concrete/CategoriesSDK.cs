@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataTransferObjects.Filters.Concrete;
 
 namespace SDK.Concrete
 {
@@ -25,9 +26,9 @@ namespace SDK.Concrete
             return response.Results.First();
         }
 
-        public async Task<List<CategoryDTO>> GetCategories()
+        public async Task<List<CategoryDTO>> GetCategories(CategoryFilter filter)
         {
-            ApiResponse<CategoryDTO> response = await _client.GetAsync<CategoryDTO>(string.Empty);
+            ApiResponse<CategoryDTO> response = await _client.GetAsync<CategoryDTO>(filter.CreateQuery());
 
             return response.Results.ToList();
         }

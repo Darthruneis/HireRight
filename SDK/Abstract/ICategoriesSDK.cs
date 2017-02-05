@@ -10,7 +10,7 @@ namespace SDK.Abstract
     {
         Task<CategoryDTO> AddCategory(CategoryDTO categoryToAdd);
 
-        Task<List<CategoryDTO>> GetCategories();
+        Task<List<CategoryDTO>> GetCategories(CategoryFilter filter);
 
         Task<CategoryDTO> GetCategory(Guid categoryGuid);
 

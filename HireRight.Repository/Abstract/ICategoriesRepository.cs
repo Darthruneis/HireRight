@@ -11,7 +11,7 @@ namespace HireRight.Repository.Abstract
     {
         Task<ScaleCategory> Add(ScaleCategory itemToAdd);
 
-        Task<List<ScaleCategory>> Get();
+        Task<List<ScaleCategory>> Get(CategoryFilter filter);
 
         Task<ScaleCategory> Get(Guid itemGuid);
 

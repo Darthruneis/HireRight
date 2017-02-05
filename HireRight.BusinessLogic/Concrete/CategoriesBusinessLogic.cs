@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
@@ -51,9 +52,9 @@ namespace HireRight.BusinessLogic.Concrete
             return ConvertModelToDto(category);
         }
 
-        public async Task<List<CategoryDTO>> Get()
+        public async Task<List<CategoryDTO>> Get(CategoryFilter filter)
         {
-            List<ScaleCategory> categories = await _categoriesRepository.Get();
+            List<ScaleCategory> categories = await _categoriesRepository.Get(filter);
 
             return categories.Select(ConvertModelToDto).ToList();
         }

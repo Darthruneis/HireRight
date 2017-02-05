@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Models
 {
     public class CustomSolutionsViewModel
     {
         public IList<JobAnalysisCategoryViewModel> Categories { get; set; }
+
+        public CategoryFilter CategoryFilter { get; set; }
 
         [Required]
         [Display(Name = "Company Name")]
@@ -30,6 +33,7 @@ namespace HireRight.Models
         {
             Categories = new List<JobAnalysisCategoryViewModel>();
             Contact = new ContactDTO();
+            CategoryFilter = new CategoryFilter(1, 10);
         }
     }
 }
