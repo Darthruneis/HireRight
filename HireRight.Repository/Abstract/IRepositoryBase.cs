@@ -16,7 +16,7 @@ namespace HireRight.Repository.Abstract
 
         Task<TModel> GetBase(Guid itemGuid, IQueryable<TModel> query);
 
-        Task<List<TModel>> TakePage(IQueryable<TModel> query, Filter<TModel> filterParameters);
+        Task<List<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters);
 
         Task<TModel> UpdateBase(TModel itemToUpdate, DbSet<TModel> dbSet, HireRightDbContext context);
     }

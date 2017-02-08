@@ -34,15 +34,18 @@ namespace HireRight.Repository.Concrete
 
             using (HireRightDbContext context = new HireRightDbContext())
             {
-                IQueryable<ScaleCategory> query = context.Categories.Where(x =>
-                                                (string.IsNullOrWhiteSpace(filter.TitleFilter) || x.Title.Contains(filter.TitleFilter))
-                                                && (string.IsNullOrWhiteSpace(filter.DescriptionFilter) || x.Description.Contains(filter.DescriptionFilter))
-                                                && (!filter.ItemGuids.Any() || filter.ItemGuids.Contains(x.Id)));
+                IQueryable<ScaleCategory> query = context.Categories;
 
-                categoriesFound = await query.OrderBy(x => x.Title)
-                                             .Skip(filter.PageSize * (filter.PageNumber - 1))
-                                             .Take(filter.PageSize)
-                                             .ToListAsync();
+                if (!string.IsNullOrWhiteSpace(filter.TitleFilter))
+                    query = query.Where(x => x.Title.ToLower().Contains(filter.TitleFilter.ToLower()));
+
+                if (!string.IsNullOrWhiteSpace(filter.DescriptionFilter))
+                    query = query.Where(x => x.Description.ToLower().Contains(filter.DescriptionFilter.ToLower()));
+
+                if (filter.ItemGuids.Any())
+                    query = query.Where(x => filter.ItemGuids.Contains(x.Id));
+
+                categoriesFound = await _repositoryBase.TakePage(query, filter);
             }
 
             return categoriesFound;

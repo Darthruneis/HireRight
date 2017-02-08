@@ -60,11 +60,8 @@ namespace HireRight.Repository.Concrete
             return item;
         }
 
-        public async Task<List<TModel>> TakePage(IQueryable<TModel> query, Filter<TModel> filterParameters)
+        public async Task<List<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters)
         {
-            if (filterParameters.ItemGuids != null && filterParameters.ItemGuids.Any())
-                query = query.Where(x => filterParameters.ItemGuids.Contains(x.Id));
-
             return await query.OrderBy(x => x.Id).Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
         }
 

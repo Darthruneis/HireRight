@@ -12,7 +12,49 @@
         <div class="col-lg-1 visible-lg hidden-md"></div>
         <div class="col-xs-2 col-lg-1 col-lg-1">
             <br />
-            <input formnovalidate="formnovalidate" id="FilterButton" type="submit" value="Filter" class="btn btn-default" />
+            <button id="FilterButton" type="button" class="btn btn-default">Filter</button>
+        </div>
+        <div class="col-xs-12">
+            @if (Model.PageNumber > 1)
+            {
+                <button id="page1Button" type="button" value="1" class="btn btn-default">1</button>
+            }
+            else
+            {
+                <button id="page1Button" type="button" value="1" class="btn btn-default" hidden="hidden"></button>
+            }
+            <button id="prevPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-left">Prev</button>
+            <button id="currentPageButton" type="button" class="btn btn-default" disabled="disabled">@Model.PageNumber</button>
+            <button id="nextPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-right">Next</button>
         </div>
     </div>
 }
+
+<script>
+    $(document)
+        .ready(function () {
+            alert("ready!");
+            $("#page1Button").click(function () {
+                filterCategories(1, 10);
+            });
+            $("#FilterButton").click(function () {
+                filterCategories(1, 10);
+            });
+            $("#prevPageButton").click(function () {
+                filterCategories(@Model.PageNumber -1, 10);
+            });
+            $("#nextPageButton").click(function () {
+                filterCategories(@Model.PageNumber +1, 10);
+            });
+        });
+
+    function filterCategories(page, size) {
+        var description = $("#DescriptionFilter").val();
+        alert(description);
+        var title = $("#TitleFilter").val();
+        alert(title);
+        var url = "/CustomSolutions/FilterCategories" + "?page=" + page + "&size=" + size + "&title=" + title + "&description=" + description;
+        alert(url);
+        window.location.href = url;
+    }
+</script>

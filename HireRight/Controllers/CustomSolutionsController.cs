@@ -23,11 +23,14 @@ namespace HireRight.Controllers
             _ordersSDK = ordersSdk;
         }
 
-        [HttpPost]
+        [HttpGet]
         [ValidateInput(false)]
-        public async Task<ActionResult> FilterCategories(CategoryFilter model)
+        public async Task<ActionResult> FilterCategories(int page, int size, string description, string title)
         {
-            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(model);
+            CategoryFilter filter = new CategoryFilter(page, size);
+            filter.TitleFilter = title;
+            filter.DescriptionFilter = description;
+            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(filter);
 
             CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(categories);
 

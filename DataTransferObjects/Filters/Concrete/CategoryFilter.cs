@@ -14,6 +14,10 @@ namespace DataTransferObjects.Filters.Concrete
         [Display(Name = "Title")]
         public string TitleFilter { get; set; }
 
+        public CategoryFilter() : base(1, 10)
+        {
+        }
+
         public CategoryFilter(int page, int size, params Guid[] itemGuids) : base(page, size, itemGuids)
         {
         }
