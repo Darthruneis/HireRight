@@ -37,11 +37,15 @@
     <div class="body-content container-fluid">
         @RenderBody()
         <footer>
-        <br/>
+            <br />
             <hr />
             &copy; 2016 - @DateTime.Now.Year <br />
             Hire Right Consultants&trade;
         </footer>
+    </div>
+    <div id="processing"
+         class="processingIcon">
+        <h2>Loading...</h2>
     </div>
     @RenderSection("scripts", required: false)
 </body>

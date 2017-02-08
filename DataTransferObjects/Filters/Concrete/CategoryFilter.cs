@@ -11,7 +11,7 @@ namespace DataTransferObjects.Filters.Concrete
         [Display(Name = "Description")]
         public string DescriptionFilter { get; set; }
 
-        [Display(Name = "Title")]
+        [Display(Name = "Category")]
         public string TitleFilter { get; set; }
 
         public CategoryFilter() : base(1, 10)

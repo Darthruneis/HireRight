@@ -1,31 +1,53 @@
 ﻿@model DataTransferObjects.Filters.Concrete.CategoryFilter
-
+<script src="~/Scripts/showHideDiv.js"></script>
 @using (Html.BeginForm("FilterCategories", "CustomSolutions", FormMethod.Post))
 {
-    <div class="row borderedRow" style="padding-bottom: 10px;">
-        <div class="col-xs-5">
-            @Html.ValidatedEditorWithLabelFor(x => x.TitleFilter)
+    string hiddenFilterDivId = "hiddenFilterDiv";
+    string shownFilterDivId = "shownFilterDiv";
+
+    @*@Html.HideRowDiv(hiddenFilterDivId, shownFilterDivId, "the filtering options again.")*@
+    <div class="col-xs-12 row" id="@hiddenFilterDivId" hidden="hidden">
+        <div class="col-xs-11">
+            Press the <span class="glyphicon glyphicon-plus-sign"></span> button to show the filtering options again.
         </div>
-        <div class="col-xs-5">
-            @Html.ValidatedEditorWithLabelFor(x => x.DescriptionFilter)
+        <div class="col-xs-1">
+            <button class="btn btn-default glyphicon glyphicon-plus-sign" type="button"
+                    onclick="toggleMultiple(@shownFilterDivId, @hiddenFilterDivId)"></button>
         </div>
-        <div class="col-lg-1 visible-lg hidden-md"></div>
-        <div class="col-xs-2 col-lg-1 col-lg-1">
+    </div>
+    <div class="col-xs-12 row" id="@shownFilterDivId">
+        <div class="col-xs-11">
+            <h4>Filtering</h4>
+        </div>
+        <div class="col-xs-1">
+            <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button"
+                    onclick="toggleMultiple(@hiddenFilterDivId, @shownFilterDivId)"></button>
+        </div>
+        <div class="col-xs-6">
+            @Html.LabelFor(x => x.TitleFilter)
             <br />
-            <button id="FilterButton" type="button" class="btn btn-default">Filter</button>
+            @Html.EditorFor(x => x.TitleFilter, new { htmlAttributes = new { @class = "form-control" } })
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-6">
+            @Html.LabelFor(x => x.DescriptionFilter)
+            <br />
+            @Html.EditorFor(x => x.DescriptionFilter, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="col-xs-11" style="padding-top: 5px;">
             @if (Model.PageNumber > 1)
             {
                 <button id="page1Button" type="button" value="1" class="btn btn-default">1</button>
             }
             else
             {
-                <button id="page1Button" type="button" value="1" class="btn btn-default" hidden="hidden"></button>
+                <button id="page1Button" type="button" value="1" class="btn btn-default" style="display: none;"></button>
             }
-            <button id="prevPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-left">Prev</button>
+            <button id="prevPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-left"></button>
             <button id="currentPageButton" type="button" class="btn btn-default" disabled="disabled">@Model.PageNumber</button>
-            <button id="nextPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-right">Next</button>
+            <button id="nextPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-right"></button>
+        </div>
+        <div class="col-xs-1" style="padding-top: 5px;">
+            <button id="FilterButton" type="button" class="btn btn-default">Filter</button>
         </div>
     </div>
 }
@@ -33,7 +55,6 @@
 <script>
     $(document)
         .ready(function () {
-            alert("ready!");
             $("#page1Button").click(function () {
                 filterCategories(1, 10);
             });
@@ -50,11 +71,22 @@
 
     function filterCategories(page, size) {
         var description = $("#DescriptionFilter").val();
-        alert(description);
         var title = $("#TitleFilter").val();
-        alert(title);
         var url = "/CustomSolutions/FilterCategories" + "?page=" + page + "&size=" + size + "&title=" + title + "&description=" + description;
-        alert(url);
-        window.location.href = url;
+        var processing = $("#processing");
+        $.ajax({
+            method: "GET",
+            url: url,
+            dataType: "html",
+            success: function (data) {
+                $("#CategoryListDiv").html(data);
+            },
+            complete: function () {
+                processing.hide();
+            },
+            beforeSend: function () {
+                processing.show();
+            }
+        });
     }
 </script>

@@ -25,7 +25,7 @@ namespace HireRight.Controllers
 
         [HttpGet]
         [ValidateInput(false)]
-        public async Task<ActionResult> FilterCategories(int page, int size, string description, string title)
+        public async Task<PartialViewResult> FilterCategories(int page, int size, string description, string title)
         {
             CategoryFilter filter = new CategoryFilter(page, size);
             filter.TitleFilter = title;
@@ -33,8 +33,9 @@ namespace HireRight.Controllers
             List<CategoryDTO> categories = await _categoriesSDK.GetCategories(filter);
 
             CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(categories);
+            newModel.CategoryFilter = filter;
 
-            return View("Index", newModel);
+            return PartialView("CustomSolutionsPartial", newModel);
         }
 
         [HttpPost]

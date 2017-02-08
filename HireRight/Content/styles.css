@@ -21,7 +21,7 @@ body {
   background-color: #5E99C1; }
 
 html {
-  line-height: 130%; }
+  line-height: 110%; }
 
 hr {
   height: 3px;
@@ -128,6 +128,14 @@ a:hover {
 .navbar-default .navbar-brand {
   font-size: 20pt;
   font-weight: bold; }
+
+.processingIcon {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #335060; }
 
 /* Override the default bootstrap behavior where horizontal description lists
    will truncate terms that are too long to fit in the left column

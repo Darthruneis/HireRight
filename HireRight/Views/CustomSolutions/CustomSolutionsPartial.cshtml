@@ -1,22 +1,23 @@
 ﻿@model CustomSolutionsViewModel
 <script src="~/Scripts/showHideDiv.js"></script>
+<div class="row borderedRow" style="padding-bottom: 10px;">
+    @{Html.RenderPartial("CategoryFilterPartial", Model.CategoryFilter);}
+</div>
 <div class="row borderedRow">
-    <div class="row">
-        <div class="col-xs-12 col-lg-3">
-            <h2>Category</h2>
-        </div>
-        <div class="col-xs-12 col-lg-6">
-            <h2>Description of Category</h2>
-        </div>
-        <div class="col-xs-8 col-lg-2">
-            <h2>Importance</h2>
-        </div>
-        <div class="col-xs-4 col-lg-1">
-            <h4>Show/ Hide</h4>
-        </div>
+    <div class="col-xs-12 col-lg-3">
+        <h2>Category</h2>
+    </div>
+    <div class="col-xs-12 col-lg-6">
+        <h2>Description of Category</h2>
+    </div>
+    <div class="col-xs-8 col-lg-2">
+        <h2>Importance</h2>
+    </div>
+    <div class="col-xs-4 col-lg-1">
+        <h4>Show/ Hide</h4>
     </div>
 </div>
-<div class="row" style="height: 70vh; overflow-y: scroll; overflow-x: hidden;">
+<div class="row borderedRow" style="height: 70vh; overflow-y: scroll; overflow-x: hidden; padding-left: 15px;">
     @for (int i = 0; i < Model.Categories.Count; i++)
     {
         <div class="row borderedRow">
@@ -24,23 +25,23 @@
                 string hiddenRowId = "hiddenRow_" + i;
                 string shownRowId = "shownRow_" + i;
             }
-            <div id="@hiddenRowId" class="col-xs-12" hidden="hidden">
-                <div class="row">
-                    <div class="col-xs-11">Press the <span class="glyphicon glyphicon-plus-sign"></span> button to show this row again.</div>
-                    <div class="col-xs-1"><button class="btn btn-default glyphicon glyphicon-plus-sign" type="button" onclick="toggleMultiple(@shownRowId, @hiddenRowId)"></button></div>
+            <div id="@hiddenRowId" class="col-xs-12 row" hidden="hidden">
+                <div class="col-xs-11">
+                    Press the <span class="glyphicon glyphicon-plus-sign"></span> button to show this row again.
+                </div>
+                <div class="col-xs-1">
+                    <button class="btn btn-default glyphicon glyphicon-plus-sign" type="button" onclick="toggleMultiple(@shownRowId, @hiddenRowId)"></button>
                 </div>
             </div>
-            <div id="@shownRowId" class="col-xs-12">
-                <div class="row">
-                    <div class="col-xs-12 col-lg-3">@Model.Categories[i].Title</div>
-                    @Html.HiddenFor(x => Model.Categories[i].Title)
-                    <div class="col-xs-12 col-lg-6">@Model.Categories[i].Description</div>
-                    @Html.HiddenFor(x => Model.Categories[i].Description)
-                    <div class="col-xs-8 col-lg-2" style="padding-top: 2px;">@Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control" })</div>
-                    @Html.HiddenFor(x => Model.Categories[i].Importance)
-                    <div class="col-xs-4 col-lg-1">
-                        <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button" onclick="toggleMultiple(@hiddenRowId, @shownRowId)"></button>
-                    </div>
+            <div id="@shownRowId" class="col-xs-12 row">
+                <div class="col-xs-12 col-lg-3">@Model.Categories[i].Title</div>
+                @Html.HiddenFor(x => Model.Categories[i].Title)
+                <div class="col-xs-12 col-lg-6">@Model.Categories[i].Description</div>
+                @Html.HiddenFor(x => Model.Categories[i].Description)
+                <div class="col-xs-8 col-lg-2" style="padding-top: 2px;">@Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control" })</div>
+                @Html.HiddenFor(x => Model.Categories[i].Importance)
+                <div class="col-xs-4 col-lg-1">
+                    <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button" onclick="toggleMultiple(@hiddenRowId, @shownRowId)"></button>
                 </div>
             </div>
         </div>
