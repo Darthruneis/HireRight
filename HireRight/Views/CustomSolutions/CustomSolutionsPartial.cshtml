@@ -1,5 +1,10 @@
 ﻿@model CustomSolutionsViewModel
 <script src="~/Scripts/showHideDiv.js"></script>
+<script src="~/Scripts/customSolutionsPartial.js"></script>
+<style>
+    .categoryDropDownDiv {
+    }
+</style>
 <div class="row borderedRow" style="padding-bottom: 10px;">
     @{Html.RenderPartial("CategoryFilterPartial", Model.CategoryFilter);}
 </div>
@@ -38,7 +43,9 @@
                 @Html.HiddenFor(x => Model.Categories[i].Title)
                 <div class="col-xs-12 col-lg-6">@Model.Categories[i].Description</div>
                 @Html.HiddenFor(x => Model.Categories[i].Description)
-                <div class="col-xs-8 col-lg-2" style="padding-top: 2px;">@Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control" })</div>
+                <div class="col-xs-8 col-lg-2" style="padding-top: 2px;">
+                    @Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control categoryDropDownDiv", data_categoryId = Model.Categories[i].Id, data_categoryName = Model.Categories[i].Title })
+                </div>
                 @Html.HiddenFor(x => Model.Categories[i].Importance)
                 <div class="col-xs-4 col-lg-1">
                     <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button" onclick="toggleMultiple(@hiddenRowId, @shownRowId)"></button>

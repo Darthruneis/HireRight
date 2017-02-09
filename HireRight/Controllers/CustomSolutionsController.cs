@@ -41,6 +41,7 @@ namespace HireRight.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(CustomSolutionsViewModel model)
         {
+            //TODO: rework this method to take in an ajax call with data for the selected categories and the contact information
             if (model == null || !ModelState.IsValid)
                 return View(model);
 
@@ -91,7 +92,7 @@ namespace HireRight.Controllers
 
         private CustomSolutionsViewModel CreateViewModelFromCategoryList(List<CategoryDTO> categories)
         {
-            List<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel() { Description = x.Description, Title = x.Title }).ToList();
+            List<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel() { Description = x.Description, Title = x.Title, Id = x.Id }).ToList();
 
             CustomSolutionsViewModel model = new CustomSolutionsViewModel();
             model.Categories = categoryViewModels.OrderBy(x => x.Title).ToList();

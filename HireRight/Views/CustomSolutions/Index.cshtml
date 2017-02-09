@@ -5,6 +5,9 @@
 }
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/customSolutions.js"></script>
+<script>
+    var selectedCategories = [];
+</script>
 <div class="row">
     <div class="col-xs-12">
         <h2>Job Analysis</h2>
@@ -65,12 +68,13 @@
         </div>
         <br />
     </div>
-    Html.RenderPartial("CustomSolutionsPartial", model: Model);
+    <div id="CategoryListDiv">@{ Html.RenderPartial("CustomSolutionsPartial", model: Model); }</div>
     <br />
     <div class="row">
         <div class="col-xs-12">
             <div style="margin: 0 auto; width: 200px;">
-                <input type="submit" value="Continue" class="btn btn-primary" />
+                @*Write the submit script to submit the array of selected items, along with the contact information*@
+                <input type="submit" value="Continue" class="btn btn-primary"/>
             </div>
         </div>
     </div>
