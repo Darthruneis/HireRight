@@ -1,0 +1,43 @@
+﻿@model CustomSolutionsViewModel
+
+<div id="contactAndCompanyInfo" class="row borderedRow">
+    <div class="col-xs-11">
+        <label>Required Information</label>
+    </div>
+    <div class="col-xs-1">
+        <button id="showContactAndCompanyInfo" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            @Html.ValidatedEditorWithLabelFor(x => x.CompanyName)
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            @Html.ValidatedEditorWithLabelFor(x => x.PositionsToFill)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            @Html.ValidatedEditorWithLabelFor(x => x.Contact.FirstName)
+        </div>
+        <div class="col-xs-6">
+            @Html.ValidatedEditorWithLabelFor(x => x.Contact.LastName)
+        </div>
+        <div class="col-xs-6 col-lg-4">
+            @Html.ValidatedEditorWithLabelFor(x => x.Contact.OfficeNumber)
+        </div>
+        <div class="col-xs-6 col-lg-4">
+            @Html.ValidatedEditorWithLabelFor(x => x.Contact.CellNumber)
+        </div>
+        <div class="col-xs-6 col-lg-4">
+            @Html.ValidatedEditorWithLabelFor(x => x.Contact.Email)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.LabelFor(x => x.Notes)
+            <br />
+            @Html.TextAreaFor(x => x.Notes, new { style = "resize: none;", rows = "5", cols = "150", @class = "form-control" })
+        </div>
+    </div>
+    <br />
+</div>

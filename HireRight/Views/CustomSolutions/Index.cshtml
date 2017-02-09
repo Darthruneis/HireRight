@@ -20,6 +20,7 @@
     string shownFormInstructionsDivId = "shownFormInstructionsDiv";
     @Html.HideRowDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId, "the instructions again")
     <div class="row borderedRow" id="@shownFormInstructionsDivId">
+        @*TODO: Extract out as much of this type of code as possible into another HTML helper.*@
         <div class="col-xs-11">Explanation of form and what it is supposed to accomplish.</div>
         <div class="col-xs-1">
             <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button"
@@ -27,55 +28,15 @@
         </div>
     </div>
     @Html.HideRowDiv("collapsedCompanyAndContactInfo", "contactAndCompanyInfo", "Required Information again.")
-    <div id="contactAndCompanyInfo" class="row borderedRow">
-        <div class="col-xs-11">
-            <label>Required Information</label>
-        </div>
-        <div class="col-xs-1">
-            <button id="showContactAndCompanyInfo" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-lg-6">
-                @Html.ValidatedEditorWithLabelFor(x => x.CompanyName)
-            </div>
-            <div class="col-xs-12 col-lg-6">
-                @Html.ValidatedEditorWithLabelFor(x => x.PositionsToFill)
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                @Html.ValidatedEditorWithLabelFor(x => x.Contact.FirstName)
-            </div>
-            <div class="col-xs-6">
-                @Html.ValidatedEditorWithLabelFor(x => x.Contact.LastName)
-            </div>
-            <div class="col-xs-6 col-lg-4">
-                @Html.ValidatedEditorWithLabelFor(x => x.Contact.OfficeNumber)
-            </div>
-            <div class="col-xs-6 col-lg-4">
-                @Html.ValidatedEditorWithLabelFor(x => x.Contact.CellNumber)
-            </div>
-            <div class="col-xs-6 col-lg-4">
-                @Html.ValidatedEditorWithLabelFor(x => x.Contact.Email)
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                @Html.LabelFor(x => x.Notes)
-                <br />
-                @Html.TextAreaFor(x => x.Notes, new { style = "resize: none;", rows = "5", cols = "150", @class = "form-control" })
-            </div>
-        </div>
-        <br />
-    </div>
+    Html.RenderPartial("ContactAndCompanyInfoPartial");
     <div id="CategoryListDiv">@{ Html.RenderPartial("CustomSolutionsPartial", model: Model); }</div>
     <br />
     <div class="row">
         <div class="col-xs-12">
             <div style="margin: 0 auto; width: 200px;">
-                @*Write the submit script to submit the array of selected items, along with the contact information*@
-                <input type="submit" value="Continue" class="btn btn-primary"/>
+                @*TODO: Write the submit script to submit the array of selected items, along with the contact information*@
+                <input type="submit" value="Continue" class="btn btn-primary" />
             </div>
         </div>
     </div>
-}
+        }
