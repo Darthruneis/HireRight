@@ -1,11 +1,14 @@
 ﻿@model CustomSolutionsViewModel
-
-<div id="contactAndCompanyInfo" class="row borderedRow">
+@{
+    string hiddenId = "collapsedCompanyAndContactInfo";
+    string shownId = "contactAndCompanyInfo";
+}
+<div id="@shownId" class="row borderedRow">
     <div class="col-xs-11">
         <label>Required Information</label>
     </div>
     <div class="col-xs-1">
-        <button id="showContactAndCompanyInfo" type="button" class="btn btn-default glyphicon glyphicon-minus-sign"></button>
+        <button type="button" class="btn btn-default glyphicon glyphicon-minus-sign" onclick="toggleMultiple(@hiddenId, @shownId)"></button>
     </div>
     <div class="row">
         <div class="col-xs-12 col-lg-6">
