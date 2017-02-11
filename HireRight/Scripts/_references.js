@@ -1,7 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="bootstrap.js" />
 /// <reference path="categoryfilterpartial.js" />
-/// <reference path="customsolutions.js" />
 /// <reference path="customsolutionspartial.js" />
 /// <reference path="indexDivScripts.js" />
 /// <reference path="jquery.unobtrusive-ajax.min.js" />

@@ -4,7 +4,9 @@ using HireRight.Models;
 using SDK.Abstract;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -41,9 +43,25 @@ namespace HireRight.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(CustomSolutionsViewModel model)
         {
-            //TODO: rework this method to take in an ajax call with data for the selected categories and the contact information
             if (model == null || !ModelState.IsValid)
                 return View(model);
+
+            foreach (UndisplayedCategory category in model.CategoriesFromOtherPages)
+            {
+                CategoryImportance importance = GetImportanceLevelFromDisplayName(category.Importance);
+                JobAnalysisCategoryViewModel categoryInModel = model.Categories.FirstOrDefault(x => x.Id == category.Id);
+                if (categoryInModel == null)
+                {
+                    categoryInModel = new JobAnalysisCategoryViewModel();
+                    categoryInModel.Id = category.Id;
+                    categoryInModel.Importance = importance;
+                    model.Categories.Add(categoryInModel);
+                }
+                else
+                {
+                    categoryInModel.Importance = importance;
+                }
+            }
 
             List<JobAnalysisCategoryViewModel> listToReturn = EnforceConstraints(model.Categories.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList());
 
@@ -79,7 +97,7 @@ namespace HireRight.Controllers
             }
 
             SubmitCardsDTO dto = new SubmitCardsDTO();
-            dto.Categories = model.Categories.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, IsInTopTwelve = x.IsInTopTwelve }).ToList();
+            dto.Categories = model.Categories.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, IsInTopTwelve = x.IsInTopTwelve, Id = x.Id }).ToList();
             dto.CompanyName = model.CompanyName;
             dto.Positions = model.Positions;
             dto.Contact = model.Contact;
@@ -127,6 +145,21 @@ namespace HireRight.Controllers
             listToReturn.AddRange(highImportanceModels);
 
             return listToReturn;
+        }
+
+        private CategoryImportance GetImportanceLevelFromDisplayName(string importanceLevelName)
+        {
+            foreach (object value in Enum.GetValues(typeof(CategoryImportance)))
+            {
+                CategoryImportance importance = (CategoryImportance)value;
+                if (importance.GetType()
+                        .GetMember(importance.ToString())
+                        .First()
+                        .GetCustomAttribute<DisplayAttribute>().Name == importanceLevelName)
+                    return importance;
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(importanceLevelName), "Importance level does not match a value from " + nameof(CategoryImportance));
         }
     }
 }

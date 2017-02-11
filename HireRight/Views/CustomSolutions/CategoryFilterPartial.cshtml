@@ -1,54 +1,67 @@
 ﻿@model DataTransferObjects.Filters.Concrete.CategoryFilter
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/categoryFilterPartial.js"></script>
-@using (Html.BeginForm("FilterCategories", "CustomSolutions", FormMethod.Post))
-{
+
+@{
     string hiddenFilterDivId = "hiddenFilterDiv";
     string shownFilterDivId = "shownFilterDiv";
-
-    @*@Html.HideRowDiv(hiddenFilterDivId, shownFilterDivId, "the filtering options again.")*@
-    <div class="col-xs-12 row" id="@hiddenFilterDivId" hidden="hidden">
-        <div class="col-xs-11">
-            Press the <span class="glyphicon glyphicon-plus-sign"></span> button to show the filtering options again.
-        </div>
-        <div class="col-xs-1">
-            <button class="btn btn-default glyphicon glyphicon-plus-sign" type="button"
-                    onclick="toggleMultiple(@shownFilterDivId, @hiddenFilterDivId)"></button>
-        </div>
-    </div>
-    <div class="col-xs-12 row" id="@shownFilterDivId">
-        <div class="col-xs-11">
-            <h4>Filtering</h4>
-        </div>
-        <div class="col-xs-1">
-            <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button"
-                    onclick="toggleMultiple(@hiddenFilterDivId, @shownFilterDivId)"></button>
-        </div>
-        <div class="col-xs-6">
-            @Html.LabelFor(x => x.TitleFilter)
-            <br />
-            @Html.EditorFor(x => x.TitleFilter, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-xs-6">
-            @Html.LabelFor(x => x.DescriptionFilter)
-            <br />
-            @Html.EditorFor(x => x.DescriptionFilter, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-xs-11" style="padding-top: 5px;">
-            @if (Model.PageNumber > 1)
-            {
-                <button id="page1Button" type="button" value="1" class="btn btn-default">1</button>
-            }
-            else
-            {
-                <button id="page1Button" type="button" value="1" class="btn btn-default" style="display: none;"></button>
-            }
-            <button id="prevPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-left"></button>
-            <button id="currentPageButton" type="button" class="btn btn-default" disabled="disabled">@Model.PageNumber</button>
-            <button id="nextPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-right"></button>
-        </div>
-        <div class="col-xs-1" style="padding-top: 5px;">
-            <button id="FilterButton" type="button" class="btn btn-default">Filter</button>
-        </div>
-    </div>
 }
+<div class="col-xs-12 row" id="@hiddenFilterDivId" hidden="hidden">
+    <div class="col-xs-11">
+        Press the <span class="glyphicon glyphicon-plus-sign"></span> button to show the filtering options again.
+    </div>
+    <div class="col-xs-1">
+        <button class="btn btn-default glyphicon glyphicon-plus-sign" type="button"
+                onclick="toggleMultiple(@shownFilterDivId, @hiddenFilterDivId)"></button>
+    </div>
+</div>
+<div class="col-xs-12 row" id="@shownFilterDivId">
+    <div class="col-xs-11">
+        <h4>Filtering</h4>
+    </div>
+    @Html.HideRowButtonInColumnDiv(hiddenFilterDivId, shownFilterDivId)
+    <div class="col-xs-6">
+        @Html.LabelFor(x => x.TitleFilter)
+        <br />
+        @Html.EditorFor(x => x.TitleFilter, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="col-xs-6">
+        @Html.LabelFor(x => x.DescriptionFilter)
+        <br />
+        @Html.EditorFor(x => x.DescriptionFilter, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="col-xs-11" style="padding-top: 5px;">
+        @if (Model.PageNumber > 1)
+            {
+            <button id="page1Button" type="button" value="1" class="btn btn-default">1</button>
+        }
+        else
+        {
+            <button id="page1Button" type="button" value="1" class="btn btn-default" style="display: none;"></button>
+        }
+        <button id="prevPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-left"></button>
+        <button id="currentPageButton" type="button" class="btn btn-default" disabled="disabled">@Model.PageNumber</button>
+        <button id="nextPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-right"></button>
+    </div>
+    <div class="col-xs-1" style="padding-top: 5px;">
+        <button id="FilterButton" type="button" class="btn btn-default">Filter</button>
+    </div>
+</div>
+
+<script>
+    $(document)
+        .ready(function () {
+            $("#page1Button").click(function () {
+                filterCategories(1, 10);
+            });
+            $("#FilterButton").click(function () {
+                filterCategories(1, 10);
+            });
+            $("#prevPageButton").click(function () {
+                filterCategories(@Model.PageNumber -1, 10);
+            });
+            $("#nextPageButton").click(function () {
+                filterCategories(@Model.PageNumber +1, 10);
+            });
+        });
+</script>

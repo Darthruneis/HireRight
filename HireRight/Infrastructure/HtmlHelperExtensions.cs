@@ -7,7 +7,7 @@ namespace HireRight.Infrastructure
 {
     public static class HtmlHelperExtensions
     {
-        public static MvcHtmlString HideRowDiv(this HtmlHelper helper, string hiddenId, string shownId, string whatToShowText)
+        public static MvcHtmlString HiddenShowRowDiv(this HtmlHelper helper, string hiddenId, string shownId, string whatToShowText)
         {
             //the div that contains the text describing how to show the div again
             TagBuilder showAgainText = new TagBuilder("div");
@@ -33,6 +33,22 @@ namespace HireRight.Infrastructure
             divToReturn.InnerHtml = showAgainText.ToString() + showDiv.ToString();
 
             return new MvcHtmlString(divToReturn.ToString());
+        }
+
+        public static MvcHtmlString HideRowButtonInColumnDiv(this HtmlHelper helper, string hiddenId, string shownId)
+        {
+            //the button to show the div again
+            TagBuilder hideButton = new TagBuilder("button");
+            hideButton.Attributes.Add("class", "btn btn-default glyphicon glyphicon-minus-sign");
+            hideButton.Attributes.Add("type", "button");
+            hideButton.Attributes.Add("onclick", $"toggleMultiple({hiddenId}, {shownId})");
+
+            //the div which holds the button
+            TagBuilder divtoReturn = new TagBuilder("div");
+            divtoReturn.Attributes.Add("class", "col-xs-1");
+            divtoReturn.InnerHtml = hideButton.ToString();
+
+            return new MvcHtmlString(divtoReturn.ToString());
         }
 
         public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)

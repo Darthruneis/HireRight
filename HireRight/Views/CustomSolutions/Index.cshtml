@@ -4,7 +4,6 @@
     ViewBag.Title = "Custom Solutions";
 }
 <script src="~/Scripts/showHideDiv.js"></script>
-<script src="~/Scripts/customSolutions.js"></script>
 <script>
     //This variable needs to be created on the Index so that it is static relative to the
     //partial views which will be reloaded, but will need to modify this collection based on user actions
@@ -15,30 +14,47 @@
         <h2>Job Analysis</h2>
     </div>
 </div>
-@using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post))
+@using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm" }))
 {
     @Html.ValidationSummary(true)
     string hiddenFormInstructionsDivId = "hiddenFormInstructionsDiv";
     string shownFormInstructionsDivId = "shownFormInstructionsDiv";
-    @Html.HideRowDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId, "the instructions again")
+    @Html.HiddenShowRowDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId, "the instructions again")
     <div class="row borderedRow" id="@shownFormInstructionsDivId">
-        @*TODO: Extract out as much of this type of code as possible into another HTML helper.*@
         <div class="col-xs-11">Explanation of form and what it is supposed to accomplish.</div>
-        <div class="col-xs-1">
-            <button class="btn btn-default glyphicon glyphicon-minus-sign" type="button"
-                    onclick="toggleMultiple(@hiddenFormInstructionsDivId, @shownFormInstructionsDivId)"></button>
-        </div>
+        @Html.HideRowButtonInColumnDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId)
     </div>
-    @Html.HideRowDiv("collapsedCompanyAndContactInfo", "contactAndCompanyInfo", "Required Information again.")
+    @Html.HiddenShowRowDiv("collapsedCompanyAndContactInfo", "contactAndCompanyInfo", "Required Information again.")
     Html.RenderPartial("ContactAndCompanyInfoPartial");
     <div id="CategoryListDiv">@{ Html.RenderPartial("CustomSolutionsPartial", model: Model); }</div>
     <br />
     <div class="row">
         <div class="col-xs-12">
             <div style="margin: 0 auto; width: 200px;">
-                @*TODO: Write the submit script to submit the array of selected items, along with the contact information*@
                 <input type="submit" value="Continue" class="btn btn-primary" />
             </div>
         </div>
     </div>
         }
+<script>
+    $(document).ready(function () {
+        var form = $("#CustomSolutionsIndexForm");
+        form.on('submit', function (e) {
+            var newHiddenFields = [];
+            for (var i = 0; i < selectedCategories.length; i++) {
+                var inputIdPrefix = "CategoriesFromOtherPages" + i + "__";
+                var inputName = "CategoriesFromOtherPages[" + i + "].";
+                var selectedCategory = selectedCategories[i];
+                var hiddenFieldForId = '<input type="hidden" name="' +
+                    inputName + 'Id" id="' + inputIdPrefix + '' + 'Id" value="' +
+                    selectedCategory.Id + '" />';
+                newHiddenFields.push(hiddenFieldForId);
+                var hiddenFieldForCategory = '<input type="hidden" name="' + inputName + 'Importance" id="' + inputIdPrefix + '' + 'Importance" value="' + selectedCategory.Importance + '" />';
+                newHiddenFields.push(hiddenFieldForCategory);
+            }
+            form.append(newHiddenFields.join(""));
+            return true;
+        }
+        );
+    });
+</script>

@@ -250,7 +250,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\categoryFilterPartial.js" />
-    <Content Include="Scripts\customSolutions.js" />
     <Content Include="Scripts\customSolutionsPartial.js" />
     <Content Include="Scripts\indexDivScripts.js" />
     <Content Include="Content\sass\_mobile-default.scss" />
