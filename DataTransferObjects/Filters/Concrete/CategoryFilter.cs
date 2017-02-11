@@ -22,6 +22,12 @@ namespace DataTransferObjects.Filters.Concrete
         {
         }
 
+        public CategoryFilter(string title, string description) : this()
+        {
+            DescriptionFilter = description;
+            TitleFilter = title;
+        }
+
         public override string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery(true) : "");

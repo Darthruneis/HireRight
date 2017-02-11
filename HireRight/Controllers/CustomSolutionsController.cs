@@ -29,13 +29,10 @@ namespace HireRight.Controllers
         [ValidateInput(false)]
         public async Task<PartialViewResult> FilterCategories(int page, int size, string description, string title)
         {
-            CategoryFilter filter = new CategoryFilter(page, size);
-            filter.TitleFilter = title;
-            filter.DescriptionFilter = description;
+            CategoryFilter filter = new CategoryFilter(title, description);
             List<CategoryDTO> categories = await _categoriesSDK.GetCategories(filter);
 
-            CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(categories);
-            newModel.CategoryFilter = filter;
+            CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(categories, filter);
 
             return PartialView("CustomSolutionsPartial", newModel);
         }
@@ -47,26 +44,16 @@ namespace HireRight.Controllers
                 return model == null ? await Index()
                                      : View(new CustomSolutionsViewModel());
 
-            foreach (UndisplayedCategory category in model.CategoriesFromOtherPages)
-            {
-                CategoryImportance importance = GetImportanceLevelFromDisplayName(category.Importance);
-                JobAnalysisCategoryViewModel categoryInModel = model.Categories.FirstOrDefault(x => x.Id == category.Id);
-                if (categoryInModel == null)
-                {
-                    categoryInModel = new JobAnalysisCategoryViewModel();
-                    categoryInModel.Id = category.Id;
-                    categoryInModel.Importance = importance;
-                    model.Categories.Add(categoryInModel);
-                }
-                else
-                {
-                    categoryInModel.Importance = importance;
-                }
-            }
+            //go through the categories in the list created by javascript, except for items which are already in the Categories list, as the model binder has
+            //already ensured they have the correct values.
+            foreach (UndisplayedCategory category in model.CategoriesFromOtherPages.Where(x => !model.Categories.Select(y => y.Id).ToList().Contains(x.Id)))
+                model.Categories.Add(new JobAnalysisCategoryViewModel(category.Id, GetImportanceLevelFromDisplayName(category.Importance)));
 
-            List<JobAnalysisCategoryViewModel> listToReturn = EnforceConstraints(model.Categories.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList());
-
-            model.Categories = listToReturn.OrderBy(x => x.Importance).ThenBy(x => x.Title).ToList();
+            model.Categories = EnforceConstraints(model.Categories
+                .Where(x => x.Importance != CategoryImportance.Irrelevant))
+                .OrderBy(x => x.Importance)
+                .ThenBy(x => x.Title)
+                .ToList();
 
             return !ModelState.IsValid
                         ? View(model)
@@ -78,9 +65,10 @@ namespace HireRight.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(new CategoryFilter(1, 10));
+            CategoryFilter categoryFilter = new CategoryFilter(1, 10);
+            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(categoryFilter);
 
-            CustomSolutionsViewModel model = CreateViewModelFromCategoryList(categories);
+            CustomSolutionsViewModel model = CreateViewModelFromCategoryList(categories, categoryFilter);
 
             return View(model);
         }
@@ -97,50 +85,43 @@ namespace HireRight.Controllers
                 return View("SelectTopTwelve", model);
             }
 
-            SubmitCardsDTO dto = new SubmitCardsDTO();
-            dto.Categories = model.Categories.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, IsInTopTwelve = x.IsInTopTwelve, Id = x.Id }).ToList();
-            dto.CompanyName = model.CompanyName;
-            dto.Positions = model.Positions;
-            dto.Contact = model.Contact;
-            dto.Notes = model.Notes;
-
-            await _ordersSDK.SubmitCards(dto);
+            await _ordersSDK.SubmitCards(model.CreateSubmitCardsDTO());
 
             return RedirectToAction("Index", "Home");
         }
 
-        private CustomSolutionsViewModel CreateViewModelFromCategoryList(List<CategoryDTO> categories)
+        private CustomSolutionsViewModel CreateViewModelFromCategoryList(List<CategoryDTO> categories, CategoryFilter filter)
         {
-            List<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel() { Description = x.Description, Title = x.Title, Id = x.Id }).ToList();
+            IEnumerable<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel(x.Description, x.Title, x.Id));
 
-            CustomSolutionsViewModel model = new CustomSolutionsViewModel();
-            model.Categories = categoryViewModels.OrderBy(x => x.Title).ToList();
+            CustomSolutionsViewModel model = new CustomSolutionsViewModel(categoryViewModels.OrderBy(x => x.Title));
+            model.CategoryFilter = filter;
 
             return model;
         }
 
-        private List<JobAnalysisCategoryViewModel> EnforceConstraints(IList<JobAnalysisCategoryViewModel> model)
+        private List<JobAnalysisCategoryViewModel> EnforceConstraints(IEnumerable<JobAnalysisCategoryViewModel> model)
         {
-            List<JobAnalysisCategoryViewModel> lowImportanceModels = model.Where(x => x.Importance == CategoryImportance.LowImportance).ToList();
-            List<JobAnalysisCategoryViewModel> highImportanceModels = model.Where(x => x.Importance == CategoryImportance.HighImportance).ToList();
+            IEnumerable<JobAnalysisCategoryViewModel> lowImportanceModels = model.Where(x => x.Importance == CategoryImportance.LowImportance);
+            IEnumerable<JobAnalysisCategoryViewModel> highImportanceModels = model.Where(x => x.Importance == CategoryImportance.HighImportance);
 
             List<JobAnalysisCategoryViewModel> listToReturn = new List<JobAnalysisCategoryViewModel>();
 
-            int total = lowImportanceModels.Count + highImportanceModels.Count;
+            int total = lowImportanceModels.Count() + highImportanceModels.Count();
             const int minimum = 3;
             const int maximum = 20;
 
             if (total < minimum)
             {
-                ModelState.AddModelError("", $"Please select at least {minimum - total} additional Important categories.");
+                ModelState.AddModelError("", $"Please select at least {minimum} Important categories. You have only selected {total} so far.");
                 return model.ToList();
             }
 
-            if (lowImportanceModels.Count > maximum)
-                ModelState.AddModelError("", $"Please narrow down your selections to fewer than {maximum} Nice To Have categories.  You have selected {lowImportanceModels.Count - maximum} too many.");
+            if (lowImportanceModels.Count() > maximum)
+                ModelState.AddModelError("", $"Please narrow down your selections to fewer than {maximum} Nice To Have categories.  You have selected {lowImportanceModels.Count() - maximum} too many.");
 
-            if (highImportanceModels.Count > maximum)
-                ModelState.AddModelError("", $"Please narrow down your selections to fewer than {maximum} Nice To Have categories.  You have selected {highImportanceModels.Count - maximum} too many.");
+            if (highImportanceModels.Count() > maximum)
+                ModelState.AddModelError("", $"Please narrow down your selections to fewer than {maximum} Nice To Have categories.  You have selected {highImportanceModels.Count() - maximum} too many.");
 
             listToReturn.AddRange(lowImportanceModels);
             listToReturn.AddRange(highImportanceModels);

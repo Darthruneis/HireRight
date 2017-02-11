@@ -40,6 +40,23 @@ namespace HireRight.Models
             CategoryFilter = new CategoryFilter(1, 10);
             CategoriesFromOtherPages = new List<UndisplayedCategory>();
         }
+
+        public CustomSolutionsViewModel(IEnumerable<JobAnalysisCategoryViewModel> categories) : this()
+        {
+            Categories = categories.ToList();
+        }
+
+        public SubmitCardsDTO CreateSubmitCardsDTO()
+        {
+            SubmitCardsDTO dto = new SubmitCardsDTO();
+            dto.Categories = Categories.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, IsInTopTwelve = x.IsInTopTwelve, Id = x.Id }).ToList();
+            dto.CompanyName = CompanyName;
+            dto.Positions = Positions;
+            dto.Contact = Contact;
+            dto.Notes = Notes;
+
+            return dto;
+        }
     }
 
     public class UndisplayedCategory

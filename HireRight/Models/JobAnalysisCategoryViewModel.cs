@@ -1,7 +1,5 @@
 ﻿using System;
 using DataTransferObjects;
-using DataTransferObjects.Data_Transfer_Objects;
-using System.ComponentModel.DataAnnotations;
 
 namespace HireRight.Models
 {
@@ -16,6 +14,19 @@ namespace HireRight.Models
         public JobAnalysisCategoryViewModel()
         {
             Importance = CategoryImportance.Irrelevant;
+        }
+
+        public JobAnalysisCategoryViewModel(Guid id, CategoryImportance importance)
+        {
+            Id = id;
+            Importance = importance;
+        }
+
+        public JobAnalysisCategoryViewModel(string description, string title, Guid id) : this()
+        {
+            Description = description;
+            Title = title;
+            Id = id;
         }
     }
 }
