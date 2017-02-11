@@ -44,7 +44,8 @@ namespace HireRight.Controllers
         public async Task<ActionResult> Index(CustomSolutionsViewModel model)
         {
             if (model == null || !ModelState.IsValid)
-                return View(model);
+                return model == null ? await Index()
+                                     : View(new CustomSolutionsViewModel());
 
             foreach (UndisplayedCategory category in model.CategoriesFromOtherPages)
             {

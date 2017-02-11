@@ -1,7 +1,9 @@
 ﻿//This ready function is called every time the partial view is sent to the browser
 //which is necessary in order to wire up the newly-rendered dropdowns
-$(document).ready(function () {
-    $(".categoryDropDownDiv").change(function (e) {
+$(document).ready(wireUpDropdownDivsOnPartialViewLoad);
+
+function wireUpDropdownDivsOnPartialViewLoad() {
+    $(".categoryDropDownDiv").change(function () {
         var element = $(this);
         var value = element.find(":selected").text();
         var id = element.data("categoryid");
@@ -11,8 +13,11 @@ $(document).ready(function () {
             unselectCategory(id);
         }
     });
-});
+}
 
+// ReSharper disable UseOfImplicitGlobalInFunctionScope
+//selectedCategories is an array that is defined in the Index view, because it must be
+//maintained across the category list partial view being replaced.
 function addOrUpdateSelectedCategories(id, importance) {
     var categoryInCollection;
     for (var i = 0; i < selectedCategories.length; i++) {
@@ -41,3 +46,4 @@ function unselectCategory(id) {
 
     selectedCategories.splice(categoryIndex, 1);
 }
+// ReSharper restore UseOfImplicitGlobalInFunctionScope

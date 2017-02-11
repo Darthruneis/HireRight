@@ -1,6 +1,6 @@
 ﻿@model DataTransferObjects.Filters.Concrete.CategoryFilter
 <script src="~/Scripts/showHideDiv.js"></script>
-<script src="~/Scripts/categoryFilterPartial.js"></script>
+<script src="~/Scripts/CustomSolutions/categoryFilterPartial.js"></script>
 
 @{
     string hiddenFilterDivId = "hiddenFilterDiv";
@@ -49,19 +49,19 @@
 </div>
 
 <script>
-    $(document)
-        .ready(function () {
-            $("#page1Button").click(function () {
-                filterCategories(1, 10);
-            });
-            $("#FilterButton").click(function () {
-                filterCategories(1, 10);
-            });
-            $("#prevPageButton").click(function () {
-                filterCategories(@Model.PageNumber -1, 10);
-            });
-            $("#nextPageButton").click(function () {
-                filterCategories(@Model.PageNumber +1, 10);
-            });
+    //This script cannot be extracted into a .js file because of the reference to the Model
+    $(document).ready(function () {
+        $("#page1Button").click(function () {
+            filterCategories(1, 10);
         });
+        $("#FilterButton").click(function () {
+            filterCategories(1, 10);
+        });
+        $("#prevPageButton").click(function () {
+            filterCategories(@Model.PageNumber -1, 10);
+        });
+        $("#nextPageButton").click(function () {
+            filterCategories(@Model.PageNumber +1, 10);
+        });
+    });
 </script>
