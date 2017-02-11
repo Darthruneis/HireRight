@@ -1,6 +1,4 @@
-﻿using DataTransferObjects.Filters;
-using DataTransferObjects.Filters.Concrete;
-using HireRight.EntityFramework.CodeFirst.Models;
+﻿using DataTransferObjects.Filters.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

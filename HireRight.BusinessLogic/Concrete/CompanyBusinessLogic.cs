@@ -1,15 +1,12 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Extensions;
-using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete

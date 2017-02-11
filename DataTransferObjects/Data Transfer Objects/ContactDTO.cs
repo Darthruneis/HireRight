@@ -1,8 +1,5 @@
-﻿using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Runtime.Serialization;
 
 namespace DataTransferObjects.Data_Transfer_Objects

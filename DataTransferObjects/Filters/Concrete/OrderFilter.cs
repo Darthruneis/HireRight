@@ -1,5 +1,4 @@
 ﻿using DataTransferObjects.Filters.Abstract;
-using HireRight.EntityFramework.CodeFirst.Models;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;

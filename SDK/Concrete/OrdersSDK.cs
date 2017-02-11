@@ -1,15 +1,11 @@
 ﻿using DataTransferObjects;
 using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Concrete;
 using SDK.Abstract;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Runtime.Remoting;
 using System.Threading.Tasks;
 
 namespace SDK.Concrete

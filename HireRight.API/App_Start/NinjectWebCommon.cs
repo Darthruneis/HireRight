@@ -2,7 +2,6 @@ using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Concrete;
 using HireRight.Repository.Abstract;
 using HireRight.Repository.Concrete;
-using Ninject.Web.WebApi;
 using Ninject.Web.WebApi.OwinHost;
 using System.Web.Http;
 

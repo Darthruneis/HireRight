@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace HireRight.Controllers
 {
-    public class ContactController : ControllerBase<ContactDTO>
+    public class ContactController : Controller
     {
         private readonly IContactsSDK _contactsSDK;
 

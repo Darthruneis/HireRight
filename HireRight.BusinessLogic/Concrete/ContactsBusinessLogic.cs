@@ -1,7 +1,5 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters;
 using HireRight.BusinessLogic.Abstract;
-using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;

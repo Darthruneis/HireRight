@@ -1,6 +1,4 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters.Abstract;
-using HireRight.EntityFramework.CodeFirst.Models;
+﻿using DataTransferObjects.Filters.Abstract;
 using System;
 using System.Runtime.Serialization;
 using System.Text;

@@ -1,6 +1,5 @@
 ﻿using DataTransferObjects;
 using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
 using System;

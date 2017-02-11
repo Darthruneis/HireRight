@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Concrete;
 
 namespace SDK.Abstract

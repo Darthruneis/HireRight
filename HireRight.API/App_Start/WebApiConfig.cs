@@ -1,7 +1,5 @@
 ﻿using HireRight.API.Handlers;
-using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
-using System.Net.Http.Formatting;
 using System.Web.Http;
 
 namespace HireRight.API

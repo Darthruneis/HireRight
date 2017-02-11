@@ -1,9 +1,6 @@
-using HireRight;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
-using SDK.Abstract;
-using SDK.Concrete;
 using System;
 using System.Web;
 using System.Web.Mvc;

@@ -1,5 +1,4 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
-using HireRight.Models;
+﻿using HireRight.Models;
 using SDK.Abstract;
 using System;
 using System.Text;
@@ -8,7 +7,7 @@ using System.Web.Mvc;
 
 namespace HireRight.Controllers
 {
-    public class ClientController : ControllerBase<ClientDTO>
+    public class ClientController : Controller
     {
         private readonly IContactsSDK _contactsSDK;
 

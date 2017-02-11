@@ -1,5 +1,4 @@
-﻿using DataTransferObjects.Filters;
-using HireRight.EntityFramework.CodeFirst.Abstract;
+﻿using HireRight.EntityFramework.CodeFirst.Abstract;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,5 @@
 ﻿using DataTransferObjects;
 using DataTransferObjects.Data_Transfer_Objects;
-using HireRight.API.Models;
 using System;
 using System.Net;
 using System.Net.Http;

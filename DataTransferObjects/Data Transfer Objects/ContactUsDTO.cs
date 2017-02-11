@@ -1,5 +1,4 @@
-﻿using HireRight.EntityFramework.CodeFirst.Models;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace DataTransferObjects.Data_Transfer_Objects

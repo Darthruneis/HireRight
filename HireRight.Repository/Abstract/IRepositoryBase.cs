@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters;
 using DataTransferObjects.Filters.Abstract;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
 

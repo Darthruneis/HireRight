@@ -1,7 +1,5 @@
-﻿using DataTransferObjects.Filters;
-using DataTransferObjects.Filters.Concrete;
+﻿using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
-using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;

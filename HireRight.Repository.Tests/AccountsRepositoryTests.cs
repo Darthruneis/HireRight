@@ -1,5 +1,4 @@
 ﻿using HireRight.EntityFramework.CodeFirst.Database_Context;
-using HireRight.EntityFramework.CodeFirst.Models;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Data.Entity;

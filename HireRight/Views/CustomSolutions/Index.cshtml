@@ -1,5 +1,4 @@
-﻿@using DataTransferObjects.Filters.Concrete
-@model CustomSolutionsViewModel
+﻿@model CustomSolutionsViewModel
 @{
     ViewBag.Title = "Custom Solutions";
 }
@@ -10,7 +9,7 @@
         <h2>Job Analysis</h2>
     </div>
 </div>
-@using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm"}))
+@using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm" }))
 {
     @Html.ValidationSummary(true)
     string hiddenFormInstructionsDivId = "hiddenFormInstructionsDiv";

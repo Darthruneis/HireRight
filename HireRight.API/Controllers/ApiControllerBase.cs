@@ -1,11 +1,7 @@
 ﻿using DataTransferObjects;
 using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters;
-using HireRight.API.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;

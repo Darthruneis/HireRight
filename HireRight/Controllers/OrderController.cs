@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace HireRight.Controllers
 {
-    public class OrderController : ControllerBase<OrderDetailsDTO>
+    public class OrderController : Controller
     {
         private readonly ICompaniesSDK _companiesSDK;
         private readonly IContactsSDK _contactsSDK;
