@@ -1,9 +1,7 @@
-﻿@model HireRight.Models.ContactUsViewModel
-
+﻿@model ContactUsViewModel
 @{
     ViewBag.Title = "Get In Touch";
 }
-
 @using (Html.BeginForm("SubmitContact", "Contact", FormMethod.Post))
 {
     Html.RenderPartial("ContactUsInfoPartial", Model);

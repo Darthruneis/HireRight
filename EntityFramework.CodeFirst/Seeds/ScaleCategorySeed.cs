@@ -35,7 +35,7 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
 
                     categories.Add(new ScaleCategory(title, description));
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
 
