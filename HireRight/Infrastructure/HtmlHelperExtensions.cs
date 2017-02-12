@@ -51,6 +51,16 @@ namespace HireRight.Infrastructure
             return new MvcHtmlString(divtoReturn.ToString());
         }
 
+        public static MvcHtmlString ProfileSampleDownloadListItem(this HtmlHelper helper, string text, string actionName)
+        {
+            var viewLink = helper.ActionLink("View", actionName, new { inline = true }, new { target = "_blank", @class = "btn btn-default glyphicon glyphicon-folder-open" });
+            var downloadLink = helper.ActionLink("Download", actionName, new { inline = false }, new { @class = "btn btn-default glyphicon glyphicon-download" });
+            string innerHtml = $"{viewLink}"
+                             + $" {downloadLink}"
+                             + $" {text}";
+            return new MvcHtmlString("<div class=\"col-xs-12\" style=\"padding: 2px;\" >" + innerHtml + "</div>");
+        }
+
         public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
         {
             MvcHtmlString labelString = helper.LabelFor(expression);

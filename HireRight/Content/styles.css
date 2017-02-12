@@ -1,7 +1,7 @@
 ﻿html, body, .centered {
   margin: 0 auto; }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   color: #000000;
   font-weight: bold; }
 
@@ -48,7 +48,7 @@ footer {
 
 body {
   padding: 0 2% 0 2%;
-  font-size: 16pt;
+  font-size: 14pt;
   color: #000000; }
 
 span .image-text-overlay {
@@ -63,7 +63,7 @@ span .image-text-overlay {
 
 .btn {
   border: 3px solid black;
-  font-size: 16pt;
+  font-size: 14pt;
   color: #000000; }
 
 .navbar {
@@ -95,7 +95,7 @@ span .image-text-overlay {
   color: #000000;
   display: block;
   height: 2em;
-  font-size: 16pt;
+  font-size: 14pt;
   transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
   overflow: hidden; }
 
@@ -176,6 +176,12 @@ h3 {
 h4 {
   font-size: 20pt; }
 
+h5 {
+  font-size: 18pt; }
+
+h6 {
+  font-size: 16pt; }
+
 .list-item-no-bullet li:before {
   display: none; }
 
@@ -206,10 +212,14 @@ h4 {
   border-Left: 3px solid #335060;
   border-Right: 3px solid #335060; }
 
+.scrollHorizontally {
+  max-width: 95vw;
+  overflow-x: scroll; }
+
 html, body, .centered {
   margin: 0 auto; }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   color: #000000;
   font-weight: bold; }
 
@@ -231,7 +241,7 @@ body {
 html, body, .centered {
   margin: 0 auto; }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   color: #000000;
   font-weight: bold; }
 

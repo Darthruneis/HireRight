@@ -199,6 +199,7 @@
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CustomSolutionsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
@@ -227,6 +228,18 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\indexPicture.jpg" />
     <Content Include="Content\PortraitPlaceholder.png" />
+    <Content Include="Content\ProfileSamples\Example Category Breakdown - Large.png" />
+    <Content Include="Content\ProfileSamples\Example Category Breakdown - Small - Categories Breakdown.png" />
+    <Content Include="Content\ProfileSamples\Example Detailed Category Breakdown - Large.png" />
+    <Content Include="Content\ProfileSamples\Example Interview Guide - Small - Response Scale.png" />
+    <Content Include="Content\ProfileSamples\Example Interview Guide.png" />
+    <Content Include="Content\ProfileSamples\Example Management Strategies - Small - Category Breakdown Chart.png" />
+    <Content Include="Content\ProfileSamples\Example Management Strategies.png" />
+    <Content Include="Content\ProfileSamples\Example Detailed Category Breakdown - Small - Percentile Graph.png" />
+    <Content Include="Content\ProfileSamples\Example Detailed Category Breakdown - Small - Percentile.png" />
+    <Content Include="Content\ProfileSamples\Example Detailed Category breakdown - Small - Response Pattern Graph.png" />
+    <Content Include="Content\ProfileSamples\Example Overall Score Summary - Score Profile Graph.png" />
+    <Content Include="Content\ProfileSamples\Example Overall Score Summary with Graph - Large.png" />
     <Content Include="Content\styles.css">
       <DependentUpon>styles.scss</DependentUpon>
     </Content>
@@ -261,6 +274,22 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="Content\ProfileSamples\EliteCareProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteCharacterProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteHealthcareProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteIndustrialProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteIntellectProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteManagerProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\ElitePersonalityProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteSalesProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteSkillsProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EliteTransportationProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\EQProfileSample.pdf" />
+    <Content Include="Content\ProfileSamples\MechanicalAptitudeTestSample.pdf" />
+    <Content Include="Content\ProfileSamples\SJTSalesSample.pdf" />
+    <Content Include="Content\ProfileSamples\SJTSupervisorSample.pdf" />
+    <Content Include="Content\ProfileSamples\SJTTeamsSample.pdf" />
+    <Content Include="Content\ProfileSamples\WATSample.pdf" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -330,10 +359,16 @@
     <Content Include="Views\CustomSolutions\ContactAndCompanyInfoPartial.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
+    <Content Include="Views\Reports\Samples.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\ExampleOverallScoreSectionPartial.cshtml" />
+    <Content Include="Views\Reports\ExampleCategoriesBreakdownSectionPartial.cshtml" />
+    <Content Include="Views\Reports\ExampleCategoryDetailedBreakdownSectionPartial.cshtml" />
+    <Content Include="Views\Reports\ExampleManagementStrategiesSectionPartial.cshtml" />
+    <Content Include="Views\Reports\ExampleInterviewGuideSectionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

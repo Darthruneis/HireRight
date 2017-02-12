@@ -214,6 +214,16 @@ h4 {
     font-size: 20pt;
 }
 
+h5 {
+    @extend %headerText;
+    font-size: 18pt;
+}
+
+h6 {
+    @extend %headerText;
+    font-size: 16pt;
+}
+
 .list-item-no-bullet {
     li:before {
         display: none;
@@ -262,4 +272,9 @@ h4 {
 .borderedVertical {
     border-Left: 3px solid $darkNavyBlue;
     border-Right: 3px solid $darkNavyBlue;
+}
+
+.scrollHorizontally {
+    max-width: 95vw;
+    overflow-x: scroll;    
 }
