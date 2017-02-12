@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
@@ -53,12 +54,15 @@ namespace HireRight.Infrastructure
 
         public static MvcHtmlString ProfileSampleDownloadListItem(this HtmlHelper helper, string text, string actionName)
         {
-            var viewLink = helper.ActionLink("View", actionName, new { inline = true }, new { target = "_blank", @class = "btn btn-default glyphicon glyphicon-folder-open" });
-            var downloadLink = helper.ActionLink("Download", actionName, new { inline = false }, new { @class = "btn btn-default glyphicon glyphicon-download" });
-            string innerHtml = $"{viewLink}"
-                             + $" {downloadLink}"
+            UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            var smallScreenViewLink = new MvcHtmlString($"<a href=\"{url.Action(actionName, "Reports", new { inline = true })}\" target=\"_blank\" title=\"View in a new tab\">" +
+                        $"<span class=\"btn btn-default glyphicon glyphicon-folder-open\" style=\"display: inline;\"></span>" +
+                        $"</a>");
+            var smallScreenDownloadLink = new MvcHtmlString($"<a href=\"{url.Action(actionName, "Reports", new { inline = false })}\" title=\"Download\"><span class=\"btn btn-default glyphicon glyphicon-download\"></span></a>");
+            string innerHtml = $"{smallScreenViewLink}"
+                             + $" {smallScreenDownloadLink}"
                              + $" {text}";
-            return new MvcHtmlString("<div class=\"col-xs-12\" style=\"padding: 2px;\" >" + innerHtml + "</div>");
+            return new MvcHtmlString("<div class=\"col-xs-12\" style=\"padding: 2px; clear: both;\" >" + innerHtml + "</div>");
         }
 
         public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
