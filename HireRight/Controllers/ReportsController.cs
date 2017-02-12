@@ -8,7 +8,57 @@ using System.Web.Mvc;
 
 namespace HireRight.Controllers
 {
-    public class ReportsController : Controller
+    public partial class ReportsController : Controller
+    {
+        [HttpGet]
+        public PartialViewResult Categories()
+        {
+            return PartialView("ExampleCategoriesBreakdownSectionPartial");
+        }
+
+        [HttpGet]
+        public PartialViewResult CategoryBreakdown()
+        {
+            return PartialView("ExampleCategoryDetailedBreakdownSectionPartial");
+        }
+
+        public ViewResult Index() => View();
+
+        [HttpGet]
+        public PartialViewResult InterviewGuide()
+        {
+            return PartialView("ExampleInterviewGuideSectionPartial");
+        }
+
+        [HttpGet]
+        public PartialViewResult Introduction()
+        {
+            return PartialView("SampleReportsIntroSectionPartial");
+        }
+
+        [HttpGet]
+        public PartialViewResult ManagementStrategies()
+        {
+            return PartialView("ExampleManagementStrategiesSectionPartial");
+        }
+
+        [HttpGet]
+        public PartialViewResult OverallScore()
+        {
+            return PartialView("ExampleOverallScoreSectionPartial");
+        }
+
+        [HttpGet]
+        public ViewResult Samples()
+        {
+            return View();
+        }
+    }
+
+    /// <summary>
+    /// This part of the controller handles all of the downloads
+    /// </summary>
+    public partial class ReportsController
     {
         private readonly string _filePathBase = System.Web.HttpContext.Current.Server.MapPath("~") + "/Content/ProfileSamples/";
 
@@ -78,18 +128,10 @@ namespace HireRight.Controllers
             return DownloadFromFileName("EQProfileSample.pdf", inline);
         }
 
-        public ViewResult Index() => View();
-
         [HttpGet]
         public FileContentResult MechanicalAptitudeTestProfileSample(bool inline = false)
         {
             return DownloadFromFileName("MechanicalAptitudeTestProfileSample.pdf", inline);
-        }
-
-        [HttpGet]
-        public ViewResult Samples()
-        {
-            return View();
         }
 
         [HttpGet]

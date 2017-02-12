@@ -3,9 +3,51 @@
 }
 <h2>Reports</h2>
 <div class="row">
-    @{ Html.RenderPartial("ExampleCategoriesBreakdownSectionPartial"); }
-    @{ Html.RenderPartial("ExampleOverallScoreSectionPartial"); }
-    @{ Html.RenderPartial("ExampleCategoryDetailedBreakdownSectionPartial"); }
-    @{ Html.RenderPartial("ExampleManagementStrategiesSectionPartial"); }
-    @{ Html.RenderPartial("ExampleInterviewGuideSectionPartial"); }
+    <div class="col-xs-12 col-lg-2 btn btn-default" id="showIntroListButton">
+        Intro
+    </div>
+    <div class="col-xs-12 col-lg-2 btn btn-default" id="showCategoriesListButton">
+        Categories
+    </div>
+    <div class="col-xs-12 col-lg-2 btn btn-default" id="showOverallListButton">
+        Overall
+    </div>
+    <div class="col-xs-12 col-lg-2 btn btn-default" id="showCategoryDetailsListButton">
+        Category Details
+    </div>
+    <div class="col-xs-12 col-lg-2 btn btn-default" id="showManagementStrategiesListButton">
+        Management Strategies
+    </div>
+    <div class="col-xs-12 col-lg-2 btn btn-default" id="showInterviewGuideListButton">
+        Interview Guide
+    </div>
 </div>
+<br />
+<div class="row" id="reportingExplanationDiv">
+</div>
+<script src="~/Scripts/replacingDivContents.js"></script>
+<script>
+    $(document).ready(function () {
+        var $reportingExplanationDiv = $("#reportingExplanationDiv");
+        var controllerName = "/Reports/";
+        replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
+        $("#showIntroListButton").click(function () {
+            replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
+        });
+        $("#showCategoriesListButton").click(function () {
+            replaceDivContents($reportingExplanationDiv, controllerName + "Categories");
+        });
+        $("#showOverallListButton").click(function () {
+            replaceDivContents($reportingExplanationDiv, controllerName + "OverallScore");
+        });
+        $("#showCategoryDetailsListButton").click(function () {
+            replaceDivContents($reportingExplanationDiv, controllerName + "CategoryBreakdown");
+        });
+        $("#showManagementStrategiesListButton").click(function () {
+            replaceDivContents($reportingExplanationDiv, controllerName + "ManagementStrategies");
+        });
+        $("#showInterviewGuideListButton").click(function () {
+            replaceDivContents($reportingExplanationDiv, controllerName + "InterviewGuide");
+        });
+    });
+</script>

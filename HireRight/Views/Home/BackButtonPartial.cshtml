@@ -1,4 +1,14 @@
-﻿<br/>
+﻿<br />
 <div style="margin: 0 auto; width: 200px;">
-    <input type="button" value="Back" onclick="replaceInfoDivHtmlWith('#introDiv');" class="btn btn-primary" />
+    <input type="button" value="Back" id="backButtonOnIndexPartialView" class="btn btn-primary" />
 </div>
+<script src="~/Scripts/replacingDivContents.js"></script>
+<script>
+    $(document).ready(function () {
+        var $infoDiv = $("#infoDiv");
+        var controllerName = "/Home/";
+        $("#backButtonOnIndexPartialView").click(function () {
+            replaceDivContents($infoDiv, controllerName + "Introduction");
+        });
+    });
+</script>
