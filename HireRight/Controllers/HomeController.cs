@@ -23,7 +23,7 @@ namespace HireRight.Controllers
         [HttpGet]
         public ViewResult Test()
         {
-            SectionWithTogglesAndTitleViewModel model = new SectionWithTogglesAndTitleViewModel(" show the order form again.", "hiddenContent", "hideButton", "showButton", "shownContent", "~/Views/Home/Index.cshtml");
+            SectionWithTogglesAndTitleViewModel model = new SectionWithTogglesAndTitleViewModel(" show the order form again.", "hiddenContent", "hideButton", "showButton", "shownContent", "~/Views/Home/Index.cshtml", "Title");
             return View("SectionWithPanelHeadAndToggles", model);
         }
 

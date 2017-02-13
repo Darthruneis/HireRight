@@ -283,6 +283,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\showHideDiv.js" />
+    <Content Include="Scripts\toggleDivsAndButtons.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -328,6 +329,7 @@
     <Content Include="Views\Home\BackButtonPartial.cshtml" />
     <Content Include="Views\CustomSolutions\CategoryFilterPartial.cshtml" />
     <Content Include="Views\CustomSolutions\ContactAndCompanyInfoPartial.cshtml" />
+    <Content Include="Views\CustomSolutions\FormInstructionsContentPartial.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
     <Content Include="Views\Reports\Samples.cshtml" />

@@ -1,46 +1,33 @@
 ﻿@model CustomSolutionsViewModel
-@{
-    string hiddenId = "collapsedCompanyAndContactInfo";
-    string shownId = "contactAndCompanyInfo";
-}
-<div id="@shownId" class="col-xs-12 row">
-    <div class="col-xs-11">
-        <h2>Required Information</h2>
+<div class="col-xs-12 row">
+    <div class="col-xs-12 col-lg-6">
+        @Html.ValidatedEditorWithLabelFor(x => x.CompanyName)
     </div>
-    <div class="col-xs-1">
-        <button type="button" class="btn btn-default glyphicon glyphicon-minus-sign" onclick="toggleMultiple(@hiddenId, @shownId)"></button>
+    <div class="col-xs-12 col-lg-6">
+        @Html.ValidatedEditorWithLabelFor(x => x.PositionsToFill)
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-lg-6">
-            @Html.ValidatedEditorWithLabelFor(x => x.CompanyName)
-        </div>
-        <div class="col-xs-12 col-lg-6">
-            @Html.ValidatedEditorWithLabelFor(x => x.PositionsToFill)
-        </div>
+</div>
+<div class="col-xs-12 row">
+    <div class="col-xs-6">
+        @Html.ValidatedEditorWithLabelFor(x => x.Contact.FirstName)
     </div>
-    <div class="row">
-        <div class="col-xs-6">
-            @Html.ValidatedEditorWithLabelFor(x => x.Contact.FirstName)
-        </div>
-        <div class="col-xs-6">
-            @Html.ValidatedEditorWithLabelFor(x => x.Contact.LastName)
-        </div>
-        <div class="col-xs-6 col-lg-4">
-            @Html.ValidatedEditorWithLabelFor(x => x.Contact.OfficeNumber)
-        </div>
-        <div class="col-xs-6 col-lg-4">
-            @Html.ValidatedEditorWithLabelFor(x => x.Contact.CellNumber)
-        </div>
-        <div class="col-xs-6 col-lg-4">
-            @Html.ValidatedEditorWithLabelFor(x => x.Contact.Email)
-        </div>
+    <div class="col-xs-6">
+        @Html.ValidatedEditorWithLabelFor(x => x.Contact.LastName)
     </div>
-    <div class="row">
-        <div class="col-xs-12">
-            @Html.LabelFor(x => x.Notes)
-            <br />
-            @Html.TextAreaFor(x => x.Notes, new { style = "resize: none;", rows = "5", cols = "150", @class = "form-control" })
-        </div>
+    <div class="col-xs-6 col-lg-4">
+        @Html.ValidatedEditorWithLabelFor(x => x.Contact.OfficeNumber)
     </div>
-    <br />
+    <div class="col-xs-6 col-lg-4">
+        @Html.ValidatedEditorWithLabelFor(x => x.Contact.CellNumber)
+    </div>
+    <div class="col-xs-6 col-lg-4">
+        @Html.ValidatedEditorWithLabelFor(x => x.Contact.Email)
+    </div>
+</div>
+<div class="col-xs-12 row">
+    <div class="col-xs-12">
+        @Html.LabelFor(x => x.Notes)
+        <br />
+        @Html.TextAreaFor(x => x.Notes, new { style = "resize: none;", rows = "5", cols = "150", @class = "form-control" })
+    </div>
 </div>

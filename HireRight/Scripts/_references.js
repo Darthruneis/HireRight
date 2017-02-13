@@ -16,3 +16,4 @@
 /// <reference path="respond.matchmedia.addlistener.min.js" />
 /// <reference path="respond.min.js" />
 /// <reference path="showhidediv.js" />
+/// <reference path="toggledivsandbuttons.js" />

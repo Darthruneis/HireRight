@@ -1,36 +1,30 @@
 ﻿@model SectionWithTogglesAndTitleViewModel
-
-<div class="row">
-    <div class="col-xs-12 row borderedRow">
-        <div class="col-xs-12 panel panel-head">
-            <div class="col-xs-11">
-                <h2>Title</h2>
-            </div>
-            <div class="col-xs-1">
-                <button class="btn btn-default glyphicon glyphicon-minus-sign" id="@Model.HideButtonId" style="margin-top: 15px;"></button>
-                <button class="btn btn-default glyphicon glyphicon-plus-sign" id="@Model.ShowButtonId" style="display: none; margin-top: 15px;"></button>
-            </div>
+<script src="~/Scripts/toggleDivsAndButtons.js"></script>
+<div class="col-xs-12 row borderedRow" style="padding-bottom: 10px;">
+    <div class="col-xs-12 panel panel-head">
+        <div class="col-xs-11">
+            <h2>@Model.TitleText</h2>
         </div>
-        <div class="col-xs-12" id="@Model.HiddenContentId" hidden="hidden">
-            Press the <span class="glyphicon glyphicon-plus-sign"></span> to @Model.ActionText
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-default glyphicon glyphicon-minus-sign" id="@Model.HideButtonId" style="margin-top: 15px;"></button>
+            <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" id="@Model.ShowButtonId" style="display: none; margin-top: 15px;"></button>
         </div>
-        <div class="col-xs-12" id="@Model.ShownContentId">
-            @{ Html.RenderPartial(Model.ViewNameWithPath, @Model.ViewModelForContentView); }
-        </div>
+    </div>
+    <div class="col-xs-12" id="@Model.HiddenContentId" hidden="hidden">
+        Press the <span class="glyphicon glyphicon-plus-sign"></span> to @Model.ActionText
+    </div>
+    <div class="col-xs-12" id="@Model.ShownContentId">
+        @{ Html.RenderPartial(Model.ViewNameWithPath, Model.ViewModelForContentView); }
     </div>
 </div>
 <script>
-    var $hideButton = $('#@Model.HideButtonId');
-    var $showButton = $('#@Model.ShowButtonId');
     $(document).ready(function () {
-        $hideButton.click(toggleDivsAndButtons);
-        $showButton.click(toggleDivsAndButtons);
+        //This script will be loaded multiple times in some cases, which means that the selectors cannot be cached with a static name or there will be name collisions galore.
+        $('#@Model.HideButtonId').click(function () {
+            toggleDivsAndButtons($('#@Model.HideButtonId'), $('#@Model.ShowButtonId'), $("#@Model.HiddenContentId"), $("#@Model.ShownContentId"));
+        });
+        $('#@Model.ShowButtonId').click(function () {
+            toggleDivsAndButtons($('#@Model.HideButtonId'), $('#@Model.ShowButtonId'), $("#@Model.HiddenContentId"), $("#@Model.ShownContentId"));
+        });
     });
-
-    function toggleDivsAndButtons() {
-        $hideButton.toggle();
-        $showButton.toggle();
-        $("#@Model.HiddenContentId").toggle();
-        $("#@Model.ShownContentId").toggle();
-    }
 </script>

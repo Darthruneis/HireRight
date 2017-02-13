@@ -2,36 +2,35 @@
 @{
     ViewBag.Title = "Custom Solutions";
 }
-<script src="~/Scripts/showHideDiv.js"></script>
-<script src="~/Scripts/CustomSolutions/index.js"></script>
-@using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm" }))
+@using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm", @class = "row" }))
 {
     @Html.ValidationSummary(true)
-    string hiddenFormInstructionsDivId = "hiddenFormInstructionsDiv";
-    string shownFormInstructionsDivId = "shownFormInstructionsDiv";
-    <div class="row borderedRow">
-        <div class="panel panel-head">
-            <div class="col-xs-11"><h2>Job Analysis</h2></div>
-            @Html.HiddenShowRowDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId, "the instructions again")
-        </div>
-        <div class="row" id="@shownFormInstructionsDivId">
-            <div class="col-xs-11">Explanation of form and what it is supposed to accomplish.</div>
-            @Html.HideRowButtonInColumnDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId)
-        </div>
-    </div>
-    <div class="row borderedRow">
-        @Html.HiddenShowRowDiv("collapsedCompanyAndContactInfo", "contactAndCompanyInfo", "Required Information again.")
-        @{ Html.RenderPartial("ContactAndCompanyInfoPartial"); }
-    </div>
-    <div class="row borderedRow" id="CategoryListDiv">
-        @{ Html.RenderPartial("CustomSolutionsPartial", model: Model); }
-    </div>
+    SectionWithTogglesAndTitleViewModel explanationViewModel = new SectionWithTogglesAndTitleViewModel("show the form instructions again.",
+        "hiddenFormInstructionsDiv", "hideFormInstructionsButton",
+        "showFormInstructionsButton", "shownFormInstructionsDiv",
+        "~/Views/CustomSolutions/FormInstructionsContentPartial.cshtml",
+        "Job Analysis");
+    Html.RenderPartial("SectionWithPanelHeadAndToggles", explanationViewModel);
+
+    SectionWithTogglesAndTitleViewModel companyAndContactInfoViewModel = new SectionWithTogglesAndTitleViewModel("show the Required Information again.",
+        "collapsedCompanyAndContactInfo", "hideCompanyAndContactInfoButton",
+        "showCompanyAndContactInfoButton", "contactAndCompanyInfo",
+        "~/Views/CustomSolutions/ContactAndCompanyInfoPartial.cshtml", "Required Information");
+    companyAndContactInfoViewModel.ViewModelForContentView = Model;
+    Html.RenderPartial("SectionWithPanelHeadAndToggles", companyAndContactInfoViewModel);
+
+    SectionWithTogglesAndTitleViewModel customSolutionsViewModel = new SectionWithTogglesAndTitleViewModel("show the category information again.",
+        "hiddenCategoryListDiv", "hideCategoryInformationButton",
+        "showCategoryInformationButton", "CategoryListDiv",
+        "~/Views/CustomSolutions/CustomSolutionsPartial.cshtml", "Filtering");
+    customSolutionsViewModel.ViewModelForContentView = Model;
+    Html.RenderPartial("SectionWithPanelHeadAndToggles", customSolutionsViewModel);
     <br />
-    <div class="row">
+    <div class="col-xs-12 row" style="padding-top: 10px;">
         <div class="col-xs-12">
             <div style="margin: 0 auto; width: 200px;">
                 <input type="submit" value="Continue" class="btn btn-primary" />
             </div>
         </div>
     </div>
-        }
+}

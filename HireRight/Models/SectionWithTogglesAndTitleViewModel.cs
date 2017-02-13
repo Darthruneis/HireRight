@@ -7,6 +7,7 @@
         public string HideButtonId { get; set; }
         public string ShowButtonId { get; set; }
         public string ShownContentId { get; set; }
+        public string TitleText { get; set; }
         public object ViewModelForContentView { get; set; }
         public string ViewNameWithPath { get; set; }
 
@@ -16,7 +17,7 @@
             ViewModelForContentView = null;
         }
 
-        public SectionWithTogglesAndTitleViewModel(string actionText, string hiddenContentId, string hideButtonId, string showButtonId, string shownContentId, string viewNameWithPath)
+        public SectionWithTogglesAndTitleViewModel(string actionText, string hiddenContentId, string hideButtonId, string showButtonId, string shownContentId, string viewNameWithPath, string titleText)
         {
             ActionText = actionText;
             HiddenContentId = hiddenContentId;
@@ -24,6 +25,7 @@
             ShowButtonId = showButtonId;
             ShownContentId = shownContentId;
             ViewNameWithPath = viewNameWithPath;
+            TitleText = titleText;
         }
     }
 }
