@@ -4,24 +4,28 @@
 }
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/CustomSolutions/index.js"></script>
-<div class="row">
-    <div class="col-xs-12">
-        <h2>Job Analysis</h2>
-    </div>
-</div>
 @using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm" }))
 {
     @Html.ValidationSummary(true)
     string hiddenFormInstructionsDivId = "hiddenFormInstructionsDiv";
     string shownFormInstructionsDivId = "shownFormInstructionsDiv";
-    @Html.HiddenShowRowDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId, "the instructions again")
-    <div class="row borderedRow" id="@shownFormInstructionsDivId">
-        <div class="col-xs-11">Explanation of form and what it is supposed to accomplish.</div>
-        @Html.HideRowButtonInColumnDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId)
+    <div class="row borderedRow">
+        <div class="panel panel-head">
+            <div class="col-xs-11"><h2>Job Analysis</h2></div>
+            @Html.HiddenShowRowDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId, "the instructions again")
+        </div>
+        <div class="row" id="@shownFormInstructionsDivId">
+            <div class="col-xs-11">Explanation of form and what it is supposed to accomplish.</div>
+            @Html.HideRowButtonInColumnDiv(hiddenFormInstructionsDivId, shownFormInstructionsDivId)
+        </div>
     </div>
-    @Html.HiddenShowRowDiv("collapsedCompanyAndContactInfo", "contactAndCompanyInfo", "Required Information again.")
-    Html.RenderPartial("ContactAndCompanyInfoPartial");
-    <div id="CategoryListDiv">@{ Html.RenderPartial("CustomSolutionsPartial", model: Model); }</div>
+    <div class="row borderedRow">
+        @Html.HiddenShowRowDiv("collapsedCompanyAndContactInfo", "contactAndCompanyInfo", "Required Information again.")
+        @{ Html.RenderPartial("ContactAndCompanyInfoPartial"); }
+    </div>
+    <div class="row borderedRow" id="CategoryListDiv">
+        @{ Html.RenderPartial("CustomSolutionsPartial", model: Model); }
+    </div>
     <br />
     <div class="row">
         <div class="col-xs-12">

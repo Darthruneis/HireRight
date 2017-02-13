@@ -28,7 +28,7 @@ namespace HireRight.Infrastructure
 
             //the div that will be returned
             TagBuilder divToReturn = new TagBuilder("div");
-            divToReturn.Attributes.Add("class", "row borderedRow");
+            divToReturn.Attributes.Add("class", "row");
             divToReturn.Attributes.Add("id", hiddenId);
             divToReturn.Attributes.Add("hidden", "hidden");
             divToReturn.InnerHtml = showAgainText.ToString() + showDiv.ToString();

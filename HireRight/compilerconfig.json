@@ -2,5 +2,9 @@
   {
     "outputFile": "Content/styles.css",
     "inputFile": "Content/styles.scss"
+  },
+  {
+    "outputFile": "Content/sass/_mobile-default.css",
+    "inputFile": "Content/sass/_mobile-default.scss"
   }
 ]

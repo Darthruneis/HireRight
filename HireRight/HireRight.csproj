@@ -183,6 +183,7 @@
     <Compile Include="Models\NewClientsViewModel.cs" />
     <Compile Include="Models\OrdersViewModel.cs" />
     <Compile Include="Models\PrimaryContactViewModel.cs" />
+    <Compile Include="Models\SectionWithTogglesAndTitleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +205,12 @@
     <Content Include="Content\ProfileSamples\Example Detailed Category breakdown - Small - Response Pattern Graph.png" />
     <Content Include="Content\ProfileSamples\Example Overall Score Summary - Score Profile Graph.png" />
     <Content Include="Content\ProfileSamples\Example Overall Score Summary with Graph - Large.png" />
+    <Content Include="Content\sass\_mobile-default.css">
+      <DependentUpon>_mobile-default.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_mobile-default.min.css">
+      <DependentUpon>_mobile-default.css</DependentUpon>
+    </Content>
     <Content Include="Content\styles.css">
       <DependentUpon>styles.scss</DependentUpon>
     </Content>
@@ -331,6 +338,7 @@
     <Content Include="Views\Reports\ExampleManagementStrategiesSectionPartial.cshtml" />
     <Content Include="Views\Reports\ExampleInterviewGuideSectionPartial.cshtml" />
     <Content Include="Views\Reports\SampleReportsIntroSectionPartial.cshtml" />
+    <Content Include="Views\Shared\SectionWithPanelHeadAndToggles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

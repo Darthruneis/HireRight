@@ -5,10 +5,10 @@
     .categoryDropDownDiv {
     }
 </style>
-<div class="row borderedRow" style="padding-bottom: 10px;">
+<div class="col-xs-12 row borderedHorizontal" style="padding: 0;">
     @{Html.RenderPartial("CategoryFilterPartial", Model.CategoryFilter);}
 </div>
-<div class="row borderedRow">
+<div class="col-xs-12 row borderedHorizontal">
     <div class="col-xs-12 col-lg-3">
         <h4>Category</h4>
     </div>
@@ -22,10 +22,10 @@
         <strong>Show/<br />Hide</strong>
     </div>
 </div>
-<div class="row borderedRow" style="height: 70vh; overflow-y: scroll; overflow-x: hidden; padding-left: 15px;">
+<div class="col-xs-12 row" style="height: 70vh; overflow-y: scroll; overflow-x: hidden; padding: 0;">
     @for (int i = 0; i < Model.Categories.Count; i++)
     {
-        <div class="row borderedRow">
+        <div class="col-xs-12 row borderedRow">
             @{
                 string hiddenRowId = "hiddenRow_" + i;
                 string shownRowId = "shownRow_" + i;

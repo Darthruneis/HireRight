@@ -3,9 +3,9 @@
     string hiddenId = "collapsedCompanyAndContactInfo";
     string shownId = "contactAndCompanyInfo";
 }
-<div id="@shownId" class="row borderedRow">
+<div id="@shownId" class="col-xs-12 row">
     <div class="col-xs-11">
-        <label>Required Information</label>
+        <h2>Required Information</h2>
     </div>
     <div class="col-xs-1">
         <button type="button" class="btn btn-default glyphicon glyphicon-minus-sign" onclick="toggleMultiple(@hiddenId, @shownId)"></button>

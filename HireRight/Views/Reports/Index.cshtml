@@ -2,27 +2,27 @@
     ViewBag.Title = "Reports";
 }
 <h2>Reports</h2>
-<div class="row">
-    <div class="col-xs-12 col-lg-2 btn btn-default" id="showIntroListButton">
-        Intro
-    </div>
+@{ Html.RenderPartial("SampleReportsIntroSectionPartial"); }
+<div class="row" style="margin: 10px 2%;">
+    @*<div class="col-xs-12 col-lg-2 btn btn-default" id="showIntroListButton">
+            Intro
+        </div>*@
     <div class="col-xs-12 col-lg-2 btn btn-default" id="showCategoriesListButton">
         Categories
     </div>
     <div class="col-xs-12 col-lg-2 btn btn-default" id="showOverallListButton">
         Overall
     </div>
-    <div class="col-xs-12 col-lg-2 btn btn-default" id="showCategoryDetailsListButton">
+    <div class="col-xs-12 col-lg-3 btn btn-default" id="showCategoryDetailsListButton">
         Category Details
     </div>
-    <div class="col-xs-12 col-lg-2 btn btn-default" id="showManagementStrategiesListButton">
+    <div class="col-xs-12 col-lg-3 btn btn-default" id="showManagementStrategiesListButton">
         Management Strategies
     </div>
     <div class="col-xs-12 col-lg-2 btn btn-default" id="showInterviewGuideListButton">
         Interview Guide
     </div>
 </div>
-<br />
 <div class="row" id="reportingExplanationDiv">
 </div>
 <script src="~/Scripts/replacingDivContents.js"></script>
@@ -30,10 +30,10 @@
     $(document).ready(function () {
         var $reportingExplanationDiv = $("#reportingExplanationDiv");
         var controllerName = "/Reports/";
-        replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
-        $("#showIntroListButton").click(function () {
-            replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
-        });
+        //replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
+        //$("#showIntroListButton").click(function () {
+        //    replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
+        //});
         $("#showCategoriesListButton").click(function () {
             replaceDivContents($reportingExplanationDiv, controllerName + "Categories");
         });

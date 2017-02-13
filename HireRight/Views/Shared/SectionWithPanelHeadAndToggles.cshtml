@@ -1,0 +1,36 @@
+﻿@model SectionWithTogglesAndTitleViewModel
+
+<div class="row">
+    <div class="col-xs-12 row borderedRow">
+        <div class="col-xs-12 panel panel-head">
+            <div class="col-xs-11">
+                <h2>Title</h2>
+            </div>
+            <div class="col-xs-1">
+                <button class="btn btn-default glyphicon glyphicon-minus-sign" id="@Model.HideButtonId" style="margin-top: 15px;"></button>
+                <button class="btn btn-default glyphicon glyphicon-plus-sign" id="@Model.ShowButtonId" style="display: none; margin-top: 15px;"></button>
+            </div>
+        </div>
+        <div class="col-xs-12" id="@Model.HiddenContentId" hidden="hidden">
+            Press the <span class="glyphicon glyphicon-plus-sign"></span> to @Model.ActionText
+        </div>
+        <div class="col-xs-12" id="@Model.ShownContentId">
+            @{ Html.RenderPartial(Model.ViewNameWithPath, @Model.ViewModelForContentView); }
+        </div>
+    </div>
+</div>
+<script>
+    var $hideButton = $('#@Model.HideButtonId');
+    var $showButton = $('#@Model.ShowButtonId');
+    $(document).ready(function () {
+        $hideButton.click(toggleDivsAndButtons);
+        $showButton.click(toggleDivsAndButtons);
+    });
+
+    function toggleDivsAndButtons() {
+        $hideButton.toggle();
+        $showButton.toggle();
+        $("#@Model.HiddenContentId").toggle();
+        $("#@Model.ShownContentId").toggle();
+    }
+</script>
