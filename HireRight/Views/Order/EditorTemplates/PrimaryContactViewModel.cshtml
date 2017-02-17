@@ -4,21 +4,21 @@
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-4">
-        @Html.ValidatedEditorWithLabelFor(x => Model.FirstName)
+        @Html.ValidatedEditorWithLabelFor(x => Model.FirstName, true)
     </div>
     <div class="col-xs-12 col-md-4">
-        @Html.ValidatedEditorWithLabelFor(x => Model.LastName)
+        @Html.ValidatedEditorWithLabelFor(x => Model.LastName, true)
     </div>
     <div class="col-xs-12 col-md-4">
-        @Html.ValidatedEditorWithLabelFor(x => Model.Email)
+        @Html.ValidatedEditorWithLabelFor(x => Model.Email, true)
     </div>
 </div>
 @Html.EditorFor(x => x.Address)
 <div class="row">
     <div class="col-xs-12 col-md-6">
-        @Html.ValidatedEditorWithLabelFor(x => Model.OfficePhone)
+        @Html.ValidatedEditorWithLabelFor(x => Model.OfficePhone, true)
     </div>
     <div class="col-xs-12 col-md-6">
-        @Html.ValidatedEditorWithLabelFor(x => Model.CellPhone)
+        @Html.ValidatedEditorWithLabelFor(x => Model.CellPhone, true)
     </div>
 </div>

@@ -2,13 +2,13 @@
 <div>
     <div class="row">
         <div class="col-xs-12 col-md-6">
-            @Html.ValidatedEditorWithLabelFor(x => Model.StreetAddress)
+            @Html.ValidatedEditorWithLabelFor(x => Model.StreetAddress, true)
         </div>
         <div class="col-xs-12 col-md-3">
-            @Html.ValidatedEditorWithLabelFor(x => Model.City)
+            @Html.ValidatedEditorWithLabelFor(x => Model.City, true)
         </div>
         <div class="col-xs-12 col-md-3">
-            @Html.ValidatedEditorWithLabelFor(x => Model.Country)
+            @Html.ValidatedEditorWithLabelFor(x => Model.Country, true)
         </div>
     </div>
     <div class="row">
@@ -16,10 +16,10 @@
             @Html.ValidatedEditorWithLabelFor(x => Model.UnitNumber)
         </div>
         <div class="col-xs-4">
-            @Html.ValidatedEditorWithLabelFor(x => Model.State)
+            @Html.ValidatedEditorWithLabelFor(x => Model.State, true)
         </div>
         <div class="col-xs-4">
-            @Html.ValidatedEditorWithLabelFor(x => Model.PostalCode)
+            @Html.ValidatedEditorWithLabelFor(x => Model.PostalCode, true)
         </div>
     </div>
 </div>

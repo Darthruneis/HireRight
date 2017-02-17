@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="ajaxcallwithloadingicon.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="customsolutions/categoryfilterpartial.js" />
 /// <reference path="customsolutions/customsolutionspartial.js" />

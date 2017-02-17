@@ -65,24 +65,15 @@ namespace HireRight.Infrastructure
             return new MvcHtmlString("<div class=\"col-xs-12\" style=\"padding: 2px; clear: both;\" >" + innerHtml + "</div>");
         }
 
-        public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
-        {
-            MvcHtmlString labelString = helper.LabelFor(expression);
-            MvcHtmlString editorString = helper.EditorFor(expression, new { htmlAttributes = new { @class = "form-control", style = "width: 100%;" } });
-            MvcHtmlString validationString = helper.ValidationMessageFor(expression);
-
-            return new MvcHtmlString(labelString + "<br />" + editorString + "<br />" + validationString);
-        }
-
-        public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
+        public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, bool isRequired = false, object htmlAttributes = null)
         {
             object htmlattributes = htmlAttributes;
 
             MvcHtmlString labelString = helper.LabelFor(expression);
-            MvcHtmlString editorString = helper.EditorFor(expression, new { htmlAttributes = htmlattributes });
+            MvcHtmlString editorString = helper.EditorFor(expression, new { htmlAttributes = htmlattributes ?? new { @class = "form-control", style = "width: 100%;" } });
             MvcHtmlString validationString = helper.ValidationMessageFor(expression);
 
-            return new MvcHtmlString(labelString + "<br />" + editorString + "<br />" + validationString);
+            return new MvcHtmlString(labelString + (isRequired ? "<span style=\"color: red;\" class=\"glyphicon glyphicon-asterisk\"></span>" : string.Empty) + "<br />" + editorString + "<br />" + validationString);
         }
     }
 }

@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-lg-4">
-                @Html.ValidatedEditorWithLabelFor(x => Model.PositionsToFill)
+                @Html.ValidatedEditorWithLabelFor(x => Model.PositionsToFill, true)
             </div>
             <div class="col-xs-12 col-lg-3">
                 @Html.LabelFor(x => x.Products) <br />
@@ -18,7 +18,7 @@
             <div class="col-xs-6 col-lg-2">
                 <div class="container-fluid">
                     <div class="col-xs-12">
-                        @Html.ValidatedEditorWithLabelFor(x => Model.Quantity)
+                        @Html.ValidatedEditorWithLabelFor(x => Model.Quantity, true)
                         <div id="orderTotal" style="width: 100%;">
                             Total: $0.00
                         </div>

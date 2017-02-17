@@ -1,10 +1,10 @@
 ﻿@model CustomSolutionsViewModel
 <div class="col-xs-12 row">
     <div class="col-xs-12 col-lg-6">
-        @Html.ValidatedEditorWithLabelFor(x => x.CompanyName)
+        @Html.ValidatedEditorWithLabelFor(x => x.CompanyName, true)
     </div>
     <div class="col-xs-12 col-lg-6">
-        @Html.ValidatedEditorWithLabelFor(x => x.PositionsToFill)
+        @Html.ValidatedEditorWithLabelFor(x => x.PositionsToFill, true)
     </div>
 </div>
 <div class="col-xs-12 row">
