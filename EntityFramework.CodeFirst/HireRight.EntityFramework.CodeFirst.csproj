@@ -58,13 +58,9 @@
     <Compile Include="Abstract\PocoBase.cs" />
     <Compile Include="BaseMigrationCodeGenerator.cs" />
     <Compile Include="Database Context\HireRightDbContext.cs" />
-    <Compile Include="Migrations\201701012051551_initialWithImmutableAddress.cs" />
-    <Compile Include="Migrations\201701012051551_initialWithImmutableAddress.Designer.cs">
-      <DependentUpon>201701012051551_initialWithImmutableAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701150500117_modelSimplifications.cs" />
-    <Compile Include="Migrations\201701150500117_modelSimplifications.Designer.cs">
-      <DependentUpon>201701150500117_modelSimplifications.cs</DependentUpon>
+    <Compile Include="Migrations\201703230045294_initializeDatabase.cs" />
+    <Compile Include="Migrations\201703230045294_initializeDatabase.Designer.cs">
+      <DependentUpon>201703230045294_initializeDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CompanyAggregate\ScaleCategory.cs" />
@@ -89,11 +85,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701012051551_initialWithImmutableAddress.resx">
-      <DependentUpon>201701012051551_initialWithImmutableAddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701150500117_modelSimplifications.resx">
-      <DependentUpon>201701150500117_modelSimplifications.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703230045294_initializeDatabase.resx">
+      <DependentUpon>201703230045294_initializeDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

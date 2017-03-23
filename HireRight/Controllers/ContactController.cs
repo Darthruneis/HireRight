@@ -1,4 +1,5 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
+﻿using System;
+using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.Models;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -8,11 +9,13 @@ namespace HireRight.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly ICompanyBusinessLogic _companyBusinessLogic;
         private readonly IContactsBusinessLogic _contactsBusinessLogic;
 
-        public ContactController(IContactsBusinessLogic contactsBusinessLogic)
+        public ContactController(IContactsBusinessLogic contactsBusinessLogic, ICompanyBusinessLogic companyBusinessLogic)
         {
             _contactsBusinessLogic = contactsBusinessLogic;
+            _companyBusinessLogic = companyBusinessLogic;
         }
 
         public ActionResult Contact()
@@ -27,19 +30,24 @@ namespace HireRight.Controllers
             if (model.Message == new ContactUsViewModel().Message)
                 ModelState.AddModelError("Message", "Please give us details as to how we can assist you.");
 
+            if (!ModelState.IsValid)
+                return View("Contact", model);
+
             try
             {
-                ContactDTO dto = await _contactsBusinessLogic.Add(model.ConvertToContactDTO());
+                CompanyDTO companyDto = await _companyBusinessLogic.Add(new CompanyDTO() { BillingAddress = model.Address, Name = model.CompanyName });
+
+                ContactDTO contactDto = model.ConvertToContactDTO();
+                contactDto.CompanyId = companyDto.Id;
+                ContactDTO dto = await _contactsBusinessLogic.Add(contactDto);
 
                 await _contactsBusinessLogic.SendNewContactEmail(dto.Id, model.Message);
             }
-            catch
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "An error ocurred while saving.  Please try again later.");
-            }
-
-            if (!ModelState.IsValid)
                 return View("Contact", model);
+            }
 
             return RedirectToAction("Success", model);
         }

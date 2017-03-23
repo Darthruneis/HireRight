@@ -14,6 +14,8 @@ namespace DataTransferObjects.Data_Transfer_Objects
         [Display(Name = "Personal Phone")]
         public string CellNumber { get; set; }
 
+        public Guid CompanyId { get; set; }
+
         [DataMember]
         [Display(Name = "Email")]
         public string Email { get; set; }

@@ -47,7 +47,7 @@ namespace HireRight.EntityFramework.CodeFirst.Database_Context
         /// <summary>
         /// Initializes the context based off the connection string name set in the class.
         /// </summary>
-        public HireRightDbContext() : base("HireRightDb")
+        public HireRightDbContext() : base("name=HireRightDb")
         { }
 
         /// <summary>

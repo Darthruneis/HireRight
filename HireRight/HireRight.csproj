@@ -331,6 +331,7 @@
     <Content Include="Views\CustomSolutions\CategoryFilterPartial.cshtml" />
     <Content Include="Views\CustomSolutions\ContactAndCompanyInfoPartial.cshtml" />
     <Content Include="Views\CustomSolutions\FormInstructionsContentPartial.cshtml" />
+    <Content Include="Views\CustomSolutions\CustomSolutionsSuccess.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
     <Content Include="Views\Reports\Samples.cshtml" />

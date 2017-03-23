@@ -21,10 +21,6 @@ namespace HireRight.BusinessLogic.Concrete
         {
             _contactsRepository = repo;
             _emailClient = new SmtpClient();
-
-            _emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-            _emailClient.DeliveryFormat = SmtpDeliveryFormat.SevenBit;
-            _emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight Test Emails";
         }
 
         public async Task<ContactDTO> Add(ContactDTO contactDto)
@@ -46,19 +42,25 @@ namespace HireRight.BusinessLogic.Concrete
             model.Name = dto.FullName;
             model.Email = dto.Email;
             model.Address = dto.Address.ConvertDtoToModel();
+            model.CompanyId = dto.CompanyId;
 
             return model;
         }
 
         public ContactDTO ConvertModelToDto(Contact model)
         {
-            ContactDTO dto = new ContactDTO();
+            var dto = new ContactDTO();
             dto.CellNumber = model.CellNumber;
             dto.OfficeNumber = model.OfficeNumber;
             dto.IsPrimary = model.IsPrimary;
             dto.IsAdmin = model.IsAdmin;
             dto.Id = model.Id;
             dto.CreatedUtc = model.CreatedUtc;
+            dto.Email = model.Email;
+            dto.CompanyId = model.CompanyId;
+            dto.Address = model.Address.ConvertModelToDto();
+            dto.FirstName = model.Name.Split(' ').First();
+            dto.LastName = model.Name.Split(' ').Last();
 
             return dto;
         }
@@ -106,6 +108,10 @@ namespace HireRight.BusinessLogic.Concrete
 
         private async Task EmailBothConsultants(string from, string subject, string message)
         {
+            _emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+            _emailClient.DeliveryFormat = SmtpDeliveryFormat.SevenBit;
+            _emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight\HireRight Test Emails";
+
             await _emailClient.SendMailAsync(CreateMailMessageForSmtpClient("silverasoc@aol.com", from, subject, message));
             await _emailClient.SendMailAsync(CreateMailMessageForSmtpClient("janet@something.com", from, subject, message));
         }

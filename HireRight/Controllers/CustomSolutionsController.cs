@@ -86,7 +86,7 @@ namespace HireRight.Controllers
 
             _ordersBusinessLogic.SubmitCards(model.CreateSubmitCardsDTO());
 
-            return RedirectToAction("Index", "Home");
+            return View("CustomSolutionsSuccess");
         }
 
         private CustomSolutionsViewModel CreateViewModelFromCategoryList(List<CategoryDTO> categories, CategoryFilter filter)

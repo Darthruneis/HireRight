@@ -23,6 +23,7 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public string PostalCode { get; set; }
 
         [DataMember, Required, Display(Name = "State or Province")]
+        [StringLength(2, MinimumLength = 2)]
         public string State { get; set; }
 
         [DataMember, Required]

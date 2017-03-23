@@ -1,74 +1,23 @@
 namespace HireRight.EntityFramework.CodeFirst.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialWithImmutableAddress : DbMigration
+    public partial class initializeDatabase : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Account",
+                "dbo.ScaleCategory",
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
-                        CompanyId = c.Guid(nullable: false),
-                        Notes = c.String(nullable: false),
+                        Description = c.String(nullable: false),
+                        Title = c.String(nullable: false),
                         CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
                         TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Company", t => t.CompanyId)
-                .Index(t => t.CompanyId);
-            
-            CreateTable(
-                "dbo.Client",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
-                        AccountId = c.Guid(nullable: false),
-                        AdminContactId = c.Guid(nullable: false),
-                        PrimaryContactId = c.Guid(nullable: false),
-                        CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
-                        TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        Company_Id = c.Guid(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Account", t => t.AccountId)
-                .ForeignKey("dbo.Company", t => t.Company_Id)
-                .ForeignKey("dbo.Contact", t => t.AdminContactId)
-                .ForeignKey("dbo.Contact", t => t.PrimaryContactId)
-                .Index(t => t.AccountId)
-                .Index(t => t.AdminContactId)
-                .Index(t => t.PrimaryContactId)
-                .Index(t => t.Company_Id);
-            
-            CreateTable(
-                "dbo.Contact",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
-                        City = c.String(nullable: false),
-                        Country = c.String(nullable: false),
-                        PostalCode = c.String(nullable: false, maxLength: 10),
-                        State = c.String(nullable: false, maxLength: 2),
-                        StreetAddress = c.String(nullable: false),
-                        UnitNumber = c.String(),
-                        CellNumber = c.String(nullable: false),
-                        ClientId = c.Guid(nullable: false),
-                        CompanyId = c.Guid(nullable: false),
-                        Email = c.String(nullable: false),
-                        IsAdmin = c.Boolean(nullable: false),
-                        IsPrimary = c.Boolean(nullable: false),
-                        Name = c.String(nullable: false),
-                        OfficeNumber = c.String(nullable: false),
-                        CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
-                        TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Client", t => t.ClientId)
-                .ForeignKey("dbo.Company", t => t.CompanyId)
-                .Index(t => t.ClientId)
-                .Index(t => t.CompanyId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Company",
@@ -82,10 +31,36 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                         StreetAddress = c.String(nullable: false),
                         UnitNumber = c.String(),
                         Name = c.String(nullable: false),
+                        Notes = c.String(),
                         CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
                         TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Contact",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
+                        City = c.String(nullable: false),
+                        Country = c.String(nullable: false),
+                        PostalCode = c.String(nullable: false, maxLength: 10),
+                        State = c.String(nullable: false, maxLength: 2),
+                        StreetAddress = c.String(nullable: false),
+                        UnitNumber = c.String(),
+                        CellNumber = c.String(nullable: false),
+                        CompanyId = c.Guid(nullable: false),
+                        Email = c.String(nullable: false),
+                        IsAdmin = c.Boolean(nullable: false),
+                        IsPrimary = c.Boolean(nullable: false),
+                        Name = c.String(nullable: false),
+                        OfficeNumber = c.String(nullable: false),
+                        CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
+                        TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Company", t => t.CompanyId)
+                .Index(t => t.CompanyId);
             
             CreateTable(
                 "dbo.CompanyLocation",
@@ -99,8 +74,8 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                         StreetAddress = c.String(nullable: false),
                         UnitNumber = c.String(),
                         CompanyId = c.Guid(nullable: false),
-                        Description = c.String(),
-                        Label = c.String(),
+                        Description = c.String(nullable: false),
+                        Label = c.String(nullable: false),
                         CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
                         TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
@@ -121,15 +96,12 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                         Status = c.Int(nullable: false),
                         CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
                         TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        Account_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Company", t => t.CompanyId)
                 .ForeignKey("dbo.Product", t => t.ProductId)
-                .ForeignKey("dbo.Account", t => t.Account_Id)
                 .Index(t => t.CompanyId)
-                .Index(t => t.ProductId)
-                .Index(t => t.Account_Id);
+                .Index(t => t.ProductId);
             
             CreateTable(
                 "dbo.Product",
@@ -159,55 +131,27 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                 .ForeignKey("dbo.Product", t => t.ProductId)
                 .Index(t => t.ProductId);
             
-            CreateTable(
-                "dbo.ScaleCategory",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true, defaultValueSql: "NEWSEQUENTIALID()"),
-                        Description = c.String(nullable: false),
-                        Title = c.String(nullable: false),
-                        CreatedUtc = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
-                        TimeStamp = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                    })
-                .PrimaryKey(t => t.Id);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Order", "Account_Id", "dbo.Account");
             DropForeignKey("dbo.Order", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Discount", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Order", "CompanyId", "dbo.Company");
-            DropForeignKey("dbo.Account", "CompanyId", "dbo.Company");
-            DropForeignKey("dbo.Client", "PrimaryContactId", "dbo.Contact");
-            DropForeignKey("dbo.Client", "AdminContactId", "dbo.Contact");
-            DropForeignKey("dbo.Contact", "CompanyId", "dbo.Company");
             DropForeignKey("dbo.CompanyLocation", "CompanyId", "dbo.Company");
-            DropForeignKey("dbo.Client", "Company_Id", "dbo.Company");
-            DropForeignKey("dbo.Contact", "ClientId", "dbo.Client");
-            DropForeignKey("dbo.Client", "AccountId", "dbo.Account");
+            DropForeignKey("dbo.Contact", "CompanyId", "dbo.Company");
             DropIndex("dbo.Discount", new[] { "ProductId" });
-            DropIndex("dbo.Order", new[] { "Account_Id" });
             DropIndex("dbo.Order", new[] { "ProductId" });
             DropIndex("dbo.Order", new[] { "CompanyId" });
             DropIndex("dbo.CompanyLocation", new[] { "CompanyId" });
             DropIndex("dbo.Contact", new[] { "CompanyId" });
-            DropIndex("dbo.Contact", new[] { "ClientId" });
-            DropIndex("dbo.Client", new[] { "Company_Id" });
-            DropIndex("dbo.Client", new[] { "PrimaryContactId" });
-            DropIndex("dbo.Client", new[] { "AdminContactId" });
-            DropIndex("dbo.Client", new[] { "AccountId" });
-            DropIndex("dbo.Account", new[] { "CompanyId" });
-            DropTable("dbo.ScaleCategory");
             DropTable("dbo.Discount");
             DropTable("dbo.Product");
             DropTable("dbo.Order");
             DropTable("dbo.CompanyLocation");
-            DropTable("dbo.Company");
             DropTable("dbo.Contact");
-            DropTable("dbo.Client");
-            DropTable("dbo.Account");
+            DropTable("dbo.Company");
+            DropTable("dbo.ScaleCategory");
         }
     }
 }

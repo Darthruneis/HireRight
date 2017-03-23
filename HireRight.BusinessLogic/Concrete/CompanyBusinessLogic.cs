@@ -24,6 +24,10 @@ namespace HireRight.BusinessLogic.Concrete
 
         public async Task<CompanyDTO> Add(CompanyDTO companyDto)
         {
+            var existingCompanies = await Get(new CompanyFilter(1, 10) { Name = companyDto.Name });
+            if (existingCompanies.Any(x => x.Name == companyDto.Name))
+                return existingCompanies.First(x => x.Name == companyDto.Name);
+
             Company companyToAdd = ConvertDtoToModel(companyDto);
 
             CompanyDTO dto = ConvertModelToDto(await _companyRepository.Add(companyToAdd).ConfigureAwait(false));
@@ -68,11 +72,11 @@ namespace HireRight.BusinessLogic.Concrete
             dto.Id = model.Id;
             dto.CreatedUtc = model.CreatedUtc;
             dto.Name = model.Name;
-            dto.BillingAddress = model.Address.ConvertModelToDto();
-            dto.Contacts = model.Contacts.Select(x => x.ConvertModelToDto()).ToList();
             dto.Notes = model.Notes;
-            dto.Locations = model.Locations.Select(x => x.ConvertModelToDto()).ToList();
-            dto.Orders = model.Orders.Select(x => x.ConvertModelToDto()).ToList();
+            dto.BillingAddress = model.Address.ConvertModelToDto();
+            dto.Contacts = model.Contacts?.Select(x => x.ConvertModelToDto()).ToList();
+            dto.Locations = model.Locations?.Select(x => x.ConvertModelToDto()).ToList();
+            dto.Orders = model.Orders?.Select(x => x.ConvertModelToDto()).ToList();
 
             return dto;
         }

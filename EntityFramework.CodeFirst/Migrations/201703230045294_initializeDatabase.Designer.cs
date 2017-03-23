@@ -7,13 +7,13 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class modelSimplifications : IMigrationMetadata
+    public sealed partial class initializeDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(modelSimplifications));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initializeDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701150500117_modelSimplifications"; }
+            get { return "201703230045294_initializeDatabase"; }
         }
         
         string IMigrationMetadata.Source

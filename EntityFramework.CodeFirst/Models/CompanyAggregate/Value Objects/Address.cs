@@ -77,6 +77,13 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
             UnitNumber = unit;
         }
 
+        /// <summary>
+        /// Default constructor. Required for EF.
+        /// </summary>
+        private Address()
+        {
+        }
+
         private static void VerifyZipCodeFormat(string zip)
         {
             if (zip.Length > 5)
