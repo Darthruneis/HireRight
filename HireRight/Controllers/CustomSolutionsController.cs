@@ -1,7 +1,6 @@
 ﻿using DataTransferObjects;
 using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.Models;
-using SDK.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,18 +9,19 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataTransferObjects.Filters.Concrete;
+using HireRight.BusinessLogic.Abstract;
 
 namespace HireRight.Controllers
 {
     public class CustomSolutionsController : Controller
     {
-        private readonly ICategoriesSDK _categoriesSDK;
-        private readonly IOrdersSDK _ordersSDK;
+        private readonly ICategoriesBusinessLogic _categoriesBusinessLogic;
+        private readonly IOrdersBusinessLogic _ordersBusinessLogic;
 
-        public CustomSolutionsController(ICategoriesSDK categoriesSdk, IOrdersSDK ordersSdk)
+        public CustomSolutionsController(ICategoriesBusinessLogic categoriesBusinessLogic, IOrdersBusinessLogic ordersBusinessLogic)
         {
-            _categoriesSDK = categoriesSdk;
-            _ordersSDK = ordersSdk;
+            _categoriesBusinessLogic = categoriesBusinessLogic;
+            _ordersBusinessLogic = ordersBusinessLogic;
         }
 
         [HttpGet]
@@ -29,7 +29,7 @@ namespace HireRight.Controllers
         public async Task<PartialViewResult> FilterCategories(int page, int size, string description, string title)
         {
             CategoryFilter filter = new CategoryFilter(title, description);
-            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(filter);
+            List<CategoryDTO> categories = await _categoriesBusinessLogic.Get(filter);
 
             CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(categories, filter);
 
@@ -58,14 +58,14 @@ namespace HireRight.Controllers
                         ? View(model)
                         : model.Categories.Count > 12
                             ? View("SelectTopTwelve", model)
-                            : await TopTwelve(model);
+                            : TopTwelve(model);
         }
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
             CategoryFilter categoryFilter = new CategoryFilter(1, 10);
-            List<CategoryDTO> categories = await _categoriesSDK.GetCategories(categoryFilter);
+            List<CategoryDTO> categories = await _categoriesBusinessLogic.Get(categoryFilter);
 
             CustomSolutionsViewModel model = CreateViewModelFromCategoryList(categories, categoryFilter);
 
@@ -73,7 +73,7 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> TopTwelve(CustomSolutionsViewModel model)
+        public ActionResult TopTwelve(CustomSolutionsViewModel model)
         {
             if (model.Categories.Count <= 12)
                 foreach (JobAnalysisCategoryViewModel jobAnalysisCategoryViewModel in model.Categories)
@@ -84,7 +84,7 @@ namespace HireRight.Controllers
                 return View("SelectTopTwelve", model);
             }
 
-            await _ordersSDK.SubmitCards(model.CreateSubmitCardsDTO());
+            _ordersBusinessLogic.SubmitCards(model.CreateSubmitCardsDTO());
 
             return RedirectToAction("Index", "Home");
         }

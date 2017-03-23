@@ -1,18 +1,18 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.Models;
-using SDK.Abstract;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using HireRight.BusinessLogic.Abstract;
 
 namespace HireRight.Controllers
 {
     public class ContactController : Controller
     {
-        private readonly IContactsSDK _contactsSDK;
+        private readonly IContactsBusinessLogic _contactsBusinessLogic;
 
-        public ContactController(IContactsSDK contactsSDK)
+        public ContactController(IContactsBusinessLogic contactsBusinessLogic)
         {
-            _contactsSDK = contactsSDK;
+            _contactsBusinessLogic = contactsBusinessLogic;
         }
 
         public ActionResult Contact()
@@ -29,9 +29,9 @@ namespace HireRight.Controllers
 
             try
             {
-                ContactDTO dto = await _contactsSDK.AddContact(model.ConvertToContactDTO());
+                ContactDTO dto = await _contactsBusinessLogic.Add(model.ConvertToContactDTO());
 
-                await _contactsSDK.SendNewContactEmail(dto.Id, model.Message);
+                await _contactsBusinessLogic.SendNewContactEmail(dto.Id, model.Message);
             }
             catch
             {

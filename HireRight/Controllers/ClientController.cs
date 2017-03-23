@@ -1,19 +1,19 @@
 ﻿using HireRight.Models;
-using SDK.Abstract;
 using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using HireRight.BusinessLogic.Abstract;
 
 namespace HireRight.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly IContactsSDK _contactsSDK;
+        private readonly IContactsBusinessLogic _contactsBusinessLogic;
 
-        public ClientController(IContactsSDK contactsSDK)
+        public ClientController(IContactsBusinessLogic contactsBusinessLogic)
         {
-            _contactsSDK = contactsSDK;
+            _contactsBusinessLogic = contactsBusinessLogic;
         }
 
         public ActionResult NewClients(NewClientsViewModel model = null)
@@ -59,7 +59,7 @@ namespace HireRight.Controllers
             message.AppendLine(model.Name + "is interested in using HireRight!  They would like to contact a consultant directly at their earliest convenience.");
             message.AppendLine($"{model.Name} is a {model.CompanyPosition} at {model.Company}");
 
-            await _contactsSDK.SendContactConsultantEmail(model.Email, message.ToString());
+            await _contactsBusinessLogic.SendContactConsultantEmail(model.Email, message.ToString());
         }
     }
 }

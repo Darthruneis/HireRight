@@ -1,9 +1,11 @@
 ﻿using Ninject;
-using SDK.Abstract;
-using SDK.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using HireRight.BusinessLogic.Abstract;
+using HireRight.BusinessLogic.Concrete;
+using HireRight.Repository.Abstract;
+using HireRight.Repository.Concrete;
 
 namespace HireRight
 {
@@ -47,12 +49,28 @@ namespace HireRight
         /// <param name="kernel"></param>
         private static void AddBindings(IKernel kernel)
         {
-            kernel.Bind<IApiSDKClient>().To<ApiSDKClient>();
-            kernel.Bind<ICompaniesSDK>().To<CompaniesSDK>();
-            kernel.Bind<IContactsSDK>().To<ContactsSDK>();
-            kernel.Bind<IOrdersSDK>().To<OrdersSDK>();
-            kernel.Bind<IProductsSDK>().To<ProductsSDK>();
-            kernel.Bind<ICategoriesSDK>().To<CategoriesSDK>();
+            //SDK Bindings
+            //kernel.Bind<IApiSDKClient>().To<ApiSDKClient>();
+            //kernel.Bind<ICompaniesSDK>().To<CompaniesSDK>();
+            //kernel.Bind<IContactsSDK>().To<ContactsSDK>();
+            //kernel.Bind<IOrdersSDK>().To<OrdersSDK>();
+            //kernel.Bind<IProductsSDK>().To<ProductsSDK>();
+            //kernel.Bind<ICategoriesSDK>().To<CategoriesSDK>();
+
+            //repository bindings
+            kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
+            kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
+            kernel.Bind<IContactsRepository>().To<ContactsRepository>();
+            kernel.Bind<IOrdersRepository>().To<OrdersRepository>();
+            kernel.Bind<IProductsRepository>().To<ProductsRepository>();
+            kernel.Bind<ICategoriesRepository>().To<CategoriesRepository>();
+
+            //business logic bindings
+            kernel.Bind<ICompanyBusinessLogic>().To<CompanyBusinessLogic>();
+            kernel.Bind<IContactsBusinessLogic>().To<ContactsBusinessLogic>();
+            kernel.Bind<IOrdersBusinessLogic>().To<OrdersBusinessLogic>();
+            kernel.Bind<IProductsBusinessLogic>().To<ProductsBusinessLogic>();
+            kernel.Bind<ICategoriesBusinessLogic>().To<CategoriesBusinessLogic>();
         }
     }
 }

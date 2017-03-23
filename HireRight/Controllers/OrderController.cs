@@ -1,28 +1,28 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.Models;
-using SDK.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using HireRight.BusinessLogic.Abstract;
 
 namespace HireRight.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly ICompaniesSDK _companiesSDK;
-        private readonly IContactsSDK _contactsSDK;
-        private readonly IOrdersSDK _ordersSDK;
-        private readonly IProductsSDK _productsSDK;
+        private readonly ICompanyBusinessLogic _companyBusinessLogic;
+        private readonly IContactsBusinessLogic _contactsBusinessLogic;
+        private readonly IOrdersBusinessLogic _ordersBusinessLogic;
+        private readonly IProductsBusinessLogic _productsBusinessLogic;
 
-        public OrderController(IOrdersSDK ordersSDK, ICompaniesSDK companiesSDK, IContactsSDK contactsSDK, IProductsSDK productsSDK)
+        public OrderController(IOrdersBusinessLogic ordersBusinessLogic, ICompanyBusinessLogic companyBusinessLogic, IContactsBusinessLogic contactsBusinessLogic, IProductsBusinessLogic productsBusinessLogic)
         {
-            _ordersSDK = ordersSDK;
-            _companiesSDK = companiesSDK;
-            _contactsSDK = contactsSDK;
-            _productsSDK = productsSDK;
+            _ordersBusinessLogic = ordersBusinessLogic;
+            _companyBusinessLogic = companyBusinessLogic;
+            _contactsBusinessLogic = contactsBusinessLogic;
+            _productsBusinessLogic = productsBusinessLogic;
         }
 
         [HttpGet]
@@ -34,7 +34,7 @@ namespace HireRight.Controllers
         [HttpGet]
         public async Task<PartialViewResult> GetDiscounts(Guid itemSelected)
         {
-            ProductDTO product = await _productsSDK.GetProduct(itemSelected);
+            ProductDTO product = await _productsBusinessLogic.Get(itemSelected);
 
             return PartialView("ProductDiscountsPartial", product);
         }
@@ -44,7 +44,7 @@ namespace HireRight.Controllers
         {
             try
             {
-                decimal total = await _ordersSDK.CalculatePrice(itemSelected, quantity);
+                decimal total = await _ordersBusinessLogic.CalculatePrice(itemSelected, quantity);
                 return PartialView("OrderTotalPartial", total);
             }
             catch (Exception ex)
@@ -70,7 +70,7 @@ namespace HireRight.Controllers
             {
                 NewOrderDTO dto = model.ConvertToNewOrderDTO();
 
-                await _companiesSDK.AddCompany(dto.Company);
+                await _companyBusinessLogic.Add(dto.Company);
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace HireRight.Controllers
 
             ProductFilter assessmentTestFilter = new ProductFilter(1, 10);
             assessmentTestFilter.Title = "test";
-            List<ProductDTO> products = await _productsSDK.GetProducts(assessmentTestFilter);
+            List<ProductDTO> products = await _productsBusinessLogic.Get(assessmentTestFilter);
 
             model.Order.Products = products;
 

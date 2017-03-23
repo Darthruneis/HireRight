@@ -355,9 +355,13 @@
       <Project>{e7a9f677-8d39-461b-810d-304b0b12e5dd}</Project>
       <Name>DataTransferObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SDK\SDK.csproj">
-      <Project>{9741eec6-8270-4456-8d94-d255fb5f80a5}</Project>
-      <Name>SDK</Name>
+    <ProjectReference Include="..\HireRight.BusinessLogic\HireRight.BusinessLogic.csproj">
+      <Project>{0f27556c-6b57-4533-a447-586270c17d65}</Project>
+      <Name>HireRight.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HireRight.Repository\HireRight.Repository.csproj">
+      <Project>{cc106c16-4063-4847-a186-814ee33b9775}</Project>
+      <Name>HireRight.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
