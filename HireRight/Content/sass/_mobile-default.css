@@ -220,12 +220,12 @@ h6 {
   margin-left: 0;
   margin-right: 0; }
 
-.tooltip2 {
+.tooltip-default {
   position: relative;
   display: inline-block;
   visibility: visible; }
 
-.tooltip2 .tooltiptext {
+.tooltip-default .tooltiptext {
   visibility: hidden;
   background-color: #5E99C1;
   color: #000000;
@@ -240,6 +240,6 @@ h6 {
   right: 105%;
   top: 3px; }
 
-.tooltip2:hover .tooltiptext {
+.tooltip-default:hover .tooltiptext {
   visibility: visible; }
 
