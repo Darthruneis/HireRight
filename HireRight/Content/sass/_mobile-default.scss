@@ -276,10 +276,36 @@ h6 {
 
 .scrollHorizontally {
     max-width: 95vw;
-    overflow-x: scroll;    
+    overflow-x: scroll;
 }
 
-.row{
+.row {
     margin-left: 0;
     margin-right: 0;
+}
+
+.tooltip2 {
+    position: relative;
+    display: inline-block;
+    visibility: visible;
+}
+
+.tooltip2 .tooltiptext {
+    visibility: hidden;
+    background-color: $site_highlights_background;
+    color: $black;
+    text-align: center;
+    border: 2px solid $black;
+    padding: 2px 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    white-space: nowrap;
+    font-family: $site_default_font_family;
+    right: 105%;
+    top: 3px;
+}
+
+.tooltip2:hover .tooltiptext {
+    visibility: visible;
 }
