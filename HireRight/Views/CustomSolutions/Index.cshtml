@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Custom Solutions";
 }
+<script src="~/Scripts/CustomSolutions/index.js"></script>
 @using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm", @class = "row" }))
 {
     @Html.ValidationSummary(true)

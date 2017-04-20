@@ -54,7 +54,7 @@ namespace HireRight.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Order()
+        public async Task<ActionResult> Index()
         {
             CreateOrderViewModel viewModel = await GetProductListForModel();
 
@@ -62,7 +62,7 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public async Task<ViewResult> Order(CreateOrderViewModel model)
+        public async Task<ViewResult> Index(CreateOrderViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 

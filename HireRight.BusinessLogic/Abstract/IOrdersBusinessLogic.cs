@@ -19,7 +19,7 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<List<OrderDetailsDTO>> Get(OrderFilter filter);
 
-        void SubmitCards(SubmitCardsDTO cardsToSubmit);
+        Task SubmitCards(SubmitCardsDTO cardsToSubmit);
 
         Task<OrderDetailsDTO> Update(OrderDetailsDTO orderDto);
     }

@@ -18,35 +18,33 @@ namespace HireRight.BusinessLogic.Concrete
 {
     public class OrdersBusinessLogic : IOrdersBusinessLogic
     {
+        private readonly ICategoriesBusinessLogic _categoriesBusinessLogic;
         private readonly IOrdersRepository _ordersRepository;
         private readonly IProductsBusinessLogic _productsBusinessLogic;
 
-        public OrdersBusinessLogic(IOrdersRepository repo, IProductsBusinessLogic productBll)
+        public OrdersBusinessLogic(IOrdersRepository repo, IProductsBusinessLogic productBll, ICategoriesBusinessLogic categoriesBusinessLogic)
         {
             _ordersRepository = repo;
             _productsBusinessLogic = productBll;
+            _categoriesBusinessLogic = categoriesBusinessLogic;
         }
 
         public static void SendFormattedEmail(string email, string greeting, string message, string subject, string replyTo = null)
         {
             string body;
-
             const string path = @"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\HireRight.BusinessLogic\Models\EmailBase.cshtml";
-
             using (StreamReader reader = new StreamReader(path))
             {
                 body = reader.ReadToEnd();
             }
 
             string messageBody = string.Format(body, greeting, message);
-
             SendEmail(email, messageBody, subject, replyTo);
         }
 
         public async Task<OrderDetailsDTO> Add(OrderDetailsDTO objectDto)
         {
             Order orderToAdd = ConvertDtoToModel(objectDto);
-
             return ConvertModelToDto(await _ordersRepository.Add(orderToAdd).ConfigureAwait(false));
         }
 
@@ -74,7 +72,6 @@ namespace HireRight.BusinessLogic.Concrete
                                           : product.Price - discountToApply.Amount;
 
             decimal orderTotal = quantity * discountedPrice;
-
             return Math.Round(orderTotal, 2);
         }
 
@@ -106,9 +103,8 @@ namespace HireRight.BusinessLogic.Concrete
 
         public async Task CreateOrder(NewOrderDTO model)
         {
-            string greetingLine = $"An order has just been placed for assessment testing for {model.PrimaryContact.FullName} of {model.Company.Name}.  The details of this order are shown below.";
-
-            StringBuilder message = new StringBuilder(greetingLine);
+            StringBuilder message = new StringBuilder($"An order has just been placed for assessment testing for " +
+                $"{model.PrimaryContact.FullName} of {model.Company.Name}. The details of this order are shown below.");
 
             ProductDTO dto = await _productsBusinessLogic.Get(model.Order.ProductId).ConfigureAwait(false);
             decimal total = await CalculatePrice(dto.Id, model.Order.Quantity);
@@ -120,7 +116,7 @@ namespace HireRight.BusinessLogic.Concrete
             foreach (string position in model.Order.NotesAndPositions.PositionsOfInterest)
                 message.AppendLine(position);
 
-            message.AppendLine().AppendLine()
+            message.AppendLine()
                    .AppendLine("Primary Contact:")
                    .AppendLine(model.PrimaryContact.FullName)
                    .AppendLine(model.PrimaryContact.Email)
@@ -129,7 +125,7 @@ namespace HireRight.BusinessLogic.Concrete
                    .AppendLine("Cell: " + model.PrimaryContact.CellNumber);
 
             if (model.SecondaryContact.FullName != null)
-                message.AppendLine().AppendLine()
+                message.AppendLine()
                        .AppendLine("Secondary Contact:")
                        .AppendLine(model.SecondaryContact.FullName)
                        .AppendLine(model.SecondaryContact.Email)
@@ -137,39 +133,35 @@ namespace HireRight.BusinessLogic.Concrete
                        .AppendLine(model.SecondaryContact.Address.GetFullAddress);
 
             if (model.Order.NotesAndPositions.Notes != null)
-                message.AppendLine().AppendLine()
+                message.AppendLine()
                        .AppendLine("The customer has left the following notes for you:")
                        .AppendLine(model.Order.NotesAndPositions.Notes)
-                       .AppendLine().AppendLine();
+                       .AppendLine();
 
-            EmailConsultants(message.ToString().Replace("\r\n", "<br/>"), "New Order Placed!");
+            EmailConsultants(message.ToString(), "New Order Placed!");
         }
 
         public async Task<OrderDetailsDTO> Get(Guid orderGuid)
         {
             Order order = await _ordersRepository.Get(orderGuid).ConfigureAwait(false);
-
             return ConvertModelToDto(order);
         }
 
         public async Task<List<OrderDetailsDTO>> Get(OrderFilter filter)
         {
             List<Order> orders = await _ordersRepository.Get(filter).ConfigureAwait(false);
-
             return orders.Select(ConvertModelToDto).ToList();
         }
 
-        public void SubmitCards(SubmitCardsDTO cardsToSubmit)
+        public async Task SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
-            string message = CreateEmailMessageFromDto(cardsToSubmit);
-
+            string message = await CreateEmailMessageFromDto(cardsToSubmit);
             EmailConsultants(message, "New Custom Test Request");
         }
 
         public async Task<OrderDetailsDTO> Update(OrderDetailsDTO objectDto)
         {
             Order orderToUpdate = ConvertDtoToModel(objectDto);
-
             return ConvertModelToDto(await _ordersRepository.Update(orderToUpdate).ConfigureAwait(false));
         }
 
@@ -188,20 +180,18 @@ namespace HireRight.BusinessLogic.Concrete
                     recipient,
                     subject,
                     //Replace normal line breaks with HTML break statements
-                    body);
-
-                mailMessage.IsBodyHtml = true;
-
-                if (replyTo != null) mailMessage.ReplyToList.Add(replyTo);
+                    body.Replace("\r\n", "<br/>"))
+                { IsBodyHtml = true };
+                if (replyTo != null)
+                    mailMessage.ReplyToList.Add(replyTo);
 
                 emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight\HireRight Test Emails";
                 emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-
                 emailClient.Send(mailMessage);
             }
         }
 
-        private string CreateEmailMessageFromDto(SubmitCardsDTO cards)
+        private async Task<string> CreateEmailMessageFromDto(SubmitCardsDTO cards)
         {
             StringBuilder message = new StringBuilder("A new custom test profile has been created by ");
 
@@ -217,15 +207,12 @@ namespace HireRight.BusinessLogic.Concrete
                 message.AppendLine("Office: " + cards.Contact.OfficeNumber);
             if (!string.IsNullOrWhiteSpace(cards.Contact.CellNumber))
                 message.AppendLine("Personal: " + cards.Contact.CellNumber);
-
             if (!string.IsNullOrWhiteSpace(cards.Notes))
                 message.AppendLine().AppendLine("The following additional information was provided:").AppendLine(cards.Notes);
 
             message.AppendLine();
-
-            WriteCategoryInfoToStringBuilder(cards.Categories.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList(), ref message);
-
-            return message.ToString().Replace("\r\n", "<br/>");
+            await WriteCategoryInfoToStringBuilder(cards.Categories.Where(x => x.Importance != CategoryImportance.Irrelevant).ToList(), message);
+            return message.ToString();
         }
 
         private string GetEnumName(CategoryImportance level)
@@ -236,24 +223,37 @@ namespace HireRight.BusinessLogic.Concrete
             return ((DisplayAttribute)attributes.First()).Name;
         }
 
-        private void WriteCategoryInfoToStringBuilder(IList<CategoryDTO> categories, ref StringBuilder message)
+        private async Task RetrieveLostCategoryTitles(IList<CategoryDTO> categories)
         {
+            IEnumerable<Guid> guids = categories.Select(x => x.Id);
+            List<CategoryDTO> categoriesFromRepo = await _categoriesBusinessLogic.Get(new CategoryFilter(1, categories.Count, guids.ToArray()));
+
+            foreach (var category in categoriesFromRepo)
+            {
+                category.IsInTopTwelve = categories.First(y => y.Id == category.Id).IsInTopTwelve;
+                category.Importance = categories.First(y => y.Id == category.Id).Importance;
+            }
+
+            categories = categoriesFromRepo;
+        }
+
+        private async Task WriteCategoryInfoToStringBuilder(IList<CategoryDTO> categories, StringBuilder message)
+        {
+            await RetrieveLostCategoryTitles(categories);
             message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.HighImportance)}</b>:");
             foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.HighImportance).OrderBy(x => x.IsInTopTwelve))
-                if (categoryDTO.IsInTopTwelve)
+                if (categoryDTO.IsInTopTwelve && categories.Count > 12)
                     message.AppendLine($"<b>* {categoryDTO.Title}</b>");
                 else
                     message.AppendLine("• " + categoryDTO.Title);
-
             message.AppendLine();
 
             message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.LowImportance)}</b>:");
             foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.LowImportance).OrderBy(x => x.IsInTopTwelve))
-                if (categoryDTO.IsInTopTwelve)
+                if (categoryDTO.IsInTopTwelve && categories.Count > 12)
                     message.AppendLine($"<b>* {categoryDTO.Title}</b>");
                 else
                     message.AppendLine("• " + categoryDTO.Title);
-
             message.AppendLine();
         }
     }

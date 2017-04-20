@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
+using WebGrease.Css.Extensions;
 
 namespace HireRight.Controllers
 {
@@ -29,9 +30,7 @@ namespace HireRight.Controllers
         public async Task<PartialViewResult> FilterCategories(int page, int size, string description, string title)
         {
             CategoryFilter filter = new CategoryFilter(title, description);
-            List<CategoryDTO> categories = await _categoriesBusinessLogic.Get(filter);
-
-            CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(categories, filter);
+            CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(await FindCategories(description, title, page, size), filter);
 
             return PartialView("CustomSolutionsPartial", newModel);
         }
@@ -39,9 +38,10 @@ namespace HireRight.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(CustomSolutionsViewModel model)
         {
-            if (model == null || !ModelState.IsValid)
-                return model == null ? await Index()
-                                     : View(new CustomSolutionsViewModel());
+            if (model == null)
+                return await Index();
+            if (!ModelState.IsValid)
+                return View(model);
 
             //go through the categories in the list created by javascript, except for items which are already in the Categories list, as the model binder has
             //already ensured they have the correct values.
@@ -49,16 +49,14 @@ namespace HireRight.Controllers
                 model.Categories.Add(new JobAnalysisCategoryViewModel(category.Id, GetImportanceLevelFromDisplayName(category.Importance)));
 
             model.Categories = EnforceConstraints(model.Categories
-                .Where(x => x.Importance != CategoryImportance.Irrelevant))
                 .OrderBy(x => x.Importance)
-                .ThenBy(x => x.Title)
-                .ToList();
+                .ThenBy(x => x.Title));
 
             return !ModelState.IsValid
                         ? View(model)
                         : model.Categories.Count > 12
                             ? View("SelectTopTwelve", model)
-                            : TopTwelve(model);
+                            : await TopTwelve(model);
         }
 
         [HttpGet]
@@ -73,18 +71,17 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public ActionResult TopTwelve(CustomSolutionsViewModel model)
+        public async Task<ActionResult> TopTwelve(CustomSolutionsViewModel model)
         {
             if (model.Categories.Count <= 12)
-                foreach (JobAnalysisCategoryViewModel jobAnalysisCategoryViewModel in model.Categories)
-                    jobAnalysisCategoryViewModel.IsInTopTwelve = true;
+                model.Categories.ForEach(x => x.IsInTopTwelve = true);
             else if (model.Categories.Count(x => x.IsInTopTwelve) > 12)
             {
-                ModelState.AddModelError("", "Please narrow down your selections to 12 or fewer.");
+                ModelState.AddModelError("", $"Please narrow down your selections to 12 or fewer. You have selected {model.Categories.Count(x => x.IsInTopTwelve) - 12} too many.");
                 return View("SelectTopTwelve", model);
             }
 
-            _ordersBusinessLogic.SubmitCards(model.CreateSubmitCardsDTO());
+            await _ordersBusinessLogic.SubmitCards(model.CreateSubmitCardsDTO());
 
             return View("CustomSolutionsSuccess");
         }
@@ -126,6 +123,14 @@ namespace HireRight.Controllers
             listToReturn.AddRange(highImportanceModels);
 
             return listToReturn;
+        }
+
+        private async Task<List<CategoryDTO>> FindCategories(string description, string title, int page = 1, int size = 10)
+        {
+            CategoryFilter filter = new CategoryFilter(title, description);
+            filter.PageNumber = page;
+            filter.PageSize = size;
+            return await _categoriesBusinessLogic.Get(filter);
         }
 
         private CategoryImportance GetImportanceLevelFromDisplayName(string importanceLevelName)

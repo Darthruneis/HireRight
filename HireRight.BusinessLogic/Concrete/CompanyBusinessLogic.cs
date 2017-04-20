@@ -24,23 +24,28 @@ namespace HireRight.BusinessLogic.Concrete
 
         public async Task<CompanyDTO> Add(CompanyDTO companyDto)
         {
-            var existingCompanies = await Get(new CompanyFilter(1, 10) { Name = companyDto.Name });
-            if (existingCompanies.Any(x => x.Name == companyDto.Name))
-                return existingCompanies.First(x => x.Name == companyDto.Name);
+            List<CompanyDTO> existingCompanies = await Get(new CompanyFilter(1, 10) { Name = companyDto.Name });
+            CompanyDTO dto;
+            if (existingCompanies.All(x => x.Name != companyDto.Name))
+            {
+                Company newCompany = await _companyRepository.Add(ConvertDtoToModel(companyDto));
+                dto = ConvertModelToDto(newCompany);
+            }
+            else
+                dto = existingCompanies.First(x => x.Name == companyDto.Name);
 
-            Company companyToAdd = ConvertDtoToModel(companyDto);
+            if (companyDto.Orders != null && companyDto.Orders.Any())
+            {
+                NewOrderDTO order = new NewOrderDTO();
+                order.Order = companyDto.Orders.First();
+                order.Company = dto;
+                order.PrimaryContact = dto.Contacts.First(x => x.IsPrimary);
+                order.SecondaryContact = dto.Contacts.First(x => !x.IsPrimary);
+                order.CreatedUtc = dto.CreatedUtc;
+                order.Id = dto.Orders.First().Id;
 
-            CompanyDTO dto = ConvertModelToDto(await _companyRepository.Add(companyToAdd).ConfigureAwait(false));
-
-            NewOrderDTO order = new NewOrderDTO();
-            order.Order = companyDto.Orders.First();
-            order.Company = dto;
-            order.PrimaryContact = dto.Contacts.First(x => x.IsPrimary);
-            order.SecondaryContact = dto.Contacts.First(x => !x.IsPrimary);
-            order.CreatedUtc = dto.CreatedUtc;
-            order.Id = dto.Orders.First().Id;
-
-            await _ordersBusinessLogic.CreateOrder(order);
+                await _ordersBusinessLogic.CreateOrder(order);
+            }
 
             return dto;
         }

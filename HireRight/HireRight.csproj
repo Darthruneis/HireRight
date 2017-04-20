@@ -298,7 +298,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Contact\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Order\Order.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Home\ManufacturingInformationPartial.cshtml" />
     <Content Include="Views\Home\CustomerServiceInformationPartial.cshtml" />
     <Content Include="Views\Home\ManagersInformationPartial.cshtml" />
