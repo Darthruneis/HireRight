@@ -1,27 +1,13 @@
 ﻿@model SectionWithTogglesAndTitleViewModel
 <script src="~/Scripts/toggleDivsAndButtons.js"></script>
-<style>
-    .tooltip {
-        position: relative;
-        display: inline-block;
-    }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            background-color: black;
-            color:;
-        }
-</style>
 <div class="col-xs-12 row borderedRow" style="padding-bottom: 10px;">
     <div class="col-xs-12 panel panel-head">
         <div class="col-xs-11">
             <h2>@Model.TitleText</h2>
         </div>
         <div class="col-xs-1">
-            <button type="button" class="btn btn-default glyphicon glyphicon-minus-sign" id="@Model.HideButtonId" style="margin-top: 15px;" title="Collapse this section">
-            </button>
-            <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign tooltip-default" id="@Model.ShowButtonId" style="display: none; margin-top: 15px;" title="Expand this section">
-            </button>
+            <button type="button" class="btn btn-default glyphicon glyphicon-minus-sign" id="@Model.HideButtonId" style="margin-top: 15px;" title="Collapse this section"></button>
+            <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign tooltip-default" id="@Model.ShowButtonId" style="display: none; margin-top: 15px;" title="Expand this section"></button>
         </div>
     </div>
     <div class="col-xs-12" id="@Model.HiddenContentId" hidden="hidden">
