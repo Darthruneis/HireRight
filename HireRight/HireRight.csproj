@@ -262,6 +262,7 @@
     <Content Include="Content\ProfileSamples\SJTTeamsSample.pdf" />
     <Content Include="Content\ProfileSamples\WATSample.pdf" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />

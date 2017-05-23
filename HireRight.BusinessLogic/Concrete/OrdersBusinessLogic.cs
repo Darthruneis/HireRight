@@ -185,7 +185,7 @@ namespace HireRight.BusinessLogic.Concrete
                 if (replyTo != null)
                     mailMessage.ReplyToList.Add(replyTo);
 
-                emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight\HireRight Test Emails";
+                emailClient.PickupDirectoryLocation = "~/HireRight Test Emails";
                 emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
                 emailClient.Send(mailMessage);
             }
