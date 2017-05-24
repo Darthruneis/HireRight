@@ -1,21 +1,15 @@
-﻿<div class="col-xs-12 col-md-6 col-md-push-3">
-    <p>
-        Hire Right provides pre-employment testing targetted to your industry and specific positions in your business. We assess the traits that impact your specific organization.
-    </p>
-    <p>
-        Our custom profiles measure skills, abilities, knowledge, and personal characteristics that are directly related to being a top performer.
-    </p>
-    <div>
-        <img src="~/Content/indexPicture.jpg" alt="indexImage" />
-    </div>
+﻿@*This is the desktop version of this view. It has a slightly different ordering
+    from the mobile view - this was the cleanest, simplest way of accomplishing this.*@
+
+<div class="col-xs-4">
+    @{ Html.RenderPartial("UnhappyEmployeesArePoison"); }
 </div>
-<div class="col-xs-6 col-md-3 col-md-pull-6">
-    <p>
-        Unqualified and disgrunted employees poison both your staff and your customers, causing irreparable damage to your revenue stream
-        and the culture of your company.
-    </p>
+<div class="col-xs-4">
+    @{ Html.RenderPartial("SalesPitch");}
 </div>
-<div class="col-xs-6 col-md-3">
-    <p>Turnover costs companies thousands of dollars per employee. The average cost is 25% of the annual compensation (SHRM).</p>
-    <p>This takes your managers and staff away from doing their jobs.</p>
+<div class="col-xs-4">
+    @{ Html.RenderPartial("Turnover");}
+</div>
+<div class="col-xs-12">
+    @{ Html.RenderPartial("ComeGetYourJobsImage"); }
 </div>
