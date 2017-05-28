@@ -71,6 +71,7 @@ namespace HireRight
             kernel.Bind<IOrdersBusinessLogic>().To<OrdersBusinessLogic>();
             kernel.Bind<IProductsBusinessLogic>().To<ProductsBusinessLogic>();
             kernel.Bind<ICategoriesBusinessLogic>().To<CategoriesBusinessLogic>();
+            kernel.Bind<IEmailSender>().To<EmailSender>();
         }
     }
 }

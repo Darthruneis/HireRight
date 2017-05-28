@@ -19,27 +19,16 @@ namespace HireRight.BusinessLogic.Concrete
     public class OrdersBusinessLogic : IOrdersBusinessLogic
     {
         private readonly ICategoriesBusinessLogic _categoriesBusinessLogic;
+        private readonly IEmailSender _emailSender;
         private readonly IOrdersRepository _ordersRepository;
         private readonly IProductsBusinessLogic _productsBusinessLogic;
 
-        public OrdersBusinessLogic(IOrdersRepository repo, IProductsBusinessLogic productBll, ICategoriesBusinessLogic categoriesBusinessLogic)
+        public OrdersBusinessLogic(IOrdersRepository repo, IProductsBusinessLogic productBll, ICategoriesBusinessLogic categoriesBusinessLogic, IEmailSender emailSender)
         {
             _ordersRepository = repo;
             _productsBusinessLogic = productBll;
             _categoriesBusinessLogic = categoriesBusinessLogic;
-        }
-
-        public static void SendFormattedEmail(string email, string greeting, string message, string subject, string replyTo = null)
-        {
-            string body;
-            const string path = @"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\HireRight.BusinessLogic\Models\EmailBase.cshtml";
-            using (StreamReader reader = new StreamReader(path))
-            {
-                body = reader.ReadToEnd();
-            }
-
-            string messageBody = string.Format(body, greeting, message);
-            SendEmail(email, messageBody, subject, replyTo);
+            _emailSender = emailSender;
         }
 
         public async Task<OrderDetailsDTO> Add(OrderDetailsDTO objectDto)
@@ -138,7 +127,7 @@ namespace HireRight.BusinessLogic.Concrete
                        .AppendLine(model.Order.NotesAndPositions.Notes)
                        .AppendLine();
 
-            EmailConsultants(message.ToString(), "New Order Placed!");
+            _emailSender.EmailConsultants(message.ToString(), "New Order Placed!");
         }
 
         public async Task<OrderDetailsDTO> Get(Guid orderGuid)
@@ -156,39 +145,13 @@ namespace HireRight.BusinessLogic.Concrete
         public async Task SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
             string message = await CreateEmailMessageFromDto(cardsToSubmit);
-            EmailConsultants(message, "New Custom Test Request");
+            _emailSender.EmailConsultants(message, "New Custom Test Request");
         }
 
         public async Task<OrderDetailsDTO> Update(OrderDetailsDTO objectDto)
         {
             Order orderToUpdate = ConvertDtoToModel(objectDto);
             return ConvertModelToDto(await _ordersRepository.Update(orderToUpdate).ConfigureAwait(false));
-        }
-
-        private static void EmailConsultants(string message, string subject, string replyTo = null)
-        {
-            SendFormattedEmail("silverasoc@aol.com", "Diana", message, subject, replyTo);
-            SendFormattedEmail("janet@something.com", "Janet", message, subject, replyTo);
-        }
-
-        private static void SendEmail(string recipient, string body, string subject, string replyTo = null)
-        {
-            using (SmtpClient emailClient = new SmtpClient())
-            {
-                MailMessage mailMessage = new MailMessage(
-                    "Hire Right Testing Admin Admin@HireRightTesting.com",
-                    recipient,
-                    subject,
-                    //Replace normal line breaks with HTML break statements
-                    body.Replace("\r\n", "<br/>"))
-                { IsBodyHtml = true };
-                if (replyTo != null)
-                    mailMessage.ReplyToList.Add(replyTo);
-
-                emailClient.PickupDirectoryLocation = "~/HireRight Test Emails";
-                emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                emailClient.Send(mailMessage);
-            }
         }
 
         private async Task<string> CreateEmailMessageFromDto(SubmitCardsDTO cards)
