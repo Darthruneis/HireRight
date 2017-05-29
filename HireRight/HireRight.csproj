@@ -261,6 +261,7 @@
     <Content Include="Content\ProfileSamples\SJTSupervisorSample.pdf" />
     <Content Include="Content\ProfileSamples\SJTTeamsSample.pdf" />
     <Content Include="Content\ProfileSamples\WATSample.pdf" />
+    <Content Include="EmailBase.cshtml" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

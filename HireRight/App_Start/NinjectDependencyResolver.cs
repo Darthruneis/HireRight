@@ -78,7 +78,7 @@ namespace HireRight
             Func<IContext, object> getEmailTemplatePath = context =>
                             {
                                 string baseDir = System.Web.HttpContext.Current.Server.MapPath("~");
-                                return Path.GetFullPath(baseDir + @"..\HireRight.BusinessLogic\Models\EmailBase.cshtml");
+                                return Path.GetFullPath(baseDir + @"\EmailBase.cshtml");
                             };
             kernel.Bind<IEmailSender>().To<EmailSender>().WithConstructorArgument("emailTemplatePath", getEmailTemplatePath);
         }
