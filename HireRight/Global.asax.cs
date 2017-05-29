@@ -10,17 +10,22 @@ namespace HireRight
 {
     public class MvcApplication : HttpApplication
     {
+        private static readonly string LogFilePath = Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath("~") + @"\logs.txt");
+
         protected void Application_Error()
         {
             var exception = Server.GetLastError();
 
-            using (StreamWriter writer = new StreamWriter(File.Open("~/log.txt", FileMode.OpenOrCreate)))
+            using (StreamWriter writer = new StreamWriter(File.Open(LogFilePath, FileMode.Append)))
             {
                 writer.WriteLine("--- START");
                 writer.WriteLine("Exception logged at: " + DateTime.Now);
                 writer.Write(exception);
-                writer.WriteLine("--- END");
+                writer.WriteLine(Environment.NewLine + "--- END");
             }
+
+            Server.ClearError();
+            Response.RedirectToRoute("Default");
         }
 
         protected void Application_Start()
@@ -30,6 +35,9 @@ namespace HireRight
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            if (!File.Exists(LogFilePath))
+                File.Create(LogFilePath);
         }
     }
 }
