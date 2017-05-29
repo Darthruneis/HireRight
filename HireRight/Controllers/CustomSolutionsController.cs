@@ -29,7 +29,7 @@ namespace HireRight.Controllers
         [ValidateInput(false)]
         public async Task<PartialViewResult> FilterCategories(int page, int size, string description, string title)
         {
-            CategoryFilter filter = new CategoryFilter(title, description);
+            CategoryFilter filter = new CategoryFilter(title, description) { PageNumber = page, PageSize = size };
             CustomSolutionsViewModel newModel = CreateViewModelFromCategoryList(await FindCategories(description, title, page, size), filter);
 
             return PartialView("CustomSolutionsPartial", newModel);

@@ -61,7 +61,11 @@ namespace HireRight.Repository.Concrete
 
         public async Task<List<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters)
         {
-            return await query.OrderBy(x => x.Id).Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
+            query = query.OrderBy(x => x.Id);
+            var count = query.Count();
+            if (count < filterParameters.PageNumber * filterParameters.PageSize)
+                return await query.Skip(count - filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
+            return await query.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
         }
 
         public async Task<TModel> UpdateBase(TModel itemToUpdate, DbSet<TModel> dbSet, HireRightDbContext context)
