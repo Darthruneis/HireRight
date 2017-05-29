@@ -1,11 +1,14 @@
 ﻿using Ninject;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Concrete;
 using HireRight.Repository.Abstract;
 using HireRight.Repository.Concrete;
+using Ninject.Activation;
 
 namespace HireRight
 {
@@ -71,7 +74,13 @@ namespace HireRight
             kernel.Bind<IOrdersBusinessLogic>().To<OrdersBusinessLogic>();
             kernel.Bind<IProductsBusinessLogic>().To<ProductsBusinessLogic>();
             kernel.Bind<ICategoriesBusinessLogic>().To<CategoriesBusinessLogic>();
-            kernel.Bind<IEmailSender>().To<EmailSender>();
+
+            Func<IContext, object> getEmailTemplatePath = context =>
+                            {
+                                string baseDir = System.Web.HttpContext.Current.Server.MapPath("~");
+                                return Path.GetFullPath(baseDir + @"..\HireRight.BusinessLogic\Models\EmailBase.cshtml");
+                            };
+            kernel.Bind<IEmailSender>().To<EmailSender>().WithConstructorArgument("emailTemplatePath", getEmailTemplatePath);
         }
     }
 }

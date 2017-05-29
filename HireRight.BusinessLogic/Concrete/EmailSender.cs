@@ -13,6 +13,7 @@ namespace HireRight.BusinessLogic.Concrete
         private static readonly string DianaEmail;
         private static readonly string JanetEmail;
         private static readonly string MailServiceEmailAddress;
+        private readonly string _emailTemplatePath;
 
         static EmailSender()
         {
@@ -20,6 +21,11 @@ namespace HireRight.BusinessLogic.Concrete
             _smtpCredentials = new NetworkCredential(MailServiceEmailAddress, WebConfigurationManager.AppSettings["MailAccountPassword"]);
             DianaEmail = WebConfigurationManager.AppSettings["DianaEmail"];
             JanetEmail = WebConfigurationManager.AppSettings["JanetEmail"];
+        }
+
+        public EmailSender(string emailTemplatePath)
+        {
+            _emailTemplatePath = emailTemplatePath;
         }
 
         public void EmailConsultants(string message, string subject, string replyTo = null)
@@ -51,8 +57,7 @@ namespace HireRight.BusinessLogic.Concrete
         public void SendFormattedEmail(string email, string greeting, string message, string subject, string replyTo = null)
         {
             string body;
-            const string path = @"~\HireRight.BusinessLogic\Models\EmailBase.cshtml";
-            using (StreamReader reader = new StreamReader(path))
+            using (StreamReader reader = new StreamReader(_emailTemplatePath))
             {
                 body = reader.ReadToEnd();
             }
@@ -64,7 +69,7 @@ namespace HireRight.BusinessLogic.Concrete
         [Conditional("DEBUG")]
         private void SetEmailPickupDirectory(SmtpClient emailClient)
         {
-            emailClient.PickupDirectoryLocation = "~/HireRight Test Emails";
+            emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight\HireRight Test Emails";
             emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
         }
     }
