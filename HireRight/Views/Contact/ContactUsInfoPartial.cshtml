@@ -2,7 +2,6 @@
 <div class="row">
     <div class="col-xs-12">
         <h2>How can we help you?</h2>
-        @Html.ValidationSummary(true)
     </div>
 </div>
 <div class="row borderedRow">
@@ -43,8 +42,11 @@
     </div>
 </div>
 <div class="row" style="margin-top: 10px;">
-    <div class="col-xs-12">
-        <div style="margin: 0 auto; width: 200px;">
+    <div class="col-xs-10">
+        @Html.ValidationSummary(true)
+    </div>
+    <div class="col-xs-2">
+        <div style="margin: 0 auto;">
             <input type="submit" style="text-align: center;" value="Send" class="btn btn-primary" />
         </div>
     </div>

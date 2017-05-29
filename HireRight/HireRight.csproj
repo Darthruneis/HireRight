@@ -339,6 +339,7 @@
     <Content Include="Views\Home\SalesPitch.cshtml" />
     <Content Include="Views\Home\Turnover.cshtml" />
     <Content Include="Views\Home\ComeGetYourJobsImage.cshtml" />
+    <Content Include="Views\Order\Contacts.cshtml" />
     <None Include="Views\Order\OrderTotalPartial.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
     <Content Include="Views\Reports\Samples.cshtml" />

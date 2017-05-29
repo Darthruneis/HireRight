@@ -73,7 +73,7 @@ namespace HireRight.Infrastructure
             MvcHtmlString editorString = helper.EditorFor(expression, new { htmlAttributes = htmlattributes ?? new { @class = "form-control", style = "width: 100%;" } });
             MvcHtmlString validationString = helper.ValidationMessageFor(expression);
 
-            return new MvcHtmlString(labelString + (isRequired ? "<span style=\"color: red;\" class=\"glyphicon glyphicon-asterisk\"></span>" : string.Empty) + "<br />" + editorString + "<br />" + validationString);
+            return new MvcHtmlString(labelString + (isRequired ? "<span style=\"color: red;\" class=\"glyphicon glyphicon-asterisk\"></span>" : string.Empty) + "<br />" + editorString + validationString);
         }
     }
 }

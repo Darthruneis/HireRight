@@ -5,7 +5,6 @@
 <script src="~/Scripts/CustomSolutions/index.js"></script>
 @using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm", @class = "row" }))
 {
-    @Html.ValidationSummary(true)
     SectionWithTogglesAndTitleViewModel explanationViewModel = new SectionWithTogglesAndTitleViewModel("show the form instructions again.",
         "hiddenFormInstructionsDiv", "hideFormInstructionsButton",
         "showFormInstructionsButton", "shownFormInstructionsDiv",
@@ -28,8 +27,11 @@
     Html.RenderPartial("SectionWithPanelHeadAndToggles", customSolutionsViewModel);
     <br />
     <div class="col-xs-12 row" style="padding-top: 10px;">
-        <div class="col-xs-12">
-            <div style="margin: 0 auto; width: 200px;">
+        <div class="col-xs-10">
+            @Html.ValidationSummary(true)
+        </div>
+        <div class="col-xs-2">
+            <div style="margin: 0 auto;">
                 <input type="submit" value="Continue" class="btn btn-primary" />
             </div>
         </div>

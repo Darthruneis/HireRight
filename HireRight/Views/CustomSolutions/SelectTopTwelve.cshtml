@@ -2,10 +2,8 @@
 @{
     ViewBag.Title = "Please select the most important categories";
 }
-
 @using (Html.BeginForm("TopTwelve", "CustomSolutions", FormMethod.Post))
 {
-    @Html.ValidationSummary(true)
     <div class="row borderedRow">
         <div class="col-xs-12 col-lg-4"><h3>Title</h3></div>
         <div class="col-xs-12 col-lg-6"><h3>Description</h3></div>
@@ -23,8 +21,10 @@
     <div style="max-height: 70vh; overflow-y: scroll; overflow-x: hidden;">
         @{ Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model); }
     </div>
-    <br/>
-    <div style="margin: 0 auto; width: 200px;">
-        <input type="submit" class="btn btn-Primary" value="Finish" />
+    <div class="row">
+        <div class="col-xs-10">@Html.ValidationSummary(true)</div>
+        <div class="col-xs-2" style="margin: 0 auto;">
+            <input type="submit" class="btn btn-Primary" value="Finish" />
+        </div>
     </div>
-}
+            }
