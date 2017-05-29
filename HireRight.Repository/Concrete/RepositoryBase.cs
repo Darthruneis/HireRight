@@ -63,7 +63,7 @@ namespace HireRight.Repository.Concrete
         {
             query = query.OrderBy(x => x.Id);
             var count = query.Count();
-            if (count < filterParameters.PageNumber * filterParameters.PageSize)
+            if (filterParameters.PageNumber > 1 && count < filterParameters.PageNumber * filterParameters.PageSize)
                 return await query.Skip(count - filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
             return await query.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
         }
