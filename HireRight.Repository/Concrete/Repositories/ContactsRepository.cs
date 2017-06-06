@@ -1,36 +1,35 @@
 ﻿using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Concrete
 {
-    public class ContactsRepository : IContactsRepository
+    public class ContactsRepository : RepositoryBase<Contact>, IContactsRepository
     {
-        private readonly IRepositoryBase<Contact> _repositoryBase;
-
-        public ContactsRepository(IRepositoryBase<Contact> repositoryBase)
+        public ContactsRepository() : base(() => new HireRightDbContext())
         {
-            _repositoryBase = repositoryBase;
+        }
+
+        public ContactsRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc)
+        {
         }
 
         public async Task<Contact> Add(Contact itemToAdd)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Contacts, context).ConfigureAwait(false);
+                return await AddBase(itemToAdd, context.Contacts, context).ConfigureAwait(false);
             }
         }
 
         public async Task<List<Contact>> Get(ContactFilter filter)
         {
-            List<Contact> contacts;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
                 IQueryable<Contact> contactsQuery = context.Contacts;
 
@@ -48,29 +47,24 @@ namespace HireRight.Repository.Concrete
 
                 contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.OfficeNumber) || x.OfficeNumber.Contains(filter.OfficeNumber));
 
-                contacts = await _repositoryBase.TakePage(contactsQuery, filter).ConfigureAwait(false);
+                List<Contact> contacts = await TakePage(contactsQuery, filter).ConfigureAwait(false);
+                return contacts;
             }
-
-            return contacts;
         }
 
         public async Task<Contact> Get(Guid itemGuid)
         {
-            Contact contact;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                contact = await _repositoryBase.GetBase(itemGuid, context.Contacts).ConfigureAwait(false);
+                return await GetBase(itemGuid, context.Contacts).ConfigureAwait(false);
             }
-
-            return contact;
         }
 
         public async Task<Contact> Update(Contact itemToUpdate)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Contacts, context).ConfigureAwait(false);
+                return await UpdateBase(itemToUpdate, context.Contacts, context).ConfigureAwait(false);
             }
         }
     }

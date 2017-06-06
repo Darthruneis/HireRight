@@ -1,37 +1,36 @@
 ﻿using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Concrete
 {
-    public class CompanyRepository : ICompanyRepository
+    public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
     {
-        private readonly IRepositoryBase<Company> _repositoryBase;
-
-        public CompanyRepository(IRepositoryBase<Company> repositoryBase)
+        public CompanyRepository() : base(() => new HireRightDbContext())
         {
-            _repositoryBase = repositoryBase;
+        }
+
+        public CompanyRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc)
+        {
         }
 
         public async Task<Company> Add(Company itemToAdd)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Companies, context).ConfigureAwait(false);
+                return await AddBase(itemToAdd, context.Companies, context).ConfigureAwait(false);
             }
         }
 
         public async Task<List<Company>> Get(CompanyFilter filter)
         {
-            List<Company> companies;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
                 IQueryable<Company> companiesQuery = context.Companies.Include(x => x.Locations).Include(x => x.Contacts).Include(x => x.Orders);
 
@@ -41,29 +40,25 @@ namespace HireRight.Repository.Concrete
                 if (!string.IsNullOrWhiteSpace(filter.Name))
                     companiesQuery = companiesQuery.Where(x => x.Name.Contains(filter.Name));
 
-                companies = await _repositoryBase.TakePage(companiesQuery, filter).ConfigureAwait(false);
+                List<Company> companies = await TakePage(companiesQuery, filter).ConfigureAwait(false);
+                return companies;
             }
-
-            return companies;
         }
 
         public async Task<Company> Get(Guid itemGuid)
         {
-            Company company;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                company = await _repositoryBase.GetBase(itemGuid, context.Companies.Include(x => x.Locations)).ConfigureAwait(false);
+                Company company = await GetBase(itemGuid, context.Companies.Include(x => x.Locations)).ConfigureAwait(false);
+                return company;
             }
-
-            return company;
         }
 
         public async Task<Company> Update(Company itemToUpdate)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Companies, context).ConfigureAwait(false);
+                return await UpdateBase(itemToUpdate, context.Companies, context).ConfigureAwait(false);
             }
         }
     }

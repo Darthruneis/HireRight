@@ -1,36 +1,35 @@
-﻿using HireRight.EntityFramework.CodeFirst.Database_Context;
+﻿using DataTransferObjects.Filters.Concrete;
+using HireRight.EntityFramework.CodeFirst.Database_Context;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataTransferObjects.Filters.Concrete;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Concrete
 {
-    public class CategoriesRepository : ICategoriesRepository
+    public class CategoriesRepository : RepositoryBase<ScaleCategory>, ICategoriesRepository
     {
-        private readonly IRepositoryBase<ScaleCategory> _repositoryBase;
-
-        public CategoriesRepository(IRepositoryBase<ScaleCategory> repositoryBase)
+        public CategoriesRepository() : base(() => new HireRightDbContext())
         {
-            _repositoryBase = repositoryBase;
+        }
+
+        public CategoriesRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc)
+        {
         }
 
         public async Task<ScaleCategory> Add(ScaleCategory itemToAdd)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Categories, context);
+                return await AddBase(itemToAdd, context.Categories, context);
             }
         }
 
         public async Task<List<ScaleCategory>> Get(CategoryFilter filter)
         {
-            List<ScaleCategory> categoriesFound;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
                 IQueryable<ScaleCategory> query = context.Categories;
 
@@ -43,29 +42,25 @@ namespace HireRight.Repository.Concrete
                 if (filter.ItemGuids.Any())
                     query = query.Where(x => filter.ItemGuids.Contains(x.Id));
 
-                categoriesFound = await _repositoryBase.TakePage(query, filter);
+                List<ScaleCategory> categoriesFound = await TakePage(query, filter);
+                return categoriesFound;
             }
-
-            return categoriesFound;
         }
 
         public async Task<ScaleCategory> Get(Guid itemGuid)
         {
-            ScaleCategory category;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                category = await _repositoryBase.GetBase(itemGuid, context.Categories);
+                ScaleCategory category = await GetBase(itemGuid, context.Categories);
+                return category;
             }
-
-            return category;
         }
 
         public async Task<ScaleCategory> Update(ScaleCategory itemToUpdate)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Categories, context);
+                return await UpdateBase(itemToUpdate, context.Categories, context);
             }
         }
     }

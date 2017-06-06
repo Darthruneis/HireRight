@@ -1,37 +1,36 @@
 ﻿using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Concrete
 {
-    public class OrdersRepository : IOrdersRepository
+    public class OrdersRepository : RepositoryBase<Order>, IOrdersRepository
     {
-        private readonly IRepositoryBase<Order> _repositoryBase;
-
-        public OrdersRepository(IRepositoryBase<Order> repositoryBase)
+        public OrdersRepository() : base(() => new HireRightDbContext())
         {
-            _repositoryBase = repositoryBase;
+        }
+
+        public OrdersRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc)
+        {
         }
 
         public async Task<Order> Add(Order itemToAdd)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Orders, context).ConfigureAwait(false);
+                return await AddBase(itemToAdd, context.Orders, context).ConfigureAwait(false);
             }
         }
 
         public async Task<List<Order>> Get(OrderFilter filter)
         {
-            List<Order> orders;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
                 IQueryable<Order> ordersQuery = context.Orders.Include(x => x.Product);
 
@@ -46,29 +45,25 @@ namespace HireRight.Repository.Concrete
                 ordersQuery = FilterByQuantity(ordersQuery, filter.Quantity, filter.QuantityComparator);
                 ordersQuery = FilterByDateCompleted(ordersQuery, filter.Completed, filter.CompletedComparator);
 
-                orders = await _repositoryBase.TakePage(ordersQuery, filter).ConfigureAwait(false);
+                List<Order> orders = await TakePage(ordersQuery, filter).ConfigureAwait(false);
+                return orders;
             }
-
-            return orders;
         }
 
         public async Task<Order> Get(Guid itemGuid)
         {
-            Order order;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                order = await _repositoryBase.GetBase(itemGuid, context.Orders.Include(x => x.Product)).ConfigureAwait(false);
+                Order order = await GetBase(itemGuid, context.Orders.Include(x => x.Product)).ConfigureAwait(false);
+                return order;
             }
-
-            return order;
         }
 
         public async Task<Order> Update(Order itemToUpdate)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Orders, context).ConfigureAwait(false);
+                return await UpdateBase(itemToUpdate, context.Orders, context).ConfigureAwait(false);
             }
         }
 

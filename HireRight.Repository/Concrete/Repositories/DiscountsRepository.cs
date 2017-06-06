@@ -1,36 +1,35 @@
 ﻿using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Concrete
 {
-    public class DiscountsRepository : IDiscountsRepository
+    public class DiscountsRepository : RepositoryBase<Discount>, IDiscountsRepository
     {
-        private readonly IRepositoryBase<Discount> _repositoryBase;
-
-        public DiscountsRepository(IRepositoryBase<Discount> repositoryBase)
+        public DiscountsRepository() : base(() => new HireRightDbContext())
         {
-            _repositoryBase = repositoryBase;
+        }
+
+        public DiscountsRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc)
+        {
         }
 
         public async Task<Discount> Add(Discount itemToAdd)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Discounts, context).ConfigureAwait(false);
+                return await AddBase(itemToAdd, context.Discounts, context).ConfigureAwait(false);
             }
         }
 
         public async Task<List<Discount>> Get(DiscountFilter filter)
         {
-            List<Discount> discounts;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
                 IQueryable<Discount> discountsQuery = context.Discounts;
 
@@ -40,29 +39,25 @@ namespace HireRight.Repository.Concrete
 
                 discountsQuery = discountsQuery.Where(x => filter.IsPercent == null || x.IsPercent == filter.IsPercent.Value);
 
-                discounts = await _repositoryBase.TakePage(discountsQuery, filter).ConfigureAwait(false);
+                List<Discount> discounts = await TakePage(discountsQuery, filter).ConfigureAwait(false);
+                return discounts;
             }
-
-            return discounts;
         }
 
         public async Task<Discount> Get(Guid itemGuid)
         {
-            Discount discount;
-
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                discount = await _repositoryBase.GetBase(itemGuid, context.Discounts).ConfigureAwait(false);
+                Discount discount = await GetBase(itemGuid, context.Discounts).ConfigureAwait(false);
+                return discount;
             }
-
-            return discount;
         }
 
         public async Task<Discount> Update(Discount itemToUpdate)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Discounts, context).ConfigureAwait(false);
+                return await UpdateBase(itemToUpdate, context.Discounts, context).ConfigureAwait(false);
             }
         }
 

@@ -8,18 +8,19 @@ namespace HireRight
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                "~/Scripts/modernizr-*",
                 "~/Scripts/jquery-{version}.min.js",
-                "~/Scripts/jquery.validate*",
+                "~/Scripts/bootstrap.min.js",
+                "~/Scripts/respond.min.js",
+                "~/Scripts/jquery.validate.min.js*",
                 "~/Scripts/jquery.validate.unobtrusive.min.js",
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js",
-                "~/Scripts/modernizr-*",
-                "~/Scripts/navbarLinksCurrentColor.js"
+                "~/Scripts/navbarLinksCurrentColor.js",
+                "~/Scripts/ajaxCallWithLoadingIcon.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/styles.css"));
 
             BundleTable.EnableOptimizations = true;

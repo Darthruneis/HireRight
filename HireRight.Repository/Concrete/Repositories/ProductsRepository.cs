@@ -1,29 +1,30 @@
 ﻿using DataTransferObjects.Filters.Concrete;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
+using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Concrete
 {
-    public class ProductsRepository : IProductsRepository
+    public class ProductsRepository : RepositoryBase<Product>, IProductsRepository
     {
-        private readonly IRepositoryBase<Product> _repositoryBase;
-
-        public ProductsRepository(IRepositoryBase<Product> repositoryBase)
+        public ProductsRepository() : base(() => new HireRightDbContext())
         {
-            _repositoryBase = repositoryBase;
+        }
+
+        public ProductsRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc)
+        {
         }
 
         public async Task<Product> Add(Product itemToAdd)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.AddBase(itemToAdd, context.Products, context).ConfigureAwait(false);
+                return await AddBase(itemToAdd, context.Products, context).ConfigureAwait(false);
             }
         }
 
@@ -31,9 +32,7 @@ namespace HireRight.Repository.Concrete
         {
             try
             {
-                List<Product> products;
-
-                using (HireRightDbContext context = new HireRightDbContext())
+                using (HireRightDbContext context = ContextFunc.Invoke())
                 {
                     IQueryable<Product> productsQuery = context.Products.Include(x => x.Discounts);
 
@@ -44,10 +43,9 @@ namespace HireRight.Repository.Concrete
 
                     productsQuery = FilterByPrice(productsQuery, filter.Price, filter.PriceComparator);
 
-                    products = await _repositoryBase.TakePage(productsQuery, filter).ConfigureAwait(false);
+                    List<Product> products = await TakePage(productsQuery, filter).ConfigureAwait(false);
+                    return products;
                 }
-
-                return products;
             }
             catch (Exception ex)
             {
@@ -59,9 +57,9 @@ namespace HireRight.Repository.Concrete
         {
             Product product;
 
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                product = await _repositoryBase.GetBase(itemGuid, context.Products.Include(x => x.Discounts)).ConfigureAwait(false);
+                product = await GetBase(itemGuid, context.Products.Include(x => x.Discounts)).ConfigureAwait(false);
             }
 
             return product;
@@ -69,9 +67,9 @@ namespace HireRight.Repository.Concrete
 
         public async Task<Product> Update(Product itemToUpdate)
         {
-            using (HireRightDbContext context = new HireRightDbContext())
+            using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await _repositoryBase.UpdateBase(itemToUpdate, context.Products, context).ConfigureAwait(false);
+                return await UpdateBase(itemToUpdate, context.Products, context).ConfigureAwait(false);
             }
         }
 

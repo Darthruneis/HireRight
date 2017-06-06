@@ -61,7 +61,6 @@ namespace HireRight
             //kernel.Bind<ICategoriesSDK>().To<CategoriesSDK>();
 
             //repository bindings
-            kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
             kernel.Bind<IContactsRepository>().To<ContactsRepository>();
             kernel.Bind<IOrdersRepository>().To<OrdersRepository>();
