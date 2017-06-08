@@ -4,8 +4,12 @@
         method: method.toUpperCase(),
         url: url,
         dataType: dataType,
-        beforeSend: function () { processing.show(); },
-        complete: function () { processing.hide(); },
+        beforeSend: function () {
+            processing.show();
+        },
+        complete: function () {
+            setTimeout(processing.hide(), 5);
+        },
         success: successFn
     });
 }

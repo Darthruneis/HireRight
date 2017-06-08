@@ -5,6 +5,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #000000;
   font-weight: bold; }
 
+.spinner {
+  -webkit-animation: spin 1.25s infinite linear;
+  -moz-animation: spin 1.25s infinite linear;
+  -o-animation: spin 1.25s infinite linear;
+  animation: spin 1.25s infinite linear; }
+
 .list-item-root li:before li:before, .list-item-nested li:before li:before {
   content: "* ";
   color: #993333;
@@ -152,7 +158,37 @@ a:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #335060; }
+  background-color: #335060;
+  border: 2px solid black;
+  border-radius: 8px;
+  text-align: center;
+  padding: 25px 45px; }
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg); }
+  100% {
+    -moz-transform: rotate(359deg); } }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg); } }
+
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg); }
+  100% {
+    -o-transform: rotate(359deg); } }
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
 
 /* Override the default bootstrap behavior where horizontal description lists
    will truncate terms that are too long to fit in the left column

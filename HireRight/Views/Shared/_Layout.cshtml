@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hire Right, the first time! Hire Right provides pre-employment testing targetted to your industry and specific positions in your business" />
+    <meta name="keywords" content="Recruitment,Recruiting,Personnel,Hiring,Hire,Analysis,Consulting,Consultant,Consultants,Consultation" />
     <title>@ViewBag.Title - Hire Right Testing</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/scripts")
@@ -21,10 +23,12 @@
             Hire Right Consultants&trade;
         </div>
     </footer>
-    <div id="processing"
-         class="processingIcon">
-        <h2>Loading...</h2>
+<div id="processing" class="processingIcon">
+    <div style="display: inline-block;">
+        <span class="glyphicon glyphicon-hourglass spinner"></span>
+        <h2 style="padding: 0; padding-top: 5px; margin: 0;">Loading...</h2>
     </div>
+</div>
     @RenderSection("scripts", required: false)
 </body>
 </html>

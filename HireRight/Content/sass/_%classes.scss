@@ -9,6 +9,13 @@
     font-weight: bold;
 }
 
+%spinner{
+    -webkit-animation: spin $spinSpeed infinite linear;
+  -moz-animation: spin $spinSpeed infinite linear;
+  -o-animation: spin $spinSpeed infinite linear;
+  animation: spin $spinSpeed infinite linear;
+}
+
 %listItemBefore {
     li:before {
         content: "* ";
