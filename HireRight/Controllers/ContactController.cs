@@ -43,7 +43,9 @@ namespace HireRight.Controllers
 
                 await _contactsBusinessLogic.SendNewContactEmail(dto.Id, model.Message);
             }
+#pragma warning disable CS0168
             catch (Exception ex)
+#pragma warning restore CS0168
             {
                 ModelState.AddModelError("", "An error ocurred while saving.  Please try again later.");
                 return View("Contact", model);

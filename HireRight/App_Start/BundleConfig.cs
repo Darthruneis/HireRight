@@ -21,7 +21,8 @@ namespace HireRight
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/styles.css"));
+                      "~/Content/styles.css"
+                      ));
 
             BundleTable.EnableOptimizations = true;
         }
