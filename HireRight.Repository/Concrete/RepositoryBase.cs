@@ -92,13 +92,15 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        private static string GetConcatenatedErrorMessage(List<ValidationResult> errors, string summaryMessage = "The following errors were encounterd: ")
+        private static string GetConcatenatedErrorMessage(List<ValidationResult> errors, string summaryMessage = "The following errors were encountered: ")
         {
             if (summaryMessage == null)
                 summaryMessage = "The following errors were encounterd: ";
 
-            List<string> errorMessages = errors.Select(x => x.ErrorMessage).ToList();
-            return string.Join(Environment.NewLine, summaryMessage, errorMessages);
+            List<string> errorMessages = new List<string>() { summaryMessage };
+            errorMessages.AddRange(errors.Select(x => x.ErrorMessage).ToList());
+
+            return string.Join(Environment.NewLine, errorMessages.ToArray());
         }
 
         private async Task<TModel> CheckForValidItem(IQueryable<TModel> query, Guid itemGuid)
