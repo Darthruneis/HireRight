@@ -12,17 +12,23 @@ namespace HireRight
     {
         private static readonly string LogFilePath = Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath("~") + @"\logs.txt");
 
+        public static void Log(string message)
+        {
+            using (StreamWriter writer = new StreamWriter(File.Open(LogFilePath, FileMode.Append)))
+            {
+                writer.WriteLine("--- START");
+                writer.Write(message);
+                writer.WriteLine(Environment.NewLine + "--- END");
+            }
+        }
+
+        public static void Log(Exception exception) => Log(exception.ToString());
+
         protected void Application_Error()
         {
             var exception = Server.GetLastError();
 
-            using (StreamWriter writer = new StreamWriter(File.Open(LogFilePath, FileMode.Append)))
-            {
-                writer.WriteLine("--- START");
-                writer.WriteLine("Exception logged at: " + DateTime.Now);
-                writer.Write(exception);
-                writer.WriteLine(Environment.NewLine + "--- END");
-            }
+            Log(exception);
 
             Server.ClearError();
             Response.RedirectToRoute("Default");

@@ -21,9 +21,6 @@ function updateTotal() {
         dataType: "html",
         beforeSend: function () {
             $orderTotalDiv.html("loading...");
-        },
-        error: function () {
-            $orderTotalDiv.html("Unable to retrieve total.");
         }
     }).done(function (response) {
         $orderTotalDiv.html(response);

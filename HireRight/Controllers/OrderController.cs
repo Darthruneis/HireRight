@@ -34,6 +34,7 @@ namespace HireRight.Controllers
         [HttpGet]
         public async Task<PartialViewResult> GetDiscounts(Guid itemSelected)
         {
+            MvcApplication.Log($"Retrieving discounts for product {itemSelected}.");
             ProductDTO product = await _productsBusinessLogic.Get(itemSelected);
 
             return PartialView("ProductDiscountsPartial", product);
@@ -44,12 +45,14 @@ namespace HireRight.Controllers
         {
             try
             {
+                MvcApplication.Log($"Calculating price for {quantity} units of {itemSelected}.");
                 decimal total = await _ordersBusinessLogic.CalculatePrice(itemSelected, quantity);
-                return PartialView("OrderTotalPartial", total);
+                return PartialView("~/Views/Order/OrderTotalPartial.cshtml", total);
             }
             catch (Exception ex)
             {
-                throw ex;
+                MvcApplication.Log(ex);
+                return PartialView("~/Views/Order/OrderTotalErrorPartial.cshtml");
             }
         }
 
