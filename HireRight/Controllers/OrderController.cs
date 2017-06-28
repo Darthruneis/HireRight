@@ -79,7 +79,7 @@ namespace HireRight.Controllers
 #if DEBUG
                 ModelState.AddModelError("", ex.Message);
 #endif
-
+                MvcApplication.Log(ex);
                 //add product information back to model before returning it with modelstate errors.
                 return View(await GetProductListForModel(model));
             }
