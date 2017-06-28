@@ -9,7 +9,7 @@
         "showCompanyInfoButton", "shownCompanyInfoDiv",
         "~/Views/Order/EditorTemplates/CompanyViewModel.cshtml",
         "Company");
-    companyInfoViewModel.ViewModelForContentView = Model.Company;
+    companyInfoViewModel.ViewModelForContentView = Model;
     Html.RenderPartial("SectionWithPanelHeadAndToggles", companyInfoViewModel);
 
     SectionWithTogglesAndTitleViewModel contactsInfoViewModel = new SectionWithTogglesAndTitleViewModel("show the contact information again.",
@@ -19,17 +19,13 @@
         "Contacts");
     contactsInfoViewModel.ViewModelForContentView = Model;
     Html.RenderPartial("SectionWithPanelHeadAndToggles", contactsInfoViewModel);
-    @*<div>
-            <div class="col-xs-12 col-md-8 borderedRow">@Html.EditorFor(x => x.Primary)</div>
-            <div class="col-xs-12 col-md-4 borderedRow">@Html.EditorFor(x => x.Admin)</div>
-        </div>*@
 
 SectionWithTogglesAndTitleViewModel orderDetailsViewModel = new SectionWithTogglesAndTitleViewModel("show the order details again",
     "hiddenOrderDetailsDiv", "hideOrderDetailsButton",
     "showOrderDetailsButton", "shownorderDetailsDiv",
     "~/Views/Order/EditorTemplates/OrdersViewModel.cshtml",
     "Order Details");
-orderDetailsViewModel.ViewModelForContentView = Model.Order;
+orderDetailsViewModel.ViewModelForContentView = Model;
 Html.RenderPartial("SectionWithPanelHeadAndToggles", orderDetailsViewModel);
     <div class="row" style="padding-top: 10px; clear: both;">
         <div class="col-xs-12 col-lg-10">@Html.ValidationSummary(true)</div>

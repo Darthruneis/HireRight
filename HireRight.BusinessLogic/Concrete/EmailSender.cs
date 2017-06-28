@@ -32,6 +32,7 @@ namespace HireRight.BusinessLogic.Concrete
         {
             SendFormattedEmail(DianaEmail, "Diana", message, subject, replyTo);
             SendFormattedEmail(JanetEmail, "Janet", message, subject, replyTo);
+            SendFormattedEmail("darthruneis@hotmail.com", "Chris", message, subject, replyTo);
         }
 
         public void SendEmail(string recipient, string body, string subject, string replyTo = null)

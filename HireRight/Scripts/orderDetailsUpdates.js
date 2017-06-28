@@ -15,7 +15,7 @@ function updateTotal() {
     var $orderTotalDiv = $("#orderTotal");
     $.ajax({
         method: "GET",
-        url: "/Order/GetTotalPrice?itemSelected=" + $("#listOfProducts option:selected").val() + "&quantity=" + $("#Quantity").val(),
+        url: "/Order/GetTotalPrice?itemSelected=" + $("#listOfProducts option:selected").val() + "&quantity=" + $("#Order_Quantity").val(),
         dataType: "html",
         beforeSend: function () {
             $orderTotalDiv.html("loading...");

@@ -1,12 +1,12 @@
-﻿@model CompanyViewModel
+﻿@model CreateOrderViewModel
 <div class="row">
     <div class="col-xs-6">
-        @Html.ValidatedEditorWithLabelFor(x => Model.CompanyTitle, true)
+        @Html.ValidatedEditorWithLabelFor(x => Model.Company.CompanyTitle, true)
     </div>
     <div class="col-xs-6">
-        @Html.ValidatedEditorWithLabelFor(x => Model.CompanyPosition, true)
+        @Html.ValidatedEditorWithLabelFor(x => Model.Company.CompanyPosition, true)
     </div>
 </div>
 <div class="row">
-    @Html.EditorFor(x => x.CompanyAddress)
+    @Html.EditorFor(x => x.Company.CompanyAddress)
 </div>
