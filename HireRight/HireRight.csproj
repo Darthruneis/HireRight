@@ -185,6 +185,7 @@
     <Compile Include="Models\PrimaryContactViewModel.cs" />
     <Compile Include="Models\SectionWithTogglesAndTitleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UrlConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

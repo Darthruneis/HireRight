@@ -1,7 +1,7 @@
 ﻿function updateDiscounts() {
     $.ajax({
         method: "GET",
-        url: "/Order/GetDiscounts?itemSelected=" + $("#listOfProducts option:selected").val(),
+        url: `${HireRightBaseUrl}Order/GetDiscounts?itemSelected=${$("#listOfProducts option:selected").val()}`,
         dataType: "html",
         beforeSend: function () {
             $("#productDiscounts").html("loading...");
@@ -13,9 +13,11 @@
 
 function updateTotal() {
     var $orderTotalDiv = $("#orderTotal");
+    var selectedProduct = $("#listOfProducts option:selected").val();
+    var quantity = $("#Order_Quantity").val();
     $.ajax({
         method: "GET",
-        url: "/Order/GetTotalPrice?itemSelected=" + $("#listOfProducts option:selected").val() + "&quantity=" + $("#Order_Quantity").val(),
+        url: `${HireRightBaseUrl}Order/GetTotalPrice?itemSelected=${selectedProduct}&quantity=${quantity}`,
         dataType: "html",
         beforeSend: function () {
             $orderTotalDiv.html("loading...");

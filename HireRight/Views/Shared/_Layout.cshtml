@@ -7,6 +7,9 @@
     <title>@ViewBag.Title - Hire Right Testing</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/scripts")
+    <script>
+        const HireRightBaseUrl = '@UrlConstants.HireRightBaseUrl';
+    </script>
 </head>
 <body>
     <header>
@@ -23,12 +26,12 @@
             Hire Right Consultants&trade;
         </div>
     </footer>
-<div id="processing" class="processingIcon">
-    <div style="display: inline-block;">
-        <span class="glyphicon glyphicon-hourglass spinner"></span>
-        <h2 style="padding: 0; padding-top: 5px; margin: 0;">Loading...</h2>
+    <div id="processing" class="processingIcon">
+        <div style="display: inline-block;">
+            <span class="glyphicon glyphicon-hourglass spinner"></span>
+            <h2 style="padding: 0; padding-top: 5px; margin: 0;">Loading...</h2>
+        </div>
     </div>
-</div>
     @RenderSection("scripts", required: false)
 </body>
 </html>
