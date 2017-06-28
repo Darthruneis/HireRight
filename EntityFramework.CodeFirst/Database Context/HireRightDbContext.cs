@@ -48,7 +48,10 @@ namespace HireRight.EntityFramework.CodeFirst.Database_Context
         /// Initializes the context based off the connection string name set in the class.
         /// </summary>
         public HireRightDbContext() : base("name=HireRightDb")
-        { }
+        {
+            //Setting the initializer will allow new migrations to run on the server
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<HireRightDbContext, Migrations.Configuration>());
+        }
 
         /// <summary>
         /// Defines how the context creates models from the database information.

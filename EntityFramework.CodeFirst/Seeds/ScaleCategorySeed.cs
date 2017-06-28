@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Remoting.Channels;
+using System.Web.Configuration;
 using System.Xml;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
@@ -11,7 +15,8 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
         internal static List<ScaleCategory> Seed()
         {
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(@"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\EntityFramework.CodeFirst\InitialScaleCategories.xml");
+            var pathFromConfig = WebConfigurationManager.AppSettings["ScaleCategoriesXmlDocPath"];
+            xDoc.Load(pathFromConfig);
 
             XmlNodeList nodeList = xDoc.GetElementsByTagName("tr");
 

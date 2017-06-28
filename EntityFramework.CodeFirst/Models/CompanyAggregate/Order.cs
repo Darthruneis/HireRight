@@ -53,7 +53,6 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         /// <summary>
         /// Notes left by the buyer about this order.
         /// </summary>
-        [Required]
         public string Notes { get; set; }
 
         /// <summary>

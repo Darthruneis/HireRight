@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.Entity.Validation;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -17,12 +19,25 @@ namespace HireRight
             using (StreamWriter writer = new StreamWriter(File.Open(LogFilePath, FileMode.Append)))
             {
                 writer.WriteLine("--- START");
+                writer.WriteLine("Log event at " + DateTime.Now);
                 writer.Write(message);
                 writer.WriteLine(Environment.NewLine + "--- END");
             }
         }
 
-        public static void Log(Exception exception) => Log(exception.ToString());
+        public static void Log(Exception exception)
+        {
+            if (exception is DbEntityValidationException)
+            {
+                var validationException = (DbEntityValidationException)exception;
+                Log(validationException.EntityValidationErrors.ToString());
+                foreach (var errorMessage in validationException.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage))
+                {
+                    Log(errorMessage);
+                }
+            }
+            Log(exception.ToString());
+        }
 
         protected void Application_Error()
         {

@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +72,10 @@
     <Compile Include="Migrations\201703230045294_initializeDatabase.Designer.cs">
       <DependentUpon>201703230045294_initializeDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706280248050_OrderNotesNotRequired.cs" />
+    <Compile Include="Migrations\201706280248050_OrderNotesNotRequired.Designer.cs">
+      <DependentUpon>201706280248050_OrderNotesNotRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CompanyAggregate\ScaleCategory.cs" />
     <Compile Include="Models\CompanyAggregate\Value Objects\Address.cs" />
@@ -91,11 +96,15 @@
   <ItemGroup>
     <Content Include="InitialScaleCategories.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703230045294_initializeDatabase.resx">
       <DependentUpon>201703230045294_initializeDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280248050_OrderNotesNotRequired.resx">
+      <DependentUpon>201706280248050_OrderNotesNotRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

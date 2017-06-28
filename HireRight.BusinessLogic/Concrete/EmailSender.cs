@@ -9,23 +9,23 @@ namespace HireRight.BusinessLogic.Concrete
 {
     public class EmailSender : IEmailSender
     {
-        private static readonly NetworkCredential _smtpCredentials;
-        private static readonly string DianaEmail;
-        private static readonly string JanetEmail;
-        private static readonly string MailServiceEmailAddress;
         private readonly string _emailTemplatePath;
+        private readonly NetworkCredential _smtpCredentials;
+        private readonly string DianaEmail;
+        private readonly string JanetEmail;
+        private readonly string MailServiceEmailAddress;
+        private readonly string SmtpHost;
+        private readonly int SmtpPort;
 
-        static EmailSender()
+        public EmailSender()
         {
             MailServiceEmailAddress = WebConfigurationManager.AppSettings["MailServiceEmailAddress"];
             _smtpCredentials = new NetworkCredential(MailServiceEmailAddress, WebConfigurationManager.AppSettings["MailAccountPassword"]);
             DianaEmail = WebConfigurationManager.AppSettings["DianaEmail"];
             JanetEmail = WebConfigurationManager.AppSettings["JanetEmail"];
-        }
-
-        public EmailSender(string emailTemplatePath)
-        {
-            _emailTemplatePath = emailTemplatePath;
+            SmtpPort = 25;
+            SmtpHost = WebConfigurationManager.AppSettings["SmtpHost"];
+            _emailTemplatePath = WebConfigurationManager.AppSettings["EmailTemplatePath"];
         }
 
         public void EmailConsultants(string message, string subject, string replyTo = null)
@@ -50,6 +50,8 @@ namespace HireRight.BusinessLogic.Concrete
                     mailMessage.ReplyToList.Add(replyTo);
 
                 SetEmailPickupDirectory(emailClient);
+                emailClient.Host = SmtpHost;
+                emailClient.Port = SmtpPort;
                 emailClient.Credentials = _smtpCredentials;
                 emailClient.Send(mailMessage);
             }

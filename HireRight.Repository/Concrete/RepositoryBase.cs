@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,24 +32,16 @@ namespace HireRight.Repository.Concrete
                 throw new ApplicationException(GetConcatenatedErrorMessage(errors));
             }
 
-            try
-            {
-                TModel result = dbSet.Add(itemToAdd);
-                await context.SaveChangesAsync();
+            TModel result = dbSet.Add(itemToAdd);
+            await context.SaveChangesAsync();
 
-                if (result.Id == Guid.Empty)
-                    errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " - Id was not updated."));
+            if (result.Id == Guid.Empty)
+                errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " - Id was not updated."));
 
-                if (result.CreatedUtc == default(DateTime))
-                    errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " CreatedUtc was not updated."));
+            if (result.CreatedUtc == default(DateTime))
+                errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " CreatedUtc was not updated."));
 
-                return await Task.FromResult(result).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                errors.Add(new ValidationResult(ex.Message));
-                throw new ApplicationException(GetConcatenatedErrorMessage(errors));
-            }
+            return await Task.FromResult(result).ConfigureAwait(false);
         }
 
         public async Task<TModel> GetBase(Guid itemGuid, IQueryable<TModel> query)
@@ -78,18 +71,10 @@ namespace HireRight.Repository.Concrete
                 throw new ApplicationException(GetConcatenatedErrorMessage(errors));
             }
 
-            try
-            {
-                await CheckForValidItem(dbSet, itemToUpdate.Id).ConfigureAwait(false);
-                dbSet.AddOrUpdate(itemToUpdate);
-                await context.SaveChangesAsync();
-                return itemToUpdate;
-            }
-            catch (Exception ex)
-            {
-                errors.Add(new ValidationResult(ex.Message));
-                throw new ApplicationException(GetConcatenatedErrorMessage(errors));
-            }
+            await CheckForValidItem(dbSet, itemToUpdate.Id).ConfigureAwait(false);
+            dbSet.AddOrUpdate(itemToUpdate);
+            await context.SaveChangesAsync();
+            return itemToUpdate;
         }
 
         private static string GetConcatenatedErrorMessage(List<ValidationResult> errors, string summaryMessage = "The following errors were encountered: ")
