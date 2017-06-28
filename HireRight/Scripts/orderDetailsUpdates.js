@@ -12,14 +12,18 @@
 }
 
 function updateTotal() {
+    var $orderTotalDiv = $("#orderTotal");
     $.ajax({
         method: "GET",
-        url: "/Order/GetTotalPrice?itemSelected=" + $("#listOfProducts option:selected").val() + "&quantity=" + $("#Order_Quantity").val(),
+        url: "/Order/GetTotalPrice?itemSelected=" + $("#listOfProducts option:selected").val() + "&quantity=" + $("#Quantity").val(),
         dataType: "html",
         beforeSend: function () {
-            $("#orderTotal").html("loading...");
+            $orderTotalDiv.html("loading...");
+        },
+        error: function () {
+            $orderTotalDiv.html("Unable to retrieve total.");
         }
     }).done(function (response) {
-        $("#orderTotal").html(response);
+        $orderTotalDiv.html(response);
     });
 }
