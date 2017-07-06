@@ -10,9 +10,6 @@ namespace DataTransferObjects.Filters.Concrete
     public class ContactFilter : Filter<Contact>
     {
         [DataMember]
-        public AddressFilter AddressFilter { get; set; }
-
-        [DataMember]
         public string CellNumber { get; set; }
 
         [DataMember]
@@ -40,9 +37,6 @@ namespace DataTransferObjects.Filters.Concrete
         public override string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
-
-            if (AddressFilter != null)
-                query.Append(AddressFilter.CreateQuery(nameof(AddressFilter)));
 
             return query.ToString();
         }

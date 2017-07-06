@@ -44,9 +44,6 @@ namespace DataTransferObjects.Filters.Concrete
         public List<string> PositionsOfInterest { get; set; }
 
         [DataMember]
-        public ProductFilter ProductFilter { get; set; }
-
-        [DataMember]
         public int? Quantity { get; set; }
 
         [DataMember]

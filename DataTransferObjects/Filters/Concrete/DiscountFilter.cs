@@ -38,9 +38,6 @@ namespace DataTransferObjects.Filters.Concrete
         public bool? IsPercent { get; set; }
 
         [DataMember]
-        public ProductFilter ProductFilter { get; set; }
-
-        [DataMember]
         public int? Threshold { get; set; }
 
         [DataMember]

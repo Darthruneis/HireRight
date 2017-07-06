@@ -13,12 +13,6 @@ namespace DataTransferObjects.Filters.Concrete
         public AddressFilter BillingAddressFilter { get; set; }
 
         [DataMember]
-        public ContactFilter ContactFilter { get; set; }
-
-        [DataMember]
-        public LocationFilter LocationFilter { get; set; }
-
-        [DataMember]
         public string Name { get; set; }
 
         public CompanyFilter(int page, int size, params Guid[] itemGuids) : base(page, size, itemGuids)
@@ -34,12 +28,6 @@ namespace DataTransferObjects.Filters.Concrete
 
             if (BillingAddressFilter != null)
                 query.Append(BillingAddressFilter.CreateQuery(nameof(BillingAddressFilter)));
-
-            if (ContactFilter != null)
-                query.Append(ContactFilter.CreateQuery(false));
-
-            if (LocationFilter != null)
-                query.Append(LocationFilter.CreateQuery(false));
 
             if (!string.IsNullOrWhiteSpace(Name))
                 query.Append($"&filter.{nameof(Name)}={Name}");

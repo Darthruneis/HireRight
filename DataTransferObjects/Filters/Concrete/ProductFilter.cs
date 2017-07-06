@@ -10,9 +10,6 @@ namespace DataTransferObjects.Filters.Concrete
     public class ProductFilter : Filter<Product>
     {
         [DataMember]
-        public DiscountFilter DiscountFilter { get; set; }
-
-        [DataMember]
         public decimal? Price { get; set; }
 
         [DataMember]
@@ -31,9 +28,6 @@ namespace DataTransferObjects.Filters.Concrete
         public new string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
-
-            if (DiscountFilter != null)
-                query.Append(DiscountFilter.CreateQuery(false).Replace("filter.", $"filter.{nameof(DiscountFilter)}."));
 
             if (PriceComparator != null && Price != null)
                 query.Append($"&filter.Price={PriceComparator.Value}&filter.Price={Price.Value}");
