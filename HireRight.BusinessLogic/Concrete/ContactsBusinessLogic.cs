@@ -4,7 +4,6 @@ using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Extensions;
@@ -15,12 +14,12 @@ namespace HireRight.BusinessLogic.Concrete
     public class ContactsBusinessLogic : IContactsBusinessLogic
     {
         private readonly IContactsRepository _contactsRepository;
-        private readonly SmtpClient _emailClient;
+        private readonly IEmailSender _emailSender;
 
-        public ContactsBusinessLogic(IContactsRepository repo)
+        public ContactsBusinessLogic(IContactsRepository repo, IEmailSender emailSender)
         {
             _contactsRepository = repo;
-            _emailClient = new SmtpClient();
+            _emailSender = emailSender;
         }
 
         public async Task<ContactDTO> Add(ContactDTO contactDto)
@@ -79,16 +78,16 @@ namespace HireRight.BusinessLogic.Concrete
             return contacts.Select(ConvertModelToDto).ToList();
         }
 
-        public async Task SendContactConsultantEmail(string clientEmail, string message)
+        public void SendContactConsultantEmail(string clientEmail, string message)
         {
-            await EmailBothConsultants(clientEmail, "New request for your help through HireRight!", message);
+            _emailSender.EmailConsultants(message, "New request for your help through HireRight!");
         }
 
         public async Task SendNewContactEmail(Guid contactId, string message)
         {
             ContactDTO contact = await Get(contactId);
 
-            await EmailBothConsultants(contact.Email, contact.FullName + " has requested your help!", message);
+            _emailSender.EmailConsultants(message, contact.FullName + " has requested your help!", contact.Email);
         }
 
         public async Task<ContactDTO> Update(ContactDTO contactDto)
@@ -96,24 +95,6 @@ namespace HireRight.BusinessLogic.Concrete
             Contact contactToUpdate = ConvertDtoToModel(contactDto);
 
             return ConvertModelToDto(await _contactsRepository.Update(contactToUpdate).ConfigureAwait(false));
-        }
-
-        private MailMessage CreateMailMessageForSmtpClient(string to, string from, string subject, string message)
-        {
-            MailMessage mailMessage = new MailMessage(to, from, subject, message);
-            mailMessage.ReplyToList.Add(from);
-
-            return mailMessage;
-        }
-
-        private async Task EmailBothConsultants(string from, string subject, string message)
-        {
-            _emailClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-            _emailClient.DeliveryFormat = SmtpDeliveryFormat.SevenBit;
-            _emailClient.PickupDirectoryLocation = @"C:\Users\Chris\Desktop\HireRight\HireRight Test Emails";
-
-            await _emailClient.SendMailAsync(CreateMailMessageForSmtpClient("silverasoc@aol.com", from, subject, message));
-            await _emailClient.SendMailAsync(CreateMailMessageForSmtpClient("janet@something.com", from, subject, message));
         }
     }
 }

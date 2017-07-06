@@ -41,7 +41,7 @@ namespace HireRight.BusinessLogic.Tests
                 }
                 catch (System.Exception ex)
                 {
-                    throw ex;
+                    throw;
                 }
             }
 

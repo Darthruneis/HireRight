@@ -15,7 +15,7 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<List<ContactDTO>> Get(ContactFilter filter);
 
-        Task SendContactConsultantEmail(string clientEmailAddress, string message);
+        void SendContactConsultantEmail(string clientEmailAddress, string message);
 
         Task SendNewContactEmail(Guid contactId, string message);
 
