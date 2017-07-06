@@ -2,14 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// A location is a physical address where a company does business. For example, a call center, or corporate office, or retail store.
     /// </summary>
-    public class CompanyLocation : PocoBase, IContainingAddress
+    public class CompanyLocation : PocoBase
     {
         /// <summary>
         /// The physical address of the location.

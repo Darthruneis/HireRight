@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingCollections;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// A product is an item which can be purchased through HireRight.
     /// </summary>
-    public class Product : PocoBase, IContainingDiscounts
+    public class Product : PocoBase
     {
         /// <summary>
         /// A collection of discounts which can be applied to this product based on volume.

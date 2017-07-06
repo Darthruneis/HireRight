@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingCollections;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// A company is a named relationship between a primary billing address, and a collection of clients and locations (if there are more than a single location).
     /// </summary>
-    public class Company : PocoBase, IContainingLocations, IContainingAddress
+    public class Company : PocoBase
     {
         /// <summary>
         /// The billing address is the primary location for the business, e.g. a corporate office.

@@ -88,7 +88,6 @@
     <Compile Include="Concrete\Repositories\DiscountsRepository.cs" />
     <Compile Include="Concrete\Repositories\OrdersRepository.cs" />
     <Compile Include="Concrete\Repositories\ProductsRepository.cs" />
-    <Compile Include="Concrete\RepositoryQueryFilterer.cs" />
     <Compile Include="Concrete\RepositoryResponseObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

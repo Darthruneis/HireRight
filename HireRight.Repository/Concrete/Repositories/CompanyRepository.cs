@@ -34,9 +34,6 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Company> companiesQuery = context.Companies.Include(x => x.Locations).Include(x => x.Contacts).Include(x => x.Orders);
 
-                companiesQuery = companiesQuery.FilterByLocations(filter.LocationFilter)
-                                               .FilterByAddress(filter.BillingAddressFilter);
-
                 if (!string.IsNullOrWhiteSpace(filter.Name))
                     companiesQuery = companiesQuery.Where(x => x.Name.Contains(filter.Name));
 

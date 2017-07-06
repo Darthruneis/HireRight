@@ -59,12 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\ContainingCollections\IContainingDiscounts.cs" />
-    <Compile Include="Abstract\ContainingCollections\IContainingLocations.cs" />
-    <Compile Include="Abstract\ContainingObjects\IContainingAddress.cs" />
-    <Compile Include="Abstract\ContainingObjects\IContainingContact.cs" />
-    <Compile Include="Abstract\ContainingCollections\IContainingOrders.cs" />
-    <Compile Include="Abstract\ContainingObjects\IContainingProduct.cs" />
     <Compile Include="Abstract\PocoBase.cs" />
     <Compile Include="BaseMigrationCodeGenerator.cs" />
     <Compile Include="Database Context\HireRightDbContext.cs" />

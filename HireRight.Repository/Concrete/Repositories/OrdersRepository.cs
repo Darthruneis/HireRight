@@ -34,8 +34,6 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Order> ordersQuery = context.Orders.Include(x => x.Product);
 
-                ordersQuery = ordersQuery.FilterByProduct(filter.ProductFilter);
-
                 ordersQuery = ordersQuery.Where(x => string.IsNullOrWhiteSpace(filter.Notes) || x.Notes.Contains(filter.Notes));
 
                 ordersQuery = ordersQuery.Where(x => filter.PositionsOfInterest == null

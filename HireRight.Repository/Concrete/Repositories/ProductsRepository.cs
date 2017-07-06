@@ -36,8 +36,6 @@ namespace HireRight.Repository.Concrete
                 {
                     IQueryable<Product> productsQuery = context.Products.Include(x => x.Discounts);
 
-                    productsQuery = productsQuery.FilterByDiscounts(filter.DiscountFilter);
-
                     if (!string.IsNullOrWhiteSpace(filter.Title))
                         productsQuery = productsQuery.Where(x => x.Title.Contains(filter.Title));
 

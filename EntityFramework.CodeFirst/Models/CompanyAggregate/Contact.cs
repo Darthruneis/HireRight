@@ -2,14 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
     /// <summary>
     /// A Contact is an individual that is part of a Company and/or Client, and can optionally be a Primary contact or an Administrator.
     /// </summary>
-    public class Contact : PocoBase, IContainingAddress
+    public class Contact : PocoBase
     {
         /// <summary>
         /// The address of this contact.

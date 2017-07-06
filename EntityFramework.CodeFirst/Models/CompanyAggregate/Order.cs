@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HireRight.EntityFramework.CodeFirst.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract.ContainingObjects;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
@@ -31,7 +30,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
     /// <summary>
     /// A request to purchase some number of products.
     /// </summary>
-    public class Order : PocoBase, IContainingProduct
+    public class Order : PocoBase
     {
         /// <summary>
         /// Navigation property.

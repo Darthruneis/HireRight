@@ -33,8 +33,6 @@ namespace HireRight.Repository.Concrete
             {
                 IQueryable<Contact> contactsQuery = context.Contacts;
 
-                contactsQuery = contactsQuery.FilterByAddress(filter.AddressFilter);
-
                 contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.CellNumber) || x.CellNumber.Contains(filter.CellNumber));
 
                 contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.Email) || x.Email.Contains(filter.Email));
