@@ -1,0 +1,70 @@
+﻿@import "_variables.scss";
+@import "_mixins.scss";
+@import "_%classes.scss";
+
+.navbar {
+    @extend %site_button_color;
+    color: $black;
+    border: 3px solid $black;
+    border-top: 0;
+}
+
+a {
+    color: $darkRed;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+    color: $black;
+    font-size: 18pt;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav > li > a:hover,
+a:hover {
+    color: white;
+    text-shadow: $black 2px 0px 1px;
+}
+
+.navbar-default .navbar-nav > li > a.current {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a.current:hover {
+    color: $black;
+    text-shadow: white 2px 0px 1px;
+}
+
+.navbar-default .navbar-brand {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+@media (max-width: 1330px) {
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin: 7.5px -15px;
+    }
+
+    .navbar-nav > li {
+        float: none;
+    }
+
+    .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

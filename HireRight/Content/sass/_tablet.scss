@@ -3,4 +3,8 @@
 @import "_%classes.scss";
 
 @media only screen and (min-width: 45em) {
+
+    body {
+        padding: 0 1%;
+    }
 }

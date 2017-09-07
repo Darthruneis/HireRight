@@ -9,11 +9,11 @@
     font-weight: bold;
 }
 
-%spinner{
+%spinner {
     -webkit-animation: spin $spinSpeed infinite linear;
-  -moz-animation: spin $spinSpeed infinite linear;
-  -o-animation: spin $spinSpeed infinite linear;
-  animation: spin $spinSpeed infinite linear;
+    -moz-animation: spin $spinSpeed infinite linear;
+    -o-animation: spin $spinSpeed infinite linear;
+    animation: spin $spinSpeed infinite linear;
 }
 
 %listItemBefore {
@@ -37,6 +37,14 @@
     background-color: $site_highlights_background;
 }
 
-%site_default_font_family{
+%site_button_color {
+    background-color: $site_button_color;
+}
+
+%submit_button_color {
+    background-color: $submit_button_color;
+}
+
+%site_default_font_family {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
