@@ -4,10 +4,12 @@ $lightGray: #808080;
 $veryLightBlue: #C5DFF0;
 $darkNavyBlue: #335060;
 $skyBlue: #5E99C1;
+$fadedLightBlue: #b3daff;
+$lightBlue: #66a3ff;
 
 $site_background: #ffffff;
 $site_side_background: #6f7376;
-$site_highlights_background: #ffffff;
+$site_highlights_background: $fadedLightBlue;
 $submit_button_color: green;
 $site_button_color: #66a3ff;
 $text_default: $black;

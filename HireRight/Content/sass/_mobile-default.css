@@ -24,7 +24,7 @@ body {
   background-color: #6f7376; }
 
 .jumbotron, .form-control {
-  background-color: #ffffff; }
+  background-color: #b3daff; }
 
 .navbar, .btn {
   background-color: #66a3ff; }
@@ -58,7 +58,7 @@ body {
   background-color: #6f7376; }
 
 .jumbotron, .form-control {
-  background-color: #ffffff; }
+  background-color: #b3daff; }
 
 .navbar, .btn {
   background-color: #66a3ff; }
@@ -169,7 +169,7 @@ span .image-text-overlay {
   border: 6px solid #000000; }
 
 .input-validation-error {
-  background-color: #fee;
+  background-color: #ff6666;
   border: 1px solid #f00; }
 
 .form-control {
@@ -186,6 +186,10 @@ span .image-text-overlay {
   font-size: 14pt;
   transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
   overflow: hidden; }
+
+input[type="submit"],
+button[type="submit"] {
+  float: right; }
 
 /*div {
     border: 2px dotted red;
