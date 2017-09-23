@@ -54,6 +54,8 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
             if (exceptions != null)
                 throw exceptions;
 
+            categories.Add(new ScaleCategory("Go-Getter Attitude", "The degree to which the individual is dedicated, shows initiative, has a positive demeanor and exhibits independence.  This characteristic is important for jobs requiring independent work and a self-starter attitude. Also applicable for the ever growing home based jobs."));
+
             return categories;
         }
     }
