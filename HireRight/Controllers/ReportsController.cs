@@ -1,53 +1,37 @@
-﻿using System.Net.Mime;
+﻿using System.Collections.Generic;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
+using HireRight.Models;
 
 namespace HireRight.Controllers
 {
     public partial class ReportsController : Controller
     {
         [HttpGet]
-        public PartialViewResult Categories()
-        {
-            return PartialView("ExampleCategoriesBreakdownSectionPartial");
-        }
+        public PartialViewResult Categories() => PartialView("ExampleCategoriesBreakdownSectionPartial");
 
         [HttpGet]
-        public PartialViewResult CategoryBreakdown()
-        {
-            return PartialView("ExampleCategoryDetailedBreakdownSectionPartial");
-        }
+        public PartialViewResult CategoryBreakdown() => PartialView("ExampleCategoryDetailedBreakdownSectionPartial");
 
         public ViewResult Index() => View();
 
         [HttpGet]
-        public PartialViewResult InterviewGuide()
-        {
-            return PartialView("ExampleInterviewGuideSectionPartial");
-        }
+        public PartialViewResult InterviewGuide() => PartialView("ExampleInterviewGuideSectionPartial");
 
         [HttpGet]
-        public PartialViewResult Introduction()
-        {
-            return PartialView("SampleReportsIntroSectionPartial");
-        }
+        public PartialViewResult Introduction() => PartialView("SampleReportsIntroSectionPartial");
 
         [HttpGet]
-        public PartialViewResult ManagementStrategies()
-        {
-            return PartialView("ExampleManagementStrategiesSectionPartial");
-        }
+        public PartialViewResult ManagementStrategies() => PartialView("ExampleManagementStrategiesSectionPartial");
 
         [HttpGet]
-        public PartialViewResult OverallScore()
-        {
-            return PartialView("ExampleOverallScoreSectionPartial");
-        }
+        public PartialViewResult OverallScore() => PartialView("ExampleOverallScoreSectionPartial");
 
         [HttpGet]
         public ViewResult Samples()
         {
-            return View();
+            return View(SamplesList);
         }
     }
 
@@ -59,123 +43,93 @@ namespace HireRight.Controllers
         private readonly string _filePathBase = System.Web.HttpContext.Current.Server.MapPath("~") + "/Content/ProfileSamples/";
 
         [HttpGet]
-        public FileContentResult EliteCareProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteCareProfileSample.pdf", inline);
-        }
+        public ActionResult EliteCareProfileSample() => DownloadFromFileName("EliteCareProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteCharacterProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteCharacterProfileSample.pdf", inline);
-        }
+        public ActionResult EliteCharacterProfileSample() => DownloadFromFileName("EliteCharacterProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteHealthcareProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteHealthcareProfileSample.pdf", inline);
-        }
+        public ActionResult EliteHealthcareProfileSample() => DownloadFromFileName("EliteHealthcareProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteIndustrialProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteIndustrialProfileSample.pdf", inline);
-        }
+        public ActionResult EliteIndustrialProfileSample() => DownloadFromFileName("EliteIndustrialProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteIntellectProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteIntellectProfileSample.pdf", inline);
-        }
+        public ActionResult EliteIntellectProfileSample() => DownloadFromFileName("EliteIntellectProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteManagerProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteManagerProfileSample.pdf", inline);
-        }
+        public ActionResult EliteManagerProfileSample() => DownloadFromFileName("EliteManagerProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult ElitePersonalityProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("ElitePersonalityProfileSample.pdf", inline);
-        }
+        public ActionResult ElitePersonalityProfileSample() => DownloadFromFileName("ElitePersonalityProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteSalesProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteSalesProfileSample.pdf", inline);
-        }
+        public ActionResult EliteSalesProfileSample() => DownloadFromFileName("EliteSalesProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteSkillsProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteSkillsProfileSample.pdf", inline);
-        }
+        public ActionResult EliteSkillsProfileSample() => DownloadFromFileName("EliteSkillsProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EliteTransportationProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EliteTransportationProfileSample.pdf", inline);
-        }
+        public ActionResult EliteTransportationProfileSample() => DownloadFromFileName("EliteTransportationProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult EQProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("EQProfileSample.pdf", inline);
-        }
+        public ActionResult EQProfileSample() => DownloadFromFileName("EQProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult MechanicalAptitudeTestProfileSample(bool inline = false)
-        {
-            return DownloadFromFileName("MechanicalAptitudeTestProfileSample.pdf", inline);
-        }
+        public ActionResult MechanicalAptitudeTestProfileSample() => DownloadFromFileName("MechanicalAptitudeTestProfileSample.pdf");
 
         [HttpGet]
-        public FileContentResult SituationalJudgementTestSalesSample(bool inline = false)
-        {
-            return DownloadFromFileName("SJTSalesSample.pdf", inline);
-        }
+        public ActionResult SalesHunterProfileTestSample() => DownloadFromFileName("SalesHunterProfileSampleReport.pdf");
 
         [HttpGet]
-        public FileContentResult SituationalJudgementTestSupervisorSample(bool inline = false)
-        {
-            return DownloadFromFileName("SJTSupervisorSample.pdf", inline);
-        }
+        public ActionResult SituationalJudgementTestSalesSample() => DownloadFromFileName("SJTSalesSample.pdf");
 
         [HttpGet]
-        public FileContentResult SituationalJudgementTestTeamsSample(bool inline = false)
-        {
-            return DownloadFromFileName("SJTTeamsSample.pdf", inline);
-        }
+        public ActionResult SituationalJudgementTestSupervisorSample() => DownloadFromFileName("SJTSupervisorSample.pdf");
 
         [HttpGet]
-        public FileContentResult WorkplaceAptitudeTestSample(bool inline = false)
+        public ActionResult SituationalJudgementTestTeamsSample() => DownloadFromFileName("SJTTeamsSample.pdf");
+
+        [HttpGet]
+        public ActionResult WorkplaceAptitudeTestSample() => DownloadFromFileName("WATSample.pdf");
+    }
+
+    /// <summary>
+    /// Helper methods
+    /// </summary>
+    public partial class ReportsController
+    {
+        private static List<SampleForDownloadViewModel> SamplesList => new List<SampleForDownloadViewModel>()
         {
-            return DownloadFromFileName("WATSample.pdf", inline);
+            new SampleForDownloadViewModel(nameof(EliteCareProfileSample), "Elite Care Profile"),
+            new SampleForDownloadViewModel(nameof(EliteCharacterProfileSample), "Elite Character Profile"),
+            new SampleForDownloadViewModel(nameof(EliteHealthcareProfileSample), "Elite Healthcare Profile"),
+            new SampleForDownloadViewModel(nameof(EliteIndustrialProfileSample), "Elite Industrial Profile"),
+            new SampleForDownloadViewModel(nameof(EliteIntellectProfileSample), "Elite Intellect Profile"),
+            new SampleForDownloadViewModel(nameof(EliteManagerProfileSample), "Elite Manager Profile"),
+            new SampleForDownloadViewModel(nameof(ElitePersonalityProfileSample), "Elite Personality Profile"),
+            new SampleForDownloadViewModel(nameof(EliteSalesProfileSample), "Elite Sales Profile"),
+            new SampleForDownloadViewModel(nameof(EliteSkillsProfileSample), "Elite Skills Profile"),
+            new SampleForDownloadViewModel(nameof(EliteTransportationProfileSample), "Elite Transportation Profile"),
+            new SampleForDownloadViewModel(nameof(EQProfileSample), "EQ (Emotional Intelligence) Profile"),
+            new SampleForDownloadViewModel(nameof(MechanicalAptitudeTestProfileSample), "Mechanical Aptitude Test"),
+            new SampleForDownloadViewModel(nameof(SalesHunterProfileTestSample), "Sales Hunter Profile Test"),
+            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSalesSample), "Situational Judgement Test - Sales"),
+            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSupervisorSample), "Situational Judgement Test - Supervisor"),
+            new SampleForDownloadViewModel(nameof(SituationalJudgementTestTeamsSample), "Situational Judgement Test - Teams"),
+            new SampleForDownloadViewModel(nameof(WorkplaceAptitudeTestSample), "Workplace Aptitude Test"),
+        };
+
+        private ActionResult Download(string filePath)
+        {
+            return File(filePath, MimeMapping.GetMimeMapping(filePath));
         }
 
-        private FileContentResult Download(string filePath, string fileName, bool inline)
-        {
-            byte[] fileData = System.IO.File.ReadAllBytes(filePath);
-            string contentType = MimeMapping.GetMimeMapping(filePath);
-
-            ContentDisposition contentDisposition = new ContentDisposition
-            {
-                FileName = fileName,
-                Size = fileData.LongLength,
-                Inline = inline,
-            };
-
-            Response.AppendHeader("Content-Disposition", contentDisposition.ToString());
-
-            return File(fileData, contentType);
-        }
-
-        private FileContentResult DownloadFromFileName(string fileName, bool inline)
+        private ActionResult DownloadFromFileName(string fileName)
         {
             string testFilePath = _filePathBase + fileName;
 
-            return Download(testFilePath, fileName, inline);
+            return Download(testFilePath);
         }
     }
 }

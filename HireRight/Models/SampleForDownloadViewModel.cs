@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HireRight.Models
+{
+    public class SampleForDownloadViewModel
+    {
+        public string ActionName { get; set; }
+        public string LinkText { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:System.Object" /> class.
+        /// </summary>
+        public SampleForDownloadViewModel(string actionName, string linkText)
+        {
+            ActionName = actionName;
+            LinkText = linkText;
+        }
+    }
+}
