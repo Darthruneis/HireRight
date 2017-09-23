@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
@@ -56,11 +57,11 @@ namespace HireRight.BusinessLogic.Concrete
             return ConvertModelToDto(product);
         }
 
-        public async Task<List<ProductDTO>> Get(ProductFilter filterParameters)
+        public async Task<PagingResultDTO<ProductDTO>> Get(ProductFilter filterParameters)
         {
-            List<Product> products = await _productsRepository.Get(filterParameters).ConfigureAwait(false);
+            PageResult<Product> products = await _productsRepository.Get(filterParameters).ConfigureAwait(false);
 
-            return products.Select(ConvertModelToDto).ToList();
+            return products.PageResultToDto(ConvertModelToDto);
         }
 
         public async Task<ProductDTO> Update(ProductDTO productDto)

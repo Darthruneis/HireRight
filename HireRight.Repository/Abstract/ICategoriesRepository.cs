@@ -1,7 +1,7 @@
 ﻿using DataTransferObjects.Filters.Concrete;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Abstract
@@ -10,7 +10,7 @@ namespace HireRight.Repository.Abstract
     {
         Task<ScaleCategory> Add(ScaleCategory itemToAdd);
 
-        Task<List<ScaleCategory>> Get(CategoryFilter filter);
+        Task<PageResult<ScaleCategory>> Get(CategoryFilter filter);
 
         Task<ScaleCategory> Get(Guid itemGuid);
 

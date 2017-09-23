@@ -6,12 +6,12 @@ using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using HireRight.BusinessLogic.Extensions;
+using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
@@ -136,14 +136,17 @@ namespace HireRight.BusinessLogic.Concrete
             return ConvertModelToDto(order);
         }
 
-        public async Task<List<OrderDetailsDTO>> Get(OrderFilter filter)
+        public async Task<PagingResultDTO<OrderDetailsDTO>> Get(OrderFilter filter)
         {
-            List<Order> orders = await _ordersRepository.Get(filter).ConfigureAwait(false);
-            return orders.Select(ConvertModelToDto).ToList();
+            PageResult<Order> orders = await _ordersRepository.Get(filter).ConfigureAwait(false);
+            return orders.PageResultToDto(ConvertModelToDto);
         }
 
         public async Task SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
+#if DEBUG
+            return;
+#endif
             string message = await CreateEmailMessageFromDto(cardsToSubmit);
             _emailSender.EmailConsultants(message, "New Custom Test Request");
         }
@@ -189,15 +192,15 @@ namespace HireRight.BusinessLogic.Concrete
         private async Task RetrieveLostCategoryTitles(IList<CategoryDTO> categories)
         {
             IEnumerable<Guid> guids = categories.Select(x => x.Id);
-            List<CategoryDTO> categoriesFromRepo = await _categoriesBusinessLogic.Get(new CategoryFilter(1, categories.Count, guids.ToArray()));
+            var categoriesFromRepo = await _categoriesBusinessLogic.Get(new CategoryFilter(1, categories.Count, guids.ToArray()));
 
-            foreach (var category in categoriesFromRepo)
+            foreach (var category in categoriesFromRepo.PageResult)
             {
                 category.IsInTopTwelve = categories.First(y => y.Id == category.Id).IsInTopTwelve;
                 category.Importance = categories.First(y => y.Id == category.Id).Importance;
             }
 
-            categories = categoriesFromRepo;
+            categories = categoriesFromRepo.PageResult.ToList();
         }
 
         private async Task WriteCategoryInfoToStringBuilder(IList<CategoryDTO> categories, StringBuilder message)

@@ -1,7 +1,6 @@
 ﻿using HireRight.Models;
 using System;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using HireRight.BusinessLogic.Abstract;
 

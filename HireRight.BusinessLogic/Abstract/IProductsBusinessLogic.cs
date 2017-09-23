@@ -13,7 +13,7 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<ProductDTO> Get(Guid productGuid);
 
-        Task<List<ProductDTO>> Get(ProductFilter filterParameters);
+        Task<PagingResultDTO<ProductDTO>> Get(ProductFilter filterParameters);
 
         Task<ProductDTO> Update(ProductDTO productDto);
     }

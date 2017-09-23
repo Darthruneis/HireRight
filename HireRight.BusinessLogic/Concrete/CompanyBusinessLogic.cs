@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
@@ -24,15 +25,15 @@ namespace HireRight.BusinessLogic.Concrete
 
         public async Task<CompanyDTO> Add(CompanyDTO companyDto)
         {
-            List<CompanyDTO> existingCompanies = await Get(new CompanyFilter(1, 10) { Name = companyDto.Name });
+            PagingResultDTO<CompanyDTO> existingCompanies = await Get(new CompanyFilter(1, 10) { Name = companyDto.Name });
             CompanyDTO dto;
-            if (existingCompanies.All(x => x.Name != companyDto.Name))
+            if (existingCompanies.PageResult.All(x => x.Name != companyDto.Name))
             {
                 Company newCompany = await _companyRepository.Add(ConvertDtoToModel(companyDto));
                 dto = ConvertModelToDto(newCompany);
             }
             else
-                dto = existingCompanies.First(x => x.Name == companyDto.Name);
+                dto = existingCompanies.PageResult.First(x => x.Name == companyDto.Name);
 
             if (companyDto.Orders != null && companyDto.Orders.Any())
             {
@@ -93,11 +94,11 @@ namespace HireRight.BusinessLogic.Concrete
             return ConvertModelToDto(company);
         }
 
-        public async Task<List<CompanyDTO>> Get(CompanyFilter filter)
+        public async Task<PagingResultDTO<CompanyDTO>> Get(CompanyFilter filter)
         {
-            List<Company> companies = await _companyRepository.Get(filter).ConfigureAwait(false);
+            PageResult<Company> companies = await _companyRepository.Get(filter).ConfigureAwait(false);
 
-            return companies.Select(ConvertModelToDto).ToList();
+            return companies.PageResultToDto(ConvertModelToDto);
         }
 
         public async Task<CompanyDTO> Update(CompanyDTO companyDto)

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
@@ -28,7 +29,7 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<List<Order>> Get(OrderFilter filter)
+        public async Task<PageResult<Order>> Get(OrderFilter filter)
         {
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
@@ -43,7 +44,7 @@ namespace HireRight.Repository.Concrete
                 ordersQuery = FilterByQuantity(ordersQuery, filter.Quantity, filter.QuantityComparator);
                 ordersQuery = FilterByDateCompleted(ordersQuery, filter.Completed, filter.CompletedComparator);
 
-                List<Order> orders = await TakePage(ordersQuery, filter).ConfigureAwait(false);
+                PageResult<Order> orders = await TakePage(ordersQuery, filter).ConfigureAwait(false);
                 return orders;
             }
         }

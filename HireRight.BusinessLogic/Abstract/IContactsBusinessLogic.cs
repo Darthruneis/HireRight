@@ -13,7 +13,7 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<ContactDTO> Get(Guid contactGuid);
 
-        Task<List<ContactDTO>> Get(ContactFilter filter);
+        Task<PagingResultDTO<ContactDTO>> Get(ContactFilter filter);
 
         void SendContactConsultantEmail(string clientEmailAddress, string message);
 

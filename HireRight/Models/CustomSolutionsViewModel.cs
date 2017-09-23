@@ -1,26 +1,24 @@
 ﻿using System;
+using System.Collections;
 using DataTransferObjects.Data_Transfer_Objects;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
-using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Models
 {
     public class CustomSolutionsViewModel
     {
         public IList<JobAnalysisCategoryViewModel> Categories { get; set; }
-
         public IList<UndisplayedCategory> CategoriesFromOtherPages { get; set; }
-
-        public CategoryFilter CategoryFilter { get; set; }
 
         [Required]
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }
 
         public ContactDTO Contact { get; set; }
+        public CategoryFilterViewModel Filter { get; set; }
 
         [Required]
         public string Notes { get; set; }
@@ -36,13 +34,14 @@ namespace HireRight.Models
         {
             Categories = new List<JobAnalysisCategoryViewModel>();
             Contact = new ContactDTO();
-            CategoryFilter = new CategoryFilter(1, 10);
+            Filter = new CategoryFilterViewModel();
             CategoriesFromOtherPages = new List<UndisplayedCategory>();
         }
 
-        public CustomSolutionsViewModel(IEnumerable<JobAnalysisCategoryViewModel> categories) : this()
+        public CustomSolutionsViewModel(IEnumerable<JobAnalysisCategoryViewModel> categories, CategoryFilterViewModel filter) : this()
         {
             Categories = categories.ToList();
+            Filter = filter;
         }
 
         public SubmitCardsDTO CreateSubmitCardsDTO()

@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Web.Mvc;
-using HireRight.Models;
+﻿using System.Web.Mvc;
 
 namespace HireRight.Controllers
 {

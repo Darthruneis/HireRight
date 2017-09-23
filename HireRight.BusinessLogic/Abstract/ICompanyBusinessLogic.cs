@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
+using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Abstract
@@ -13,7 +14,7 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<CompanyDTO> Get(Guid companyGuid);
 
-        Task<List<CompanyDTO>> Get(CompanyFilter filter);
+        Task<PagingResultDTO<CompanyDTO>> Get(CompanyFilter filter);
 
         Task<CompanyDTO> Update(CompanyDTO companyDto);
     }
