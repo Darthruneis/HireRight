@@ -42,7 +42,7 @@ namespace HireRight.Repository.Concrete
                 if (filter.ItemGuids.Any())
                     query = query.Where(x => filter.ItemGuids.Contains(x.Id));
 
-                List<ScaleCategory> categoriesFound = await TakePage(query, filter);
+                List<ScaleCategory> categoriesFound = await TakePage(query, filter, x => x.Title);
                 return categoriesFound;
             }
         }

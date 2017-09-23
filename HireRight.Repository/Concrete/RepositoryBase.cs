@@ -9,6 +9,8 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace HireRight.Repository.Concrete
@@ -53,9 +55,14 @@ namespace HireRight.Repository.Concrete
             return item;
         }
 
-        public async Task<List<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters)
+        public Task<List<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters) => TakePage(query, filterParameters, x => x.Id);
+
+        public async Task<List<TModel>> TakePage<T>(IQueryable<TModel> query, FilterBase filterParameters, Expression<Func<TModel, T>> orderBy = null)
         {
-            query = query.OrderBy(x => x.Id);
+            query = orderBy == null
+                ? query.OrderBy(x => x.Id)
+                : query.OrderBy(orderBy);
+
             var count = query.Count();
             if (filterParameters.PageNumber > 1 && count < filterParameters.PageNumber * filterParameters.PageSize)
                 return await query.Skip(count - filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync();
