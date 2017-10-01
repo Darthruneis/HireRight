@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Extensions;
+using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
@@ -71,11 +72,11 @@ namespace HireRight.BusinessLogic.Concrete
             return ConvertModelToDto(contact);
         }
 
-        public async Task<List<ContactDTO>> Get(ContactFilter filter)
+        public async Task<PagingResultDTO<ContactDTO>> Get(ContactFilter filter)
         {
-            List<Contact> contacts = await _contactsRepository.Get(filter).ConfigureAwait(false);
+            PageResult<Contact> contacts = await _contactsRepository.Get(filter).ConfigureAwait(false);
 
-            return contacts.Select(ConvertModelToDto).ToList();
+            return contacts.PageResultToDto(ConvertModelToDto);
         }
 
         public void SendContactConsultantEmail(string clientEmail, string message)

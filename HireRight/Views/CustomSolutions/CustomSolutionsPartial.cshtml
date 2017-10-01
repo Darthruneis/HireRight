@@ -1,12 +1,8 @@
 ﻿@model CustomSolutionsViewModel
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/CustomSolutions/customSolutionsPartial.js"></script>
-<style>
-    .categoryDropDownDiv {
-    }
-</style>
 <div class="col-xs-12 row" style="padding: 0; margin-bottom: 10px;">
-    @{Html.RenderPartial("CategoryFilterPartial", Model.CategoryFilter);}
+    @{Html.RenderPartial("CategoryFilterPartial", Model.Filter);}
 </div>
 <div class="col-xs-12 row borderedRow">
     <div class="col-xs-12 col-lg-3">

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
@@ -28,7 +29,7 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<List<Product>> Get(ProductFilter filter)
+        public async Task<PageResult<Product>> Get(ProductFilter filter)
         {
             try
             {
@@ -41,7 +42,7 @@ namespace HireRight.Repository.Concrete
 
                     productsQuery = FilterByPrice(productsQuery, filter.Price, filter.PriceComparator);
 
-                    List<Product> products = await TakePage(productsQuery, filter).ConfigureAwait(false);
+                    PageResult<Product> products = await TakePage(productsQuery, filter).ConfigureAwait(false);
                     return products;
                 }
             }

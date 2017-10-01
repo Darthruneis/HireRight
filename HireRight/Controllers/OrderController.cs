@@ -94,9 +94,9 @@ namespace HireRight.Controllers
 
             ProductFilter assessmentTestFilter = new ProductFilter(1, 10);
             assessmentTestFilter.Title = "test";
-            List<ProductDTO> products = await _productsBusinessLogic.Get(assessmentTestFilter);
+            PagingResultDTO<ProductDTO> products = await _productsBusinessLogic.Get(assessmentTestFilter);
 
-            model.Order.Products = products;
+            model.Order.Products = products.PageResult.ToList();
 
             model.Order.SelectedProduct = model.Order.Products.First();
 

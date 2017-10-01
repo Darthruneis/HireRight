@@ -3,9 +3,9 @@ using HireRight.EntityFramework.CodeFirst.Database_Context;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
@@ -27,7 +27,7 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<List<ScaleCategory>> Get(CategoryFilter filter)
+        public async Task<PageResult<ScaleCategory>> Get(CategoryFilter filter)
         {
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
@@ -42,7 +42,7 @@ namespace HireRight.Repository.Concrete
                 if (filter.ItemGuids.Any())
                     query = query.Where(x => filter.ItemGuids.Contains(x.Id));
 
-                List<ScaleCategory> categoriesFound = await TakePage(query, filter, x => x.Title);
+                var categoriesFound = await TakePage(query, filter, x => x.Title);
                 return categoriesFound;
             }
         }

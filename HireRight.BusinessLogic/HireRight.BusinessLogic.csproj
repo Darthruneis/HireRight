@@ -80,6 +80,7 @@
     <Compile Include="Extensions\DiscountConversionExtensions.cs" />
     <Compile Include="Extensions\LocationConversionExtensions.cs" />
     <Compile Include="Extensions\OrderConversionExtensions.cs" />
+    <Compile Include="Extensions\ResultExtensions.cs" />
     <Compile Include="Models\BusinessLogicResponseObject.cs" />
     <Compile Include="Models\CreateOrderModel.cs" />
     <Compile Include="Concrete\OrdersBusinessLogic.cs" />

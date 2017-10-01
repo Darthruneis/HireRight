@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
+using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.Repository.Abstract
@@ -10,7 +11,7 @@ namespace HireRight.Repository.Abstract
     {
         Task<Contact> Add(Contact itemToAdd);
 
-        Task<List<Contact>> Get(ContactFilter filter);
+        Task<PageResult<Contact>> Get(ContactFilter filter);
 
         Task<Contact> Get(Guid itemGuid);
 

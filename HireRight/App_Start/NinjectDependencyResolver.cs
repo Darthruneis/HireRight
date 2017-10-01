@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Web;
 using System.Web.Mvc;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Concrete;

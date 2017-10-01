@@ -3,6 +3,7 @@
     ViewBag.Title = "Custom Solutions";
 }
 <script src="~/Scripts/CustomSolutions/index.js"></script>
+<script src="~/Scripts/CustomSolutions/categoryFilterPartial.js"></script>
 @using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm", @class = "row" }))
 {
     SectionWithTogglesAndTitleViewModel explanationViewModel = new SectionWithTogglesAndTitleViewModel("show the form instructions again.",

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
@@ -28,7 +29,7 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<List<Company>> Get(CompanyFilter filter)
+        public async Task<PageResult<Company>> Get(CompanyFilter filter)
         {
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
@@ -37,7 +38,7 @@ namespace HireRight.Repository.Concrete
                 if (!string.IsNullOrWhiteSpace(filter.Name))
                     companiesQuery = companiesQuery.Where(x => x.Name.Contains(filter.Name));
 
-                List<Company> companies = await TakePage(companiesQuery, filter).ConfigureAwait(false);
+                var companies = await TakePage(companiesQuery, filter).ConfigureAwait(false);
                 return companies;
             }
         }

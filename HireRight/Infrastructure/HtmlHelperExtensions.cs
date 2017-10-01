@@ -55,14 +55,9 @@ namespace HireRight.Infrastructure
         public static MvcHtmlString ProfileSampleDownloadListItem(this HtmlHelper helper, string text, string actionName)
         {
             UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
-            MvcHtmlString smallScreenViewLink = new MvcHtmlString($"<a href=\"{url.Action(actionName, "Reports", new { inline = true })}\" target=\"_blank\" title=\"View in a new tab\">" +
-                        $"<span class=\"btn btn-default glyphicon glyphicon-folder-open\" style=\"display: inline;\"></span>" +
-                        $"</a>");
-            MvcHtmlString smallScreenDownloadLink = new MvcHtmlString($"<a href=\"{url.Action(actionName, "Reports", new { inline = false })}\" title=\"Download\"><span class=\"btn btn-default glyphicon glyphicon-download\"></span></a>");
-            string innerHtml = $"{smallScreenViewLink}"
-                             + $" {smallScreenDownloadLink}"
-                             + $" {text}";
-            return new MvcHtmlString("<div class=\"col-xs-12\" style=\"padding: 2px; clear: both;\" >" + innerHtml + "</div>");
+            MvcHtmlString downloadlink =
+                new MvcHtmlString($"<a href=\"{url.Action(actionName, "Reports")}\" target=\"_blank\" title=\"View in a new tab\">{text}</a>");
+            return new MvcHtmlString("<div class=\"col-xs-12\" style=\"padding: 2px; clear: both;\" >" + downloadlink + "</div>");
         }
 
         public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, bool isRequired = false, object htmlAttributes = null)

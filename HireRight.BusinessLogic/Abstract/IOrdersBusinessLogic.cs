@@ -17,7 +17,7 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<OrderDetailsDTO> Get(Guid orderGuid);
 
-        Task<List<OrderDetailsDTO>> Get(OrderFilter filter);
+        Task<PagingResultDTO<OrderDetailsDTO>> Get(OrderFilter filter);
 
         Task SubmitCards(SubmitCardsDTO cardsToSubmit);
 

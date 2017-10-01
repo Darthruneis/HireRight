@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
@@ -27,7 +28,7 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<List<Contact>> Get(ContactFilter filter)
+        public async Task<PageResult<Contact>> Get(ContactFilter filter)
         {
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
@@ -45,7 +46,7 @@ namespace HireRight.Repository.Concrete
 
                 contactsQuery = contactsQuery.Where(x => string.IsNullOrWhiteSpace(filter.OfficeNumber) || x.OfficeNumber.Contains(filter.OfficeNumber));
 
-                List<Contact> contacts = await TakePage(contactsQuery, filter).ConfigureAwait(false);
+                var contacts = await TakePage(contactsQuery, filter).ConfigureAwait(false);
                 return contacts;
             }
         }

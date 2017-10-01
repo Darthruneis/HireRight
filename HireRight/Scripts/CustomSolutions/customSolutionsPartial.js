@@ -5,7 +5,7 @@ $(document).ready(wireUpDropdownDivsOnPartialViewLoad);
 function wireUpDropdownDivsOnPartialViewLoad() {
     $(".categoryDropDownDiv").change(function () {
         var element = $(this);
-        var value = element.find(":selected").text();
+        var value = element.find("option:selected").text();
         var id = element.data("categoryid");
         if (value !== "Not Important") {
             addOrUpdateSelectedCategories(id, value);

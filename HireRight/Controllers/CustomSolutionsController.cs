@@ -1,5 +1,4 @@
 ﻿using DataTransferObjects;
-using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
 using WebGrease.Css.Extensions;
@@ -63,7 +63,7 @@ namespace HireRight.Controllers
         public async Task<ActionResult> Index()
         {
             CategoryFilter categoryFilter = new CategoryFilter(1, 10);
-            List<CategoryDTO> categories = await _categoriesBusinessLogic.Get(categoryFilter);
+            PagingResultDTO<CategoryDTO> categories = await _categoriesBusinessLogic.Get(categoryFilter);
 
             CustomSolutionsViewModel model = CreateViewModelFromCategoryList(categories, categoryFilter);
 
@@ -86,14 +86,11 @@ namespace HireRight.Controllers
             return View("CustomSolutionsSuccess");
         }
 
-        private CustomSolutionsViewModel CreateViewModelFromCategoryList(List<CategoryDTO> categories, CategoryFilter filter)
+        private CustomSolutionsViewModel CreateViewModelFromCategoryList(PagingResultDTO<CategoryDTO> categories, CategoryFilter filter)
         {
-            IEnumerable<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel(x.Description, x.Title, x.Id));
+            IEnumerable<JobAnalysisCategoryViewModel> categoryViewModels = categories.PageResult.Select(x => new JobAnalysisCategoryViewModel(x.Description, x.Title, x.Id));
 
-            CustomSolutionsViewModel model = new CustomSolutionsViewModel(categoryViewModels.OrderBy(x => x.Title));
-            model.CategoryFilter = filter;
-
-            return model;
+            return new CustomSolutionsViewModel(categoryViewModels.OrderBy(x => x.Title), new CategoryFilterViewModel() { Filter = filter, TotalMatchingResults = categories.TotalMatchingResults });
         }
 
         private List<JobAnalysisCategoryViewModel> EnforceConstraints(IEnumerable<JobAnalysisCategoryViewModel> model)
@@ -125,7 +122,7 @@ namespace HireRight.Controllers
             return listToReturn;
         }
 
-        private async Task<List<CategoryDTO>> FindCategories(string description, string title, int page = 1, int size = 10)
+        private async Task<PagingResultDTO<CategoryDTO>> FindCategories(string description, string title, int page = 1, int size = 10)
         {
             CategoryFilter filter = new CategoryFilter(title, description);
             filter.PageNumber = page;

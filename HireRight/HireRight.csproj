@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\CategoryFilterViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\ContactUsViewModel.cs" />
     <Compile Include="Models\CreateOrderViewModel.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\NewClientsViewModel.cs" />
     <Compile Include="Models\OrdersViewModel.cs" />
     <Compile Include="Models\PrimaryContactViewModel.cs" />
+    <Compile Include="Models\SampleForDownloadViewModel.cs" />
     <Compile Include="Models\SectionWithTogglesAndTitleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -263,6 +265,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\ProfileSamples\SalesHunterProfileSampleReport.pdf" />
     <Content Include="Content\sass\_navigation.scss" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />

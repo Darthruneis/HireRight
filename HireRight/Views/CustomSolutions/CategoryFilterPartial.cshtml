@@ -1,27 +1,57 @@
-﻿@model DataTransferObjects.Filters.Concrete.CategoryFilter
-<script src="~/Scripts/CustomSolutions/categoryFilterPartial.js"></script>
+﻿@model CategoryFilterViewModel
+
+<style>
+    .pagingButton {
+        min-width: 50px;
+        top: 0px;
+    }
+</style>
 <div class="col-xs-6">
-    @Html.LabelFor(x => x.TitleFilter)
+    @Html.LabelFor(x => x.Filter.TitleFilter)
     <br />
-    @Html.EditorFor(x => x.TitleFilter, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.EditorFor(x => x.Filter.TitleFilter, new { htmlAttributes = new { @class = "form-control" } })
 </div>
 <div class="col-xs-6">
-    @Html.LabelFor(x => x.DescriptionFilter)
+    @Html.LabelFor(x => x.Filter.DescriptionFilter)
     <br />
-    @Html.EditorFor(x => x.DescriptionFilter, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.EditorFor(x => x.Filter.DescriptionFilter, new { htmlAttributes = new { @class = "form-control" } })
 </div>
 <div class="col-xs-11" style="padding-top: 5px;">
-    @if (Model.PageNumber > 1)
-            {
-        <button id="page1Button" type="button" value="1" class="btn btn-default">1</button>
-    }
-    else
+    @if (Model.Filter.PageNumber != 1)
     {
-        <button id="page1Button" type="button" value="1" class="btn btn-default" style="display: none;"></button>
+        <button type="button"
+                class="btn btn-default pagingButton"
+                data-page="1">
+            1
+        </button>
     }
-    <button id="prevPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-left"></button>
-    <button id="currentPageButton" type="button" class="btn btn-default" disabled="disabled">@Model.PageNumber</button>
-    <button id="nextPageButton" type="button" class="btn btn-default glyphicon glyphicon-chevron-right"></button>
+    @if (Model.Filter.PageNumber > 1)
+    {
+        <button type="button"
+                class="btn btn-default glyphicon glyphicon-chevron-left pagingButton"
+                data-page="@(Model.Filter.PageNumber - 1)"></button>
+    }
+    <button type="button"
+            class="btn btn-default pagingButton"
+            disabled="disabled"
+            data-page="@(Model.Filter.PageNumber)">
+        @Model.Filter.PageNumber
+    </button>
+    @{ long lastPage = (long)(Math.Ceiling((double)Model.TotalMatchingResults / Model.Filter.PageSize)); }
+    @if (Model.Filter.PageNumber < lastPage)
+    {
+        <button type="button"
+                class="btn btn-default glyphicon glyphicon-chevron-right pagingButton"
+                data-page="@(Model.Filter.PageNumber + 1)"></button>
+    }
+    @if (Model.Filter.PageNumber != lastPage)
+    {
+        <button type="button"
+                class="btn btn-default pagingButton"
+                data-page="@(lastPage)">
+            @(lastPage)
+        </button>
+    }
 </div>
 <div class="col-xs-1" style="padding-top: 5px;">
     <button id="FilterButton" type="button" class="btn btn-default">Filter</button>
@@ -30,17 +60,11 @@
 <script>
     //This script cannot be extracted into a .js file because of the reference to the Model
     $(document).ready(function () {
-        $("#page1Button").click(function () {
-            filterCategories(1, 10);
+        $("button.pagingButton").click(function () {
+            filterCategories($(this).data("page"), 10);
         });
         $("#FilterButton").click(function () {
             filterCategories(1, 10);
-        });
-        $("#prevPageButton").click(function () {
-            filterCategories(@Model.PageNumber -1, 10);
-        });
-        $("#nextPageButton").click(function () {
-            filterCategories(@Model.PageNumber +1, 10);
         });
     });
 </script>

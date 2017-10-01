@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Remoting.Channels;
 using System.Web.Configuration;
 using System.Xml;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;

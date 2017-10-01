@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
@@ -27,7 +28,7 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<List<Discount>> Get(DiscountFilter filter)
+        public async Task<PageResult<Discount>> Get(DiscountFilter filter)
         {
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
@@ -39,7 +40,7 @@ namespace HireRight.Repository.Concrete
 
                 discountsQuery = discountsQuery.Where(x => filter.IsPercent == null || x.IsPercent == filter.IsPercent.Value);
 
-                List<Discount> discounts = await TakePage(discountsQuery, filter).ConfigureAwait(false);
+                PageResult<Discount> discounts = await TakePage(discountsQuery, filter).ConfigureAwait(false);
                 return discounts;
             }
         }
