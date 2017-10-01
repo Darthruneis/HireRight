@@ -37,7 +37,7 @@ body {
     @extend %centered;
     @extend %site_side_colors;
     padding: 0;
-    font-size: $text_size;
+    font-size: $normal_text_size;
     color: $text_default;
 }
 
@@ -62,7 +62,7 @@ span .image-text-overlay {
 .btn {
     border: 3px solid black;
     @extend %site_button_color;
-    font-size: $text_size;
+    font-size: $normal_text_size;
     color: $text_default;
 }
 
@@ -102,7 +102,7 @@ span .image-text-overlay {
     color: $black;
     display: block;
     height: 40px;
-    font-size: $text_size;
+    font-size: $normal_text_size;
     transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
     overflow: hidden;
 }

@@ -5,5 +5,14 @@
 @media only screen and (min-width: 64.25em) {
     body {
         padding: 0 3%;
+        font-size: $small_text_size;
+    }
+
+    .btn{
+        font-size: $small_text_size;
+    }
+
+    .form-control{
+        font-size: $small_text_size;
     }
 }
