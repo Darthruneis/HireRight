@@ -1,6 +1,16 @@
 ﻿@model CustomSolutionsViewModel
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/CustomSolutions/customSolutionsPartial.js"></script>
+<div class="col-xs-12 row">
+    <div class="col-xs-12">
+        Select the Category for your organization if listed. Use other for unlisted ones and you will see the entire list of scales available.
+        For each scale rate the importance for a successful candidate. Use the drop down menu for your ratings. For those rated Not Important you may want to click the Show/Hide button.
+    </div>
+    <br/>
+    <div class="col-xs-12" style="padding-top: 12px;">After you have rated each scale, review your ratings to determine if the critical characteristics of a successful applicant are included.</div>
+    <br/>
+    <div class="col-xs-12" style="padding-top: 12px;">When finished, click 'Continue'.</div>
+</div>
 <div class="col-xs-12 row" style="padding: 0; margin-bottom: 10px;">
     @{Html.RenderPartial("CategoryFilterPartial", Model.Filter);}
 </div>
