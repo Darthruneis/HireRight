@@ -1,10 +1,14 @@
-﻿<nav class="navbar navbar-default navbar-fixed-top">
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed glyphicon glyphicon-menu-hamburger" data-toggle="collapse" data-target="#navbarLinks"></button>
-            <a class="navbar-brand" href="/">Hire Right Testing</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Hire Right Testing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
-        <div class="collapse navbar-collapse" id="navbarLinks">
+        <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("New Clients", "NewClients", "Client")</li>
                 <li>@Html.ActionLink("Build a Custom Test", "Index", "CustomSolutions")</li>
@@ -16,4 +20,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</div>

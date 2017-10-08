@@ -10,68 +10,62 @@
 }
 
 a {
-    color: $lightBlue;
+    color: $lightBlue !important;
 }
 
-a:hover{
-    color: $purple;
+a:hover {
+    color: $purple !important;
 }
 
-.navbar-default .navbar-brand,
-.navbar-default .navbar-nav > li > a {
-    color: $black;
-    font-size: 18pt;
+.navbar > .container {
+    margin-left: $gutter;
+    margin-right: $gutter;
+    padding: 0;
 }
 
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-nav > li > a:hover
-{
-    color: white;
+.navbar-brand,
+.navbar-nav > li > a {
+    color: $black !important;
+    font-size: 14pt !important;
+}
+
+.navbar-brand:hover,
+.navbar-nav > li > a:hover {
+    color: white !important;
     text-shadow: $black 2px 0px 1px;
 }
 
-.navbar-default .navbar-nav > li > a.current {
-    color: white;
+.navbar-nav > li > a.current {
+    color: white !important;
 }
 
-.navbar-default .navbar-nav > li > a.current:hover {
-    color: $black;
+.navbar-nav > li > a.current:hover {
+    color: $black !important;
     text-shadow: white 2px 0px 1px;
 }
 
-.navbar-default .navbar-brand {
+.navbar-inverse .navbar-brand {
     font-size: 18pt;
     font-weight: bold;
 }
 
-@media (max-width: 1550px) {
-
-    //TODO: Figure out why the nav menu is not collapsing/hiding on 'tablet' size browser window, it works correctly for 'desktop' and 'mobile' sizes.
-    //~765px-~1550px
-
-    .navbar-toggle {
-        display: block;
+@media (min-width: 768px) and (max-width: 1252px) {
+    div.navbar-collapse.collapse {
+        display: none !important;
     }
-    .navbar-header {
-        float: none;
+    button.navbar-toggle{
+        display: block !important;
+        right: 1px;
+        position: absolute;
     }
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    .navbar-collapse.collapse.in { 
+        display: block!important;
     }
-
-    .navbar-nav {
-        float: none !important;
-        margin: 7.5px -15px;
+    .collapsing {
+        overflow: hidden!important;
     }
-    /*
-
-    .navbar-nav > li {
-        float: none;
+    ul.nav.navbar-nav > li {
+        width: 100%;
+        font-size: 18pt !important;
     }
-
-    .navbar-nav > li > a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }*/
 }
