@@ -26,9 +26,11 @@
     <button id="FilterButton" type="button" class="btn btn-default">Filter</button>
 </div>
 
+<script src="~/Scripts/CustomSolutions/categoryFilterPartial.js"></script>
 <script>
     //This script cannot be extracted into a .js file because of the reference to the Model
     $(document).ready(function () {
+        console.log("binding paging");
         $("button.pagingButton").click(function () {
             filterCategories($(this).data("page"), 10);
         });

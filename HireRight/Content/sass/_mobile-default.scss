@@ -337,17 +337,36 @@ h6 {
 }
 
 .borderedRow {
-    border: 3px solid $darkNavyBlue;
+    @extend %borderedTop;
+    @extend %borderedBottom;
+    @extend %borderedLeft;
+    @extend %borderedRight;
 }
 
 .borderedHorizontal {
-    border-Top: 3px solid $darkNavyBlue;
-    border-Bottom: 3px solid $darkNavyBlue;
+    @extend %borderedTop;
+    @extend %borderedBottom;
 }
 
 .borderedVertical {
-    border-Left: 3px solid $darkNavyBlue;
-    border-Right: 3px solid $darkNavyBlue;
+    @extend %borderedLeft;
+    @extend %borderedRight;
+}
+
+.borderedTop {
+    @extend %borderedTop;
+}
+
+.borderedBottom {
+    @extend %borderedBottom;
+}
+
+.borderedLeft {
+    @extend %borderedLeft;
+}
+
+.borderedRight {
+    @extend %borderedRight;
 }
 
 .scrollHorizontally {

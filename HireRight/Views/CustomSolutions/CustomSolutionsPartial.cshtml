@@ -15,7 +15,7 @@
     @{Html.RenderPartial("CategoryFilterPartial", Model.Filter);}
 </div>
 
-<div class="row borderedRow">
+<div class="row borderedRow" style="clear: both;">
     <div div class="col-xs-11 row">
         <div class="col-xs-3">
             <strong>Category</strong>
@@ -31,10 +31,15 @@
         <strong>Show/Hide</strong>
     </div>
 </div>
-<div class="borderedRow" style="padding: 0;">
+<div class="borderedRow">
     @for (int i = 0; i < Model.Categories.Count; i++)
     {
-        <div class="row borderedRow">
+        string borderString = "borderedBottom";
+        if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
+        {
+            borderString = "";
+        }
+        <div class="row @(borderString)">
             @{
                 string rowId = "categoryRow_" + i;
             }
