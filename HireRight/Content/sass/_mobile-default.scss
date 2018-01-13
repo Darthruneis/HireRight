@@ -369,6 +369,10 @@ h6 {
     @extend %borderedRight;
 }
 
+.divider {
+    border-bottom: 1px solid $darkNavyBlue;
+}
+
 .scrollHorizontally {
     max-width: 95vw;
     overflow-x: scroll;

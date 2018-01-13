@@ -73,7 +73,7 @@ namespace HireRight.Infrastructure
 
         public static MvcHtmlString CollapseButton(this HtmlHelper helper, string divToToggleId)
         {
-            return new MvcHtmlString($"<button type='button' class='btn btn-default collapseIcon glyphicon glyphicon-minus-sign' data-toggledivid='{divToToggleId}' title='Collapse this section'></button>");
+            return new MvcHtmlString($"<button type='button' class='btn btn-default collapseIcon pull-right glyphicon glyphicon-minus-sign' data-toggledivid='{divToToggleId}' title='Collapse this section'></button>");
         }
 
         public static MvcHtmlString SubmitButton(this HtmlHelper helper, string buttonText = "Submit")

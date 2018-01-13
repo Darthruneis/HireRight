@@ -271,6 +271,9 @@ h6 {
 .validation-summary-valid {
   display: none; }
 
+.divider {
+  border-bottom: 1px solid #335060; }
+
 .scrollHorizontally {
   max-width: 95vw;
   overflow-x: scroll; }

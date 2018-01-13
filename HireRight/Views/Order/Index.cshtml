@@ -2,37 +2,68 @@
 @{
     ViewBag.Title = "Order";
 }
-@using (Html.BeginForm("Index", "Order", FormMethod.Post, new { @class = "row" }))
+@using (Html.BeginForm("Index", "Order", FormMethod.Post))
 {
-    SectionWithTogglesAndTitleViewModel companyInfoViewModel = new SectionWithTogglesAndTitleViewModel("show the company information again.",
-        "hiddenCompanyInfoDiv", "hideCompanyInfoButton",
-        "showCompanyInfoButton", "shownCompanyInfoDiv",
-        "~/Views/Order/EditorTemplates/CompanyViewModel.cshtml",
-        "Company");
-    companyInfoViewModel.ViewModelForContentView = Model;
-    Html.RenderPartial("SectionWithPanelHeadAndToggles", companyInfoViewModel);
+    <div class="row divider" style="padding-bottom: 10px;">
+        <div class="col-xs-12 col-lg-5">
+            <div class="row">
+                <div class="col-xs-9 col-md-11">
+                    <h2>Company</h2>
+                </div>
+                <div class="col-xs-3 col-md-1">
+                    @Html.CollapseButton("companyInfoDiv")
+                </div>
+            </div>
+            <div class="row" id="companyInfoDiv">
+                <div style="padding-bottom: 10px;">
+                    @{
+                        Html.RenderPartial("~/Views/Order/EditorTemplates/CompanyViewModel.cshtml", Model);
+                    }
+                </div>
+            </div>
+        </div>
 
-    SectionWithTogglesAndTitleViewModel contactsInfoViewModel = new SectionWithTogglesAndTitleViewModel("show the contact information again.",
-        "hiddenContactInfoDiv", "hideContactInfoButton",
-        "showContactInfoButton", "shownContactInfoDiv",
-        "~/Views/Order/Contacts.cshtml",
-        "Contacts");
-    contactsInfoViewModel.ViewModelForContentView = Model;
-    Html.RenderPartial("SectionWithPanelHeadAndToggles", contactsInfoViewModel);
+        <div class="col-xs-12 col-lg-7">
+            <div class="row">
+                <div class="col-xs-9 col-md-11">
+                    <h2>Contacts</h2>
+                </div>
+                <div class="col-xs-3 col-md-1">
+                    @Html.CollapseButton("contactsInfoDiv")
+                </div>
+            </div>
+            <div class="row" id="contactsInfoDiv">
+                <div style="padding-bottom: 10px;">
+                    @{
+                        Html.RenderPartial("Contacts", Model);
+                    }
+                </div>
+            </div>
+        </div>
 
-SectionWithTogglesAndTitleViewModel orderDetailsViewModel = new SectionWithTogglesAndTitleViewModel("show the order details again",
-    "hiddenOrderDetailsDiv", "hideOrderDetailsButton",
-    "showOrderDetailsButton", "shownorderDetailsDiv",
-    "~/Views/Order/EditorTemplates/OrdersViewModel.cshtml",
-    "Order Details");
-orderDetailsViewModel.ViewModelForContentView = Model;
-Html.RenderPartial("SectionWithPanelHeadAndToggles", orderDetailsViewModel);
+    </div>
+    <div class="divider" style="padding-top: 5px;">
+        <div class="row">
+            <div class="col-xs-9 col-md-11">
+                <h2>Order Details</h2>
+            </div>
+            <div class="col-xs-3 col-md-1">
+                @Html.CollapseButton("orderDetailsDiv")
+            </div>
+        </div>
+        <div class="row" id="orderDetailsDiv">
+            <div style="padding-bottom: 10px; clear: both;">
+                @{
+                    Html.RenderPartial("~/Views/Order/EditorTemplates/OrdersViewModel.cshtml", Model);
+                }
+            </div>
+        </div>
+    </div>
+
     <div class="row" style="padding-top: 10px; clear: both;">
         <div class="col-xs-12 col-lg-10">@Html.ValidationSummary(true)</div>
         <div class="col-xs-12 col-lg-2">
-            <div style="text-align: center;">
-                <input type="submit" value="Place Order" class="btn btn-primary"/>
-            </div>
+            @Html.SubmitButton("Place Order")
         </div>
     </div>
 }
