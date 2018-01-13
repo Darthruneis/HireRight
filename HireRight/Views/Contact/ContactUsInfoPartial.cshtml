@@ -4,7 +4,7 @@
         <h2>How can we help you?</h2>
     </div>
 </div>
-<div class="row borderedRow">
+<div class="row">
     <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => Model.CompanyName, true)
     </div>
@@ -12,7 +12,8 @@
         @Html.ValidatedEditorWithLabelFor(x => Model.PositionAtCompany, true)
     </div>
 </div>
-<div class="row borderedRow">
+<br/>
+<div class="row">
     <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => Model.FirstName, true)
     </div>
@@ -29,14 +30,16 @@
         @Html.ValidatedEditorWithLabelFor(x => Model.CellPhone, true)
     </div>
 </div>
-<div class="row borderedRow" style="padding-left: 15px; padding-right: 15px;">
+<br />
+<div class="row" style="padding-left: 15px; padding-right: 15px;">
     @Html.EditorFor(x => x.Address)
 </div>
-<div class="row borderedRow">
+<br />
+<div class="row">
     <div class="col-xs-12">
         @Html.LabelFor(x => Model.Message)
         <br />
-        @Html.TextAreaFor(x => Model.Message, new { @class = "form-control", style = "resize=none;", placeholder = "I would like help with...", required = true, rows = 12, cols = 200 })
+        @Html.TextAreaFor(x => Model.Message, new { @class = "form-control", style = "resize: vertical; min-height: 90px; overflow-y: scroll; overflow-x: hidden;", placeholder = "I would like help with...", required = true, rows = 6, cols = 200 })
         <br />
         @Html.ValidationMessageFor(x => Model.Message)
     </div>
@@ -46,8 +49,6 @@
         @Html.ValidationSummary(true)
     </div>
     <div class="col-xs-2">
-        <div style="margin: 0 auto;">
-            <input type="submit" style="text-align: center;" value="Send" class="btn btn-primary" />
-        </div>
+        @Html.SubmitButton("Send")
     </div>
 </div>
