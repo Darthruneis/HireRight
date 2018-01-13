@@ -35,7 +35,7 @@ footer {
 body {
     @extend %centered;
     @extend %site_side_colors;
-    padding: 0 $gutter 0 $gutter;
+    padding: 0 5% 0 5%;
     font-size: $text_size;
     color: $text_default;
 }
