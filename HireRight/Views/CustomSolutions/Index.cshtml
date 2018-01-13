@@ -6,35 +6,56 @@
 <script src="~/Scripts/CustomSolutions/categoryFilterPartial.js"></script>
 @using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm", @class = "row" }))
 {
-    SectionWithTogglesAndTitleViewModel explanationViewModel = new SectionWithTogglesAndTitleViewModel("show the form instructions again.",
-        "hiddenFormInstructionsDiv", "hideFormInstructionsButton",
-        "showFormInstructionsButton", "shownFormInstructionsDiv",
-        "~/Views/CustomSolutions/FormInstructionsContentPartial.cshtml",
-        "Job Analysis");
-    Html.RenderPartial("SectionWithPanelHeadAndToggles", explanationViewModel);
-
-    SectionWithTogglesAndTitleViewModel companyAndContactInfoViewModel = new SectionWithTogglesAndTitleViewModel("show the Required Information again.",
-        "collapsedCompanyAndContactInfo", "hideCompanyAndContactInfoButton",
-        "showCompanyAndContactInfoButton", "contactAndCompanyInfo",
-        "~/Views/CustomSolutions/ContactAndCompanyInfoPartial.cshtml", "Required Information");
-    companyAndContactInfoViewModel.ViewModelForContentView = Model;
-    Html.RenderPartial("SectionWithPanelHeadAndToggles", companyAndContactInfoViewModel);
-
-    SectionWithTogglesAndTitleViewModel customSolutionsViewModel = new SectionWithTogglesAndTitleViewModel("show the category information again.",
-        "hiddenCategoryListDiv", "hideCategoryInformationButton",
-        "showCategoryInformationButton", "CategoryListDiv",
-        "~/Views/CustomSolutions/CustomSolutionsPartial.cshtml", "Choosing the Critical Scales");
-    customSolutionsViewModel.ViewModelForContentView = Model;
-    Html.RenderPartial("SectionWithPanelHeadAndToggles", customSolutionsViewModel);
+    <div class="row">
+        <div class="col-xs-9 col-md-11">
+            <h2>Job Analysis</h2>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            @Html.CollapseButton("jobAnalysisInstructionsDiv")
+        </div>
+    </div>
+    <div class="row" id="jobAnalysisInstructionsDiv">
+        @{
+            Html.RenderPartial("FormInstructionsContentPartial");
+        }
+    </div>
     <br />
+
+    <div class="row">
+        <div class="col-xs-9 col-md-11">
+            <h2>Required Information</h2>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            @Html.CollapseButton("contactAndCompanyInfoDiv")
+        </div>
+    </div>
+    <div class="row" id="contactAndCompanyInfoDiv">
+        @{
+            Html.RenderPartial("ContactAndCompanyInfoPartial", Model);
+        }
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-xs-9 col-md-11">
+            <h2>Choosing the Critical Scales</h2>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            @Html.CollapseButton("scaleCategoriesDiv")
+        </div>
+    </div>
+    <div class="row" id="scaleCategoriesDiv">
+        @{
+            Html.RenderPartial("CustomSolutionsPartial", Model);
+        }
+    </div>
+
     <div class="col-xs-12 row" style="padding-top: 10px;">
         <div class="col-xs-10">
             @Html.ValidationSummary(true)
         </div>
         <div class="col-xs-2">
-            <div style="margin: 0 auto;">
-                <input type="submit" value="Continue" class="btn btn-primary" />
-            </div>
+            @Html.SubmitButton("Continue")
         </div>
     </div>
 }

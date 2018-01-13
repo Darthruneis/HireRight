@@ -70,5 +70,15 @@ namespace HireRight.Infrastructure
 
             return new MvcHtmlString(labelString + (isRequired ? "<span style=\"color: red;\" class=\"glyphicon glyphicon-asterisk\"></span>" : string.Empty) + "<br />" + editorString + validationString);
         }
+
+        public static MvcHtmlString CollapseButton(this HtmlHelper helper, string divToToggleId)
+        {
+            return new MvcHtmlString($"<button type='button' class='btn btn-default collapseIcon glyphicon glyphicon-minus-sign' data-toggledivid='{divToToggleId}' title='Collapse this section'></button>");
+        }
+
+        public static MvcHtmlString SubmitButton(this HtmlHelper helper, string buttonText = "Submit")
+        {
+            return new MvcHtmlString($"<input type='submit' value='{buttonText}' class='btn btn-primary pull-right' />");
+        }
     }
 }

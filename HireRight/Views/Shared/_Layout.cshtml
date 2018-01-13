@@ -30,5 +30,10 @@
         </div>
     </div>
     @RenderSection("scripts", required: false)
+<script>
+    $(document).ready(function() {
+        Collapsibles.bindCollapsibles();
+    });
+</script>
 </body>
 </html>

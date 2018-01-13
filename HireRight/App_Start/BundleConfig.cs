@@ -17,6 +17,7 @@ namespace HireRight
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Scripts/navbarLinksCurrentColor.js",
                 "~/Scripts/ajaxCallWithLoadingIcon.js",
+                "~/Scripts/Global/Collapsibles.js",
                 "~/Scripts/showHideDiv.js"
                 ));
 

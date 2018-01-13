@@ -1,0 +1,39 @@
+﻿@model PagingButtonsModel
+
+<div>
+    @if (Model.Filter.PageNumber != 1)
+    {
+        <button type="button"
+                class="btn btn-default pagingButton"
+                data-page="1">
+            1
+        </button>
+    }
+    @if (Model.Filter.PageNumber > 1)
+    {
+        <button type="button"
+                class="btn btn-default glyphicon glyphicon-chevron-left pagingButton"
+                data-page="@(Model.Filter.PageNumber - 1)"></button>
+    }
+    <button type="button"
+            class="btn btn-default pagingButton"
+            disabled="disabled"
+            data-page="@(Model.Filter.PageNumber)">
+        @Model.Filter.PageNumber
+    </button>
+    @{ long lastPage = (long)(Math.Ceiling((double)Model.TotalMatchingResults / Model.Filter.PageSize)); }
+    @if (Model.Filter.PageNumber < lastPage)
+    {
+        <button type="button"
+                class="btn btn-default glyphicon glyphicon-chevron-right pagingButton"
+                data-page="@(Model.Filter.PageNumber + 1)"></button>
+    }
+    @if (Model.Filter.PageNumber != lastPage)
+    {
+        <button type="button"
+                class="btn btn-default pagingButton"
+                data-page="@(lastPage)">
+            @(lastPage)
+        </button>
+    }
+</div>
