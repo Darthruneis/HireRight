@@ -56,7 +56,7 @@ span .image-text-overlay {
 /* Set padding to keep content from hitting the edges */
 .body-content {
     @extend %site_main_background;
-    padding: 8px $gutter 8px $gutter;
+    padding: 8px 5% 8px 5%;
 }
 
 .btn {
