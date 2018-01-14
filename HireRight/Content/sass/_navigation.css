@@ -1,7 +1,14 @@
-﻿.navbar {
-  background-color: #66a3ff; }
+﻿/*$site_background: $white;*/
+/*$site_side_background: $white;*/
+/*$site_highlights_background: $fadedLightBlue;*/
+/*$site_background: $white;*/
+/*$site_side_background: $white;*/
+/*$site_highlights_background: $fadedLightBlue;*/
+.navbar {
+  background-color: #5E99C1; }
 
 .navbar {
+  /*@extend %site_button_color;*/
   color: #000000;
   border: 3px solid #000000;
   border-top: 0; }

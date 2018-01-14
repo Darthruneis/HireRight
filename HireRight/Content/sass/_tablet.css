@@ -1,4 +1,10 @@
-﻿@media only screen and (min-width: 45em) {
+﻿/*$site_background: $white;*/
+/*$site_side_background: $white;*/
+/*$site_highlights_background: $fadedLightBlue;*/
+/*$site_background: $white;*/
+/*$site_side_background: $white;*/
+/*$site_highlights_background: $fadedLightBlue;*/
+@media only screen and (min-width: 45em) {
   body {
     padding: 0 1%; } }
 

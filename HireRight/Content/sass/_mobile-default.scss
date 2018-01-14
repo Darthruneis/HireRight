@@ -37,7 +37,7 @@ body {
     @extend %centered;
     @extend %site_side_colors;
     font-size: $normal_text_size;
-    padding: 0 5% 0 5%;
+    padding: 0;
     color: $text_default;
 }
 
@@ -67,7 +67,7 @@ span .image-text-overlay {
 }
 
 .btn-primary {
-    @extend %submit_button_color;
+    @extend %site_button_color;
 }
 
 .jumbotron {
@@ -108,8 +108,9 @@ span .image-text-overlay {
 }
 
 input[type="submit"],
-button[type="submit"]{
+button[type="submit"] {
     float: right;
+    @extend %submit_button_color;
 }
 
 /*div {
