@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 30px;
   vertical-align: middle; }
 
-footer, .body-content, .panel {
+.footer, .body-content, .panel {
   background-color: #ffffff; }
 
 body {
@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 30px;
   vertical-align: middle; }
 
-footer, .body-content, .panel {
+.footer, .body-content, .panel {
   background-color: #ffffff; }
 
 body {
@@ -160,8 +160,8 @@ hr {
   height: 3px;
   background-color: #335060;
   border: 0;
-  margin: 0 1%;
-  padding: 1px 0; }
+  margin: 0;
+  padding: 0; }
 
 header {
   padding: -10px 0 0 0;
@@ -170,7 +170,7 @@ header {
   width: 100%;
   display: block; }
 
-footer {
+.footer {
   min-height: 20px;
   clear: both;
   width: 100%;
@@ -315,7 +315,8 @@ h1 {
   font-size: 40pt; }
 
 h2 {
-  font-size: 20pt; }
+  font-size: 20pt;
+  margin: 0; }
 
 h3 {
   margin: 0;
@@ -372,6 +373,17 @@ h6 {
   text-align: center;
   font-size: 18pt; }
 
+.horizontal-List-Button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 100%; }
+
+.noPadNoMarg {
+  margin: 0;
+  padding: 0; }
+
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
 /*$site_highlights_background: $skyBlue;*/
@@ -397,7 +409,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 30px;
   vertical-align: middle; }
 
-footer, .body-content, .panel {
+.footer, .body-content, .panel {
   background-color: #ffffff; }
 
 body {
@@ -454,7 +466,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 30px;
   vertical-align: middle; }
 
-footer, .body-content, .panel {
+.footer, .body-content, .panel {
   background-color: #ffffff; }
 
 body {

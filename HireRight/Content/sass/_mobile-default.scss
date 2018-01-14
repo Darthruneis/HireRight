@@ -11,8 +11,8 @@ hr {
     height: 3px;
     background-color: $darkNavyBlue;
     border: 0;
-    margin: 0 1%;
-    padding: 1px 0;
+    margin: 0;
+    padding: 0;
 }
 
 header {
@@ -23,7 +23,7 @@ header {
     display: block;
 }
 
-footer {
+.footer {
     @extend %site_main_background;
     min-height: 20px;
     clear: both;
@@ -231,6 +231,7 @@ h1 {
 h2 {
     @extend %headerText;
     font-size: 20pt;
+    margin: 0;
 }
 
 h3 {
@@ -349,4 +350,17 @@ h6 {
     width: 100%;
     text-align: center;
     font-size: 18pt;
+}
+
+.horizontal-List-Button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 100%;
+}
+
+.noPadNoMarg {
+    margin: 0;
+    padding: 0;
 }

@@ -3,28 +3,37 @@
 }
 <h2>Reports</h2>
 @{ Html.RenderPartial("SampleReportsIntroSectionPartial"); }
-<div class="row" style="margin: 10px 2%;">
-    @*<div class="col-xs-12 col-lg-2 btn btn-default" id="showIntroListButton">
-            Intro
-        </div>*@
-    <div class="col-xs-12 col-lg-2 btn btn-default" id="showCategoriesListButton">
-        Categories
+<div class="row">
+    <div class="col-xs-12 col-lg-2 col-lg-offset-1">
+        <div class="btn btn-default horizontal-List-Button" id="showCategoriesListButton">
+            Categories
+        </div>
     </div>
-    <div class="col-xs-12 col-lg-2 btn btn-default" id="showOverallListButton">
-        Overall
+    <div class="col-xs-12 col-lg-2">
+        <div class="btn btn-default horizontal-List-Button" id="showOverallListButton">
+            Overall
+        </div>
     </div>
-    <div class="col-xs-12 col-lg-3 btn btn-default" id="showCategoryDetailsListButton">
-        Category Details
+    <div class="col-xs-12 col-lg-2">
+        <div class="btn btn-default horizontal-List-Button" id="showCategoryDetailsListButton">
+            Category Details
+        </div>
     </div>
-    <div class="col-xs-12 col-lg-3 btn btn-default" id="showManagementStrategiesListButton">
-        Management Strategies
+    <div class="col-xs-12 col-lg-2">
+        <div class="btn btn-default horizontal-List-Button" id="showManagementStrategiesListButton">
+            Management Strategies
+        </div>
     </div>
-    <div class="col-xs-12 col-lg-2 btn btn-default" id="showInterviewGuideListButton">
-        Interview Guide
+    <div class="col-xs-12 col-lg-2">
+        <div class="btn btn-default horizontal-List-Button" id="showInterviewGuideListButton">
+            Interview Guide
+        </div>
     </div>
 </div>
+
 <div class="row" id="reportingExplanationDiv">
 </div>
+
 <script src="~/Scripts/replacingDivContents.js"></script>
 <script>
     $(document).ready(function () {

@@ -1,6 +1,6 @@
 ﻿@model PrimaryContactViewModel
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-4" style="padding: 0;">
         @Html.ValidatedEditorWithLabelFor(x => Model.FirstName, true)
     </div>
     <div class="col-xs-12 col-lg-4">
@@ -9,8 +9,12 @@
     <div class="col-xs-12 col-lg-4">
         @Html.ValidatedEditorWithLabelFor(x => Model.Email, true)
     </div>
+</div>
+<div class="row">
     @Html.EditorFor(x => x.Address)
-    <div class="col-xs-12 col-md-6">
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6" style="padding: 0;">
         @Html.ValidatedEditorWithLabelFor(x => Model.OfficePhone, true)
     </div>
     <div class="col-xs-12 col-md-6">

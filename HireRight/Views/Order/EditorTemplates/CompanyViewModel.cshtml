@@ -1,9 +1,9 @@
 ﻿@model CreateOrderViewModel
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6" style="padding: 0;">
         @Html.ValidatedEditorWithLabelFor(x => Model.Company.CompanyTitle, true)
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => Model.Company.CompanyPosition, true)
     </div>
 </div>
