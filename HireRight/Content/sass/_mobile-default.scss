@@ -1,6 +1,7 @@
 ﻿@import "_variables.scss";
 @import "_mixins.scss";
 @import "_%classes.scss";
+@import "_navigation.scss";
 
 html {
     @extend %centered;
@@ -35,12 +36,12 @@ footer {
 body {
     @extend %centered;
     @extend %site_side_colors;
+    font-size: $normal_text_size;
     padding: 0 5% 0 5%;
-    font-size: $text_size;
     color: $text_default;
 }
 
-img{
+img {
     width: 100%;
     padding: 4px;
 }
@@ -55,49 +56,18 @@ span .image-text-overlay {
 /* Set padding to keep content from hitting the edges */
 .body-content {
     @extend %site_main_background;
-    padding: 8px $gutter 8px $gutter;
+    padding: 8px 5% 8px 5%;
 }
 
 .btn {
     border: 3px solid black;
-    @extend %site_highlight_color;
-    font-size: $text_size;
+    @extend %site_button_color;
+    font-size: $normal_text_size;
     color: $text_default;
 }
 
-.navbar {
-    @extend %site_highlight_color;
-    color: $black;
-    border: 3px solid $black;
-    border-top: 0;
-}
-
-@media (max-width: 1330px) {
-    .navbar-header {
-        float: none;
-    }
-    .navbar-toggle {
-        display: block;
-    }
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-    .navbar-nav {
-        float: none!important;
-        margin: 7.5px -15px;
-    }
-    .navbar-nav>li {
-        float: none;
-    }
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-}
-
 .btn-primary {
-    @extend %site_highlight_color;
+    @extend %submit_button_color;
 }
 
 .jumbotron {
@@ -116,7 +86,7 @@ span .image-text-overlay {
 }
 
 .input-validation-error {
-    background-color: #fee;
+    background-color: #ff6666;
     border: 1px solid #f00;
 }
 
@@ -132,48 +102,19 @@ span .image-text-overlay {
     color: $black;
     display: block;
     height: 40px;
-    font-size: $text_size;
+    font-size: $normal_text_size;
     transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
     overflow: hidden;
+}
+
+input[type="submit"],
+button[type="submit"]{
+    float: right;
 }
 
 /*div {
     border: 2px dotted red;
 }*/
-
-a {
-    color: $darkRed;
-}
-
-a:hover {
-    color: $black;
-}
-
-.navbar-default .navbar-brand,
-.navbar-default .navbar-nav > li > a {
-    color: $black;
-    font-size: 14pt;
-}
-
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-nav > li > a:hover {
-    color: $veryLightBlue;
-    text-shadow: $black 2px 0px 1px;
-}
-
-.navbar-default .navbar-nav > li > a.current {
-    color: white;
-}
-
-.navbar-default .navbar-nav > li > a.current:hover {
-    color: $black;
-    text-shadow: white 2px 0px 1px;
-}
-
-.navbar-default .navbar-brand {
-    font-size: 18pt;
-    font-weight: bold;
-}
 
 .centered {
     @extend %centered;
@@ -188,49 +129,55 @@ a:hover {
     background-color: $darkNavyBlue;
     border: 2px solid black;
     border-radius: 8px;
-    text-align: center; 
+    text-align: center;
     padding: 25px 45px;
 }
 
-.spinner{
-  @extend %spinner;
+.spinner {
+    @extend %spinner;
 }
 
 @-moz-keyframes spin {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
-  100% {
-    -moz-transform: rotate(359deg);
-  }
-}
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-  }
-}
-@-o-keyframes spin {
-  0% {
-    -o-transform: rotate(0deg);
-  }
-  100% {
-    -o-transform: rotate(359deg);
-  }
-}
-@keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+
+    100% {
+        -moz-transform: rotate(359deg);
+    }
 }
 
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@-o-keyframes spin {
+    0% {
+        -o-transform: rotate(0deg);
+    }
+
+    100% {
+        -o-transform: rotate(359deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
 
 /* Override the default bootstrap behavior where horizontal description lists
    will truncate terms that are too long to fit in the left column
