@@ -1,9 +1,9 @@
-﻿/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
+﻿/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
 html, body, .centered {
   margin: 0 auto; }
 
@@ -24,15 +24,15 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle; }
 
 footer, .body-content, .panel {
-  background-color: #C5DFF0; }
+  background-color: #ffffff; }
 
 body {
-  background-color: #335060; }
+  background-color: #ffffff; }
 
-.navbar, .jumbotron, .form-control {
-  background-color: #5E99C1; }
+.jumbotron, .form-control {
+  background-color: #b3daff; }
 
-.btn, .btn-primary {
+.navbar, .btn, .btn-primary {
   background-color: #66a3ff; }
 
 input[type="submit"],
@@ -51,12 +51,12 @@ button[type="submit"] {
 .borderedRow, .borderedVertical, .borderedRight {
   border-right: 3px solid #335060; }
 
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
 html, body, .centered {
   margin: 0 auto; }
 
@@ -77,15 +77,15 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle; }
 
 footer, .body-content, .panel {
-  background-color: #C5DFF0; }
+  background-color: #ffffff; }
 
 body {
-  background-color: #335060; }
+  background-color: #ffffff; }
 
-.navbar, .jumbotron, .form-control {
-  background-color: #5E99C1; }
+.jumbotron, .form-control {
+  background-color: #b3daff; }
 
-.btn, .btn-primary {
+.navbar, .btn, .btn-primary {
   background-color: #66a3ff; }
 
 input[type="submit"],
@@ -105,7 +105,6 @@ button[type="submit"] {
   border-right: 3px solid #335060; }
 
 .navbar {
-  /*@extend %site_button_color;*/
   color: #000000;
   border: 3px solid #000000;
   border-top: 0; }
@@ -359,12 +358,12 @@ h6 {
 .collapseIcon {
   font-size: 11pt !important; }
 
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
 html, body, .centered {
   margin: 0 auto; }
 
@@ -385,15 +384,15 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle; }
 
 footer, .body-content, .panel {
-  background-color: #C5DFF0; }
+  background-color: #ffffff; }
 
 body {
-  background-color: #335060; }
+  background-color: #ffffff; }
 
-.navbar, .jumbotron, .form-control {
-  background-color: #5E99C1; }
+.jumbotron, .form-control {
+  background-color: #b3daff; }
 
-.btn, .btn-primary {
+.navbar, .btn, .btn-primary {
   background-color: #66a3ff; }
 
 input[type="submit"],
@@ -416,12 +415,12 @@ button[type="submit"] {
   body {
     padding: 0 1%; } }
 
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
 html, body, .centered {
   margin: 0 auto; }
 
@@ -442,15 +441,15 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle; }
 
 footer, .body-content, .panel {
-  background-color: #C5DFF0; }
+  background-color: #ffffff; }
 
 body {
-  background-color: #335060; }
+  background-color: #ffffff; }
 
-.navbar, .jumbotron, .form-control {
-  background-color: #5E99C1; }
+.jumbotron, .form-control {
+  background-color: #b3daff; }
 
-.btn, .btn-primary {
+.navbar, .btn, .btn-primary {
   background-color: #66a3ff; }
 
 input[type="submit"],

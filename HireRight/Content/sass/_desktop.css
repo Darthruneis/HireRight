@@ -1,9 +1,9 @@
-﻿/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
-/*$site_background: $white;*/
-/*$site_side_background: $white;*/
-/*$site_highlights_background: $fadedLightBlue;*/
+﻿/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
 @media only screen and (min-width: 64.25em) {
   body {
     padding: 0 3%;

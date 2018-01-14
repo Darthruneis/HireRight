@@ -3,8 +3,7 @@
 @import "_%classes.scss";
 
 .navbar {
-    /*@extend %site_button_color;*/
-    @extend %site_highlight_color;
+    @extend %site_button_color;
     color: $black;
     border: 3px solid $black;
     border-top: 0;
