@@ -1,5 +1,5 @@
 ﻿namespace Collapsibles {
-    export function bindCollapsibles(expandTooltip: string = "Expand this section", collapseTooltip: string = "Collapse this section") {
+    export function bindCollapsibles() {
         $("body").on("click", ".collapseIcon", function () {
             const $buttonClicked = $(this);
 
@@ -8,12 +8,16 @@
 
             div.toggle();
 
-            $buttonClicked.toggleClass("glyphicon-minus-sign glyphicon-plus-sign");
-
-            if ($buttonClicked.hasClass("glyphicon-minus-sign"))
-                $buttonClicked.attr("title", collapseTooltip);
-            else
-                $buttonClicked.attr("title", expandTooltip);
+            swapCollapseButtonIconAndTitle($buttonClicked);
         });
+    }
+
+    export function swapCollapseButtonIconAndTitle($button: JQuery) {
+        $button.toggleClass("glyphicon-minus-sign glyphicon-plus-sign");
+
+        if ($button.hasClass("glyphicon-minus-sign"))
+            $button.attr("title", $button.data("collapsetitle"));
+        else
+            $button.attr("title", $button.data("expandtitle"));
     }
 }

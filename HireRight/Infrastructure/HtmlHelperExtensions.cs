@@ -71,9 +71,9 @@ namespace HireRight.Infrastructure
             return new MvcHtmlString(labelString + (isRequired ? "<span style=\"color: red;\" class=\"glyphicon glyphicon-asterisk\"></span>" : string.Empty) + "<br />" + editorString + validationString);
         }
 
-        public static MvcHtmlString CollapseButton(this HtmlHelper helper, string divToToggleId)
+        public static MvcHtmlString CollapseButton(this HtmlHelper helper, string divToToggleId, string expandTitle = "Expand this section", string collapseTitle = "Collapse this section", string customClass = "collapseIcon")
         {
-            return new MvcHtmlString($"<button type='button' class='btn btn-default collapseIcon pull-right glyphicon glyphicon-minus-sign' data-toggledivid='{divToToggleId}' title='Collapse this section'></button>");
+            return new MvcHtmlString($"<button type='button' class='btn btn-default {customClass} pull-right glyphicon glyphicon-minus-sign' data-toggledivid='{divToToggleId}' title='{collapseTitle}' data-expandtitle='{expandTitle}' data-collapsetitle='{collapseTitle}'></button>");
         }
 
         public static MvcHtmlString SubmitButton(this HtmlHelper helper, string buttonText = "Submit")

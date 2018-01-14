@@ -1,7 +1,7 @@
 ﻿@model CustomSolutionsViewModel
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/CustomSolutions/customSolutionsPartial.js"></script>
-<div class="col-xs-12 row">
+<div class="row">
     <div class="col-xs-12">
         Select the Category for your organization if listed. Use other for unlisted ones and you will see the entire list of scales available.
         For each scale rate the importance for a successful candidate. Use the drop down menu for your ratings. For those rated Not Important you may want to click the Show/Hide button.
@@ -11,54 +11,90 @@
     <br />
     <div class="col-xs-12" style="padding-top: 12px;">When finished, click 'Continue'.</div>
 </div>
-<div class="col-xs-12 row" style="padding: 0; margin-bottom: 10px;">
+<div class="row" style="padding: 0; margin-bottom: 10px;">
     @{Html.RenderPartial("CategoryFilterPartial", Model.Filter);}
 </div>
 
-<div class="row borderedRow" style="clear: both;">
-    <div div class="col-xs-11 row">
-        <div class="col-xs-3">
-            <strong>Category</strong>
+@*The col class here is used for the padding styling rather than the positioning.*@
+<div class="col-xs-12">
+    <div class="row borderedRow" style="clear: both;">
+        <div div class="col-xs-11 row">
+            <div class="col-xs-4 col-lg-2">
+                <strong>Category</strong>
+            </div>
+            <div class="col-xs-4 col-lg-7">
+                <strong>Category Description</strong>
+            </div>
+            <div class="col-xs-4 col-lg-3">
+                <strong>Importance</strong>
+            </div>
         </div>
-        <div class="col-xs-6">
-            <strong>Description of Category</strong>
-        </div>
-        <div class="col-xs-3">
-            <strong>Importance</strong>
+        <div class="col-xs-1">
+            <strong class="pull-right">@*Detail*@</strong>
         </div>
     </div>
-    <div class="col-xs-1 row">
-        <strong>Show/Hide</strong>
-    </div>
-</div>
-<div class="borderedRow">
-    @for (int i = 0; i < Model.Categories.Count; i++)
-    {
-        string borderString = "borderedBottom";
-        if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
-        {
-            borderString = "";
+
+    <style>
+        .descriptionToggle {
+            font-size: 9pt !important;
         }
-        <div class="row @(borderString)">
-            @{
-                string rowId = "categoryRow_" + i;
+
+        .categoryDropDownDiv {
+            font-size: 11pt !important;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
+    </style>
+
+    <div class="borderedRow">
+        @for (int i = 0; i < Model.Categories.Count; i++)
+        {
+            string borderString = "borderedBottom";
+            if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
+            {
+                borderString = "";
             }
-            <div class="col-xs-11 row">
-                <div id="@rowId">
-                    <div class="col-xs-3">@Model.Categories[i].Title</div>
-                    @Html.HiddenFor(x => Model.Categories[i].Title)
-                    <div class="col-xs-6">@Model.Categories[i].Description</div>
-                    @Html.HiddenFor(x => Model.Categories[i].Description)
-                    <div class="col-xs-3" style="padding-top: 2px;">
+            <div class="row @(borderString)">
+                @{
+                    string rowId = "categoryRow_" + i;
+                }
+                <div class="col-xs-11 row">
+                    <div class="col-xs-4 col-lg-2">
+                        @Model.Categories[i].Title
+                        @Html.HiddenFor(x => Model.Categories[i].Title)
+                    </div>
+                    <div class="col-xs-4 col-lg-7">
+                        <div id="@rowId" style="overflow-y: hidden; text-overflow: ellipsis; height: auto;">
+                            @Model.Categories[i].Description
+                            @Html.HiddenFor(x => Model.Categories[i].Description)
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-lg-3" style="padding-top: 2px;">
                         @Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control categoryDropDownDiv", data_categoryId = Model.Categories[i].Id, data_categoryName = Model.Categories[i].Title })
+                        @Html.HiddenFor(x => Model.Categories[i].Importance)
                     </div>
                 </div>
+                <div class="col-xs-1 row">
+                    @Html.HiddenFor(x => Model.Categories[i].Id)
+                    @Html.CollapseButton(rowId, "Show description", "Hide description", "descriptionToggle")
+                </div>
             </div>
-            <div class="col-xs-1 row">
-                @Html.HiddenFor(x => Model.Categories[i].Importance)
-                @Html.HiddenFor(x => Model.Categories[i].Id)
-                @Html.CollapseButton(rowId)
-            </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#CategoryListDiv").on("click", ".descriptionToggle", function() {
+            var $descriptionDiv = $("#" + $(this).data("toggledivid"));
+
+            if ($(this).hasClass("glyphicon-minus-sign")) {
+                $descriptionDiv.height("14pt");
+            } else {
+                $descriptionDiv.height("auto");
+            }
+
+            Collapsibles.swapCollapseButtonIconAndTitle($(this));
+        });
+    })
+</script>

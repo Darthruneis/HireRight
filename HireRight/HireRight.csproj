@@ -211,11 +211,47 @@
     <Content Include="Content\ProfileSamples\Example Detailed Category breakdown - Small - Response Pattern Graph.png" />
     <Content Include="Content\ProfileSamples\Example Overall Score Summary - Score Profile Graph.png" />
     <Content Include="Content\ProfileSamples\Example Overall Score Summary with Graph - Large.png" />
+    <Content Include="Content\sass\_%25classes.css">
+      <DependentUpon>_%25classes.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_%25classes.min.css">
+      <DependentUpon>_%25classes.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_desktop.css">
+      <DependentUpon>_desktop.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_desktop.min.css">
+      <DependentUpon>_desktop.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_mixins.css">
+      <DependentUpon>_mixins.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_mixins.min.css">
+      <DependentUpon>_mixins.css</DependentUpon>
+    </Content>
     <Content Include="Content\sass\_mobile-default.css">
       <DependentUpon>_mobile-default.scss</DependentUpon>
     </Content>
     <Content Include="Content\sass\_mobile-default.min.css">
       <DependentUpon>_mobile-default.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_navigation.css">
+      <DependentUpon>_navigation.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_navigation.min.css">
+      <DependentUpon>_navigation.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_tablet.css">
+      <DependentUpon>_tablet.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_tablet.min.css">
+      <DependentUpon>_tablet.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_variables.css">
+      <DependentUpon>_variables.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_variables.min.css">
+      <DependentUpon>_variables.css</DependentUpon>
     </Content>
     <Content Include="Content\styles.css">
       <DependentUpon>styles.scss</DependentUpon>
@@ -270,6 +306,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\ProfileSamples\SalesHunterProfileSampleReport.pdf" />
+    <Content Include="Content\sass\_navigation.scss" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

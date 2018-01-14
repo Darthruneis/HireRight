@@ -1,0 +1,71 @@
+﻿@import "_variables.scss";
+@import "_mixins.scss";
+@import "_%classes.scss";
+
+.navbar {
+    @extend %site_button_color;
+    color: $black;
+    border: 3px solid $black;
+    border-top: 0;
+}
+
+a {
+    color: $lightBlue !important;
+}
+
+a:hover {
+    color: $purple !important;
+}
+
+.navbar > .container {
+    margin-left: $gutter;
+    margin-right: $gutter;
+    padding: 0;
+}
+
+.navbar-brand,
+.navbar-nav > li > a {
+    color: $black !important;
+    font-size: 14pt !important;
+}
+
+.navbar-brand:hover,
+.navbar-nav > li > a:hover {
+    color: white !important;
+    text-shadow: $black 2px 0px 1px;
+}
+
+.navbar-nav > li > a.current {
+    color: white !important;
+}
+
+.navbar-nav > li > a.current:hover {
+    color: $black !important;
+    text-shadow: white 2px 0px 1px;
+}
+
+.navbar-inverse .navbar-brand {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) and (max-width: 1252px) {
+    div.navbar-collapse.collapse {
+        display: none !important;
+    }
+    button.navbar-toggle{
+        display: block !important;
+        right: 1px;
+        position: absolute;
+    }
+    .navbar-collapse.collapse.in { 
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+    ul.nav.navbar-nav > li {
+        width: 100%;
+        font-size: 18pt !important;
+    }
+}
