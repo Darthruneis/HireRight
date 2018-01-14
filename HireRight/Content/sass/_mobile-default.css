@@ -365,3 +365,9 @@ h6 {
 .collapseIcon {
   font-size: 11pt !important; }
 
+.centeredHeaderText {
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  font-size: 18pt; }
+

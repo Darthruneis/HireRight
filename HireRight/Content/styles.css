@@ -365,6 +365,12 @@ h6 {
 .collapseIcon {
   font-size: 11pt !important; }
 
+.centeredHeaderText {
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  font-size: 18pt; }
+
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
 /*$site_highlights_background: $skyBlue;*/

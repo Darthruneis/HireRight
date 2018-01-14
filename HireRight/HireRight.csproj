@@ -193,12 +193,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\administration.jpeg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\indexPicture.jpg" />
+    <Content Include="Content\management.jpeg" />
+    <Content Include="Content\manufacturing.jpeg" />
+    <Content Include="Content\Medical.jpeg" />
+    <Content Include="Content\otherIndustries.jpeg" />
     <Content Include="Content\PortraitPlaceholder.png" />
+    <Content Include="Content\professional.jpeg" />
     <Content Include="Content\ProfileSamples\Example Category Breakdown - Large.png" />
     <Content Include="Content\ProfileSamples\Example Category Breakdown - Small - Categories Breakdown.png" />
     <Content Include="Content\ProfileSamples\Example Detailed Category Breakdown - Large.png" />
@@ -211,6 +217,7 @@
     <Content Include="Content\ProfileSamples\Example Detailed Category breakdown - Small - Response Pattern Graph.png" />
     <Content Include="Content\ProfileSamples\Example Overall Score Summary - Score Profile Graph.png" />
     <Content Include="Content\ProfileSamples\Example Overall Score Summary with Graph - Large.png" />
+    <Content Include="Content\Sales.jpeg" />
     <Content Include="Content\sass\_%25classes.css">
       <DependentUpon>_%25classes.scss</DependentUpon>
     </Content>
@@ -253,6 +260,7 @@
     <Content Include="Content\sass\_variables.min.css">
       <DependentUpon>_variables.css</DependentUpon>
     </Content>
+    <Content Include="Content\startup.jpeg" />
     <Content Include="Content\styles.css">
       <DependentUpon>styles.scss</DependentUpon>
     </Content>
