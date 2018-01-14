@@ -15,7 +15,10 @@
 <div class="row">
     <div class="col-xs-12">
         <div style="margin: 0 auto; width: 200px;">
-            @Html.ActionLink("Make a Purchase", "Index", new { controller = "Order" }, new { @class = "btn btn-primary" })
+            <button type="button" class="btn btn-primary" id="placeOrderButton" onclick="location.href='@(Url.Action("Index"))'">Make a Purchase</button>
+            @*@Html.ActionLink("Make a Purchase", "Index", new {controller = "Order"}, new {@class = "btn btn-primary"})*@
         </div>
     </div>
 </div>
+
+

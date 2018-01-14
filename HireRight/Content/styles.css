@@ -183,6 +183,11 @@ body {
   padding: 0;
   color: #000000; }
 
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  /*padding: 8px 5% 8px 5%;*/
+  padding: 20px 5% 0 5%; }
+
 img {
   width: 100%;
   margin: 4px;
@@ -199,10 +204,6 @@ span .image-text-overlay {
   top: 200px;
   left: 0;
   width: 100%; }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-  padding: 8px 5% 8px 5%; }
 
 .btn {
   border: 3px solid black;

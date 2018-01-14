@@ -198,7 +198,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DianaClarke.jpg" />
     <Content Include="Content\indexPicture.jpg" />
+    <Content Include="Content\JanetCannon.jpg" />
     <Content Include="Content\management.jpeg" />
     <Content Include="Content\manufacturing.jpeg" />
     <Content Include="Content\Medical.jpeg" />
