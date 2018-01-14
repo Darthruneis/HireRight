@@ -32,6 +32,18 @@ body {
 .btn-primary {
   background-color: green; }
 
+.borderedRow, .borderedHorizontal, .borderedTop {
+  border-top: 3px solid #335060; }
+
+.borderedRow, .borderedHorizontal, .borderedBottom {
+  border-bottom: 3px solid #335060; }
+
+.borderedRow, .borderedVertical, .borderedLeft {
+  border-left: 3px solid #335060; }
+
+.borderedRow, .borderedVertical, .borderedRight {
+  border-right: 3px solid #335060; }
+
 html, body, .centered {
   margin: 0 auto; }
 
@@ -65,6 +77,18 @@ body {
 
 .btn-primary {
   background-color: green; }
+
+.borderedRow, .borderedHorizontal, .borderedTop {
+  border-top: 3px solid #335060; }
+
+.borderedRow, .borderedHorizontal, .borderedBottom {
+  border-bottom: 3px solid #335060; }
+
+.borderedRow, .borderedVertical, .borderedLeft {
+  border-left: 3px solid #335060; }
+
+.borderedRow, .borderedVertical, .borderedRight {
+  border-right: 3px solid #335060; }
 
 .navbar {
   color: #000000;
@@ -141,8 +165,8 @@ footer {
   padding-bottom: 4px; }
 
 body {
-  padding: 0;
   font-size: 14pt;
+  padding: 0 5% 0 5%;
   color: #000000; }
 
 img {
@@ -306,16 +330,8 @@ h6 {
 .validation-summary-valid {
   display: none; }
 
-.borderedRow {
-  border: 3px solid #335060; }
-
-.borderedHorizontal {
-  border-Top: 3px solid #335060;
-  border-Bottom: 3px solid #335060; }
-
-.borderedVertical {
-  border-Left: 3px solid #335060;
-  border-Right: 3px solid #335060; }
+.divider {
+  border-bottom: 1px solid #335060; }
 
 .scrollHorizontally {
   max-width: 95vw;
@@ -324,4 +340,7 @@ h6 {
 .row {
   margin-left: 0;
   margin-right: 0; }
+
+.collapseIcon {
+  font-size: 11pt !important; }
 

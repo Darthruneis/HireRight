@@ -6,5 +6,29 @@
   {
     "outputFile": "Content/sass/_mobile-default.css",
     "inputFile": "Content/sass/_mobile-default.scss"
+  },
+  {
+    "outputFile": "Content/sass/_%classes.css",
+    "inputFile": "Content/sass/_%classes.scss"
+  },
+  {
+    "outputFile": "Content/sass/_desktop.css",
+    "inputFile": "Content/sass/_desktop.scss"
+  },
+  {
+    "outputFile": "Content/sass/_mixins.css",
+    "inputFile": "Content/sass/_mixins.scss"
+  },
+  {
+    "outputFile": "Content/sass/_navigation.css",
+    "inputFile": "Content/sass/_navigation.scss"
+  },
+  {
+    "outputFile": "Content/sass/_tablet.css",
+    "inputFile": "Content/sass/_tablet.scss"
+  },
+  {
+    "outputFile": "Content/sass/_variables.css",
+    "inputFile": "Content/sass/_variables.scss"
   }
 ]
