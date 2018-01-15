@@ -1,6 +1,8 @@
 ﻿using HireRight.Models;
 using System;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using HireRight.BusinessLogic.Abstract;
 
@@ -23,15 +25,20 @@ namespace HireRight.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitNewClients(NewClientsViewModel model)
+        public async Task<ActionResult> SubmitNewClients(NewClientsViewModel model)
         {
+            if (!model.AnyOptionsSelected)
+                ModelState.AddModelError("", "Please check at least one of the options.");
+
             if (!ModelState.IsValid)
                 return View("NewClients", model);
 
             try
             {
-                if (model.ToTalkToConsultant)
-                    SendContactConsultantEmail(model);
+                var result = await _contactsBusinessLogic.SendNewClientEmail(model.ConvertToClientDTO(), model.AdditionalInfo);
+                if (result.Any())
+                    foreach (var error in result)
+                        ModelState.AddModelError("", error);
             }
             catch (Exception ex)
             {

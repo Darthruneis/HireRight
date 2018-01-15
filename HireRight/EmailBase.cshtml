@@ -1,14 +1,9 @@
-﻿@using System.Configuration
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    @{
-        var baseUrl = ConfigurationManager.AppSettings["HireRightBaseUrl"];
-    }
-    <link href="@(baseUrl)/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="@(baseUrl)/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="@(@"{2}")/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="@(@"{2}")/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <title>Hire Right Testing</title>
 </head>
 <body style="padding: 3px;">
@@ -27,7 +22,6 @@
     <div style="width: 100%;">
         <br />
         <p>Hello {0},</p>
-
         <div>{1}</div>
     </div>
     <div style="border-top: 2px solid black; bottom: 0; height: 40px; position: absolute; width: 97%;">

@@ -30,8 +30,6 @@
             @Html.CheckBoxFor(x => x.ToTalkToConsultant) Contact Us to talk with a Consultant <br />
             <div id="contactInfo" hidden="hidden" style="padding-left: 20px;">
                 @Html.ActionLink("Get in Touch", "Contact", new { controller = "Contact" })<br />
-                Diana: XXX-XXX-XXXX A@@b.c<br />
-                Janet: XXX-XXX-XXXX A@@b.c
             </div>
         </div>
         <div class="col-xs-6">
@@ -41,7 +39,7 @@
             </div>
         </div>
         <div class="col-xs-6">
-            @Html.CheckBoxFor(x => x.ToTakeSampleAssesment) Take a Sample Assesment
+            @Html.CheckBoxFor(x => x.ToTakeSampleAssesment) Take a Sample Assessment
             <div id="assessmentInfo" hidden="hidden" style="padding-left: 20px;">
                 Sample Assessment Info
             </div>
@@ -78,7 +76,9 @@
         </div>
         <br />
         <div class="row">
-            <div class="col-xs-10"></div>
+            <div class="col-xs-10">
+                @Html.ValidationSummary(true)
+            </div>
             <div class="col-xs-2">
                 <div style="margin: 0 auto;">
                     <input type="submit" value="Send" class="btn btn-primary" />

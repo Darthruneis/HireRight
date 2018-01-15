@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -50,9 +51,11 @@ namespace HireRight.BusinessLogic.Concrete
                     mailMessage.ReplyToList.Add(replyTo);
 
                 SetEmailPickupDirectory(emailClient);
+#if !DEBUG
                 emailClient.Host = SmtpHost;
                 emailClient.Port = SmtpPort;
                 emailClient.Credentials = _smtpCredentials;
+#endif
                 emailClient.Send(mailMessage);
             }
         }
@@ -65,7 +68,7 @@ namespace HireRight.BusinessLogic.Concrete
                 body = reader.ReadToEnd();
             }
 
-            string messageBody = string.Format(body, greeting, message);
+            string messageBody = string.Format(body, greeting, message, ConfigurationManager.AppSettings["HireRightBaseUrl"]);
             SendEmail(email, messageBody, subject, replyTo);
         }
 

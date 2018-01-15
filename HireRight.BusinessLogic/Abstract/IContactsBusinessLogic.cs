@@ -20,5 +20,7 @@ namespace HireRight.BusinessLogic.Abstract
         Task SendNewContactEmail(Guid contactId, string message);
 
         Task<ContactDTO> Update(ContactDTO contactDto);
+
+        Task<IList<string>> SendNewClientEmail(ClientDTO newClient, string additionalInformation = "");
     }
 }

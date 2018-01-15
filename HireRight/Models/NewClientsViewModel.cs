@@ -44,6 +44,8 @@ namespace HireRight.Models
             return dto;
         }
 
+        public bool AnyOptionsSelected => ToReceiveSample || ToScheduleDemo || ToTakeSampleAssesment || ToTalkToConsultant;
+
         public ContactDTO ConvertToContactDTO()
         {
             ContactDTO dto = new ContactDTO();

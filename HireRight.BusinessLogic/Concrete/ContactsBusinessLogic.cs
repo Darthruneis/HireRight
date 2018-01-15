@@ -4,6 +4,7 @@ using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Extensions;
@@ -28,6 +29,47 @@ namespace HireRight.BusinessLogic.Concrete
             Contact contactToAdd = ConvertDtoToModel(contactDto);
 
             return ConvertModelToDto(await _contactsRepository.Add(contactToAdd).ConfigureAwait(false));
+        }
+
+        public Task<IList<string>> SendNewClientEmail(ClientDTO newClient, string additionalInformation = "")
+        {
+            IList<string> errors = new List<string>();
+
+            if(!(newClient.ToReceiveSample || newClient.ToScheduleDemo || newClient.ToTakeSampleAssesment || newClient.ToTalkToConsultant))
+                errors.Add("Please select at least one of the options.");
+
+            if(errors.Any())
+                return Task.FromResult(errors);
+
+            StringBuilder message = new StringBuilder();
+            message.AppendLine($"{newClient.Name} is interested in using HireRight!  {newClient.Name} is a {newClient.CompanyPosition} at {newClient.Company}. <br/>");
+
+            message.AppendLine("<ul>");
+
+            if(newClient.ToTalkToConsultant)
+                message.AppendLine("<li>They would like to contact a consultant directly at their earliest convenience.</li>");
+            if (newClient.ToReceiveSample)
+                message.AppendLine("<li>They are interested in receiving a sample assessment to evaluate.</li>");
+            if (newClient.ToScheduleDemo)
+                message.AppendLine("<li>They are interested in scheduling a demo.</li>");
+            if (newClient.ToTakeSampleAssesment)
+                message.AppendLine("<li>They are interested in taking a sample assessment.</li>");
+
+            message.Append("</ul>");
+            message.AppendLine("<br/>");
+
+            if (!string.IsNullOrWhiteSpace(additionalInformation))
+            {
+                message.AppendLine("The client has included the following information:")
+                       .AppendLine("<br/>")
+                       .AppendLine(additionalInformation.Replace(Environment.NewLine, "<br/>"));
+            }
+
+            message.AppendLine("<br/>").AppendLine("Please contact the client as soon as possible.");
+
+            SendContactConsultantEmail(newClient.Email, message.ToString());
+
+            return Task.FromResult(errors);
         }
 
         public Contact ConvertDtoToModel(ContactDTO dto)
@@ -81,7 +123,7 @@ namespace HireRight.BusinessLogic.Concrete
 
         public void SendContactConsultantEmail(string clientEmail, string message)
         {
-            _emailSender.EmailConsultants(message, "New request for your help through HireRight!");
+            _emailSender.EmailConsultants(message, "New request for your help through HireRight!", clientEmail);
         }
 
         public async Task SendNewContactEmail(Guid contactId, string message)
