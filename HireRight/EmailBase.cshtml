@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using System.Configuration
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <link href="http://localhost:13277/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="http://localhost:13277/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @{
+        var baseUrl = ConfigurationManager.AppSettings["HireRightBaseUrl"];
+    }
+    <link href="@(baseUrl)/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="@(baseUrl)/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <title>Hire Right Testing</title>
 </head>
 <body style="padding: 3px;">
