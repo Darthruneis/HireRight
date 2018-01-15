@@ -15,4 +15,12 @@
     .form-control{
         font-size: $small_text_size;
     }
+
+}
+
+@media only screen and (min-width: 1200px){
+
+    .pull-right-xl{
+        float: right;
+    }
 }
