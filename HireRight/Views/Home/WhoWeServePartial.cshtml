@@ -21,7 +21,7 @@
     $(document).ready(function() {
         $(".industryToggleImg").on("click", function() {
             $(this).closest(".categoryContainer").toggleClass("col-xs-6 col-lg-4 col-xs-12");
-            $("#" + $(this).data("toggledivid")).toggle();
+            $("#" + $(this).data("toggledivid")).fadeToggle(250);
         })
     })
 </script>

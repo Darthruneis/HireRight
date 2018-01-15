@@ -8,7 +8,7 @@
             processing.show();
         },
         complete: function () {
-            setTimeout(processing.hide(), 5);
+            processing.fadeOut(750);
         },
         success: successFn
     });
