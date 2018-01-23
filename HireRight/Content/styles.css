@@ -540,12 +540,58 @@ button[type="submit"] {
   text-align: center;
   font-size: 18pt; }
 
-hr {
-  height: 3px;
-  background-color: #335060;
-  border: 0;
-  margin: 0;
-  padding: 0; }
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+.centered, body {
+  margin: 0 auto; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+  font-weight: bold; }
+
+.spinner {
+  -webkit-animation: spin 1.25s infinite linear;
+  -moz-animation: spin 1.25s infinite linear;
+  -o-animation: spin 1.25s infinite linear;
+  animation: spin 1.25s infinite linear; }
+
+.list-item-root li:before li:before, .list-item-nested li:before li:before {
+  content: "* ";
+  color: #993333;
+  font-size: 30px;
+  vertical-align: middle; }
+
+.footer, .body-content, .panel {
+  background-color: #ffffff; }
+
+body {
+  background-color: #ffffff; }
+
+.form-control {
+  background-color: #b3daff; }
+
+.navbar, .btn, .btn-primary {
+  background-color: #0040ff; }
+
+input[type="submit"],
+button[type="submit"] {
+  background-color: green; }
+
+.borderedRow, .borderedHorizontal, .borderedTop {
+  border-top: 3px solid #335060; }
+
+.borderedRow, .borderedHorizontal, .borderedBottom {
+  border-bottom: 3px solid #335060; }
+
+.borderedRow, .borderedVertical, .borderedLeft {
+  border-left: 3px solid #335060; }
+
+.borderedRow, .borderedVertical, .borderedRight {
+  border-right: 3px solid #335060; }
 
 header {
   padding: -10px 0 0 0;
@@ -554,60 +600,10 @@ header {
   width: 100%;
   display: block; }
 
-.footer {
-  min-height: 20px;
-  clear: both;
-  width: 100%;
-  position: relative;
-  bottom: 0;
-  padding-bottom: 4px; }
-
 body {
   font-size: 14pt;
   padding: 0;
   color: #000000; }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-  /*padding: 8px 5% 8px 5%;*/
-  padding: 20px 5% 0 5%; }
-
-img {
-  width: 100%;
-  margin: 4px;
-  padding: 0 !important;
-  border: 1px solid black; }
-
-.imgDiv {
-  margin: 4px;
-  padding: 0 !important;
-  border: 1px solid black; }
-
-span .image-text-overlay {
-  position: absolute;
-  top: 200px;
-  left: 0;
-  width: 100%; }
-
-.jumbotron {
-  /*@extend %site_highlight_color;*/
-  background-color: transparent;
-  width: 100%;
-  margin-top: 3px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 5px;
-  overflow: hidden;
-  /*border: 6px solid $black;*/ }
-
-/*div {
-    border: 2px dotted red;
-}*/
-/* Override the default bootstrap behavior where horizontal description lists
-   will truncate terms that are too long to fit in the left column
-*/
-.dl-horizontal dt {
-  white-space: normal; }
 
 .text-shadow-red {
   text-shadow: #993333 2px 0px 1px; }
@@ -640,6 +636,54 @@ h5 {
 h6 {
   margin: 0;
   font-size: 13pt; }
+
+/*div {
+    border: 2px dotted red;
+}*/
+hr {
+  height: 3px;
+  background-color: #335060;
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+.footer {
+  min-height: 20px;
+  clear: both;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  padding-bottom: 4px; }
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  padding: 20px 5% 0 5%; }
+
+img {
+  width: 100%;
+  margin: 4px;
+  padding: 0 !important;
+  border: 1px solid black; }
+
+.imgDiv {
+  margin: 4px;
+  padding: 0 !important;
+  border: 1px solid black; }
+
+.jumbotron {
+  background-color: transparent;
+  width: 100%;
+  margin-top: 3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  overflow: hidden; }
+
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
+*/
+.dl-horizontal dt {
+  white-space: normal; }
 
 .row {
   margin-left: 0;

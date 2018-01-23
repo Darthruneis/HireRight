@@ -1,0 +1,60 @@
+﻿/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+body {
+  margin: 0 auto; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+  font-weight: bold; }
+
+body {
+  background-color: #ffffff; }
+
+header {
+  padding: -10px 0 0 0;
+  margin: 0 0 20px 0;
+  height: 30px;
+  width: 100%;
+  display: block; }
+
+body {
+  font-size: 14pt;
+  padding: 0;
+  color: #000000; }
+
+.text-shadow-red {
+  text-shadow: #993333 2px 0px 1px; }
+
+.text-shadow-black {
+  text-shadow: #000000 2px 0px 1px; }
+
+.text-shadow-gray {
+  text-shadow: #808080 2px 0px 1px; }
+
+h1 {
+  font-size: 40pt; }
+
+h2 {
+  font-size: 20pt;
+  margin: 0; }
+
+h3 {
+  margin: 0;
+  font-size: 18pt; }
+
+h4 {
+  margin: 0;
+  font-size: 16pt; }
+
+h5 {
+  margin: 0;
+  font-size: 14pt; }
+
+h6 {
+  margin: 0;
+  font-size: 13pt; }
+

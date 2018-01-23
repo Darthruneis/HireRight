@@ -50,5 +50,9 @@
   {
     "outputFile": "Content/sass/_animations.css",
     "inputFile": "Content/sass/_animations.scss"
+  },
+  {
+    "outputFile": "Content/sass/_text.css",
+    "inputFile": "Content/sass/_text.scss"
   }
 ]

@@ -286,6 +286,12 @@
     <Content Include="Content\sass\_tablet.min.css">
       <DependentUpon>_tablet.css</DependentUpon>
     </Content>
+    <Content Include="Content\sass\_text.css">
+      <DependentUpon>_text.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_text.min.css">
+      <DependentUpon>_text.css</DependentUpon>
+    </Content>
     <Content Include="Content\sass\_variables.css">
       <DependentUpon>_variables.scss</DependentUpon>
     </Content>
@@ -351,6 +357,7 @@
     <Content Include="Content\sass\_inputs.scss" />
     <Content Include="Content\sass\_animations.scss" />
     <Content Include="Content\sass\_positioning.scss" />
+    <Content Include="Content\sass\_text.scss" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

@@ -1,0 +1,66 @@
+﻿@import "_variables.scss";
+@import "_mixins.scss";
+@import "_%classes.scss";
+
+header {
+    padding: -10px 0 0 0;
+    margin: 0 0 20px 0;
+    height: 30px;
+    width: 100%;
+    display: block;
+}
+
+body {
+    @extend %centered;
+    @extend %site_side_colors;
+    font-size: $normal_text_size;
+    padding: 0;
+    color: $text_default;
+}
+
+.text-shadow-red {
+    text-shadow: $text_shadow_red;
+}
+
+.text-shadow-black {
+    text-shadow: $text_shadow_black;
+}
+
+.text-shadow-gray {
+    text-shadow: $text_shadow_gray;
+}
+
+h1 {
+    @extend %headerText;
+    font-size: 40pt;
+}
+
+h2 {
+    @extend %headerText;
+    font-size: 20pt;
+    margin: 0;
+}
+
+h3 {
+    @extend %headerText;
+    margin: 0;
+    font-size: 18pt;
+}
+
+h4 {
+    @extend %headerText;
+    margin: 0;
+    font-size: 16pt;
+}
+
+h5 {
+    @extend %headerText;
+    margin: 0;
+    font-size: 14pt;
+}
+
+h6 {
+    @extend %headerText;
+    margin: 0;
+    font-size: 13pt;
+}

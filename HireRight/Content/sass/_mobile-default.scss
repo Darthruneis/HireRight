@@ -7,6 +7,11 @@
 @import "_buttons.scss";
 @import "_animations.scss";
 @import "_positioning.scss";
+@import "_text.scss";
+
+/*div {
+    border: 2px dotted red;
+}*/
 
 hr {
     height: 3px;
@@ -14,14 +19,6 @@ hr {
     border: 0;
     margin: 0;
     padding: 0;
-}
-
-header {
-    padding: -10px 0 0 0;
-    margin: 0 0 20px 0;
-    height: 30px;
-    width: 100%;
-    display: block;
 }
 
 .footer {
@@ -34,18 +31,9 @@ header {
     padding-bottom: 4px;
 }
 
-body {
-    @extend %centered;
-    @extend %site_side_colors;
-    font-size: $normal_text_size;
-    padding: 0;
-    color: $text_default;
-}
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     @extend %site_main_background;
-    /*padding: 8px 5% 8px 5%;*/
     padding: 20px 5% 0 5%;
 }
 
@@ -62,15 +50,7 @@ img {
     border: 1px solid black;
 }
 
-span .image-text-overlay {
-    position: absolute;
-    top: 200px;
-    left: 0;
-    width: 100%;
-}
-
 .jumbotron {
-    /*@extend %site_highlight_color;*/
     background-color: transparent;
     width: 100%;
     margin-top: 3px;
@@ -78,69 +58,17 @@ span .image-text-overlay {
     padding-bottom: 10px;
     margin-bottom: 5px;
     overflow: hidden;
-    /*border: 6px solid $black;*/
 }
 
 .panel {
     @extend %site_main_background;
 }
 
-/*div {
-    border: 2px dotted red;
-}*/
-
 /* Override the default bootstrap behavior where horizontal description lists
    will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
     white-space: normal;
-}
-
-.text-shadow-red {
-    text-shadow: $text_shadow_red;
-}
-
-.text-shadow-black {
-    text-shadow: $text_shadow_black;
-}
-
-.text-shadow-gray {
-    text-shadow: $text_shadow_gray;
-}
-
-h1 {
-    @extend %headerText;
-    font-size: 40pt;
-}
-
-h2 {
-    @extend %headerText;
-    font-size: 20pt;
-    margin: 0;
-}
-
-h3 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 18pt;
-}
-
-h4 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 16pt;
-}
-
-h5 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 14pt;
-}
-
-h6 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 13pt;
 }
 
 .row {
