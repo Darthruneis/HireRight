@@ -1,0 +1,29 @@
+﻿@import "_variables.scss";
+@import "_mixins.scss";
+@import "_%classes.scss";
+
+.btn {
+    border: 3px solid black;
+    @extend %site_button_color;
+    font-size: $normal_text_size;
+    color: $text_default;
+    font-weight: bold;
+}
+
+.btn-primary {
+    @extend %site_button_color;
+}
+
+input[type="submit"],
+button[type="submit"] {
+    float: right;
+    @extend %submit_button_color;
+}
+
+.horizontal-List-Button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 100%;
+}

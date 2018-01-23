@@ -30,5 +30,25 @@
   {
     "outputFile": "Content/sass/_variables.css",
     "inputFile": "Content/sass/_variables.scss"
+  },
+  {
+    "outputFile": "Content/sass/_positioning.css",
+    "inputFile": "Content/sass/_positioning.scss"
+  },
+  {
+    "outputFile": "Content/sass/_inputs.css",
+    "inputFile": "Content/sass/_inputs.scss"
+  },
+  {
+    "outputFile": "Content/sass/_buttons.css",
+    "inputFile": "Content/sass/_buttons.scss"
+  },
+  {
+    "outputFile": "Content/sass/_borders.css",
+    "inputFile": "Content/sass/_borders.scss"
+  },
+  {
+    "outputFile": "Content/sass/_animations.css",
+    "inputFile": "Content/sass/_animations.scss"
   }
 ]

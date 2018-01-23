@@ -13,6 +13,14 @@ $lightPurple: #b380ff;
 $purple: #8533ff;
 $darkPurple: #5c00e6;
 
+$boldBlue-65: #4d79ff;
+$boldBlue-60: #3366ff;
+$boldBlue-55: #1a53ff;
+$boldBlue-50: #0040ff;
+$boldBlue-45: #0039e6;
+$boldBlue-40: #0033cc;
+$boldBlue-35: #002db3;
+
 $site_background: $white;
 /*$site_background: $veryLightBlue;*/
 $site_side_background: $white;
@@ -21,7 +29,7 @@ $site_highlights_background: $fadedLightBlue;
 /*$site_highlights_background: $skyBlue;*/
 
 $submit_button_color: green;
-$site_button_color: $blue;
+$site_button_color: $boldBlue-50;
 
 $text_default: $black;
 $text_shadow_red: $darkRed 2px 0px 1px;

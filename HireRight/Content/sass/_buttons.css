@@ -1,0 +1,30 @@
+﻿/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+.btn, .btn-primary {
+  background-color: #0040ff; }
+
+input[type="submit"],
+button[type="submit"] {
+  background-color: green; }
+
+.btn {
+  border: 3px solid black;
+  font-size: 14pt;
+  color: #000000;
+  font-weight: bold; }
+
+input[type="submit"],
+button[type="submit"] {
+  float: right; }
+
+.horizontal-List-Button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 100%; }
+

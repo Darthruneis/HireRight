@@ -1,0 +1,34 @@
+﻿/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+/*$site_background: $veryLightBlue;*/
+/*$site_side_background: $darkNavyBlue;*/
+/*$site_highlights_background: $skyBlue;*/
+.centered {
+  margin: 0 auto; }
+
+.list-item-root li:before li:before, .list-item-nested li:before li:before {
+  content: "* ";
+  color: #993333;
+  font-size: 30px;
+  vertical-align: middle; }
+
+.list-item-no-bullet li:before {
+  display: none; }
+
+.list-item-nested li:before {
+  content: "- "; }
+
+.divider {
+  border-bottom: 1px solid #335060; }
+
+.scrollHorizontally {
+  max-width: 95vw;
+  overflow-x: scroll; }
+
+.centeredHeaderText {
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  font-size: 18pt; }
+
