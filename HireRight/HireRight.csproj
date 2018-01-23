@@ -382,7 +382,6 @@
     <Content Include="Views\CustomSolutions\CustomSolutionsPartial.cshtml" />
     <Content Include="Views\CustomSolutions\SelectTopTwelve.cshtml" />
     <Content Include="Views\CustomSolutions\MarkCategoryDtoAsTopTwelve.cshtml" />
-    <Content Include="Views\Home\IntroductionPartial.mobile.cshtml" />
     <Content Include="Views\Home\BackButtonPartial.cshtml" />
     <Content Include="Views\CustomSolutions\CategoryFilterPartial.cshtml" />
     <Content Include="Views\CustomSolutions\ContactAndCompanyInfoPartial.cshtml" />
