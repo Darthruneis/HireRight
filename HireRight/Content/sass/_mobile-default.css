@@ -615,7 +615,8 @@ body {
   text-shadow: #808080 2px 0px 1px; }
 
 h1 {
-  font-size: 40pt; }
+  font-size: 40pt;
+  margin: 0; }
 
 h2 {
   font-size: 20pt;
@@ -669,15 +670,6 @@ img {
   margin: 4px;
   padding: 0 !important;
   border: 1px solid black; }
-
-.jumbotron {
-  background-color: transparent;
-  width: 100%;
-  margin-top: 3px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 5px;
-  overflow: hidden; }
 
 /* Override the default bootstrap behavior where horizontal description lists
    will truncate terms that are too long to fit in the left column

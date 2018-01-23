@@ -50,16 +50,6 @@ img {
     border: 1px solid black;
 }
 
-.jumbotron {
-    background-color: transparent;
-    width: 100%;
-    margin-top: 3px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 5px;
-    overflow: hidden;
-}
-
 .panel {
     @extend %site_main_background;
 }

@@ -36,7 +36,8 @@ body {
   text-shadow: #808080 2px 0px 1px; }
 
 h1 {
-  font-size: 40pt; }
+  font-size: 40pt;
+  margin: 0; }
 
 h2 {
   font-size: 20pt;

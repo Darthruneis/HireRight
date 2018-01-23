@@ -33,6 +33,7 @@ body {
 h1 {
     @extend %headerText;
     font-size: 40pt;
+    margin: 0;
 }
 
 h2 {
