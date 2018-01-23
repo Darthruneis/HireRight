@@ -540,9 +540,6 @@ button[type="submit"] {
   text-align: center;
   font-size: 18pt; }
 
-html {
-  /*@extend %centered;*/ }
-
 hr {
   height: 3px;
   background-color: #335060;
