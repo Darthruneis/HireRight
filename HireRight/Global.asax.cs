@@ -16,6 +16,9 @@ namespace HireRight
 
         public static void Log(string message)
         {
+            if (!File.Exists(LogFilePath))
+                File.Create(LogFilePath);
+
             using (StreamWriter writer = new StreamWriter(File.Open(LogFilePath, FileMode.Append)))
             {
                 writer.WriteLine("--- START");
