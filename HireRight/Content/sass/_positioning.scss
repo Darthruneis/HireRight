@@ -1,0 +1,42 @@
+﻿@import "_variables.scss";
+@import "_mixins.scss";
+@import "_%classes.scss";
+
+.list-item-no-bullet {
+    li:before {
+        display: none;
+    }
+}
+
+.list-item-root {
+    li:before {
+        @extend %listItemBefore;
+    }
+}
+
+.list-item-nested {
+    li:before {
+        @extend %listItemBefore;
+        content: "- ";
+    }
+}
+
+.divider {
+    border-bottom: 1px solid $darkNavyBlue;
+}
+
+.scrollHorizontally {
+    max-width: 95vw;
+    overflow-x: scroll;
+}
+
+.centeredHeaderText {
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    font-size: 18pt;
+}
+
+.centered {
+    @extend %centered;
+}

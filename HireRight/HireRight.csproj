@@ -226,11 +226,35 @@
     <Content Include="Content\sass\_%25classes.min.css">
       <DependentUpon>_%25classes.css</DependentUpon>
     </Content>
+    <Content Include="Content\sass\_animations.css">
+      <DependentUpon>_animations.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_animations.min.css">
+      <DependentUpon>_animations.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_borders.css">
+      <DependentUpon>_borders.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_borders.min.css">
+      <DependentUpon>_borders.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_buttons.css">
+      <DependentUpon>_buttons.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_buttons.min.css">
+      <DependentUpon>_buttons.css</DependentUpon>
+    </Content>
     <Content Include="Content\sass\_desktop.css">
       <DependentUpon>_desktop.scss</DependentUpon>
     </Content>
     <Content Include="Content\sass\_desktop.min.css">
       <DependentUpon>_desktop.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_inputs.css">
+      <DependentUpon>_inputs.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_inputs.min.css">
+      <DependentUpon>_inputs.css</DependentUpon>
     </Content>
     <Content Include="Content\sass\_mixins.css">
       <DependentUpon>_mixins.scss</DependentUpon>
@@ -250,11 +274,23 @@
     <Content Include="Content\sass\_navigation.min.css">
       <DependentUpon>_navigation.css</DependentUpon>
     </Content>
+    <Content Include="Content\sass\_positioning.css">
+      <DependentUpon>_positioning.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_positioning.min.css">
+      <DependentUpon>_positioning.css</DependentUpon>
+    </Content>
     <Content Include="Content\sass\_tablet.css">
       <DependentUpon>_tablet.scss</DependentUpon>
     </Content>
     <Content Include="Content\sass\_tablet.min.css">
       <DependentUpon>_tablet.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_text.css">
+      <DependentUpon>_text.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\sass\_text.min.css">
+      <DependentUpon>_text.css</DependentUpon>
     </Content>
     <Content Include="Content\sass\_variables.css">
       <DependentUpon>_variables.scss</DependentUpon>
@@ -316,6 +352,12 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\ProfileSamples\SalesHunterProfileSampleReport.pdf" />
     <Content Include="Content\sass\_navigation.scss" />
+    <Content Include="Content\sass\_buttons.scss" />
+    <Content Include="Content\sass\_borders.scss" />
+    <Content Include="Content\sass\_inputs.scss" />
+    <Content Include="Content\sass\_animations.scss" />
+    <Content Include="Content\sass\_positioning.scss" />
+    <Content Include="Content\sass\_text.scss" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

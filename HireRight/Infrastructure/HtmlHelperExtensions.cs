@@ -52,11 +52,11 @@ namespace HireRight.Infrastructure
             return new MvcHtmlString(divtoReturn.ToString());
         }
 
-        public static MvcHtmlString ProfileSampleDownloadListItem(this HtmlHelper helper, string text, string actionName)
+        public static MvcHtmlString ProfileSampleDownloadListItem(this HtmlHelper helper, string text, string actionName, bool alternate = false)
         {
             UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
             MvcHtmlString downloadlink =
-                new MvcHtmlString($"<a href=\"{url.Action(actionName, "Reports")}\" target=\"_blank\" title=\"View in a new tab\">{text}</a>");
+                new MvcHtmlString($"<a href=\"{url.Action(actionName, "Reports")}\" target=\"_blank\" title=\"View in a new tab\" class='{(alternate ? "alternateLink" : "primaryLink")}'>{text}</a>");
             return new MvcHtmlString("<div class=\"col-xs-12\" style=\"padding: 2px; clear: both;\" >" + downloadlink + "</div>");
         }
 

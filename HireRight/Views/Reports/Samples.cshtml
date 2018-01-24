@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = "Sample Reports";
+    var samples = Model.OrderBy(x => x.ActionName).ToList();
 }
 
 <div class="row" style="max-height: 75vh; overflow-y: scroll;">
-    @foreach (var sample in Model.OrderBy(x => x.ActionName))
+    @foreach (var sample in samples)
     {
-        @Html.ProfileSampleDownloadListItem(sample.LinkText, sample.ActionName)
+        @Html.ProfileSampleDownloadListItem(sample.LinkText, sample.ActionName, samples.IndexOf(sample) % 2 == 0)
     }
 </div>
