@@ -46,12 +46,11 @@ a.alternateLink {
 }
 
 .navbar-nav > li > a.current {
-    color: white !important;
+    color: $black !important;
 }
 
 .navbar-nav > li > a.current:hover {
-    color: $black !important;
-    text-shadow: white 2px 0px 1px;
+    color: $white !important;
 }
 
 .navbar-inverse .navbar-brand {

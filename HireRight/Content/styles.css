@@ -140,11 +140,10 @@ a.alternateLink {
   text-shadow: #000000 2px 0px 1px; }
 
 .navbar-nav > li > a.current {
-  color: white !important; }
+  color: #000000 !important; }
 
 .navbar-nav > li > a.current:hover {
-  color: #000000 !important;
-  text-shadow: white 2px 0px 1px; }
+  color: #ffffff !important; }
 
 .navbar-inverse .navbar-brand {
   font-size: 18pt;
