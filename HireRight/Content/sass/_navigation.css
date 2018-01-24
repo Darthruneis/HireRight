@@ -5,18 +5,24 @@
 /*$site_side_background: $darkNavyBlue;*/
 /*$site_highlights_background: $skyBlue;*/
 .navbar {
-  background-color: #0040ff; }
-
-.navbar {
+  background-color: #1a53ff;
   color: #000000;
-  border: 3px solid #000000;
-  border-top: 0; }
+  border: 0;
+  border-bottom: 2px solid #000000; }
 
 a {
   color: #66a3ff !important; }
 
-a:hover {
+a:hover,
+a.primaryLink:hover,
+a.alternateLink:hover {
   color: #8533ff !important; }
+
+a.primaryLink {
+  color: #ff6600 !important; }
+
+a.alternateLink {
+  color: #4d79ff !important; }
 
 .navbar > .container {
   margin-left: 1%;

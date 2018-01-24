@@ -3,18 +3,28 @@
 @import "_%classes.scss";
 
 .navbar {
-    @extend %site_button_color;
+    background-color: $boldBlue-55;
     color: $black;
-    border: 3px solid $black;
-    border-top: 0;
+    border: 0;
+    border-bottom: 2px solid $black;
 }
 
 a {
     color: $lightBlue !important;
 }
 
-a:hover {
+a:hover, 
+a.primaryLink:hover, 
+a.alternateLink:hover {
     color: $purple !important;
+}
+
+a.primaryLink {
+    color: $orange-50 !important;
+}
+
+a.alternateLink {
+    color: $boldBlue-65 !important;
 }
 
 .navbar > .container {

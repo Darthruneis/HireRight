@@ -32,12 +32,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -85,12 +85,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -105,15 +105,24 @@ button[type="submit"] {
   border-right: 3px solid #335060; }
 
 .navbar {
+  background-color: #1a53ff;
   color: #000000;
-  border: 3px solid #000000;
-  border-top: 0; }
+  border: 0;
+  border-bottom: 2px solid #000000; }
 
 a {
   color: #66a3ff !important; }
 
-a:hover {
+a:hover,
+a.primaryLink:hover,
+a.alternateLink:hover {
   color: #8533ff !important; }
+
+a.primaryLink {
+  color: #ff6600 !important; }
+
+a.alternateLink {
+  color: #4d79ff !important; }
 
 .navbar > .container {
   margin-left: 1%;
@@ -190,12 +199,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -243,12 +252,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -280,7 +289,7 @@ textarea {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
   background-image: none;
-  border: 3px solid #000000;
+  border: 2px solid #000000;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   color: #000000;
@@ -341,12 +350,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -361,10 +370,13 @@ button[type="submit"] {
   border-right: 3px solid #335060; }
 
 .btn {
-  border: 3px solid black;
+  border: 2px solid black;
   font-size: 14pt;
   color: #000000;
   font-weight: bold; }
+
+.btn.glyphicon {
+  color: #0040ff; }
 
 input[type="submit"],
 button[type="submit"] {
@@ -411,12 +423,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -502,12 +514,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -574,12 +586,12 @@ body {
 .form-control {
   background-color: #b3daff; }
 
-.navbar, .btn, .btn-primary {
-  background-color: #0040ff; }
+.btn, .btn-primary {
+  background-color: #ff8533; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: green; }
+  background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
   border-top: 3px solid #335060; }
@@ -682,7 +694,8 @@ img {
   margin-right: 0; }
 
 .collapseIcon {
-  font-size: 11pt !important; }
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 .noPadNoMarg {
   margin: 0;

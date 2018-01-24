@@ -21,6 +21,27 @@ $boldBlue-45: #0039e6;
 $boldBlue-40: #0033cc;
 $boldBlue-35: #002db3;
 
+$gray-80: #cccccc;
+$gray-75: #bfbfbf;
+$gray-70: #b3b3b3;
+$gray-65: #a6a6a6;
+$gray-60: #999999;
+$gray-55: #8c8c8c;
+$gray-50: #808080;
+$gray-45: #737373;
+$gray-40: #666666;
+$gray-35: #595959;
+
+$orange-75: #ffb380;
+$orange-70: #ffa366;
+$orange-65: #ff944d;
+$orange-60: #ff8533;
+$orange-55: #ff751a;
+$orange-50: #ff6600;
+$orange-45: #e65c00;
+$orange-40: #cc5200;
+$orange-35: #b34700;
+
 $site_background: $white;
 /*$site_background: $veryLightBlue;*/
 $site_side_background: $white;
@@ -28,8 +49,8 @@ $site_side_background: $white;
 $site_highlights_background: $fadedLightBlue;
 /*$site_highlights_background: $skyBlue;*/
 
-$submit_button_color: green;
-$site_button_color: $boldBlue-50;
+$submit_button_color: $orange-60;
+$site_button_color: $orange-60;
 
 $text_default: $black;
 $text_shadow_red: $darkRed 2px 0px 1px;
