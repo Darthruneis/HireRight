@@ -1,5 +1,5 @@
 ﻿@model CustomSolutionsViewModel
-<div class="col-xs-12 row">
+<div class="row">
     <div class="col-xs-12 col-lg-6">
         @Html.ValidatedEditorWithLabelFor(x => x.CompanyName, true)
     </div>
@@ -7,7 +7,7 @@
         @Html.ValidatedEditorWithLabelFor(x => x.PositionsToFill, true)
     </div>
 </div>
-<div class="col-xs-12 row">
+<div class="row">
     <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => x.Contact.FirstName)
     </div>
@@ -24,7 +24,7 @@
         @Html.ValidatedEditorWithLabelFor(x => x.Contact.Email)
     </div>
 </div>
-<div class="col-xs-12 row">
+<div class="row">
     <div class="col-xs-12">
         @Html.LabelFor(x => x.Notes)
         <br />
