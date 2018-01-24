@@ -11,6 +11,10 @@ input[type="submit"],
 button[type="submit"] {
   background-color: #ff8533; }
 
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
+
 .btn {
   border: 2px solid black;
   font-size: 14pt;
@@ -30,4 +34,8 @@ button[type="submit"] {
   margin-left: 3px;
   margin-right: 3px;
   width: 100%; }
+
+.pagingButton {
+  min-width: 50px;
+  top: 0px; }
 

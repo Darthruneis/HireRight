@@ -50,17 +50,22 @@
 }
 
 %borderedTop {
-    border-top: 3px solid $darkNavyBlue;
+    border-top: 2px solid $black;
 }
 
 %borderedBottom {
-    border-bottom: 3px solid $darkNavyBlue;
+    border-bottom: 2px solid $black;
 }
 
 %borderedLeft {
-    border-left: 3px solid $darkNavyBlue;
+    border-left: 2px solid $black;
 }
 
 %borderedRight {
-    border-right: 3px solid $darkNavyBlue;
+    border-right: 2px solid $black;
+}
+
+%collapseButton {
+    font-size: 11pt !important;
+    background-color: white !important;
 }

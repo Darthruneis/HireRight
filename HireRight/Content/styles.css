@@ -40,16 +40,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
@@ -93,16 +97,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 .navbar {
   background-color: #1a53ff;
@@ -206,16 +214,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
@@ -259,16 +271,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -357,16 +373,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 .btn {
   border: 2px solid black;
@@ -387,6 +407,10 @@ button[type="submit"] {
   margin-left: 3px;
   margin-right: 3px;
   width: 100%; }
+
+.pagingButton {
+  min-width: 50px;
+  top: 0px; }
 
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
@@ -430,16 +454,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 .processingIcon {
   display: none;
@@ -521,16 +549,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 .list-item-no-bullet li:before {
   display: none; }
@@ -593,16 +625,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 header {
   padding: -10px 0 0 0;
@@ -692,13 +728,14 @@ img {
   margin-left: 0;
   margin-right: 0; }
 
-.collapseIcon {
-  font-size: 11pt !important;
-  background-color: white !important; }
-
 .noPadNoMarg {
   margin: 0;
   padding: 0; }
+
+.categoryDropDownDiv {
+  font-size: 11pt !important;
+  margin-bottom: 3px;
+  margin-top: 3px; }
 
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
@@ -742,16 +779,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 @media only screen and (min-width: 45em) {
   body {
@@ -799,16 +840,20 @@ button[type="submit"] {
   background-color: #ff8533; }
 
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
+
+.collapseIcon, .pagingButton, .descriptionToggle {
+  font-size: 11pt !important;
+  background-color: white !important; }
 
 @media only screen and (min-width: 64.25em) {
   body {

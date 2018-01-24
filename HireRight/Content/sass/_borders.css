@@ -5,14 +5,14 @@
 /*$site_side_background: $darkNavyBlue;*/
 /*$site_highlights_background: $skyBlue;*/
 .borderedRow, .borderedHorizontal, .borderedTop {
-  border-top: 3px solid #335060; }
+  border-top: 2px solid #000000; }
 
 .borderedRow, .borderedHorizontal, .borderedBottom {
-  border-bottom: 3px solid #335060; }
+  border-bottom: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedLeft {
-  border-left: 3px solid #335060; }
+  border-left: 2px solid #000000; }
 
 .borderedRow, .borderedVertical, .borderedRight {
-  border-right: 3px solid #335060; }
+  border-right: 2px solid #000000; }
 
