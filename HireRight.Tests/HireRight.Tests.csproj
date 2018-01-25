@@ -111,6 +111,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomSolutionsViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +121,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataTransferObjects\DataTransferObjects.csproj">
+      <Project>{E7A9F677-8D39-461B-810D-304B0B12E5DD}</Project>
+      <Name>DataTransferObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HireRight\HireRight.csproj">
       <Project>{BE05383B-E90D-4C3E-8B2B-E4342374F69C}</Project>
       <Name>HireRight</Name>

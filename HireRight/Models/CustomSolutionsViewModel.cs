@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Models
 {
@@ -24,7 +25,7 @@ namespace HireRight.Models
         public string Notes { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public List<string> Positions => PositionsToFill.Split(',').Select(x => x.Trim()).ToList();
+        public List<string> Positions => (PositionsToFill ?? "").Split(',').Select(x => x.Trim()).ToList();
 
         [Required]
         [Display(Name = "Positions to fill (separated by commas)")]
@@ -54,6 +55,11 @@ namespace HireRight.Models
             dto.Notes = Notes;
 
             return dto;
+        }
+
+        public CategoryFilter ToFilter()
+        {
+            return new CategoryFilter(1, Categories.Count, Categories.Select(x => x.Id).ToArray());
         }
     }
 

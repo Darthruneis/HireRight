@@ -28,5 +28,10 @@ namespace HireRight.Models
             Title = title;
             Id = id;
         }
+
+        public override string ToString()
+        {
+            return $"{Id},{Title},{Description}";
+        }
     }
 }

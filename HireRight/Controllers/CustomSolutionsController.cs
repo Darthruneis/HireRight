@@ -18,6 +18,7 @@ namespace HireRight.Controllers
     {
         private readonly ICategoriesBusinessLogic _categoriesBusinessLogic;
         private readonly IOrdersBusinessLogic _ordersBusinessLogic;
+        private const int MaximumNumberOfCategories = 12;
 
         public CustomSolutionsController(ICategoriesBusinessLogic categoriesBusinessLogic, IOrdersBusinessLogic ordersBusinessLogic)
         {
@@ -52,11 +53,29 @@ namespace HireRight.Controllers
                 .OrderBy(x => x.Importance)
                 .ThenBy(x => x.Title));
 
+            model = await RefreshCategoryDetails(model);
+
             return !ModelState.IsValid
                         ? View(model)
-                        : model.Categories.Count > 12
+                        : model.Categories.Count > MaximumNumberOfCategories
                             ? View("SelectTopTwelve", model)
                             : await TopTwelve(model);
+        }
+
+        private async Task<CustomSolutionsViewModel> RefreshCategoryDetails(CustomSolutionsViewModel model)
+        {
+            var categories = await _categoriesBusinessLogic.Get(model.ToFilter());
+            if(categories.IsFailure)
+                throw new Exception(categories.Error);
+
+            foreach (JobAnalysisCategoryViewModel jobAnalysisCategoryViewModel in model.Categories)
+            {
+                var cat = categories.PageResult.Single(x => x.Id == jobAnalysisCategoryViewModel.Id);
+                jobAnalysisCategoryViewModel.Description = cat.Description;
+                jobAnalysisCategoryViewModel.Title = cat.Title;
+            }
+
+            return model;
         }
 
         [HttpGet]
@@ -73,11 +92,11 @@ namespace HireRight.Controllers
         [HttpPost]
         public async Task<ActionResult> TopTwelve(CustomSolutionsViewModel model)
         {
-            if (model.Categories.Count <= 12)
+            if (model.Categories.Count <= MaximumNumberOfCategories)
                 model.Categories.ForEach(x => x.IsInTopTwelve = true);
-            else if (model.Categories.Count(x => x.IsInTopTwelve) > 12)
+            else if (model.Categories.Count(x => x.IsInTopTwelve) > MaximumNumberOfCategories)
             {
-                ModelState.AddModelError("", $"Please narrow down your selections to 12 or fewer. You have selected {model.Categories.Count(x => x.IsInTopTwelve) - 12} too many.");
+                ModelState.AddModelError("", $"Please narrow down your selections to 12 or fewer. You have selected {model.Categories.Count(x => x.IsInTopTwelve) - MaximumNumberOfCategories} too many.");
                 return View("SelectTopTwelve", model);
             }
 
