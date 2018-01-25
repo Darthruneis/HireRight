@@ -1,12 +1,26 @@
 ﻿@model CustomSolutionsViewModel
 @for (int i = 0; i < Model.Categories.Count; i++)
 {
-    <div class="row borderedRow">
-        <div class="col-xs-12 col-lg-4">@Model.Categories[i].Title</div>
+    string borderString = "borderedBottom";
+    if ((i + 1) % 2 == 0 || (i + 1) == Model.Categories.Count)
+    {
+        borderString = "";
+    }
+    <div class="row @(borderString)">
+        <div class="col-xs-6 col-lg-2">
+            @Model.Categories[i].Title
+        </div>
+        <div class="col-xs-6 col-lg-push-7 col-lg-3">
+            @Html.CheckBoxFor(x => Model.Categories[i].IsInTopTwelve)
+        </div>
+        <div class="col-xs-12 col-lg-pull-3 col-lg-7">
+            <div style="overflow-y: hidden; text-overflow: ellipsis; height: auto; padding-bottom: 4px;">
+                @Model.Categories[i].Description
+            </div>
+        </div>
+
         @Html.HiddenFor(x => Model.Categories[i].Title)
-        <div class="col-xs-12 col-lg-6">@Model.Categories[i].Description</div>
         @Html.HiddenFor(x => Model.Categories[i].Description)
-        <div class="col-xs-12 col-lg-2">@Html.CheckBoxFor(x => Model.Categories[i].IsInTopTwelve)</div>
         @Html.HiddenFor(x => Model.Categories[i].IsInTopTwelve)
         @Html.HiddenFor(x => Model.Categories[i].Importance)
     </div>

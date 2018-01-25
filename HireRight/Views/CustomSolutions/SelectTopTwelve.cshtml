@@ -4,11 +4,32 @@
 }
 @using (Html.BeginForm("TopTwelve", "CustomSolutions", FormMethod.Post))
 {
-    <div class="row borderedRow">
-        <div class="col-xs-12 col-lg-4"><h3>Title</h3></div>
-        <div class="col-xs-12 col-lg-6"><h3>Description</h3></div>
-        <div class="col-xs-12 col-lg-2"><h3>Highest Importance</h3></div>
+    <div class="col-xs-12" style="min-width: 480px">
+        @*Due to using borderedRow on this div's sibling div,
+            a bottom border isn't needed because that border would be doubled up.*@
+        <div class="row borderedTop borderedLeft borderedRight" style="clear: both;">
+            <div class="col-xs-6 col-lg-2">
+                <strong>Category</strong>
+            </div>
+            <div class="hidden-xs visible-lg col-lg-7">
+                <strong>Category Description</strong>
+            </div>
+            <div class="col-xs-6 col-lg-3">
+                <strong>Importance</strong>
+            </div>
+        </div>
+        <div class="borderedRow" style="min-width: 480px">
+            @{ Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model); }
+        </div>
     </div>
+    <div class="row">
+        <div class="col-xs-10">@Html.ValidationSummary(true)</div>
+        <div class="col-xs-2" style="margin: 0 auto;">
+            <input type="submit" class="btn btn-Primary" value="Finish" />
+        </div>
+    </div>
+
+
     @Html.HiddenFor(x => x.CompanyName)
     @Html.HiddenFor(x => x.Contact.CellNumber)
     @Html.HiddenFor(x => x.Contact.OfficeNumber)
@@ -17,14 +38,4 @@
     @Html.HiddenFor(x => x.Contact.Email)
     @Html.HiddenFor(x => x.Notes)
     @Html.HiddenFor(x => x.PositionsToFill)
-
-    <div style="max-height: 70vh; overflow-y: scroll; overflow-x: hidden;">
-        @{ Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model); }
-    </div>
-    <div class="row">
-        <div class="col-xs-10">@Html.ValidationSummary(true)</div>
-        <div class="col-xs-2" style="margin: 0 auto;">
-            <input type="submit" class="btn btn-Primary" value="Finish" />
-        </div>
-    </div>
-            }
+}
