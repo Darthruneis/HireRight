@@ -1,9 +1,4 @@
 ﻿<p class="centeredHeaderText">Eight Major Categories</p>
-<style>
-    .informationalDiv {
-        margin-left: 20px;
-    }
-</style>
 <div class="row">
     <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("ManufacturingInformationPartial");}</div>
     <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("StartUpInformationPartial");}</div>
@@ -20,7 +15,7 @@
 <script>
     $(document).ready(function() {
         $(".industryToggleImg").on("click", function() {
-            $(this).closest(".categoryContainer").toggleClass("col-lg-4 col-xs-12");
+            $(this).closest(".categoryContainer").toggleClass("col-lg-4");
             $("#" + $(this).data("toggledivid")).fadeToggle(250);
         })
     })
