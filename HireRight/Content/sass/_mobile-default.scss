@@ -15,7 +15,7 @@
 
 hr {
     height: 3px;
-    background-color: $darkNavyBlue;
+    background-color: $boldBlue-50;
     border: 0;
     margin: 0;
     padding: 0;
@@ -41,7 +41,7 @@ img {
     width: 100%;
     margin: 4px;
     padding: 0 !important;
-    border: 1px solid black;
+    border: 2px solid $black;
 }
 
 .imgDiv {
