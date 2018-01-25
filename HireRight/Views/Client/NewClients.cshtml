@@ -27,16 +27,6 @@
             <h4>What would you like to do? Check all that apply.</h4>
         </div>
     </div>
-    <style>
-        input[type="checkbox"].newClientsCheckbox {
-            height: 17px;
-        }
-
-        label.checkboxLabelFor {
-            display: inline;
-            font-weight: normal;
-        }
-    </style>
     <div class="row">
         <div class="col-xs-6">
             @Html.CheckBoxFor(x => x.ToTalkToConsultant, new { @class = "newClientsCheckbox"}) @Html.LabelFor(x => x.ToTalkToConsultant, "Contact Us to talk with a Consultant", new Dictionary<string, object> { { "class", "checkboxLabelFor" } })

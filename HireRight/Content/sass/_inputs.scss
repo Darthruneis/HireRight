@@ -55,3 +55,12 @@ textarea {
     background-color: #ff6666;
     border: 1px solid #f00;
 }
+
+input[type="checkbox"].newClientsCheckbox {
+    height: 17px;
+}
+
+label.checkboxLabelFor {
+    display: inline;
+    font-weight: normal;
+}
