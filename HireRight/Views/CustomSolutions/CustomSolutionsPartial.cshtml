@@ -17,65 +17,63 @@
 
 @*The col class here is used for the padding styling rather than the positioning.*@
 <div class="col-xs-12">
-    <div style="min-width: 480px">
-        @*Due to using borderedRow on this div's sibling div,
-            a bottom border isn't needed because that border would be doubled up.*@
-        <div class="row borderedTop borderedLeft borderedRight">
-            <div class="col-xs-11">
-                <div class="row">
-                    <div class="col-xs-12 col-lg-2">
-                        <strong>Category</strong>
-                    </div>
-                    <div class="hidden-xs visible-lg col-lg-7">
-                        <strong>Category Description</strong>
-                    </div>
-                    <div class="hidden-xs visible-lg col-lg-3">
-                        <strong>Importance</strong>
-                    </div>
+    @*Due to using borderedRow on this div's sibling div,
+        a bottom border isn't needed because that border would be doubled up.*@
+    <div class="row borderedTop borderedLeft borderedRight">
+        <div class="col-xs-11">
+            <div class="row">
+                <div class="col-xs-12 col-lg-2">
+                    <strong>Category</strong>
+                </div>
+                <div class="hidden-xs visible-lg col-lg-7">
+                    <strong>Category Description</strong>
+                </div>
+                <div class="hidden-xs visible-lg col-lg-3">
+                    <strong>Importance</strong>
                 </div>
             </div>
-            <div class="col-xs-1">
-                <strong class="pull-right"></strong>
-            </div>
         </div>
-        <div class="row borderedRow">
-            <div class="col-xs-12">
-                @for (int i = 0; i < Model.Categories.Count; i++)
+        <div class="col-xs-1">
+            <strong class="pull-right"></strong>
+        </div>
+    </div>
+    <div class="row borderedRow">
+        <div class="col-xs-12">
+            @for (int i = 0; i < Model.Categories.Count; i++)
+            {
+                string borderString = "borderedBottom";
+                if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
                 {
-                    string borderString = "borderedBottom";
-                    if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
-                    {
-                        borderString = "";
+                    borderString = "";
+                }
+                <div class="row @(borderString)">
+                    @{
+                        string rowId = "categoryRow_" + i;
                     }
-                    <div class="row @(borderString)">
-                        @{
-                            string rowId = "categoryRow_" + i;
-                        }
-                        <div class="col-xs-12 col-sm-11">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-2">
-                                    <span class="bold">@Model.Categories[i].Title</span>
-                                    @Html.HiddenFor(x => Model.Categories[i].Title)
-                                </div>
-                                <div class="col-xs-12 col-sm-push-7 col-sm-3" style="padding-top: 2px;">
-                                    @Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control categoryDropDownDiv", data_categoryId = Model.Categories[i].Id, data_categoryName = Model.Categories[i].Title })
-                                    @Html.HiddenFor(x => Model.Categories[i].Importance)
-                                </div>
-                                <div class="col-xs-12 col-sm-pull-3 col-sm-7">
-                                    <div id="@rowId" style="overflow-y: hidden; text-overflow: ellipsis; height: auto; padding-bottom: 4px;">
-                                        @Model.Categories[i].Description
-                                        @Html.HiddenFor(x => Model.Categories[i].Description)
-                                    </div>
+                    <div class="col-xs-12 col-sm-11">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                <span class="bold">@Model.Categories[i].Title</span>
+                                @Html.HiddenFor(x => Model.Categories[i].Title)
+                            </div>
+                            <div class="col-xs-12 col-sm-push-7 col-sm-3" style="padding-top: 2px;">
+                                @Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control categoryDropDownDiv", data_categoryId = Model.Categories[i].Id, data_categoryName = Model.Categories[i].Title })
+                                @Html.HiddenFor(x => Model.Categories[i].Importance)
+                            </div>
+                            <div class="col-xs-12 col-sm-pull-3 col-sm-7">
+                                <div id="@rowId" style="overflow-y: hidden; text-overflow: ellipsis; height: auto; padding-bottom: 4px;">
+                                    @Model.Categories[i].Description
+                                    @Html.HiddenFor(x => Model.Categories[i].Description)
                                 </div>
                             </div>
                         </div>
-                        <div class="hidden-xs visible-sm visible-md visible-lg col-sm-1">
-                            @Html.HiddenFor(x => Model.Categories[i].Id)
-                            @Html.CollapseButton(rowId, "Show description", "Hide description", "descriptionToggle")
-                        </div>
                     </div>
-                }
-            </div>
+                    <div class="hidden-xs visible-sm visible-md visible-lg col-sm-1">
+                        @Html.HiddenFor(x => Model.Categories[i].Id)
+                        @Html.CollapseButton(rowId, "Show description", "Hide description", "descriptionToggle")
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

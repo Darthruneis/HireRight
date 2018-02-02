@@ -11,30 +11,28 @@
     </div>
     @*The col class here is used for the padding styling rather than the positioning.*@
     <div class="col-xs-12">
-        <div style="min-width: 480px">
-            @*Due to using borderedRow on this div's sibling div,
-                a bottom border isn't needed because that border would be doubled up.*@
-            <div class="row borderedTop borderedLeft borderedRight">
-                <div class="col-xs-6 col-lg-2">
-                    <strong>Category</strong>
-                </div>
-                <div class="hidden-xs visible-lg col-lg-8">
-                    <strong>Category Description</strong>
-                </div>
-                <div class="col-xs-6 col-lg-2">
-                    <strong>Importance</strong>
-                </div>
+        @*Due to using borderedRow on this div's sibling div,
+            a bottom border isn't needed because that border would be doubled up.*@
+        <div class="row borderedTop borderedLeft borderedRight">
+            <div class="col-xs-6 col-lg-2">
+                <strong>Category</strong>
             </div>
-            <div class="row borderedRow" style="min-width: 480px">
-                <div class="col-xs-12">
-                    @{ Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model); }
-                </div>
+            <div class="hidden-xs visible-lg col-lg-8">
+                <strong>Category Description</strong>
+            </div>
+            <div class="col-xs-6 col-lg-2">
+                <strong>Importance</strong>
+            </div>
+        </div>
+        <div class="row borderedRow" style="min-width: 480px">
+            <div class="col-xs-12">
+                @{ Html.RenderPartial("MarkCategoryDtoAsTopTwelve", Model); }
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-10">@Html.ValidationSummary(true)</div>
-        <div class="col-xs-2" style="margin: 0 auto;">
+        <div class="col-xs-2 centered">
             <input type="submit" class="btn btn-Primary" value="Finish" />
         </div>
     </div>
