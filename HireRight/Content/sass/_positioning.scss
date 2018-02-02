@@ -53,10 +53,10 @@ $sides: (top, bottom, left, right);
 
 @each $space in $spaceamounts {
     @each $side in $sides {
-        .marg-#{str-slice($side, 0, 1)}-#{$space} {
+        .marg-#{$side}-#{$space} {
             margin-#{$side}: #{$space}px !important;
         }        
-        .pad-#{str-slice($side, 0, 1)}-#{$space} {
+        .pad-#{$side}-#{$space} {
             padding-#{$side}: #{$space}px !important;
         }
     }
