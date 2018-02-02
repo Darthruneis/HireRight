@@ -11,7 +11,7 @@
             @Model.Categories[i].Title
         </div>
         <div class="col-xs-6 col-lg-push-8 col-lg-2">
-            @Html.CheckBoxFor(x => Model.Categories[i].IsInTopTwelve, new { @class = "newClientsCheckbox" }) @Html.LabelFor(x => Model.Categories[i].IsInTopTwelve, "12 Most Important", new Dictionary<string, object> { { "class", "checkboxLabelFor" } })
+            @Html.CheckBoxFor(x => Model.Categories[i].IsInTopTwelve, new { @class = "newClientsCheckbox" }) @Html.LabelFor(x => Model.Categories[i].IsInTopTwelve, "Most Important", new Dictionary<string, object> { { "class", "checkboxLabelFor" } })
         </div>
         <div class="col-xs-12 col-lg-pull-2 col-lg-8">
             <div style="overflow-y: hidden; text-overflow: ellipsis; height: auto; padding-bottom: 4px;">
