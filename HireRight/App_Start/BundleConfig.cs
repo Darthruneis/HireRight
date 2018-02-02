@@ -10,7 +10,7 @@ namespace HireRight
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                 "~/Scripts/modernizr-*",
                 "~/Scripts/jquery-{version}.min.js",
-                "~/Scripts/bootstrap.min.js",
+                "~/Scripts/Bootstrap/bootstrap.min.js",
                 "~/Scripts/respond.min.js",
                 "~/Scripts/jquery.validate.min.js*",
                 "~/Scripts/jquery.validate.unobtrusive.min.js",
@@ -22,8 +22,7 @@ namespace HireRight
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/styles.css"
+                      "~/Content/styles.min.css"
                       ));
 
             BundleTable.EnableOptimizations = true;

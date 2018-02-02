@@ -54,5 +54,9 @@
   {
     "outputFile": "Content/sass/_text.css",
     "inputFile": "Content/sass/_text.scss"
+  },
+  {
+    "outputFile": "Content/sass/Bootstrap/_bootstrap.css",
+    "inputFile": "Content/sass/Bootstrap/_bootstrap.scss"
   }
 ]
