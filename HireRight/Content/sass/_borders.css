@@ -4,15 +4,15 @@
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
 /*$site_highlights_background: $skyBlue;*/
-.borderedRow, .borderedHorizontal, .borderedTop {
+.borderedTop, .borderedHorizontal, .borderedRow {
   border-top: 2px solid #000000; }
 
-.borderedRow, .borderedHorizontal, .borderedBottom {
+.borderedBottom, .borderedHorizontal, .borderedRow {
   border-bottom: 2px solid #000000; }
 
-.borderedRow, .borderedVertical, .borderedLeft {
+.borderedLeft, .borderedVertical, .borderedRow {
   border-left: 2px solid #000000; }
 
-.borderedRow, .borderedVertical, .borderedRight {
+.borderedRight, .borderedVertical, .borderedRow {
   border-right: 2px solid #000000; }
 

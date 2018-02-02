@@ -3,7 +3,10 @@
 @import "_%classes.scss";
 
 .spinner {
-    @extend %spinner;
+    -webkit-animation: spin $spinSpeed infinite linear;
+    -moz-animation: spin $spinSpeed infinite linear;
+    -o-animation: spin $spinSpeed infinite linear;
+    animation: spin $spinSpeed infinite linear;
 }
 
 .processingIcon {

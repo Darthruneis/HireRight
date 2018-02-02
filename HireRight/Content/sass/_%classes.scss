@@ -9,13 +9,6 @@
     font-weight: bold;
 }
 
-%spinner {
-    -webkit-animation: spin $spinSpeed infinite linear;
-    -moz-animation: spin $spinSpeed infinite linear;
-    -o-animation: spin $spinSpeed infinite linear;
-    animation: spin $spinSpeed infinite linear;
-}
-
 %listItemBefore {
     li:before {
         content: "* ";
@@ -47,22 +40,6 @@
 
 %site_default_font_family {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-%borderedTop {
-    border-top: 2px solid $black;
-}
-
-%borderedBottom {
-    border-bottom: 2px solid $black;
-}
-
-%borderedLeft {
-    border-left: 2px solid $black;
-}
-
-%borderedRight {
-    border-right: 2px solid $black;
 }
 
 %collapseButton {

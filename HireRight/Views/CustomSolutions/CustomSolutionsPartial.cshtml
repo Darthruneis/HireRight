@@ -61,8 +61,8 @@
                                 @Html.HiddenFor(x => Model.Categories[i].Importance)
                             </div>
                             <div class="col-xs-12 col-sm-pull-3 col-sm-7">
-                                <div id="@rowId" style="overflow-y: hidden; text-overflow: ellipsis; height: auto; padding-bottom: 4px;">
-                                    @Model.Categories[i].Description
+                                <div id="@rowId">
+                                    <span class="overflow">@Model.Categories[i].Description</span>
                                     @Html.HiddenFor(x => Model.Categories[i].Description)
                                 </div>
                             </div>

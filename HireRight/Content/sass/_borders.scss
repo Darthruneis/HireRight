@@ -2,35 +2,34 @@
 @import "_mixins.scss";
 @import "_%classes.scss";
 
-.borderedRow {
-    @extend %borderedTop;
-    @extend %borderedBottom;
-    @extend %borderedLeft;
-    @extend %borderedRight;
-}
-
-.borderedHorizontal {
-    @extend %borderedTop;
-    @extend %borderedBottom;
-}
-
-.borderedVertical {
-    @extend %borderedLeft;
-    @extend %borderedRight;
-}
-
 .borderedTop {
-    @extend %borderedTop;
+    border-top: 2px solid $black;
 }
 
 .borderedBottom {
-    @extend %borderedBottom;
+    border-bottom: 2px solid $black;
 }
 
 .borderedLeft {
-    @extend %borderedLeft;
+    border-left: 2px solid $black;
 }
 
 .borderedRight {
-    @extend %borderedRight;
+    border-right: 2px solid $black;
 }
+
+.borderedRow {
+    @extend .borderedVertical;
+    @extend .borderedHorizontal;
+}
+
+.borderedHorizontal {
+    @extend .borderedTop;
+    @extend .borderedBottom;
+}
+
+.borderedVertical {
+    @extend .borderedLeft;
+    @extend .borderedRight;
+}
+
