@@ -4,6 +4,7 @@
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
 /*$site_highlights_background: $skyBlue;*/
+@import url(../bootstrap.css);
 .centered, body {
   margin: 0 auto; }
 
@@ -288,8 +289,14 @@ button[type="submit"] {
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select {
-  margin: 0 1% 0 0;
+select,
+label {
+  color: #000000;
+  /*margin-bottom: 4px;
+    margin-left: $gutter;
+    margin-right: $gutter;*/ }
+
+input, select {
   height: 40px; }
 
 textarea {
@@ -300,6 +307,7 @@ textarea {
   box-sizing: border-box; }
 
 .form-control {
+  font-size: 14pt;
   -o-transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
@@ -307,12 +315,7 @@ textarea {
   border: 2px solid #000000;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  color: #000000;
-  display: block;
-  height: 40px;
-  font-size: 14pt;
-  transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
-  overflow: hidden; }
+  transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s; }
 
 .field-validation-error {
   color: #f00; }
@@ -721,10 +724,9 @@ img {
   width: 100%;
   margin: 4px;
   padding: 0 !important;
-  border: 2px solid #000000; }
+  border: 1px solid #000000; }
 
 .imgDiv {
-  margin: 4px;
   padding: 0 !important;
   border: 1px solid black; }
 
@@ -733,10 +735,6 @@ img {
 */
 .dl-horizontal dt {
   white-space: normal; }
-
-.row {
-  margin-left: 0;
-  margin-right: 0; }
 
 .noPadNoMarg {
   margin: 0;

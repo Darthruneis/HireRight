@@ -1,5 +1,4 @@
 ﻿@model ProductDTO
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-6">
@@ -37,15 +36,15 @@
                         @{ decimal price = Model.Price * (1.00m - discountsArray[i].Amount);}
                         $@price.ToString("N2")
                     </div>
-                            }
-                            else
-                            {
-                                <div class="col-xs-6">
-                                    @{ decimal price = Model.Price - discountsArray[i].Amount;}
-                                    $@price.ToString("N2")
+                }
+                else
+                {
+                    <div class="col-xs-6">
+                        @{ decimal price = Model.Price - discountsArray[i].Amount;}
+                        $@price.ToString("N2")
                     </div>
-                                        }
+                }
             </div>
-                                        }
+        }
     }
 </div>

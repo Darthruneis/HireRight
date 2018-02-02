@@ -13,7 +13,7 @@
             @Html.CollapseButton("jobAnalysisInstructionsDiv")
         </div>
     </div>
-    <div class="row" id="jobAnalysisInstructionsDiv">
+    <div id="jobAnalysisInstructionsDiv">
         @{
             Html.RenderPartial("FormInstructionsContentPartial");
         }
@@ -43,7 +43,7 @@
             @Html.CollapseButton("CategoryListDiv")
         </div>
     </div>
-    <div class="row" id="CategoryListDiv">
+    <div id="CategoryListDiv">
         @Html.Partial("CustomSolutionsPartial", Model)
     </div>
 

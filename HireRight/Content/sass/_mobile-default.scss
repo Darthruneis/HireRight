@@ -8,6 +8,7 @@
 @import "_animations.scss";
 @import "_positioning.scss";
 @import "_text.scss";
+@import "../bootstrap.css";
 
 /*div {
     border: 2px dotted red;
@@ -41,11 +42,10 @@ img {
     width: 100%;
     margin: 4px;
     padding: 0 !important;
-    border: 2px solid $black;
+    border: 1px solid $black;
 }
 
 .imgDiv {
-    margin: 4px;
     padding: 0 !important;
     border: 1px solid black;
 }
@@ -59,11 +59,6 @@ img {
 */
 .dl-horizontal dt {
     white-space: normal;
-}
-
-.row {
-    margin-left: 0;
-    margin-right: 0;
 }
 
 .noPadNoMarg {
