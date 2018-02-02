@@ -698,6 +698,15 @@ h6 {
   margin: 0;
   font-size: 13pt; }
 
+.bold {
+  font-weight: bold; }
+
+.overflow {
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  height: auto;
+  padding-bottom: 4px; }
+
 /*div {
     border: 2px dotted red;
 }*/
