@@ -31,19 +31,12 @@
         </div>
     </div>
 </div>
-
-<div class="row" id="reportingExplanationDiv">
-</div>
-
+<div class="row" id="reportingExplanationDiv"></div>
 <script src="~/Scripts/replacingDivContents.js"></script>
 <script>
     $(document).ready(function () {
         var $reportingExplanationDiv = $("#reportingExplanationDiv");
         var controllerName = "/Reports/";
-        //replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
-        //$("#showIntroListButton").click(function () {
-        //    replaceDivContents($reportingExplanationDiv, controllerName + "Introduction");
-        //});
         $("#showCategoriesListButton").click(function () {
             replaceDivContents($reportingExplanationDiv, controllerName + "Categories");
         });

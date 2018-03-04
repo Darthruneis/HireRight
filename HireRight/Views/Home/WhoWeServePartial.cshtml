@@ -1,17 +1,15 @@
 ﻿<p class="centeredHeaderText">Eight Major Categories</p>
 <div class="row">
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("ManufacturingInformationPartial");}</div>
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("StartUpInformationPartial");}</div>
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("AdministrationAndClericalInformationPartial");}</div>
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("CustomerServiceInformationPartial");}</div>
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("ProfessionalServicesInformationPartial"); }</div>
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("MedicalInformationPartial");}</div>
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("OtherIndustriesInformationPartial");}</div>
-    <div class="col-xs-12 col-lg-4 categoryContainer" style="padding: 5px;">@{ Html.RenderPartial("ManagersInformationPartial");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("ManufacturingInformationPartial");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("StartUpInformationPartial");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("AdministrationAndClericalInformationPartial");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("CustomerServiceInformationPartial");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("ProfessionalServicesInformationPartial"); }</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("MedicalInformationPartial");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("OtherIndustriesInformationPartial");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("ManagersInformationPartial");}</div>
 </div>
 @{ Html.RenderPartial("BackButtonPartial"); }
-<script src="~/Scripts/showHideDiv.js"></script>
-
 <script>
     $(document).ready(function () {
         $(".industryToggleImg").on("click",
