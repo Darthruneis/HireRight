@@ -7,7 +7,7 @@ var CustomSolutions;
         $("#categoryContainerDiv").on("click", ".moreImportantButton", function (e) {
             increaseImportanceLevel($(this).closest(".categoryCardRow"));
         });
-        $("#ContinueButton").on("click", function () { toggleIrrelevantCards(); });
+        $("#ContinueButton, #BackButton").on("click", function () { toggleIrrelevantCards(); });
     }
     CustomSolutions.bindEvents = bindEvents;
     function toggleIrrelevantCards() {
@@ -24,6 +24,9 @@ var CustomSolutions;
             }
             toggleButtonsBasedOnImportance($row, $newValue);
         });
+        $("form input[type='submit']").closest("div").toggle();
+        $("#ContinueButton").toggle();
+        $("#BackButton").toggle();
     }
     function getImportanceLevel($categoryRow) {
         return $categoryRow.find("input[type='hidden']").val();

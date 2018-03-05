@@ -10,7 +10,7 @@
             function (e) {
                 increaseImportanceLevel($(this).closest(".categoryCardRow"));
             });
-        $("#ContinueButton").on("click", () => { toggleIrrelevantCards(); });
+        $("#ContinueButton, #BackButton").on("click", () => { toggleIrrelevantCards(); });
     }
 
     function toggleIrrelevantCards(): void {
@@ -26,6 +26,9 @@
             }
             toggleButtonsBasedOnImportance($row, $newValue);
         });
+        $("form input[type='submit']").closest("div").toggle();
+        $("#ContinueButton").toggle();
+        $("#BackButton").toggle();
     }
 
     function getImportanceLevel($categoryRow: JQuery): string {
