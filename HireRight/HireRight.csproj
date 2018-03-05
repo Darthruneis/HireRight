@@ -576,6 +576,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\CustomSolutions\_customSolutions.ts" />
     <TypeScriptCompile Include="Scripts\Global\Collapsibles.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>

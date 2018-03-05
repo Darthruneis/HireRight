@@ -82,62 +82,9 @@
         </div>
     }
 </div>
-
+<script src="~/Scripts/CustomSolutions/_customSolutions.js"></script>
 <script>
-    function getImportanceLevel($categoryRow) {
-        return $categoryRow.find("input[type='hidden']").val();
-    }
-    function getNumericImportanceLevel(stringValue) {
-        switch (stringValue) {
-            case "Irrelevant":
-                return 1;
-            case "LowImportance":
-                return 2;
-            case "HighImportance":
-                return 3;
-            default:
-                //reset to middle column
-                return 2;
-        }
-    }
-    function getStringImportanceLevel(intValue) {
-        if (intValue >= 3)
-            return "HighImportance";
-        if (intValue <= 1)
-            return "Irrelevant";
-        return "LowImportance";
-    }
-    function updateImportanceLevel($categoryRow, increase) {
-        var current = getNumericImportanceLevel(getImportanceLevel($categoryRow));
-        if (increase)
-            current = current + 1;
-        else
-            current = current - 1;
-
-        var newValue = getStringImportanceLevel(current);
-
-        $categoryRow.find("input[type='hidden']").val(newValue);
-
-        var detachedHtml = $categoryRow.find(".categoryCard").detach();
-        detachedHtml.appendTo($categoryRow.find(".col-xs-4")[getNumericImportanceLevel(newValue) - 1]);
-    }
-    function increaseImportanceLevel($categoryRow) {
-        updateImportanceLevel($categoryRow, true);
-    }
-    function decreaseImportanceLevel($categoryRow) {
-        updateImportanceLevel($categoryRow, false);
-    }
-
-    $("#categoryContainerDiv").on("click",
-        ".lessImportantButton",
-        function (e) {
-            decreaseImportanceLevel($(this).closest(".categoryCardRow"));
-        });
-    $("#categoryContainerDiv").on("click",
-        ".moreImportantButton",
-        function (e) {
-            increaseImportanceLevel($(this).closest(".categoryCardRow"));
-        });
+    CustomSolutions.bindEvents();
 </script>
 
 @*ORIGINAL IMPLEMENTATION BELOW
