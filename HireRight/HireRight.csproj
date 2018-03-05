@@ -459,6 +459,7 @@
     <Content Include="Content\sass\Bootstrap\_bootstrap-mincer.scss" />
     <Content Include="Content\sass\Bootstrap\_bootstrap-sprockets.scss" />
     <Content Include="Content\sass\Bootstrap\_bootstrap.scss" />
+    <Content Include="Content\sass\_customSolutions.scss" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

@@ -3,60 +3,30 @@
 <script src="~/Scripts/CustomSolutions/customSolutionsPartial.js"></script>
 <div class="row">
     <div class="col-xs-12">
-        Select the Category for your organization if listed. Use other for unlisted ones and you will see the entire list of scales available.
-        For each scale rate the importance for a successful candidate. Use the drop down menu for your ratings. For those rated Not Important you may want to click the Show/Hide button.
+        Select the Industry for your organization if listed. For each scale rate the importance for a successful candidate.At the end of this first step, the 'Irrelevant' categories will be dropped.Then, the selection must be narrowed to at most nine (9) categories.
+        <br />
+        All tests will include a 10th category - <b>Candidness</b>.
+        <br />
+        <br />
+        When finished, click 'Continue'.
+        <br />
+        <br />
     </div>
-    <br />
-    <div class="col-xs-12 pad-top-10">After you have rated each scale, review your ratings to determine if the critical characteristics of a successful applicant are included.</div>
-    <br />
-    <div class="col-xs-12 pad-top-10">When finished, click 'Continue'.</div>
 </div>
-
 <div class="row">
     <div class="col-xs-12">
-        <h3>-- This is where the industry selector, and the option to show 'shared/general' scales will go. --</h3>
+        -- This is where the industry selector, and the option to show 'shared/general' scales will go. --
     </div>
 </div>
 
-<div class="row">
+<div class="row importanceHeaders">
     <h4 class="col-xs-4">Irrelevant</h4>
     <h4 class="col-xs-4">Nice to Have</h4>
     <h4 class="col-xs-4">Critical for Success</h4>
 </div>
 
-<style>
-    .importanceToggleButton {
-        height: auto;
-        min-height: 100%;
-        position: absolute;
-        top: 0;
-        width: auto;
-        cursor: pointer;
-    }
-
-        .importanceToggleButton:hover {
-            background-color: aqua;
-        }
-
-    .lessImportantButton {
-        left: 0;
-        border-right: 2px solid black;
-    }
-
-    .moreImportantButton {
-        right: 0;
-        border-left: 2px solid black;
-    }
-
-    .categoryCard {
-        border: 2px solid black;
-        -ms-border-radius: 6px;
-        border-radius: 6px;
-    }
-</style>
-
 <div id="categoryContainerDiv">
-    @for (int i = 0; i < Model.Categories.Take(1).Count(); i++)
+    @for (int i = 0; i < Model.Categories.Count; i++)
     {
         var category = Model.Categories[i];
         category.Importance = CategoryImportance.LowImportance;
@@ -84,7 +54,9 @@
 </div>
 <script src="~/Scripts/CustomSolutions/_customSolutions.js"></script>
 <script>
-    CustomSolutions.bindEvents();
+    $(document).ready(function() {
+        CustomSolutions.bindEvents();
+    });
 </script>
 
 @*ORIGINAL IMPLEMENTATION BELOW

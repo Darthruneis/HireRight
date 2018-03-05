@@ -1,0 +1,28 @@
+﻿.importanceToggleButton {
+    height: auto;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    width: auto;
+    cursor: pointer;
+}
+
+.importanceToggleButton:hover {
+    background-color: aqua;
+}
+
+.lessImportantButton {
+    left: 0;
+    border-right: 2px solid black;
+}
+
+.moreImportantButton {
+    right: 0;
+    border-left: 2px solid black;
+}
+
+.categoryCard {
+    border: 2px solid black;
+    -ms-border-radius: 6px;
+    border-radius: 6px;
+}

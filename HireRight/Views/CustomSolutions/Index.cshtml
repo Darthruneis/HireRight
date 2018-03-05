@@ -46,12 +46,13 @@
     <div id="CategoryListDiv" style="display: block;">
         @Html.Partial("CustomSolutionsPartial", Model)
     </div>
-    <div class="row">
-        <div class="col-xs-10">
+    <div style="clear: both;">
+        <div class="pull-left">
             @Html.ValidationSummary(true)
         </div>
-        <div class="col-xs-2" style="padding-top: 10px;">
-            @Html.SubmitButton("Continue")
+        <div class="pull-right" style="padding-top: 10px;">
+            <div style="display: none;">@Html.SubmitButton("Finish")</div>
+            <button class="btn btn-primary pull-right" type="button" id="ContinueButton">Continue</button>
         </div>
     </div>
 }
