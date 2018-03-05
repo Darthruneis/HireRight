@@ -13,8 +13,7 @@ header {
 body {
     @extend %centered;
     @extend %site_side_colors;
-    font-size: $normal_text_size;
-    padding: 0;
+    font-size: $normal_text_size;    
     color: $text_default;
 }
 

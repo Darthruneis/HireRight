@@ -10,6 +10,11 @@
 @import "_text.scss";
 @import "../bootstrap.css";
 
+html {
+    height: 100%;
+}
+
+
 /*div {
     border: 2px dotted red;
 }*/
@@ -32,10 +37,8 @@ hr {
     padding-bottom: 4px;
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
-    @extend %site_main_background;
-    padding: 20px 5% 0 5%;
+    @extend %site_main_background;    
 }
 
 img {

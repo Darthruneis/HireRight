@@ -7,89 +7,221 @@
         For each scale rate the importance for a successful candidate. Use the drop down menu for your ratings. For those rated Not Important you may want to click the Show/Hide button.
     </div>
     <br />
-    <div class="col-xs-12" style="padding-top: 12px;">After you have rated each scale, review your ratings to determine if the critical characteristics of a successful applicant are included.</div>
+    <div class="col-xs-12 pad-top-10">After you have rated each scale, review your ratings to determine if the critical characteristics of a successful applicant are included.</div>
     <br />
-    <div class="col-xs-12" style="padding-top: 12px;">When finished, click 'Continue'.</div>
-</div>
-<div style="padding: 0; margin-bottom: 10px;">
-    @{Html.RenderPartial("CategoryFilterPartial", Model.Filter);}
+    <div class="col-xs-12 pad-top-10">When finished, click 'Continue'.</div>
 </div>
 
-@*The col class here is used for the padding styling rather than the positioning.*@
-<div class="col-xs-12">
-    @*Due to using borderedRow on this div's sibling div,
-        a bottom border isn't needed because that border would be doubled up.*@
-    <div class="row borderedTop borderedLeft borderedRight">
-        <div class="col-xs-11">
-            <div class="row">
-                <div class="col-xs-12 col-lg-2">
-                    <strong>Category</strong>
-                </div>
-                <div class="hidden-xs visible-lg col-lg-7">
-                    <strong>Category Description</strong>
-                </div>
-                <div class="hidden-xs visible-lg col-lg-3">
-                    <strong>Importance</strong>
+<div class="row">
+    <div class="col-xs-12">
+        <h3>-- This is where the industry selector, and the option to show 'shared/general' scales will go. --</h3>
+    </div>
+</div>
+
+<div class="row">
+    <h4 class="col-xs-4">Irrelevant</h4>
+    <h4 class="col-xs-4">Nice to Have</h4>
+    <h4 class="col-xs-4">Critical for Success</h4>
+</div>
+
+<style>
+    .importanceToggleButton {
+        height: auto;
+        min-height: 100%;
+        position: absolute;
+        top: 0;
+        width: auto;
+        cursor: pointer;
+    }
+
+        .importanceToggleButton:hover {
+            background-color: aqua;
+        }
+
+    .lessImportantButton {
+        left: 0;
+        border-right: 2px solid black;
+    }
+
+    .moreImportantButton {
+        right: 0;
+        border-left: 2px solid black;
+    }
+
+    .categoryCard {
+        border: 2px solid black;
+        -ms-border-radius: 6px;
+        border-radius: 6px;
+    }
+</style>
+
+<div id="categoryContainerDiv">
+    @for (int i = 0; i < Model.Categories.Take(1).Count(); i++)
+    {
+        var category = Model.Categories[i];
+        category.Importance = CategoryImportance.LowImportance;
+
+        <div class="row categoryCardRow">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4">
+                <div id="category-@(i)" class="col-xs-12 categoryCard" style="clear: both;">
+                    <div class="pull-left importanceToggleButton lessImportantButton">
+                        <i class="glyphicon glyphicon-arrow-left"></i>
+                    </div>
+                    <div class="marg-left-4 marg-right-4">
+                        <label>@category.Title</label><br />
+                        @category.Description
+                    </div>
+                    <div class="pull-right importanceToggleButton moreImportantButton">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                    </div>
                 </div>
             </div>
+            <div class="col-xs-4"></div>
+            @Html.HiddenFor(x => x.Categories[i].Importance)
         </div>
-        <div class="col-xs-1">
-            <strong class="pull-right"></strong>
-        </div>
-    </div>
-    <div class="row borderedRow">
-        <div class="col-xs-12">
-            @for (int i = 0; i < Model.Categories.Count; i++)
-            {
-                string borderString = "borderedBottom";
-                if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
-                {
-                    borderString = "";
-                }
-                <div class="row @(borderString)">
-                    @{
-                        string rowId = "categoryRow_" + i;
-                    }
-                    <div class="col-xs-12 col-sm-11">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-2">
-                                <span class="bold">@Model.Categories[i].Title</span>
-                                @Html.HiddenFor(x => Model.Categories[i].Title)
-                            </div>
-                            <div class="col-xs-12 col-sm-push-7 col-sm-3" style="padding-top: 2px;">
-                                @Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control categoryDropDownDiv", data_categoryId = Model.Categories[i].Id, data_categoryName = Model.Categories[i].Title })
-                                @Html.HiddenFor(x => Model.Categories[i].Importance)
-                            </div>
-                            <div class="col-xs-12 col-sm-pull-3 col-sm-7">
-                                <div id="@rowId">
-                                    <span class="overflow">@Model.Categories[i].Description</span>
-                                    @Html.HiddenFor(x => Model.Categories[i].Description)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hidden-xs visible-sm visible-md visible-lg col-sm-1">
-                        @Html.HiddenFor(x => Model.Categories[i].Id)
-                        @Html.CollapseButton(rowId, "Show description", "Hide description", "descriptionToggle")
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
+    }
 </div>
 
 <script>
-    $(document).ready(function () {
-        $("#CategoryListDiv").on("click", ".descriptionToggle", function () {
-            var $descriptionDiv = $("#" + $(this).data("toggledivid"));
+    function getImportanceLevel($categoryRow) {
+        return $categoryRow.find("input[type='hidden']").val();
+    }
+    function getNumericImportanceLevel(stringValue) {
+        switch (stringValue) {
+            case "Irrelevant":
+                return 1;
+            case "LowImportance":
+                return 2;
+            case "HighImportance":
+                return 3;
+            default:
+                //reset to middle column
+                return 2;
+        }
+    }
+    function getStringImportanceLevel(intValue) {
+        if (intValue >= 3)
+            return "HighImportance";
+        if (intValue <= 1)
+            return "Irrelevant";
+        return "LowImportance";
+    }
+    function updateImportanceLevel($categoryRow, increase) {
+        var current = getNumericImportanceLevel(getImportanceLevel($categoryRow));
+        if (increase)
+            current = current + 1;
+        else
+            current = current - 1;
 
-            if ($(this).hasClass("glyphicon-minus-sign")) {
-                $descriptionDiv.height("14pt");
-            } else {
-                $descriptionDiv.height("auto");
-            }
+        var newValue = getStringImportanceLevel(current);
 
-            Collapsibles.swapCollapseButtonIconAndTitle($(this));
+        $categoryRow.find("input[type='hidden']").val(newValue);
+
+        var detachedHtml = $categoryRow.find(".categoryCard").detach();
+        detachedHtml.appendTo($categoryRow.find(".col-xs-4")[getNumericImportanceLevel(newValue) - 1]);
+    }
+    function increaseImportanceLevel($categoryRow) {
+        updateImportanceLevel($categoryRow, true);
+    }
+    function decreaseImportanceLevel($categoryRow) {
+        updateImportanceLevel($categoryRow, false);
+    }
+
+    $("#categoryContainerDiv").on("click",
+        ".lessImportantButton",
+        function (e) {
+            decreaseImportanceLevel($(this).closest(".categoryCardRow"));
         });
-    })
+    $("#categoryContainerDiv").on("click",
+        ".moreImportantButton",
+        function (e) {
+            increaseImportanceLevel($(this).closest(".categoryCardRow"));
+        });
 </script>
+
+@*ORIGINAL IMPLEMENTATION BELOW
+    <div class="pad-0 marg-bottom-10">
+            @{Html.RenderPartial("CategoryFilterPartial", Model.Filter);}
+        </div>
+
+    @*The col class here is used for the padding styling rather than the positioning.*@
+@*
+    <div class="col-xs-12">
+        @*Due to using borderedRow on this div's sibling div,
+            a bottom border isn't needed because that border would be doubled up.*@
+@*
+        <div class="row borderedTop borderedLeft borderedRight">
+            <div class="col-xs-11">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-2">
+                        <strong>Category</strong>
+                    </div>
+                    <div class="hidden-xs visible-lg col-lg-7">
+                        <strong>Category Description</strong>
+                    </div>
+                    <div class="hidden-xs visible-lg col-lg-3">
+                        <strong>Importance</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1">
+                <strong class="pull-right"></strong>
+            </div>
+        </div>
+        <div class="row borderedRow">
+            <div class="col-xs-12">
+                @for (int i = 0; i < Model.Categories.Count; i++)
+                {
+                    string borderString = "borderedBottom";
+                    if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
+                    {
+                        borderString = "";
+                    }
+                    <div class="row @(borderString)">
+                        @{
+                            string rowId = "categoryRow_" + i;
+                        }
+                        <div class="col-xs-12 col-sm-11">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-2">
+                                    <span class="bold">@Model.Categories[i].Title</span>
+                                    @Html.HiddenFor(x => Model.Categories[i].Title)
+                                </div>
+                                <div class="pad-top-2 col-xs-12 col-sm-push-7 col-sm-3">
+                                    @Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control categoryDropDownDiv", data_categoryId = Model.Categories[i].Id, data_categoryName = Model.Categories[i].Title })
+                                    @Html.HiddenFor(x => Model.Categories[i].Importance)
+                                </div>
+                                <div class="col-xs-12 col-sm-pull-3 col-sm-7">
+                                    <div id="@rowId">
+                                        <span class="overflow">@Model.Categories[i].Description</span>
+                                        @Html.HiddenFor(x => Model.Categories[i].Description)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden-xs visible-sm visible-md visible-lg col-sm-1">
+                            @Html.HiddenFor(x => Model.Categories[i].Id)
+                            @Html.CollapseButton(rowId, "Show description", "Hide description", "descriptionToggle")
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#CategoryListDiv").on("click", ".descriptionToggle", function () {
+                var $descriptionDiv = $("#" + $(this).data("toggledivid"));
+
+                if ($(this).hasClass("glyphicon-minus-sign")) {
+                    $descriptionDiv.height("14pt");
+                } else {
+                    $descriptionDiv.height("auto");
+                }
+
+                Collapsibles.swapCollapseButtonIconAndTitle($(this));
+            });
+        })
+    </script>
+*@

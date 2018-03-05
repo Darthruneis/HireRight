@@ -8,7 +8,8 @@
   background-color: #1a53ff;
   color: #000000;
   border: 0;
-  border-bottom: 2px solid #000000; }
+  border-bottom: 2px solid #000000;
+  margin: 0; }
 
 a {
   color: #66a3ff !important; }

@@ -6,7 +6,6 @@
 /*$site_highlights_background: $skyBlue;*/
 @media only screen and (min-width: 64.25em) {
   body {
-    padding: 0 3%;
     font-size: 12pt; }
   .btn {
     font-size: 12pt; }

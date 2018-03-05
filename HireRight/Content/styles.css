@@ -5897,7 +5897,8 @@ button[type="submit"] {
   background-color: #1a53ff;
   color: #000000;
   border: 0;
-  border-bottom: 2px solid #000000; }
+  border-bottom: 2px solid #000000;
+  margin: 0; }
 
 a {
   color: #66a3ff !important; }
@@ -6282,6 +6283,10 @@ button[type="submit"] {
   font-size: 11pt !important;
   background-color: white !important; }
 
+body {
+  padding: 20px 5% 0 5%;
+  /*height: 100%;*/ }
+
 .list-item-no-bullet li:before {
   display: none; }
 
@@ -6303,6 +6308,12 @@ button[type="submit"] {
 
 .informationalDiv {
   margin-left: 20px; }
+
+.pad-0 {
+  padding: 0; }
+
+.marg-0 {
+  margin: 0; }
 
 .marg-1 {
   margin: 1px !important; }
@@ -7072,7 +7083,6 @@ header {
 
 body {
   font-size: 14pt;
-  padding: 0;
   color: #000000; }
 
 .text-shadow-red {
@@ -7117,6 +7127,9 @@ h6 {
   height: auto;
   padding-bottom: 4px; }
 
+html {
+  height: 100%; }
+
 /*div {
     border: 2px dotted red;
 }*/
@@ -7134,10 +7147,6 @@ hr {
   position: relative;
   bottom: 0;
   padding-bottom: 4px; }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-  padding: 20px 5% 0 5%; }
 
 img {
   width: 100%;
@@ -7203,10 +7212,6 @@ button[type="submit"] {
   font-size: 11pt !important;
   background-color: white !important; }
 
-@media only screen and (min-width: 45em) {
-  body {
-    padding: 0 1%; } }
-
 /*$site_background: $veryLightBlue;*/
 /*$site_side_background: $darkNavyBlue;*/
 /*$site_highlights_background: $skyBlue;*/
@@ -7248,7 +7253,6 @@ button[type="submit"] {
 
 @media only screen and (min-width: 64.25em) {
   body {
-    padding: 0 3%;
     font-size: 12pt; }
   .btn {
     font-size: 12pt; }

@@ -2,6 +2,11 @@
 @import "_mixins.scss";
 @import "_%classes.scss";
 
+body {
+    padding: 20px 5% 0 5%;
+    /*height: 100%;*/
+}
+
 .list-item-no-bullet {
     li:before {
         display: none;
@@ -50,6 +55,14 @@
 //see also: https://gist.github.com/jareware/4738651
 $spaceamounts: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 75, 100);
 $sides: (top, bottom, left, right);
+
+//Having these for each side is pointless, so left 0 out of the $spaceamounts array.
+.pad-0 {
+    padding: 0;
+}
+.marg-0 {
+    margin: 0;
+}
 
 @each $space in $spaceamounts {
     .marg-#{$space} {

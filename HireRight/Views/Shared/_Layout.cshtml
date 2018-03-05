@@ -12,30 +12,37 @@
     <header>
         @{Html.RenderPartial("NavigationMenu");}
     </header>
-<div class="body-content container-fluid">
-    @*outside of a row
-    <div class="row">
-        inside of a row
-    </div>
-    <div class="col-xs-12">
-        inside of a column without a row
-    </div>
-    <div class="row">
-        <div>inside of a row</div>
+    <div class="body-content container-fluid">
+        @*<div>
+                outside of a row
+                <div class="row">
+                    inside of a row
+                </div>
+                <div class="col-xs-12">
+                    inside of a column without a row
+                </div>
+                <div class="row">
+                    <div>inside of a row</div>
+                    <div class="col-xs-12">
+                        <div>inside of a column</div>
+                    </div>
+                </div>
+            </div>*@
         <div class="col-xs-12">
-            <div>inside of a column</div>
+            @*Some part of the body-content and/or container-fluid classes causes an effect similar to row
+                (negative padding/margin) - using a col-xs-12 here to fix this.
+                Uncomment the above example code to see exactly this behavior in the positioning of any other content on the screen.*@
+            @RenderBody()
         </div>
-    </div>*@
-    @RenderBody()
-    <div class="footer">
-        <br/>
-        <hr/>
-        <div>
-            &copy; 2016 - @DateTime.Now.Year <br/>
-            Hire Right Consultants&trade;
+        <div class="footer">
+            <br />
+            <hr />
+            <div>
+                &copy; 2016 - @DateTime.Now.Year <br />
+                Hire Right Consultants&trade;
+            </div>
         </div>
     </div>
-</div>
     <div id="processing" class="processingIcon">
         <div style="display: inline-block;">
             <span class="glyphicon glyphicon-hourglass spinner"></span>
