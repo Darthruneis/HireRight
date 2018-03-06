@@ -82,12 +82,8 @@ var CustomSolutions;
         $("#notEnough").hide();
         $(".categoryCardRow input[type='hidden']").each(function (index, elem) {
             var $row = $(elem).closest(".categoryCardRow");
-            var $newValue = $(elem).val();
             $row.find(".categoryColumn").toggleClass("col-xs-4 col-xs-6");
             $row.find(".categoryColumn.lowestCategory").toggle();
-            if ($newValue === "Irrelevant") {
-                $row.toggle();
-            }
         });
     }
     function getImportanceLevel($categoryRow) {
@@ -136,19 +132,19 @@ var CustomSolutions;
             return;
         var $card = $categoryRow.find(".categoryCard");
         //padding on columns is 15 - moving will always cross 2, so 15 + 15 = 30
-        var width = parseInt($card.css("width")) + 30;
+        var distanceToMove = parseInt($card.css("width")) + 30;
         var cache = new CardCssCache($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
-        //preserve the height of the entire row during the animation
-        $categoryRow.css("height", $card.css("height"));
-        $card.css("position", "absolute");
-        var mLeft = width;
-        var mRight = width;
+        var mLeft = distanceToMove;
+        var mRight = distanceToMove;
         if (original > newValue)
             //moving to the right
             mLeft *= -1;
         else
             //moving to the left
             mRight *= -1;
+        //preserve the height of the entire row during the animation
+        $categoryRow.css("height", $card.css("height"));
+        $card.css("position", "absolute");
         $card.animate({
             'margin-left': mLeft,
             'margin-right': mRight

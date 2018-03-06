@@ -108,13 +108,8 @@
 
         $(".categoryCardRow input[type='hidden']").each((index, elem) => {
             var $row = $(elem).closest(".categoryCardRow");
-            var $newValue = $(elem).val();
             $row.find(".categoryColumn").toggleClass("col-xs-4 col-xs-6");
             $row.find(".categoryColumn.lowestCategory").toggle();
-
-            if ($newValue === "Irrelevant") {
-                $row.toggle();
-            }
         });
     }
 
@@ -165,21 +160,15 @@
     }
 
     function animateCardMovement($categoryRow: JQuery, $newCategoryRow: JQuery, original: number, newValue: number) {
-        if (original === newValue)
-            return;
+        if (original === newValue) return;
 
         var $card = $categoryRow.find(".categoryCard");
         //padding on columns is 15 - moving will always cross 2, so 15 + 15 = 30
-        var width: number = parseInt($card.css("width")) + 30;
+        var distanceToMove: number = parseInt($card.css("width")) + 30;
         var cache: CardCssCache = new CardCssCache($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
 
-        //preserve the height of the entire row during the animation
-        $categoryRow.css("height", $card.css("height"));
-
-        $card.css("position", "absolute");
-        var mLeft: number = width;
-        var mRight: number = width;
-
+        var mLeft: number = distanceToMove;
+        var mRight: number = distanceToMove;
         if (original > newValue)
             //moving to the right
             mLeft *= -1;
@@ -187,6 +176,9 @@
             //moving to the left
             mRight *= -1;
 
+        //preserve the height of the entire row during the animation
+        $categoryRow.css("height", $card.css("height"));
+        $card.css("position", "absolute");
         $card.animate({
             'margin-left': mLeft,
             'margin-right': mRight
