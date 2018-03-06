@@ -22,12 +22,20 @@ var CustomSolutions;
         return CardCssCache;
     }());
     function bindEvents() {
+        bindMovementButtons();
+        bindContinueAndBackButtons();
+        bindFormSubmit();
+    }
+    CustomSolutions.bindEvents = bindEvents;
+    function bindMovementButtons() {
         $("#categoryContainerDiv").on("click", ".lessImportantButton", function (e) {
             updateImportanceLevel($(this).closest(".categoryCardRow"), false);
         });
         $("#categoryContainerDiv").on("click", ".moreImportantButton", function (e) {
             updateImportanceLevel($(this).closest(".categoryCardRow"), true);
         });
+    }
+    function bindContinueAndBackButtons() {
         $("#ContinueButton").on("click", function () {
             var results = inspectCardCounts();
             var isValid = true;
@@ -45,11 +53,12 @@ var CustomSolutions;
         $("#BackButton").on("click", function () {
             toggleIrrelevantCards();
         });
+    }
+    function bindFormSubmit() {
         $("form").on("submit", function (e) {
             return inspectCardCounts();
         });
     }
-    CustomSolutions.bindEvents = bindEvents;
     function inspectCardCounts() {
         var numberOfRelevantCards = 0;
         var numberOfCriticalCards = 0;

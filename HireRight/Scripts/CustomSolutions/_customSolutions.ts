@@ -30,6 +30,12 @@
     }
 
     export function bindEvents() {
+        bindMovementButtons();
+        bindContinueAndBackButtons();
+        bindFormSubmit();
+    }
+
+    function bindMovementButtons() {
         $("#categoryContainerDiv").on("click",
             ".lessImportantButton",
             function (e) {
@@ -41,7 +47,9 @@
             function (e) {
                 updateImportanceLevel($(this).closest(".categoryCardRow"), true);
             });
+    }
 
+    function bindContinueAndBackButtons() {
         $("#ContinueButton").on("click",
             function () {
                 var results: CardCategoryCounts = inspectCardCounts();
@@ -63,11 +71,14 @@
         $("#BackButton").on("click", () => {
             toggleIrrelevantCards();
         });
+    }
 
+    function bindFormSubmit() {
         $("form").on("submit",
             function (e: Event) {
                 return inspectCardCounts();
             });
+
     }
 
     function inspectCardCounts(): CardCategoryCounts {
