@@ -141,17 +141,14 @@ var CustomSolutions;
         //preserve the height of the entire row during the animation
         $categoryRow.css("height", $card.css("height"));
         $card.css("position", "absolute");
-        var mLeft;
-        var mRight;
-        if (original > newValue) {
+        var mLeft = width;
+        var mRight = width;
+        if (original > newValue)
             //moving to the right
-            mLeft = -width;
-            mRight = width;
-        }
-        else {
-            mLeft = width;
-            mRight = -width;
-        }
+            mLeft *= -1;
+        else
+            //moving to the left
+            mRight *= -1;
         $card.animate({
             'margin-left': mLeft,
             'margin-right': mRight
@@ -159,11 +156,7 @@ var CustomSolutions;
     }
     function updateImportanceLevel($categoryRow, increase) {
         var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
-        var current = original;
-        if (increase)
-            current = current + 1;
-        else
-            current = current - 1;
+        var current = increase ? original + 1 : original - 1;
         var newValue = getStringImportanceLevel(current);
         toggleButtonsBasedOnImportance($categoryRow, newValue);
         $categoryRow.find("input[type='hidden']").val(newValue);

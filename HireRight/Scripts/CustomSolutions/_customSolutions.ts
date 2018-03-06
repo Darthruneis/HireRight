@@ -16,7 +16,7 @@
         mRight: string;
         position: string;
 
-        restoreCss($card: JQuery):void {
+        restoreCss($card: JQuery): void {
             $card.css("position", this.position);
             $card.css("margin-left", this.mLeft);
             $card.css("margin-right", this.mRight);
@@ -154,7 +154,7 @@
         }
     }
 
-    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, $card:JQuery, cache: CardCssCache) {
+    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, $card: JQuery, cache: CardCssCache) {
         cache.restoreCss($card);
 
         var detachedHtml = $card.detach();
@@ -171,22 +171,21 @@
         var $card = $categoryRow.find(".categoryCard");
         //padding on columns is 15 - moving will always cross 2, so 15 + 15 = 30
         var width: number = parseInt($card.css("width")) + 30;
-        var cache: CardCssCache = new CardCssCache ($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
+        var cache: CardCssCache = new CardCssCache($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
 
         //preserve the height of the entire row during the animation
         $categoryRow.css("height", $card.css("height"));
 
         $card.css("position", "absolute");
-        var mLeft: number;
-        var mRight: number;
-        if (original > newValue) {
+        var mLeft: number = width;
+        var mRight: number = width;
+
+        if (original > newValue)
             //moving to the right
-            mLeft = -width;
-            mRight = width;
-        } else {
-            mLeft = width;
-            mRight = -width;
-        }
+            mLeft *= -1;
+        else
+            //moving to the left
+            mRight *= -1;
 
         $card.animate({
             'margin-left': mLeft,
@@ -198,11 +197,7 @@
 
     function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void {
         var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
-        var current = original;
-        if (increase)
-            current = current + 1;
-        else
-            current = current - 1;
+        var current = increase ? original + 1 : original - 1;
 
         var newValue: string = getStringImportanceLevel(current);
         toggleButtonsBasedOnImportance($categoryRow, newValue);
