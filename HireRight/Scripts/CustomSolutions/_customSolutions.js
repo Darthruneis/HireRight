@@ -15,7 +15,6 @@ var CustomSolutions;
             this.position = pos;
         }
         CardCssCache.prototype.restoreCss = function ($card) {
-            //restore original css
             $card.css("position", this.position);
             $card.css("margin-left", this.mLeft);
             $card.css("margin-right", this.mRight);
