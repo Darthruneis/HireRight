@@ -1,10 +1,9 @@
 ﻿.importanceToggleButton {
-    height: auto;
-    min-height: 100%;
-    position: absolute;
-    top: 0;
-    width: auto;
+    text-align: center;
     cursor: pointer;
+    height: 100%;
+    width: 100%;
+    border-top: 2px solid black;
 }
 
 .importanceToggleButton:hover {
@@ -12,17 +11,28 @@
 }
 
 .lessImportantButton {
-    left: 0;
-    border-right: 2px solid black;
+    border-right: 1px solid black;
 }
 
 .moreImportantButton {
-    right: 0;
-    border-left: 2px solid black;
+    border-left: 1px solid black;
 }
 
 .categoryCard {
     border: 2px solid black;
     -ms-border-radius: 6px;
     border-radius: 6px;
+}
+
+.categoryCard .cardDetails {
+    padding: 2px 10px 5px 10px;
+}
+
+.categoryCard label {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.importanceHeaders h4{
+    text-align: center;
 }

@@ -47,11 +47,13 @@
         @Html.Partial("CustomSolutionsPartial", Model)
     </div>
     <div style="clear: both;" class="pad-top-10">
+        <button class="btn btn-primary pull-left" type="button" style="display: none" id="BackButton">Back</button>
         <div class="pull-left">
             @Html.ValidationSummary(true)
+            <span class="field-validation-error" style="display: none;" id="notEnoughCrits">Please select at least 3 critical scales.<br /></span>
+            <span class="field-validation-error" style="display: none;" id="notEnough">Please choose 1 - 9 important scales.<br /></span>
         </div>
         <div class="pull-right" style="display: none;">@Html.SubmitButton("Finish")</div>
         <button class="btn btn-primary pull-right" type="button" id="ContinueButton">Continue</button>
-        <button class="btn btn-primary pull-left" type="button" style="display: none" id="BackButton">Back</button>
     </div>
 }
