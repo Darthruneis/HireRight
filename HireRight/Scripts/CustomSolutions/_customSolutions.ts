@@ -78,7 +78,6 @@
             function (e: Event) {
                 return inspectCardCounts();
             });
-
     }
 
     function inspectCardCounts(): CardCategoryCounts {
