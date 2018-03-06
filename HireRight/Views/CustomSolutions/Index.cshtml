@@ -43,10 +43,10 @@
             @Html.CollapseButton("CategoryListDiv")
         </div>
     </div>
-    <div id="CategoryListDiv" style="display: block;">
+    <div id="CategoryListDiv">
         @Html.Partial("CustomSolutionsPartial", Model)
     </div>
-    <div style="clear: both;" class="pad-top-10">
+    <div style="clear: both;">
         <button class="btn btn-primary pull-left" type="button" style="display: none" id="BackButton">Back</button>
         <div class="pull-left">
             @Html.ValidationSummary(true)

@@ -1,20 +1,62 @@
 ﻿namespace CustomSolutions {
+    class CardCategoryCounts {
+        relevant: number;
+        critical: number;
+        nice: number;
+
+        constructor(rel: number, crit: number) {
+            this.relevant = rel;
+            this.critical = crit;
+            this.nice = rel - crit;
+        }
+    }
+
+    class CardCssCache {
+        mLeft: string;
+        mRight: string;
+        position: string;
+
+        restoreCss($card: JQuery):void {
+            //restore original css
+            $card.css("position", this.position);
+            $card.css("margin-left", this.mLeft);
+            $card.css("margin-right", this.mRight);
+        }
+
+        constructor(left: string, right: string, pos: string) {
+            this.mLeft = left;
+            this.mRight = right;
+            this.position = pos;
+        }
+    }
+
     export function bindEvents() {
         $("#categoryContainerDiv").on("click",
             ".lessImportantButton",
             function (e) {
-                decreaseImportanceLevel($(this).closest(".categoryCardRow"));
+                updateImportanceLevel($(this).closest(".categoryCardRow"), false);
             });
 
         $("#categoryContainerDiv").on("click",
             ".moreImportantButton",
             function (e) {
-                increaseImportanceLevel($(this).closest(".categoryCardRow"));
+                updateImportanceLevel($(this).closest(".categoryCardRow"), true);
             });
 
         $("#ContinueButton").on("click",
             function () {
-                var isValid = inspectCardCounts();
+                var results: CardCategoryCounts = inspectCardCounts();
+
+                var isValid: boolean = true;
+                if (results.relevant === 0 || results.relevant > 9) {
+                    $("#notEnough").show();
+                    isValid = false;
+                }
+                if (results.critical < 3) {
+                    $("#notEnoughCrits").show();
+                    isValid = false;
+                }
+
                 if (isValid)
                     toggleIrrelevantCards();
             });
@@ -29,7 +71,7 @@
             });
     }
 
-    function inspectCardCounts(): boolean {
+    function inspectCardCounts(): CardCategoryCounts {
         var numberOfRelevantCards: number = 0;
         var numberOfCriticalCards: number = 0;
         $(".categoryCardRow input[type='hidden']").each((index, elem) => {
@@ -41,17 +83,7 @@
             }
         });
 
-        var isValid: boolean = true;
-        if (numberOfRelevantCards === 0 || numberOfRelevantCards > 9) {
-            $("#notEnough").show();
-            isValid = false;
-        }
-        if (numberOfCriticalCards < 3) {
-            $("#notEnoughCrits").show();
-            isValid = false;
-        }
-
-        return isValid;
+        return new CardCategoryCounts(numberOfRelevantCards, numberOfCriticalCards);
     }
 
     function toggleIrrelevantCards(): void {
@@ -80,7 +112,6 @@
     function getImportanceLevel($categoryRow: JQuery): string {
         return $categoryRow.find("input[type='hidden']").val();
     }
-
     function getNumericImportanceLevel(stringValue: string): number {
         switch (stringValue) {
             case "Irrelevant":
@@ -94,7 +125,6 @@
                 return 1;
         }
     }
-
     function getStringImportanceLevel(intValue: number): string {
         if (intValue >= 2)
             return "HighImportance";
@@ -115,50 +145,27 @@
         }
     }
 
-    function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void {
-        var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
-        var current = original;
-        if (increase)
-            current = current + 1;
-        else
-            current = current - 1;
+    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, $card:JQuery, cache: CardCssCache) {
+        cache.restoreCss($card);
 
-        var newValue: string = getStringImportanceLevel(current);
-        toggleButtonsBasedOnImportance($categoryRow, newValue);
+        var detachedHtml = $card.detach();
+        detachedHtml.appendTo($newCategoryRow);
 
-        $categoryRow.find("input[type='hidden']").val(newValue);
-
-        moveCardToNewColumn($categoryRow, $($categoryRow.find(".categoryColumn")[getNumericImportanceLevel(newValue)]), original, current);
+        //restore original height for the row
+        $categoryRow.css("height", "auto");
     }
 
-    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, original: number, newValue: number) {
+    function animateCardMovement($categoryRow: JQuery, $newCategoryRow: JQuery, original: number, newValue: number) {
         if (original === newValue)
             return;
 
         var $card = $categoryRow.find(".categoryCard");
         //padding on columns is 15 - moving will always cross 2, so 15 + 15 = 30
         var width: number = parseInt($card.css("width")) + 30;
-
-        var cache = {
-            mLeft: $card.css("margin-left"),
-            mRight: $card.css("margin-right"),
-            position: $card.css("position")
-        };
+        var cache: CardCssCache = new CardCssCache ($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
 
         //preserve the height of the entire row during the animation
         $categoryRow.css("height", $card.css("height"));
-
-        var promise: Function = () => {
-            //restore original css
-            $card.css("position", cache.position);
-            $card.css("margin-left", cache.mLeft);
-            $card.css("margin-right", cache.mRight);
-            var detachedHtml = $card.detach();
-            detachedHtml.appendTo($newCategoryRow);
-
-            //restore original height for the row
-            $categoryRow.css("height", "auto");
-        };
 
         $card.css("position", "absolute");
         var mLeft: number;
@@ -176,15 +183,23 @@
             'margin-left': mLeft,
             'margin-right': mRight
         },
-            700,
-            promise);
+            500,
+            () => moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache));
     }
 
-    function increaseImportanceLevel($categoryRow): void {
-        updateImportanceLevel($categoryRow, true);
-    }
+    function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void {
+        var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
+        var current = original;
+        if (increase)
+            current = current + 1;
+        else
+            current = current - 1;
 
-    function decreaseImportanceLevel($categoryRow): void {
-        updateImportanceLevel($categoryRow, false);
+        var newValue: string = getStringImportanceLevel(current);
+        toggleButtonsBasedOnImportance($categoryRow, newValue);
+
+        $categoryRow.find("input[type='hidden']").val(newValue);
+
+        animateCardMovement($categoryRow, $($categoryRow.find(".categoryColumn")[getNumericImportanceLevel(newValue)]), original, current);
     }
 }

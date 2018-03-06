@@ -1,14 +1,45 @@
 var CustomSolutions;
 (function (CustomSolutions) {
+    var CardCategoryCounts = /** @class */ (function () {
+        function CardCategoryCounts(rel, crit) {
+            this.relevant = rel;
+            this.critical = crit;
+            this.nice = rel - crit;
+        }
+        return CardCategoryCounts;
+    }());
+    var CardCssCache = /** @class */ (function () {
+        function CardCssCache(left, right, pos) {
+            this.mLeft = left;
+            this.mRight = right;
+            this.position = pos;
+        }
+        CardCssCache.prototype.restoreCss = function ($card) {
+            //restore original css
+            $card.css("position", this.position);
+            $card.css("margin-left", this.mLeft);
+            $card.css("margin-right", this.mRight);
+        };
+        return CardCssCache;
+    }());
     function bindEvents() {
         $("#categoryContainerDiv").on("click", ".lessImportantButton", function (e) {
-            decreaseImportanceLevel($(this).closest(".categoryCardRow"));
+            updateImportanceLevel($(this).closest(".categoryCardRow"), false);
         });
         $("#categoryContainerDiv").on("click", ".moreImportantButton", function (e) {
-            increaseImportanceLevel($(this).closest(".categoryCardRow"));
+            updateImportanceLevel($(this).closest(".categoryCardRow"), true);
         });
         $("#ContinueButton").on("click", function () {
-            var isValid = inspectCardCounts();
+            var results = inspectCardCounts();
+            var isValid = true;
+            if (results.relevant === 0 || results.relevant > 9) {
+                $("#notEnough").show();
+                isValid = false;
+            }
+            if (results.critical < 3) {
+                $("#notEnoughCrits").show();
+                isValid = false;
+            }
             if (isValid)
                 toggleIrrelevantCards();
         });
@@ -31,16 +62,7 @@ var CustomSolutions;
                     numberOfCriticalCards++;
             }
         });
-        var isValid = true;
-        if (numberOfRelevantCards === 0 || numberOfRelevantCards > 9) {
-            $("#notEnough").show();
-            isValid = false;
-        }
-        if (numberOfCriticalCards < 3) {
-            $("#notEnoughCrits").show();
-            isValid = false;
-        }
-        return isValid;
+        return new CardCategoryCounts(numberOfRelevantCards, numberOfCriticalCards);
     }
     function toggleIrrelevantCards() {
         $(".importanceHeaders").find(":first-child").toggle();
@@ -94,41 +116,22 @@ var CustomSolutions;
             $categoryRow.find(".lessImportantButton").show();
         }
     }
-    function updateImportanceLevel($categoryRow, increase) {
-        var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
-        var current = original;
-        if (increase)
-            current = current + 1;
-        else
-            current = current - 1;
-        var newValue = getStringImportanceLevel(current);
-        toggleButtonsBasedOnImportance($categoryRow, newValue);
-        $categoryRow.find("input[type='hidden']").val(newValue);
-        moveCardToNewColumn($categoryRow, $($categoryRow.find(".categoryColumn")[getNumericImportanceLevel(newValue)]), original, current);
+    function moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache) {
+        cache.restoreCss($card);
+        var detachedHtml = $card.detach();
+        detachedHtml.appendTo($newCategoryRow);
+        //restore original height for the row
+        $categoryRow.css("height", "auto");
     }
-    function moveCardToNewColumn($categoryRow, $newCategoryRow, original, newValue) {
+    function animateCardMovement($categoryRow, $newCategoryRow, original, newValue) {
         if (original === newValue)
             return;
         var $card = $categoryRow.find(".categoryCard");
         //padding on columns is 15 - moving will always cross 2, so 15 + 15 = 30
         var width = parseInt($card.css("width")) + 30;
-        var cache = {
-            mLeft: $card.css("margin-left"),
-            mRight: $card.css("margin-right"),
-            position: $card.css("position")
-        };
+        var cache = new CardCssCache($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
         //preserve the height of the entire row during the animation
         $categoryRow.css("height", $card.css("height"));
-        var promise = function () {
-            //restore original css
-            $card.css("position", cache.position);
-            $card.css("margin-left", cache.mLeft);
-            $card.css("margin-right", cache.mRight);
-            var detachedHtml = $card.detach();
-            detachedHtml.appendTo($newCategoryRow);
-            //restore original height for the row
-            $categoryRow.css("height", "auto");
-        };
         $card.css("position", "absolute");
         var mLeft;
         var mRight;
@@ -144,13 +147,19 @@ var CustomSolutions;
         $card.animate({
             'margin-left': mLeft,
             'margin-right': mRight
-        }, 700, promise);
+        }, 500, function () { return moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache); });
     }
-    function increaseImportanceLevel($categoryRow) {
-        updateImportanceLevel($categoryRow, true);
-    }
-    function decreaseImportanceLevel($categoryRow) {
-        updateImportanceLevel($categoryRow, false);
+    function updateImportanceLevel($categoryRow, increase) {
+        var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
+        var current = original;
+        if (increase)
+            current = current + 1;
+        else
+            current = current - 1;
+        var newValue = getStringImportanceLevel(current);
+        toggleButtonsBasedOnImportance($categoryRow, newValue);
+        $categoryRow.find("input[type='hidden']").val(newValue);
+        animateCardMovement($categoryRow, $($categoryRow.find(".categoryColumn")[getNumericImportanceLevel(newValue)]), original, current);
     }
 })(CustomSolutions || (CustomSolutions = {}));
 //# sourceMappingURL=_customSolutions.js.map
