@@ -22,6 +22,7 @@
     border: 2px solid black;
     -ms-border-radius: 6px;
     border-radius: 6px;
+    margin-bottom: 10px;
 }
 
 .categoryCard .cardDetails {
@@ -33,10 +34,6 @@
     padding-right: 20px;
 }
 
-.importanceHeaders h4{
+.importanceHeaders h4 {
     text-align: center;
-}
-
-.categoryCardRow {
-    padding-bottom: 10px;
 }
