@@ -10,7 +10,7 @@ namespace HireRight.EntityFramework.CodeFirst
         public override ScaffoldedMigration Generate(string migrationId, IEnumerable<MigrationOperation> operations, string sourceModel, string targetModel, string @namespace, string className)
         {
             List<string> columnNamesToSetDefaultSqlValue = new List<string> { "CreatedUtc", "ModifiedUtc" };
-            const string guidColumnNameToSetDefaultSqlValue = "Id";
+            List<string> guidColumnNamesToSetDefaultSqlValue = new List<string>() { "Id", "RowGuid"};
 
             foreach (MigrationOperation operation in operations)
                 if (operation is CreateTableOperation)
@@ -18,8 +18,8 @@ namespace HireRight.EntityFramework.CodeFirst
                     foreach (ColumnModel column in ((CreateTableOperation)operation).Columns)
                         if ((column.ClrType == typeof(DateTime)) && columnNamesToSetDefaultSqlValue.Contains(column.Name))
                             column.DefaultValueSql = "GETUTCDATE()";
-                        else if ((column.ClrType == typeof(Guid)) && (column.Name == guidColumnNameToSetDefaultSqlValue))
-                            column.DefaultValueSql = "NEWSEQUENTIALID()";
+                        else if ((column.ClrType == typeof(Guid)) && guidColumnNamesToSetDefaultSqlValue.Contains(column.Name))
+                            column.DefaultValueSql = "NEWID()";
                 }
                 else if (operation is AddColumnOperation)
                 {
@@ -27,8 +27,8 @@ namespace HireRight.EntityFramework.CodeFirst
 
                     if ((column.ClrType == typeof(DateTime)) && columnNamesToSetDefaultSqlValue.Contains(column.Name))
                         column.DefaultValueSql = "GETUTCDATE()";
-                    else if ((column.ClrType == typeof(Guid)) && (column.Name == guidColumnNameToSetDefaultSqlValue))
-                        column.DefaultValueSql = "NEWSEQUENTIALID()";
+                    else if ((column.ClrType == typeof(Guid)) && guidColumnNamesToSetDefaultSqlValue.Contains(column.Name))
+                        column.DefaultValueSql = "NEWID()";
                 }
 
             CSharpMigrationCodeGenerator generator = new CSharpMigrationCodeGenerator();

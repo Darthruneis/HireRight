@@ -45,6 +45,13 @@ namespace HireRight.EntityFramework.CodeFirst.Database_Context
         public virtual DbSet<Product> Products { get; set; }
 
         /// <summary>
+        /// The <see cref="Industry" /> table in the database.
+        /// </summary>
+        public virtual DbSet<Industry> Industries { get; set; }
+
+        public virtual DbSet<IndustryScaleCategory> IndustryScaleCategoryBinders { get; set; }
+
+        /// <summary>
         /// Initializes the context based off the connection string name set in the class.
         /// </summary>
         public HireRightDbContext() : base("name=HireRightDb")
