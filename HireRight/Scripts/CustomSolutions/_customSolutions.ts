@@ -61,8 +61,7 @@
                 updateCardVisibilityRanks(parseInt($this.data("industryid")), visibilityRankChange);
             });
     }
-
-    //TODO: Look into unit testing this somehow, because this logic is complex enough
+    
     function updateCardVisibilityRanks(industry: number, visibilityRankChange: number) {
         $(".categoryCard").each((index, elem) => {
             if ($(elem).data("industry-" + industry) !== 1)
