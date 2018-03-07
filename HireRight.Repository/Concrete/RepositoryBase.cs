@@ -16,14 +16,14 @@ namespace HireRight.Repository.Concrete
     public abstract class RepositoryBase<TModel>
         where TModel : PocoBase
     {
-        protected Func<HireRightDbContext> ContextFunc;
+        protected readonly Func<HireRightDbContext> ContextFunc;
 
         protected RepositoryBase(Func<HireRightDbContext> contextFunc)
         {
             ContextFunc = contextFunc;
         }
 
-        public async Task<TModel> AddBase(TModel itemToAdd, DbSet<TModel> dbSet, HireRightDbContext context)
+        protected async Task<TModel> AddBase(TModel itemToAdd, DbSet<TModel> dbSet, HireRightDbContext context)
         {
             var errors = new List<ValidationResult>();
             if (itemToAdd == null)
@@ -44,34 +44,37 @@ namespace HireRight.Repository.Concrete
             return await Task.FromResult(result).ConfigureAwait(false);
         }
 
-        public async Task<TModel> GetBase(Guid itemGuid, IQueryable<TModel> query)
+        protected async Task<TModel> GetBase(Guid itemGuid, IQueryable<TModel> query, params Expression<Func<TModel, object>>[] includes)
         {
             if (itemGuid == Guid.Empty)
                 throw new InvalidOperationException("An empty guid cannot be found in the repository!");
 
-            TModel item = await CheckForValidItem(query, itemGuid).ConfigureAwait(false);
+            TModel item = await CheckForValidItem(query, itemGuid, includes).ConfigureAwait(false);
             return item;
         }
 
-        public Task<PageResult<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters) => TakePage(query, filterParameters, x => x.Id);
+        protected Task<PageResult<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters, params Expression<Func<TModel, object>>[] includes)
+            => TakePage(query, filterParameters, x => x.Id, includes);
 
-        public async Task<PageResult<TModel>> TakePage<T>(IQueryable<TModel> query, FilterBase filterParameters, Expression<Func<TModel, T>> orderBy = null)
+        protected async Task<PageResult<TModel>> TakePage<T>(IQueryable<TModel> query, FilterBase filterParameters,
+                                                             Expression<Func<TModel, T>> orderBy = null, params Expression<Func<TModel, object>>[] includes)
         {
+            query = query.Includes(includes);
             query = orderBy == null
                 ? query.OrderBy(x => x.Id)
                 : query.OrderBy(orderBy);
 
             var count = query.Count();
 
-            Func<List<TModel>, PageResult<TModel>> createResult = collection => PageResult<TModel>.Ok(count, collection, filterParameters.PageNumber, filterParameters.PageSize);
+            PageResult<TModel> CreateResult(List<TModel> collection) => PageResult<TModel>.Ok(count, collection, filterParameters.PageNumber, filterParameters.PageSize);
 
             if (filterParameters.PageNumber > 1 && count < filterParameters.PageNumber * filterParameters.PageSize)
-                return createResult(await query.Skip(count - filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
+                return CreateResult(await query.Skip(count - filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
 
-            return createResult(await query.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
+            return CreateResult(await query.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
         }
 
-        public async Task<TModel> UpdateBase(TModel itemToUpdate, DbSet<TModel> dbSet, HireRightDbContext context)
+        protected async Task<TModel> UpdateBase(TModel itemToUpdate, DbSet<TModel> dbSet, HireRightDbContext context, params Expression<Func<TModel, object>>[] includes)
         {
             var errors = new List<ValidationResult>();
             if (itemToUpdate == null)
@@ -80,7 +83,7 @@ namespace HireRight.Repository.Concrete
                 throw new ApplicationException(GetConcatenatedErrorMessage(errors));
             }
 
-            await CheckForValidItem(dbSet, itemToUpdate.Id).ConfigureAwait(false);
+            await CheckForValidItem(dbSet, itemToUpdate.Id, includes).ConfigureAwait(false);
             dbSet.AddOrUpdate(itemToUpdate);
             await context.SaveChangesAsync();
             return itemToUpdate;
@@ -91,18 +94,28 @@ namespace HireRight.Repository.Concrete
             if (summaryMessage == null)
                 summaryMessage = "The following errors were encounterd: ";
 
-            List<string> errorMessages = new List<string>() { summaryMessage };
+            var errorMessages = new List<string>() { summaryMessage };
             errorMessages.AddRange(errors.Select(x => x.ErrorMessage).ToList());
 
             return string.Join(Environment.NewLine, errorMessages.ToArray());
         }
 
-        private async Task<TModel> CheckForValidItem(IQueryable<TModel> query, Guid itemGuid)
+        private async Task<TModel> CheckForValidItem(IQueryable<TModel> query, Guid itemGuid, params Expression<Func<TModel, object>>[] includes)
         {
-            TModel item = await query.FirstOrDefaultAsync(x => x.Id == itemGuid).ConfigureAwait(false);
+            TModel item = await query.Includes(includes).FirstOrDefaultAsync(x => x.Id == itemGuid).ConfigureAwait(false);
             if (item == null)
                 throw new ApplicationException(nameof(TModel) + " was not found!");
             return item;
+        }
+    }
+
+    public static class QueryableExtensions
+    {
+        public static IQueryable<TModel> Includes<TModel>(this IQueryable<TModel> query, params Expression<Func<TModel, object>>[] includes)
+        {
+            foreach (Expression<Func<TModel, object>> expression in includes)
+                query = query.Include(expression);
+            return query;
         }
     }
 }
