@@ -8,12 +8,11 @@ namespace HireRight.Models
         public string Description { get; set; }
         public Guid Id { get; set; }
         public CategoryImportance Importance { get; set; }
-        public bool IsInTopTwelve { get; set; }
         public string Title { get; set; }
 
         public JobAnalysisCategoryViewModel()
         {
-            Importance = CategoryImportance.Irrelevant;
+            Importance = CategoryImportance.LowImportance;
         }
 
         public JobAnalysisCategoryViewModel(Guid id, CategoryImportance importance)

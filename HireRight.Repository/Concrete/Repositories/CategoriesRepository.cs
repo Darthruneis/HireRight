@@ -3,6 +3,8 @@ using HireRight.EntityFramework.CodeFirst.Database_Context;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 using HireRight.Repository.Abstract;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using HireRight.EntityFramework.CodeFirst.Models;
@@ -62,6 +64,12 @@ namespace HireRight.Repository.Concrete
             {
                 return await UpdateBase(itemToUpdate, context.Categories, context);
             }
+        }
+
+        public async Task<ICollection<ScaleCategory>> GetAll()
+        {
+            using (var context = ContextFunc())
+                return await context.Categories.OrderBy(x => x.Title).ToListAsync();
         }
     }
 }

@@ -26,40 +26,33 @@
 </div>
 
 <div id="categoryContainerDiv">
-    @for (int i = 0; i < Model.Categories.Count; i++)
+    @for (int i = 0; i < Model.Categories.Take(10).Count(); i++)
     {
         var category = Model.Categories[i];
-        category.Importance = CategoryImportance.LowImportance;
+        @Html.HiddenFor(x => x.Categories[i].Description)
+        @Html.HiddenFor(x => x.Categories[i].Id)
+        @Html.HiddenFor(x => x.Categories[i].Title)
 
         <div class="row categoryCardRow">
-            <div class="col-xs-4 categoryColumn lowestCategory"></div>
-            <div class="col-xs-4 categoryColumn">
-                <div id="category-@(i)" class="categoryCard">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="cardDetails">
-                                <label>@category.Title</label><br />
-                                @category.Description
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-6" style="padding-right: 0;">
-                                    <div class="pull-left importanceToggleButton lessImportantButton">
-                                        <i class="glyphicon glyphicon-arrow-left"></i>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6" style="padding-left: 0;">
-                                    <div class="pull-right importanceToggleButton moreImportantButton">
-                                        <i class="glyphicon glyphicon-arrow-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-xs-4 categoryColumn lowestCategory">
+                @if (category.Importance == CategoryImportance.Irrelevant)
+                {
+                    @Html.Partial("_CategoryCard", category)
+                }
             </div>
-            <div class="col-xs-4 categoryColumn"></div>
+            <div class="col-xs-4 categoryColumn">
+                @if (category.Importance == CategoryImportance.LowImportance)
+                {
+                    @Html.Partial("_CategoryCard", category)
+                }
+            </div>
+            <div class="col-xs-4 categoryColumn">
+                @if (category.Importance == CategoryImportance.HighImportance)
+                {
+                    @Html.Partial("_CategoryCard", category)
+                }
+            </div>
+            @*This needs to remain the only hidden field that is inside of the 'categoryCardRow' element.*@
             @Html.HiddenFor(x => x.Categories[i].Importance)
         </div>
     }

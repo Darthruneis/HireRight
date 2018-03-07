@@ -1,5 +1,6 @@
 ﻿using DataTransferObjects.Filters.Concrete;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
@@ -15,5 +16,7 @@ namespace HireRight.Repository.Abstract
         Task<ScaleCategory> Get(Guid itemGuid);
 
         Task<ScaleCategory> Update(ScaleCategory itemToUpdate);
+
+        Task<ICollection<ScaleCategory>> GetAll();
     }
 }

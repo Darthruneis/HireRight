@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using DataTransferObjects;
 using DataTransferObjects.Filters.Concrete;
 
 namespace HireRight.Models
@@ -12,14 +13,12 @@ namespace HireRight.Models
     public class CustomSolutionsViewModel
     {
         public IList<JobAnalysisCategoryViewModel> Categories { get; set; }
-        public IList<UndisplayedCategory> CategoriesFromOtherPages { get; set; }
 
         [Required]
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }
 
         public ContactDTO Contact { get; set; }
-        public CategoryFilterViewModel Filter { get; set; }
 
         [Required]
         public string Notes { get; set; }
@@ -35,20 +34,19 @@ namespace HireRight.Models
         {
             Categories = new List<JobAnalysisCategoryViewModel>();
             Contact = new ContactDTO();
-            Filter = new CategoryFilterViewModel();
-            CategoriesFromOtherPages = new List<UndisplayedCategory>();
         }
 
-        public CustomSolutionsViewModel(IEnumerable<JobAnalysisCategoryViewModel> categories, CategoryFilterViewModel filter) : this()
+        public CustomSolutionsViewModel(IEnumerable<JobAnalysisCategoryViewModel> categories) : this()
         {
             Categories = categories.ToList();
-            Filter = filter;
         }
 
         public SubmitCardsDTO CreateSubmitCardsDTO()
         {
             SubmitCardsDTO dto = new SubmitCardsDTO();
-            dto.Categories = Categories.Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, IsInTopTwelve = x.IsInTopTwelve, Id = x.Id }).ToList();
+            dto.Categories = Categories.Where(x => x.Importance != CategoryImportance.Irrelevant)
+                                       .Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, Id = x.Id })
+                                       .ToList();
             dto.CompanyName = CompanyName;
             dto.Positions = Positions;
             dto.Contact = Contact;
@@ -56,16 +54,5 @@ namespace HireRight.Models
 
             return dto;
         }
-
-        public CategoryFilter ToFilter()
-        {
-            return new CategoryFilter(1, Categories.Count, Categories.Select(x => x.Id).ToArray());
-        }
-    }
-
-    public class UndisplayedCategory
-    {
-        public Guid Id { get; set; }
-        public string Importance { get; set; }
     }
 }

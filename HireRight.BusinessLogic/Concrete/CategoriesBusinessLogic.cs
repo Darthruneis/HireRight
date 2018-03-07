@@ -1,6 +1,8 @@
 ﻿using HireRight.BusinessLogic.Abstract;
 using HireRight.Repository.Abstract;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters.Concrete;
@@ -63,6 +65,13 @@ namespace HireRight.BusinessLogic.Concrete
             ScaleCategory categoryToUpdate = ConvertDtoToModel(categoryDto);
 
             return ConvertModelToDto(await _categoriesRepository.Update(categoryToUpdate));
+        }
+
+        public async Task<ICollection<CategoryDTO>> GetAll()
+        {
+            var categories = await _categoriesRepository.GetAll();
+
+            return categories.Select(ConvertModelToDto).ToList();
         }
     }
 }

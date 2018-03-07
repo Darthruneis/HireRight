@@ -144,9 +144,6 @@ namespace HireRight.BusinessLogic.Concrete
 
         public async Task SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
-#if DEBUG
-            return;
-#endif
             string message = await CreateEmailMessageFromDto(cardsToSubmit);
             _emailSender.EmailConsultants(message, "New Custom Test Request");
         }
@@ -196,7 +193,6 @@ namespace HireRight.BusinessLogic.Concrete
 
             foreach (var category in categoriesFromRepo.PageResult)
             {
-                category.IsInTopTwelve = categories.First(y => y.Id == category.Id).IsInTopTwelve;
                 category.Importance = categories.First(y => y.Id == category.Id).Importance;
             }
 
@@ -207,18 +203,12 @@ namespace HireRight.BusinessLogic.Concrete
         {
             await RetrieveLostCategoryTitles(categories);
             message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.HighImportance)}</b>:");
-            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.HighImportance).OrderBy(x => x.IsInTopTwelve))
-                if (categoryDTO.IsInTopTwelve && categories.Count > 12)
-                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
-                else
+            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.HighImportance).OrderBy(x => x.Title))
                     message.AppendLine("• " + categoryDTO.Title);
             message.AppendLine();
 
             message.AppendLine($"The following categories were marked as <b>{GetEnumName(CategoryImportance.LowImportance)}</b>:");
-            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.LowImportance).OrderBy(x => x.IsInTopTwelve))
-                if (categoryDTO.IsInTopTwelve && categories.Count > 12)
-                    message.AppendLine($"<b>* {categoryDTO.Title}</b>");
-                else
+            foreach (CategoryDTO categoryDTO in categories.Where(x => x.Importance == CategoryImportance.LowImportance).OrderBy(x => x.Title))
                     message.AppendLine("• " + categoryDTO.Title);
             message.AppendLine();
         }
