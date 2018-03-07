@@ -1,7 +1,7 @@
 ﻿@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 @model JobAnalysisCategoryViewModel
 
-<div class="categoryCard" data-categorytitle="@Model.Title" data-visibilityrank="@(Model.Industries.Contains(Industry.General) ? 2 : 1)"
+<div class="categoryCard" data-categorytitle="@Model.Title" data-visibilityrank="1"
      @foreach (var industry in Model.Industries)
      {
          @:data-industry-@(industry)="1"
