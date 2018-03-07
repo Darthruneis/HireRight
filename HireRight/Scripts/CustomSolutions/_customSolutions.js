@@ -25,8 +25,58 @@ var CustomSolutions;
         bindMovementButtons();
         bindContinueAndBackButtons();
         bindFormSubmit();
+        bindIndustryToggles();
     }
     CustomSolutions.bindEvents = bindEvents;
+    function bindIndustryToggles() {
+        $(".industryToggle:not(.generalIndustryToggle)").on("click", function (e) {
+            var $this = $(this);
+            var isBeingRemoved = $this.hasClass("activeIndustry");
+            $(".industryToggle:not(.generalIndustryToggle)").removeClass("activeIndustry").find("i").hide();
+            var visibilityRankChange = -1;
+            if (!isBeingRemoved) {
+                $this.addClass("activeIndustry");
+                $this.find("i").show();
+                visibilityRankChange = 1;
+            }
+            updateCardVisibilityRanks(parseInt($this.data("industryid")), visibilityRankChange);
+        });
+        $(".generalIndustryToggle").on("click", function (e) {
+            var $this = $(this);
+            $this.toggleClass("activeIndustry");
+            $this.find("i").toggle();
+            var visibilityRankChange = $this.hasClass("activeIndustry") ? 1 : -1;
+            updateCardVisibilityRanks(parseInt($this.data("industryid")), visibilityRankChange);
+        });
+    }
+    function updateCardVisibilityRanks(industry, visibilityRankChange) {
+        //$(`.categoryCard[data-industry-${industry}='1']`).each((index, elem) => {
+        //    updateCardVisibilityRank($(elem), visibilityRankChange);
+        //});
+        $(".categoryCard").each(function (index, elem) {
+            if ($(elem).data("industry-" + industry) !== "1")
+                updateCardVisibilityRank($(elem), -visibilityRankChange);
+            else
+                updateCardVisibilityRank($(elem), visibilityRankChange);
+        });
+        $(".categoryCard").each(function (index, elem) {
+            var visibilityRank = parseInt($(elem).data("visibilityrank"));
+            if (visibilityRank > 0) {
+                console.log("showing card " + $(elem).data("categorytitle"));
+                $(elem).show();
+            }
+            else {
+                $(elem).data("visibilityrank", "0");
+                $(elem).hide();
+            }
+        });
+    }
+    function updateCardVisibilityRank($card, visibilityRankChange) {
+        var visibilityRank = parseInt($card.data("visibilityrank"));
+        console.log($card.data("categorytitle") + " rank: " + visibilityRank + " => " + (visibilityRank + visibilityRankChange) + "(" + visibilityRankChange + ")");
+        visibilityRank += visibilityRankChange;
+        $card.data("visibilityrank", visibilityRank);
+    }
     function bindMovementButtons() {
         $("#categoryContainerDiv").on("click", ".lessImportantButton", function (e) {
             updateImportanceLevel($(this).closest(".categoryCardRow"), false);

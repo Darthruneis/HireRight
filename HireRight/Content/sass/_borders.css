@@ -1,10 +1,4 @@
-﻿/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-.borderedTop, .borderedHorizontal, .borderedRow {
+﻿.borderedTop, .borderedHorizontal, .borderedRow {
   border-top: 2px solid #000000; }
 
 .borderedBottom, .borderedHorizontal, .borderedRow {

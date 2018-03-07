@@ -1,10 +1,4 @@
-﻿/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-.spinner {
+﻿.spinner {
   -webkit-animation: spin 1.25s infinite linear;
   -moz-animation: spin 1.25s infinite linear;
   -o-animation: spin 1.25s infinite linear;

@@ -1,6 +1,11 @@
-﻿@model JobAnalysisCategoryViewModel
+﻿@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+@model JobAnalysisCategoryViewModel
 
-<div class="categoryCard">
+<div class="categoryCard" data-categorytitle="@Model.Title" data-visibilityrank="@(Model.Industries.Contains(Industry.General) ? 1 : 0)"
+     @foreach (var industry in Model.Industries)
+     {
+         @:data-industry-@(industry)="1"
+     }>
     <div class="row">
         <div class="col-xs-12">
             <div class="cardDetails">

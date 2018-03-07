@@ -13,15 +13,22 @@ using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
-    public abstract class RepositoryBase<TModel>
-        where TModel : PocoBase
+    public abstract class RepositoryWithContextFunc
     {
         protected readonly Func<HireRightDbContext> ContextFunc;
 
-        protected RepositoryBase(Func<HireRightDbContext> contextFunc)
+        protected RepositoryWithContextFunc(Func<HireRightDbContext> contextFunc)
         {
             ContextFunc = contextFunc;
         }
+
+        protected RepositoryWithContextFunc() : this(() => new HireRightDbContext()) { }
+    }
+
+    public abstract class RepositoryBase<TModel> : RepositoryWithContextFunc
+        where TModel : PocoBase
+    {
+        protected RepositoryBase(Func<HireRightDbContext> contextFunc) : base(contextFunc) { }
 
         protected async Task<TModel> AddBase(TModel itemToAdd, DbSet<TModel> dbSet, HireRightDbContext context)
         {

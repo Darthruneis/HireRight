@@ -4,7 +4,7 @@ using HireRight.EntityFramework.CodeFirst.Abstract;
 namespace HireRight.BusinessLogic.Abstract
 {
     public interface IBusinessLogicBase<TModel, TDto>
-        where TModel : PocoBase, new()
+        where TModel : PocoBase
         where TDto : DataTransferObjectBase
     {
         TModel ConvertDtoToModel(TDto dto);

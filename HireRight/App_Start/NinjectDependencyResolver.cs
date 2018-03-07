@@ -65,6 +65,7 @@ namespace HireRight
             kernel.Bind<IOrdersRepository>().To<OrdersRepository>();
             kernel.Bind<IProductsRepository>().To<ProductsRepository>();
             kernel.Bind<ICategoriesRepository>().To<CategoriesRepository>();
+            kernel.Bind<IIndustryRepository>().To<IndustryRepository>();
 
             //business logic bindings
             kernel.Bind<ICompanyBusinessLogic>().To<CompanyBusinessLogic>();
@@ -72,6 +73,7 @@ namespace HireRight
             kernel.Bind<IOrdersBusinessLogic>().To<OrdersBusinessLogic>();
             kernel.Bind<IProductsBusinessLogic>().To<ProductsBusinessLogic>();
             kernel.Bind<ICategoriesBusinessLogic>().To<CategoriesBusinessLogic>();
+            kernel.Bind<IIndustryBusinessLogic>().To<IndustryBusinessLogic>();
 
             Func<IContext, object> getEmailTemplatePath = context =>
                             {

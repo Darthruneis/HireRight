@@ -30,15 +30,19 @@ namespace HireRight.Models
         [Display(Name = "Positions to fill (separated by commas)")]
         public string PositionsToFill { get; set; }
 
-        public CustomSolutionsViewModel()
+        public List<IndustryDTO> Industries { get; set; }
+
+        private CustomSolutionsViewModel()
         {
             Categories = new List<JobAnalysisCategoryViewModel>();
             Contact = new ContactDTO();
+            Industries = new List<IndustryDTO>();
         }
 
-        public CustomSolutionsViewModel(IEnumerable<JobAnalysisCategoryViewModel> categories) : this()
+        public CustomSolutionsViewModel(IEnumerable<JobAnalysisCategoryViewModel> categories, IEnumerable<IndustryDTO> industries) : this()
         {
             Categories = categories.ToList();
+            Industries = industries.ToList();
         }
 
         public SubmitCardsDTO CreateSubmitCardsDTO()

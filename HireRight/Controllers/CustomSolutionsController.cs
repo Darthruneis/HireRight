@@ -18,12 +18,14 @@ namespace HireRight.Controllers
     {
         private readonly ICategoriesBusinessLogic _categoriesBusinessLogic;
         private readonly IOrdersBusinessLogic _ordersBusinessLogic;
+        private readonly IIndustryBusinessLogic _industryBusinessLogic;
         private const int MaximumNumberOfCategories = 9;
 
-        public CustomSolutionsController(ICategoriesBusinessLogic categoriesBusinessLogic, IOrdersBusinessLogic ordersBusinessLogic)
+        public CustomSolutionsController(ICategoriesBusinessLogic categoriesBusinessLogic, IOrdersBusinessLogic ordersBusinessLogic, IIndustryBusinessLogic industryBusinessLogic)
         {
             _categoriesBusinessLogic = categoriesBusinessLogic;
             _ordersBusinessLogic = ordersBusinessLogic;
+            _industryBusinessLogic = industryBusinessLogic;
         }
         
         [HttpPost]
@@ -49,20 +51,15 @@ namespace HireRight.Controllers
         public async Task<ActionResult> Index()
         {
             ICollection<CategoryDTO> categories = await _categoriesBusinessLogic.GetAll();
-            //TODO: Get all industries
-            //TODO: Add Industries to the view model
+            var industries = await _industryBusinessLogic.GetAll();
+
+            JobAnalysisCategoryViewModel createCategoryModel(CategoryDTO category) 
+                => new JobAnalysisCategoryViewModel(category.Description, category.Title, category.Id, industries.Where(y => category.Industries.Contains(y.Id)).Select(y => y.Id).ToList());
+            
             //TODO: Implement Industry logic on the View
-            CustomSolutionsViewModel model = CreateViewModelFromCategoryList(categories);
+            CustomSolutionsViewModel model = new CustomSolutionsViewModel(categories.Select(createCategoryModel).OrderBy(x => x.Title), industries);
 
             return View(model);
-        }
-
-        private CustomSolutionsViewModel CreateViewModelFromCategoryList(ICollection<CategoryDTO> categories)
-        {
-            //TODO: Pass the industries for the category to the model constructor
-            IEnumerable<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel(x.Description, x.Title, x.Id));
-
-            return new CustomSolutionsViewModel(categoryViewModels.OrderBy(x => x.Title));
         }
     }
 }

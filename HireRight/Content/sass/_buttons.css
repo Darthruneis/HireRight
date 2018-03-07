@@ -1,10 +1,4 @@
-﻿/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-.btn, .btn-primary {
+﻿.btn, .btn-primary {
   background-color: #ff8533; }
 
 input[type="submit"],

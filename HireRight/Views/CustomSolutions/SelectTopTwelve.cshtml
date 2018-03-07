@@ -1,4 +1,4 @@
-﻿@model CustomSolutionsViewModel
+﻿@*@model CustomSolutionsViewModel
 @{
     ViewBag.Title = "Please select the most important categories";
 }
@@ -8,12 +8,12 @@
         <div class="col-xs-12">
             Please narrow down your selections to at most 12 categories.
         </div>
-    </div>
+    </div>*@
     @*The col class here is used for the padding styling rather than the positioning.*@
-    <div class="col-xs-12">
+    @*<div class="col-xs-12">*@
         @*Due to using borderedRow on this div's sibling div,
             a bottom border isn't needed because that border would be doubled up.*@
-        <div class="row borderedTop borderedLeft borderedRight">
+        @*<div class="row borderedTop borderedLeft borderedRight">
             <div class="col-xs-6 col-lg-2">
                 <strong>Category</strong>
             </div>
@@ -37,7 +37,6 @@
         </div>
     </div>
 
-
     @Html.HiddenFor(x => x.CompanyName)
     @Html.HiddenFor(x => x.Contact.CellNumber)
     @Html.HiddenFor(x => x.Contact.OfficeNumber)
@@ -46,4 +45,4 @@
     @Html.HiddenFor(x => x.Contact.Email)
     @Html.HiddenFor(x => x.Notes)
     @Html.HiddenFor(x => x.PositionsToFill)
-}
+}*@

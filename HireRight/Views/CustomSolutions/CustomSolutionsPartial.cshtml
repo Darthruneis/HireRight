@@ -1,4 +1,5 @@
-﻿@model CustomSolutionsViewModel
+﻿@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+@model CustomSolutionsViewModel
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/CustomSolutions/customSolutionsPartial.js"></script>
 <div class="row">
@@ -14,8 +15,24 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12">
-        -- This is where the industry selector, and the option to show 'shared/general' scales will go. --
+    @foreach (IndustryDTO industry in Model.Industries.Where(x => x.Id != Industry.General))
+    {
+        <div class="col-xs-4 col-md-3">
+            <div class=" industryToggle" data-industryid="@industry.Id">
+                <span style="width: 100%; text-align: center; display: inline-block;">
+                    <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
+                    &nbsp;&nbsp;@industry.Name
+                </span>
+            </div>
+        </div>
+    }
+    <div class="col-xs-4 col-md-3">
+        <div class="industryToggle generalIndustryToggle" data-industryid="@Industry.General">
+            <span style="width: 100%; text-align: center; display: inline-block;">
+                <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
+                &nbsp;&nbsp;@Model.Industries.Single(x => x.Id == Industry.General).Name
+            </span>
+        </div>
     </div>
 </div>
 
@@ -26,7 +43,7 @@
 </div>
 
 <div id="categoryContainerDiv">
-    @for (int i = 0; i < Model.Categories.Take(10).Count(); i++)
+    @for (int i = 0; i < Model.Categories.Count(); i++)
     {
         var category = Model.Categories[i];
         @Html.HiddenFor(x => x.Categories[i].Description)

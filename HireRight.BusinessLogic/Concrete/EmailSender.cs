@@ -11,12 +11,16 @@ namespace HireRight.BusinessLogic.Concrete
     public class EmailSender : IEmailSender
     {
         private readonly string _emailTemplatePath;
-        private readonly NetworkCredential _smtpCredentials;
         private readonly string DianaEmail;
         private readonly string JanetEmail;
         private readonly string MailServiceEmailAddress;
-        private readonly string SmtpHost;
-        private readonly int SmtpPort;
+#pragma warning disable 414
+        // ReSharper disable NotAccessedField.Local
+        private readonly NetworkCredential _smtpCredentials;
+        private readonly string _smtpHost;
+        private readonly int _smtpPort;
+        // ReSharper restore NotAccessedField.Local
+#pragma warning restore 414
 
         public EmailSender()
         {
@@ -24,8 +28,8 @@ namespace HireRight.BusinessLogic.Concrete
             _smtpCredentials = new NetworkCredential(MailServiceEmailAddress, WebConfigurationManager.AppSettings["MailAccountPassword"]);
             DianaEmail = WebConfigurationManager.AppSettings["DianaEmail"];
             JanetEmail = WebConfigurationManager.AppSettings["JanetEmail"];
-            SmtpPort = 25;
-            SmtpHost = WebConfigurationManager.AppSettings["SmtpHost"];
+            _smtpPort = 25;
+            _smtpHost = WebConfigurationManager.AppSettings["SmtpHost"];
             _emailTemplatePath = WebConfigurationManager.AppSettings["EmailTemplatePath"];
         }
 
@@ -34,9 +38,13 @@ namespace HireRight.BusinessLogic.Concrete
 #if DEBUG
     return;
 #endif
+#pragma warning disable 162
+            // ReSharper disable HeuristicUnreachableCode
             SendFormattedEmail(DianaEmail, "Diana", message, subject, replyTo);
             SendFormattedEmail(JanetEmail, "Janet", message, subject, replyTo);
             SendFormattedEmail("darthruneis@hotmail.com", "Chris", message, subject, replyTo);
+            // ReSharper restore HeuristicUnreachableCode
+#pragma warning restore 162
         }
 
         public void SendEmail(string recipient, string body, string subject, string replyTo = null)

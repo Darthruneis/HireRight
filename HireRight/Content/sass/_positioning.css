@@ -1,10 +1,4 @@
-﻿/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-/*$site_background: $veryLightBlue;*/
-/*$site_side_background: $darkNavyBlue;*/
-/*$site_highlights_background: $skyBlue;*/
-.centered {
+﻿.centered {
   margin: 0 auto; }
 
 .list-item-root li:before li:before, .list-item-nested li:before li:before {

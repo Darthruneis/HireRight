@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DataTransferObjects;
 
 namespace HireRight.Models
@@ -9,6 +11,7 @@ namespace HireRight.Models
         public Guid Id { get; set; }
         public CategoryImportance Importance { get; set; }
         public string Title { get; set; }
+        public List<long> Industries { get; set; }
 
         public JobAnalysisCategoryViewModel()
         {
@@ -21,11 +24,12 @@ namespace HireRight.Models
             Importance = importance;
         }
 
-        public JobAnalysisCategoryViewModel(string description, string title, Guid id) : this()
+        public JobAnalysisCategoryViewModel(string description, string title, Guid id, ICollection<long> industries) : this()
         {
             Description = description;
             Title = title;
             Id = id;
+            Industries = industries.ToList();
         }
 
         public override string ToString()

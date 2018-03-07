@@ -1,4 +1,6 @@
-﻿.importanceToggleButton {
+﻿@import "variables.scss";
+
+.importanceToggleButton {
     text-align: center;
     cursor: pointer;
     height: 100%;
@@ -36,4 +38,28 @@
 
 .importanceHeaders h4 {
     text-align: center;
+}
+
+.industryToggle {
+    margin-bottom: 10px;
+    border: 2px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+
+    background-color: $site_button_color;
+    &:hover {
+        background-color: $boldBlue-65;
+    }
+
+    & span {
+        padding: 5px 0;
+    }
+}
+
+.industryToggle.activeIndustry {
+    background-color: $boldBlue-65;
+
+    &:hover {
+        background-color: $white;
+    }
 }
