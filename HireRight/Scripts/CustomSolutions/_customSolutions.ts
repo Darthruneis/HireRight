@@ -84,8 +84,6 @@
 
     function updateCardVisibilityRank($card: JQuery, visibilityRankChange: number) {
         var visibilityRank: number = parseInt($card.data("visibilityrank"));
-
-        //console.log($card.data("categorytitle") + " rank: " + visibilityRank + " => " + (visibilityRank + visibilityRankChange) + "(" + visibilityRankChange + ")");
         visibilityRank += visibilityRankChange;
         $card.data("visibilityrank", visibilityRank);
     }

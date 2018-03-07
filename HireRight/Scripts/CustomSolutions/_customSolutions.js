@@ -70,7 +70,6 @@ var CustomSolutions;
     }
     function updateCardVisibilityRank($card, visibilityRankChange) {
         var visibilityRank = parseInt($card.data("visibilityrank"));
-        //console.log($card.data("categorytitle") + " rank: " + visibilityRank + " => " + (visibilityRank + visibilityRankChange) + "(" + visibilityRankChange + ")");
         visibilityRank += visibilityRankChange;
         $card.data("visibilityrank", visibilityRank);
     }
