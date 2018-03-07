@@ -69,7 +69,7 @@ namespace HireRight.Repository.Concrete
         public async Task<ICollection<ScaleCategory>> GetAll()
         {
             using (var context = ContextFunc())
-                return await context.Categories.OrderBy(x => x.Title).ToListAsync();
+                return await context.Categories.Include(x => x.IndustryBinders).OrderBy(x => x.Title).ToListAsync();
         }
     }
 }

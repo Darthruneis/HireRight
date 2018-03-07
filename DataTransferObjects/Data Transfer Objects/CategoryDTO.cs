@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DataTransferObjects.Data_Transfer_Objects
@@ -20,6 +21,9 @@ namespace DataTransferObjects.Data_Transfer_Objects
 
         [DataMember]
         public string Title { get; set; }
+
+        [DataMember]
+        public List<long> Industries { get; set; }
 
         public CategoryDTO()
         {

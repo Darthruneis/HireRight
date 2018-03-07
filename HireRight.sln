@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HireRight", "HireRight\HireRight.csproj", "{BE05383B-E90D-4C3E-8B2B-E4342374F69C}"
 EndProject
@@ -110,5 +110,8 @@ Global
 		{A329595F-864E-4308-AACE-4C686093F0F3} = {8A7833C6-1FD0-449F-92B1-CFEB34673117}
 		{615F6646-C4B6-4D3E-877C-FF3D4E3A6EFB} = {8A7833C6-1FD0-449F-92B1-CFEB34673117}
 		{0ABE87B8-761F-4D4C-9391-27034AD058D9} = {EBD002B3-2F09-4C29-9739-0562452C3C86}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D894B66-095C-499D-A6E5-E74E10CDB0FC}
 	EndGlobalSection
 EndGlobal

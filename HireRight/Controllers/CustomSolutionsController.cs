@@ -48,7 +48,10 @@ namespace HireRight.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var categories = await _categoriesBusinessLogic.GetAll();
+            ICollection<CategoryDTO> categories = await _categoriesBusinessLogic.GetAll();
+            //TODO: Get all industries
+            //TODO: Add Industries to the view model
+            //TODO: Implement Industry logic on the View
             CustomSolutionsViewModel model = CreateViewModelFromCategoryList(categories);
 
             return View(model);
@@ -56,6 +59,7 @@ namespace HireRight.Controllers
 
         private CustomSolutionsViewModel CreateViewModelFromCategoryList(ICollection<CategoryDTO> categories)
         {
+            //TODO: Pass the industries for the category to the model constructor
             IEnumerable<JobAnalysisCategoryViewModel> categoryViewModels = categories.Select(x => new JobAnalysisCategoryViewModel(x.Description, x.Title, x.Id));
 
             return new CustomSolutionsViewModel(categoryViewModels.OrderBy(x => x.Title));

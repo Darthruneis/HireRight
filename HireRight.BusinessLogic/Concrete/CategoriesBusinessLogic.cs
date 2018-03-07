@@ -42,6 +42,7 @@ namespace HireRight.BusinessLogic.Concrete
             CategoryDTO dto = new CategoryDTO(model.Title, model.Description);
             dto.Id = model.Id;
             dto.CreatedUtc = model.CreatedUtc;
+            dto.Industries = model.IndustryBinders?.Select(x => x.IndustryId).ToList() ?? new List<long>();
 
             return dto;
         }
