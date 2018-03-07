@@ -62,12 +62,10 @@
             });
     }
 
+    //TODO: Look into unit testing this somehow, because this logic is complex enough
     function updateCardVisibilityRanks(industry: number, visibilityRankChange: number) {
-        //$(`.categoryCard[data-industry-${industry}='1']`).each((index, elem) => {
-        //    updateCardVisibilityRank($(elem), visibilityRankChange);
-        //});
         $(".categoryCard").each((index, elem) => {
-            if ($(elem).data("industry-" + industry) !== "1")
+            if ($(elem).data("industry-" + industry) !== 1)
                 updateCardVisibilityRank($(elem), -visibilityRankChange);
             else
                 updateCardVisibilityRank($(elem), visibilityRankChange);
@@ -76,7 +74,6 @@
         $(".categoryCard").each((index, elem) => {
             var visibilityRank: number = parseInt($(elem).data("visibilityrank"));
             if (visibilityRank > 0) {
-                console.log("showing card " + $(elem).data("categorytitle"));
                 $(elem).show();
             } else {
                 $(elem).data("visibilityrank", "0");
@@ -88,7 +85,7 @@
     function updateCardVisibilityRank($card: JQuery, visibilityRankChange: number) {
         var visibilityRank: number = parseInt($card.data("visibilityrank"));
 
-        console.log($card.data("categorytitle") + " rank: " + visibilityRank + " => " + (visibilityRank + visibilityRankChange) + "(" + visibilityRankChange + ")");
+        //console.log($card.data("categorytitle") + " rank: " + visibilityRank + " => " + (visibilityRank + visibilityRankChange) + "(" + visibilityRankChange + ")");
         visibilityRank += visibilityRankChange;
         $card.data("visibilityrank", visibilityRank);
     }
