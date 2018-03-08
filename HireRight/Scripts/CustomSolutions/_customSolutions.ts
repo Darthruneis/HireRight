@@ -34,6 +34,7 @@
         bindContinueAndBackButtons();
         bindFormSubmit();
         bindIndustryToggles();
+        toggleCards();
     }
 
     function bindIndustryToggles() {
@@ -64,19 +65,28 @@
     
     function updateCardVisibilityRanks(industry: number, visibilityRankChange: number) {
         $(".categoryCard").each((index, elem) => {
-            if ($(elem).data("industry-" + industry) !== 1)
-                updateCardVisibilityRank($(elem), -visibilityRankChange);
-            else
+            if ($(elem).data("industry-" + industry) != null)
                 updateCardVisibilityRank($(elem), visibilityRankChange);
         });
 
+        toggleCards();
+    }
+
+    function toggleCards() {
         $(".categoryCard").each((index, elem) => {
             var visibilityRank: number = parseInt($(elem).data("visibilityrank"));
+            var $elem: JQuery = $(elem);
+            const getHidden: () => JQuery = () => $elem.closest(".categoryCardRow").find("input[type='hidden']");
+
             if (visibilityRank > 0) {
-                $(elem).show();
+                $elem.show().closest(".categoryCardRow").show();
+                if (getHidden().val() === "Irrelevant")
+                    getHidden().val($elem.data("cachedhiddenlevel"));
             } else {
-                $(elem).data("visibilityrank", "0");
-                $(elem).hide();
+                $elem.data("visibilityrank", "0");
+                $elem.hide().closest(".categoryCardRow").hide();
+                $elem.data("cachedhiddenlevel", getHidden().val());
+                getHidden().val("Irrelevant");
             }
         });
     }

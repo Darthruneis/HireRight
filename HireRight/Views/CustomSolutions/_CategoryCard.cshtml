@@ -1,6 +1,16 @@
-﻿@model JobAnalysisCategoryViewModel
+﻿@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+@model JobAnalysisCategoryViewModel
 
-<div class="categoryCard" data-categorytitle="@Model.Title" data-visibilityrank="1"
+@{
+    //By default, the General category begins as selected. Anything marked as General should be given higher visibility so that it remains visible 
+    //until an industry is selected it does not have *and* general is disabled.
+    var rank = Model.Industries.Contains(Industry.General) ? 1 : 0;
+}
+<div class="categoryCard" data-categorytitle="@Model.Title" 
+     data-visibilityrank="@rank"
+     @if(rank < 1) {
+         @: style="display: none;"
+     }
      @foreach (var industry in Model.Industries)
      {
          @:data-industry-@(industry)="1"
