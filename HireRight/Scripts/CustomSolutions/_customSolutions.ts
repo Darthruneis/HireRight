@@ -138,8 +138,34 @@
     function bindFormSubmit() {
         $("form").on("submit",
             function (e: Event) {
-                return inspectCardCounts();
+                makeHiddenCardsIrrelevant();
+                var counts = inspectCardCounts();
+                var result: boolean = true;
+                if (counts.relevant < 1 || counts.relevant > 9) {
+                    $("#notEnough").show();
+                    result = false;
+                }
+                else
+                    $("#notEnough").hide();
+
+                if (counts.critical < 3) {
+                    $("#notEnoughCrits").show();
+                    result = false;
+                }
+                else
+                    $("#notEnoughCrits").hide();
+                return result;
             });
+    }
+
+    function makeHiddenCardsIrrelevant() {
+        $("#categoryContainerDiv").find(".categoryCardRow").each((index, elem) => {
+            var $card = $(elem).find(".categoryCard");
+            var visibilityRank = parseInt($card.data("visibilityrank"));
+            if (visibilityRank <= 0) {
+                $card.find("input[type='hidden']").val("Irrelevant");
+            }
+        });
     }
 
     function inspectCardCounts(): CardCategoryCounts {
