@@ -76,7 +76,7 @@ namespace HireRight.Controllers
         public ActionResult EQProfileSample() => DownloadFromFileName("EQProfileSample.pdf");
 
         [HttpGet]
-        public ActionResult MechanicalAptitudeTestProfileSample() => DownloadFromFileName("MechanicalAptitudeTestProfileSample.pdf");
+        public ActionResult MechanicalAptitudeTestProfileSample() => DownloadFromFileName("MechanicalAptitudeTestSample.pdf");
 
         [HttpGet]
         public ActionResult SalesHunterProfileTestSample() => DownloadFromFileName("SalesHunterProfileSampleReport.pdf");
@@ -92,6 +92,9 @@ namespace HireRight.Controllers
 
         [HttpGet]
         public ActionResult WorkplaceAptitudeTestSample() => DownloadFromFileName("WATSample.pdf");
+        
+        [HttpGet]
+        public ActionResult EliteGritProfileSample() => DownloadFromFileName("EliteGritProfileSample.pdf");
     }
 
     /// <summary>
@@ -118,6 +121,7 @@ namespace HireRight.Controllers
             new SampleForDownloadViewModel(nameof(SituationalJudgementTestSupervisorSample), "Situational Judgement Test - Supervisor"),
             new SampleForDownloadViewModel(nameof(SituationalJudgementTestTeamsSample), "Situational Judgement Test - Teams"),
             new SampleForDownloadViewModel(nameof(WorkplaceAptitudeTestSample), "Workplace Aptitude Test"),
+            new SampleForDownloadViewModel(nameof(EliteGritProfileSample), "Elite Grit Profile"),
         };
 
         private ActionResult Download(string filePath)
