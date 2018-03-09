@@ -18,7 +18,7 @@
     @foreach (IndustryDTO industry in Model.Industries.Where(x => x.Id != Industry.General))
     {
         <div class="col-xs-4 col-md-3">
-            <div class=" industryToggle" data-industryid="@industry.Id">
+            <div class="industryToggle" data-industryid="@industry.Id" data-industryname="@industry.Name">
                 <span style="width: 100%; text-align: center; display: inline-block;">
                     <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
                     &nbsp;&nbsp;@industry.Name
@@ -27,10 +27,11 @@
         </div>
     }
     <div class="col-xs-4 col-md-3">
-        <div class="industryToggle generalIndustryToggle activeIndustry" data-industryid="@Industry.General">
+        @{ var general = @Model.Industries.Single(x => x.Id == Industry.General);}
+        <div class="industryToggle generalIndustryToggle" data-industryid="@Industry.General" data-industryname="@general.Name">
             <span style="width: 100%; text-align: center; display: inline-block;">
-                <i class="glyphicon glyphicon-ok" style="color: green;"></i>
-                &nbsp;&nbsp;@Model.Industries.Single(x => x.Id == Industry.General).Name
+                <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
+                &nbsp;&nbsp;@general.Name
             </span>
         </div>
     </div>

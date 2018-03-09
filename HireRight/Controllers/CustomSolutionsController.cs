@@ -54,7 +54,9 @@ namespace HireRight.Controllers
             var industries = await _industryBusinessLogic.GetAll();
 
             JobAnalysisCategoryViewModel createCategoryModel(CategoryDTO category) 
-                => new JobAnalysisCategoryViewModel(category.Description, category.Title, category.Id, industries.Where(y => category.Industries.Contains(y.Id)).Select(y => y.Id).ToList());
+                => new JobAnalysisCategoryViewModel(category.Description, category.Title, category.Id, 
+                                                    industries.Where(y => category.Industries.Contains(y.Id)).Select(y => y.Id).ToList(), 
+                                                    industries.ToList());
             
             CustomSolutionsViewModel model = new CustomSolutionsViewModel(categories.Select(createCategoryModel).OrderBy(x => x.Title), industries);
             return View(model);

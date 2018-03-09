@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataTransferObjects;
+using DataTransferObjects.Data_Transfer_Objects;
 
 namespace HireRight.Models
 {
@@ -11,7 +12,8 @@ namespace HireRight.Models
         public Guid Id { get; set; }
         public CategoryImportance Importance { get; set; }
         public string Title { get; set; }
-        public List<long> Industries { get; set; }
+        public List<long> RelevantIndustries { get; set; }
+        public List<IndustryDTO> AllIndustries { get; set; }
 
         public JobAnalysisCategoryViewModel()
         {
@@ -24,12 +26,13 @@ namespace HireRight.Models
             Importance = importance;
         }
 
-        public JobAnalysisCategoryViewModel(string description, string title, Guid id, ICollection<long> industries) : this()
+        public JobAnalysisCategoryViewModel(string description, string title, Guid id, List<long> industries, List<IndustryDTO> allIndustries) : this()
         {
             Description = description;
             Title = title;
             Id = id;
-            Industries = industries.ToList();
+            RelevantIndustries = industries.ToList();
+            AllIndustries = allIndustries.ToList();
         }
 
         public override string ToString()
