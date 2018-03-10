@@ -7,13 +7,13 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class StaticIdsForCategories : IMigrationMetadata
+    public sealed partial class ScaleCategoryStaticIdColumn : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(StaticIdsForCategories));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ScaleCategoryStaticIdColumn));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803100530449_StaticIdsForCategories"; }
+            get { return "201803101836114_ScaleCategoryStaticIdColumn"; }
         }
         
         string IMigrationMetadata.Source

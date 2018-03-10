@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace HireRight.Repository.Tests
 {
-    [TestFixture]
+    [TestFixture, Explicit]
     public class CategorySeedTests
     {
         [Test]

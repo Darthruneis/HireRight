@@ -26,8 +26,8 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
             var categories = JsonConvert.DeserializeObject<List<ScaleCategory>>(json);
             categories = categories.OrderBy(x => x.Title).ToList();
             foreach (ScaleCategory scaleCategory in categories)
-                if (scaleCategory.Id != (categories.IndexOf(scaleCategory) + 1))
-                    scaleCategory.Id = categories.IndexOf(scaleCategory) + 1;
+                if (scaleCategory.StaticId != (categories.IndexOf(scaleCategory) + 1))
+                    scaleCategory.StaticId = categories.IndexOf(scaleCategory) + 1;
 
             return categories;
         }
@@ -79,7 +79,7 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
 
         public static string UpdateJsonFile(List<ScaleCategory> categories)
         {
-            string json = JsonConvert.SerializeObject(categories.Select(x => new { x.Id, x.Title, x.Description }));
+            string json = JsonConvert.SerializeObject(categories.Select(x => new { x.StaticId, x.Title, x.Description }));
             File.WriteAllText(JsonFilePath, json);
             return json;
         }

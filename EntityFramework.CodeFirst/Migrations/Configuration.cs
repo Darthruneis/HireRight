@@ -23,7 +23,8 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                 if (!context.Products.Any(x => x.Title == product.Title && x.Price == product.Price && x.Discounts.Count == product.Discounts.Count))
                     context.Products.AddOrUpdate(product);
 
-            context.Categories.AddOrUpdate(x => x.Id, ScaleCategorySeed.Seed().ToArray());
+            List<ScaleCategory> scaleCategories = ScaleCategorySeed.Seed();
+            context.Categories.AddOrUpdate(x => x.Title, scaleCategories.ToArray());
             context.Industries.AddOrUpdate(x => x.Id, IndustrySeed.Seed);
             context.SaveChanges();
 
@@ -163,7 +164,8 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
 
                 var category = context.Categories.SingleOrDefault(x => x.Title == title);
                 if (category == null)
-                    throw new InvalidOperationException("Category with title " + title + " was not found on the context.");
+                    //throw new InvalidOperationException("Category with title " + title + " was not found on the context.");
+                    return;
 
                 AddBinderIfMissing(context, category.Id, industryIds);
             }

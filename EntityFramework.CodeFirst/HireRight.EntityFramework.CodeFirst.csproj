@@ -79,9 +79,9 @@
     <Compile Include="Migrations\201803100303078_RefactorPocoBaseAndAddIndustries.Designer.cs">
       <DependentUpon>201803100303078_RefactorPocoBaseAndAddIndustries.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803100530449_StaticIdsForCategories.cs" />
-    <Compile Include="Migrations\201803100530449_StaticIdsForCategories.Designer.cs">
-      <DependentUpon>201803100530449_StaticIdsForCategories.cs</DependentUpon>
+    <Compile Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.cs" />
+    <Compile Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.Designer.cs">
+      <DependentUpon>201803101836114_ScaleCategoryStaticIdColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CompanyAggregate\Industry.cs" />
@@ -121,8 +121,8 @@
     <EmbeddedResource Include="Migrations\201803100303078_RefactorPocoBaseAndAddIndustries.resx">
       <DependentUpon>201803100303078_RefactorPocoBaseAndAddIndustries.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803100530449_StaticIdsForCategories.resx">
-      <DependentUpon>201803100530449_StaticIdsForCategories.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.resx">
+      <DependentUpon>201803101836114_ScaleCategoryStaticIdColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
