@@ -169,12 +169,12 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                 .Index(t => t.StaticId, unique: true);
 
             AddColumn("dbo.ScaleCategory", "StaticId", c => c.Long(nullable: false));
-            CreateIndex("dbo.ScaleCategory", "StaticId", unique: true);
             Sql("Update dbo.ScaleCategory Set StaticId = Id");
+            CreateIndex("dbo.ScaleCategory", "StaticId", unique: true);
 
             AddColumn("dbo.Product", "StaticId", c => c.Long(nullable: false));
-            CreateIndex("dbo.Product", "StaticId", unique: true);
             Sql("Update dbo.Product Set StaticId = Id");
+            CreateIndex("dbo.Product", "StaticId", unique: true);
         }
 
         public override void Down()
