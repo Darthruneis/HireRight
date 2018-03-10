@@ -23,20 +23,15 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                 if (!context.Products.Any(x => x.Title == product.Title && x.Price == product.Price && x.Discounts.Count == product.Discounts.Count))
                     context.Products.AddOrUpdate(product);
 
+            List<ScaleCategory> scaleCategories = ScaleCategorySeed.Seed();
+            context.Categories.AddOrUpdate(x => x.Title, scaleCategories.ToArray());
             context.Industries.AddOrUpdate(x => x.Id, IndustrySeed.Seed);
             context.SaveChanges();
 
-            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT ScaleCategory ON");
+            ScaleCategorySeed.UpdateJsonFile(context.Categories.AsNoTracking().ToList());
 
-            context.Categories.AddOrUpdate(x => x.Id, ScaleCategorySeed.Seed().ToArray());
-            context.SaveChanges();
-            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT ScaleCategory OFF");
-            context.SaveChanges();
-
-            //ScaleCategorySeed.UpdateJsonFile(context.Categories.AsNoTracking().ToList());
-
-            //SetIndustryRelationshipsForCategories(context);
-            if (errors.Any())
+            SetIndustryRelationshipsForCategories(context);
+            if(errors.Any())
                 throw new AggregateException("Encountered erors with the binders. See the inner exceptions for details.", errors);
             context.SaveChanges();
         }
@@ -169,7 +164,8 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
 
                 var category = context.Categories.SingleOrDefault(x => x.Title == title);
                 if (category == null)
-                    throw new InvalidOperationException("Category with title " + title + " was not found on the context.");
+                    //throw new InvalidOperationException("Category with title " + title + " was not found on the context.");
+                    return;
 
                 AddBinderIfMissing(context, category.Id, industryIds);
             }
