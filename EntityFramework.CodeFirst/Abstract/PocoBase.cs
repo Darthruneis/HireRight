@@ -28,7 +28,7 @@ namespace HireRight.EntityFramework.CodeFirst.Abstract
         [Timestamp]
         public byte[] TimeStamp { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public virtual Guid RowGuid { get; set; }
     }
 }

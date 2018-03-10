@@ -24,7 +24,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                     context.Products.AddOrUpdate(product);
 
             List<ScaleCategory> scaleCategories = ScaleCategorySeed.Seed();
-            context.Categories.AddOrUpdate(x => x.Title, scaleCategories.ToArray());
+            context.Categories.AddOrUpdate(x => x.StaticId, scaleCategories.ToArray());
             context.Industries.AddOrUpdate(x => x.Id, IndustrySeed.Seed);
             context.SaveChanges();
 

@@ -83,6 +83,10 @@
     <Compile Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.Designer.cs">
       <DependentUpon>201803101836114_ScaleCategoryStaticIdColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803101903540_ComputedRowGuids.cs" />
+    <Compile Include="Migrations\201803101903540_ComputedRowGuids.Designer.cs">
+      <DependentUpon>201803101903540_ComputedRowGuids.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CompanyAggregate\Industry.cs" />
     <Compile Include="Models\CompanyAggregate\IndustryScaleCategory.cs" />
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.resx">
       <DependentUpon>201803101836114_ScaleCategoryStaticIdColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803101903540_ComputedRowGuids.resx">
+      <DependentUpon>201803101903540_ComputedRowGuids.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
