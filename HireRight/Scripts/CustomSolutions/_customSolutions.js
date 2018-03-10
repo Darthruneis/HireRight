@@ -23,12 +23,18 @@ var CustomSolutions;
         return CardCssCache;
     }());
     function bindEvents() {
+        //TODO: remove this after testing.
+        $(".categoryCard").each(function (index, elem) {
+            if (parseInt($(elem).data("visibilityrank")) < 1)
+                console.log("warning - a card has been initialized as invisible. Behavior may be unpredictable. Card: " +
+                    $(elem).data("categorytitle"));
+        });
         bindMovementButtons();
         bindContinueAndBackButtons();
         bindFormSubmit();
         bindIndustryToggles();
-        toggleCards();
-        throw new Error("Make sure to update the implementation to use the new method...");
+        //toggleCards();
+        //throw new Error("Make sure to update the implementation to use the new method...");
     }
     CustomSolutions.bindEvents = bindEvents;
     function bindIndustryToggles() {
@@ -36,32 +42,39 @@ var CustomSolutions;
             var $this = $(this);
             var isBeingRemoved = $this.hasClass("activeIndustry");
             $(".industryToggle:not(.generalIndustryToggle)").removeClass("activeIndustry").find("i").hide();
-            var visibilityRankChange = -1;
             if (!isBeingRemoved) {
                 $this.addClass("activeIndustry");
                 $this.find("i").show();
-                visibilityRankChange = 1;
             }
-            updateCardVisibilityRanks($this.data("industryname"), visibilityRankChange);
+            updateCardVisibilityRanks();
         });
         $(".generalIndustryToggle").on("click", function (e) {
             var $this = $(this);
             $this.toggleClass("activeIndustry");
             $this.find("i").toggle();
-            var visibilityRankChange = $this.hasClass("activeIndustry") ? 1 : -1;
-            updateCardVisibilityRanks($this.data("industryname"), visibilityRankChange);
+            updateCardVisibilityRanks();
         });
     }
-    function updateCardVisibilityRanks(industry, visibilityRankChange) {
+    function updateCardVisibilityRanks() {
+        var $toggles = $(".activeIndustry").toArray().map(function (value, index, array) { return $(value); });
+        var getHidden = function ($card) { return $card.closest(".categoryCardRow").find("input[type='hidden']"); };
         $(".categoryCard").each(function (index, elem) {
-            if ($(elem).hasClass("industry-" + industry)) {
-                updateCardVisibilityRank($(elem), visibilityRankChange);
+            var $card = $(elem);
+            var rank = getVisibilityRankForCard($card, $toggles);
+            $card.data("visibilityrank", rank);
+            var $hidden = getHidden($card);
+            if (rank > 0) {
+                $card.show().closest(".categoryCardRow").show();
+                if ($hidden.val() === "Irrelevant")
+                    $hidden.val($card.data("cachedhiddenlevel"));
             }
             else {
-                updateCardVisibilityRank($(elem), -visibilityRankChange);
+                $card.hide().closest(".categoryCardRow").hide();
+                $card.data("cachedhiddenlevel", $hidden.val());
+                $hidden.val("Irrelevant");
             }
         });
-        toggleCards();
+        //toggleCards();
     }
     function toggleCards() {
         $(".categoryCard").each(function (index, elem) {
@@ -80,7 +93,6 @@ var CustomSolutions;
             }
         });
     }
-    //TODO: Reimplement the handlers to make use of this
     function getVisibilityRankForCard($card, $toggles) {
         var specificCategory = "";
         var generalCategoryEnabled = false;
@@ -107,11 +119,6 @@ var CustomSolutions;
         if (rankOfCard > 2)
             rankOfCard = 2;
         return rankOfCard;
-    }
-    function updateCardVisibilityRank($card, visibilityRankChange) {
-        var visibilityRank = parseInt($card.data("visibilityrank"));
-        console.log($card.data("categorytitle") + ": " + visibilityRank + " => " + (visibilityRank + visibilityRankChange));
-        $card.data("visibilityrank", visibilityRank + visibilityRankChange);
     }
     function bindMovementButtons() {
         $("#categoryContainerDiv").on("click", ".lessImportantButton", function (e) {
