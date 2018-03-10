@@ -7,13 +7,13 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdatingGeneratedIdForTables : IMigrationMetadata
+    public sealed partial class StaticIdsForCategories : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdatingGeneratedIdForTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(StaticIdsForCategories));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803070229326_UpdatingGeneratedIdForTables"; }
+            get { return "201803100530449_StaticIdsForCategories"; }
         }
         
         string IMigrationMetadata.Source

@@ -26,7 +26,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         /// </summary>
         [Required]
         [ForeignKey(nameof(Company))]
-        public Guid CompanyId { get; set; }
+        public long CompanyId { get; set; }
 
         /// <summary>
         /// A description for the location. Entirely up to the company as to what is provided here, but examples could be a description which indicates whether

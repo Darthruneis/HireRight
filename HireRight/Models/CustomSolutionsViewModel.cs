@@ -49,7 +49,7 @@ namespace HireRight.Models
         {
             SubmitCardsDTO dto = new SubmitCardsDTO();
             dto.Categories = Categories.Where(x => x.Importance != CategoryImportance.Irrelevant)
-                                       .Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, Id = x.Id })
+                                       .Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, RowGuid = x.Id })
                                        .ToList();
             dto.CompanyName = CompanyName;
             dto.Positions = Positions;

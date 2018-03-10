@@ -43,7 +43,7 @@ namespace HireRight.BusinessLogic.Concrete
                 order.PrimaryContact = dto.Contacts.First(x => x.IsPrimary);
                 order.SecondaryContact = dto.Contacts.First(x => !x.IsPrimary);
                 order.CreatedUtc = dto.CreatedUtc;
-                order.Id = dto.Orders.First().Id;
+                order.RowGuid = dto.Orders.First().RowGuid;
 
                 await _ordersBusinessLogic.CreateOrder(order);
             }
@@ -54,7 +54,7 @@ namespace HireRight.BusinessLogic.Concrete
         public Company ConvertDtoToModel(CompanyDTO dto)
         {
             Company model = new Company();
-            model.Id = dto.Id;
+            model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
             model.Name = dto.Name;
             model.Address = dto.BillingAddress.ConvertDtoToModel();
@@ -75,7 +75,7 @@ namespace HireRight.BusinessLogic.Concrete
         public CompanyDTO ConvertModelToDto(Company model)
         {
             CompanyDTO dto = new CompanyDTO();
-            dto.Id = model.Id;
+            dto.RowGuid = model.RowGuid;
             dto.CreatedUtc = model.CreatedUtc;
             dto.Name = model.Name;
             dto.Notes = model.Notes;

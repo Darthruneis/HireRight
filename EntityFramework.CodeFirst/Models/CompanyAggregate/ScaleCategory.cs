@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using HireRight.EntityFramework.CodeFirst.Abstract;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
@@ -8,7 +7,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
     /// <summary>
     /// A Scale Category is a type of expertise or personal trait that impacts job performance and eligibility.
     /// </summary>
-    public class ScaleCategory : PocoBase
+    public class ScaleCategory : StaticPocoBase
     {
         /// <summary>
         /// The description for this scale category.

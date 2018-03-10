@@ -32,7 +32,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         /// </summary>
         [Required]
         [ForeignKey(nameof(Company))]
-        public Guid CompanyId { get; set; }
+        public long CompanyId { get; set; }
 
         /// <summary>
         /// This contact's email address.

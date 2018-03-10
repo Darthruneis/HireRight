@@ -67,9 +67,8 @@ namespace HireRight.BusinessLogic.Concrete
         public Order ConvertDtoToModel(OrderDetailsDTO dto)
         {
             Order model = new Order();
-            model.Id = dto.Id;
+            model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
-            model.ProductId = dto.ProductId;
             model.Notes = dto.NotesAndPositions.Notes;
             model.PositionsOfInterest = dto.NotesAndPositions.PositionsOfInterest;
             model.Quantity = dto.Quantity;
@@ -80,10 +79,9 @@ namespace HireRight.BusinessLogic.Concrete
         public OrderDetailsDTO ConvertModelToDto(Order model)
         {
             OrderDetailsDTO dto = new OrderDetailsDTO();
-            dto.Id = model.Id;
+            dto.RowGuid = model.RowGuid;
             dto.CreatedUtc = model.CreatedUtc;
             dto.Quantity = model.Quantity;
-            dto.ProductId = model.ProductId;
             dto.NotesAndPositions.Notes = model.Notes;
             dto.NotesAndPositions.PositionsOfInterest = model.PositionsOfInterest;
 
@@ -96,7 +94,7 @@ namespace HireRight.BusinessLogic.Concrete
                 $"{model.PrimaryContact.FullName} of {model.Company.Name}. The details of this order are shown below.");
 
             ProductDTO dto = await _productsBusinessLogic.Get(model.Order.ProductId).ConfigureAwait(false);
-            decimal total = await CalculatePrice(dto.Id, model.Order.Quantity);
+            decimal total = await CalculatePrice(dto.RowGuid, model.Order.Quantity);
 
             message.AppendLine()
                    .AppendLine($"Quantity: {model.Order.Quantity}")
@@ -188,12 +186,12 @@ namespace HireRight.BusinessLogic.Concrete
 
         private async Task RetrieveLostCategoryTitles(IList<CategoryDTO> categories)
         {
-            IEnumerable<Guid> guids = categories.Select(x => x.Id);
+            IEnumerable<Guid> guids = categories.Select(x => x.RowGuid);
             var categoriesFromRepo = await _categoriesBusinessLogic.Get(new CategoryFilter(1, categories.Count, guids.ToArray()));
 
             foreach (var category in categoriesFromRepo.PageResult)
             {
-                category.Importance = categories.First(y => y.Id == category.Id).Importance;
+                category.Importance = categories.First(y => y.RowGuid == category.RowGuid).Importance;
             }
 
             categories = categoriesFromRepo.PageResult.ToList();

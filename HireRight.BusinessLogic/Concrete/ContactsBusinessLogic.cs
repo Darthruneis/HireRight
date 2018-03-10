@@ -75,7 +75,7 @@ namespace HireRight.BusinessLogic.Concrete
         public Contact ConvertDtoToModel(ContactDTO dto)
         {
             Contact model = new Contact();
-            model.Id = dto.Id;
+            model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
             model.CellNumber = dto.CellNumber;
             model.OfficeNumber = dto.OfficeNumber;
@@ -84,7 +84,6 @@ namespace HireRight.BusinessLogic.Concrete
             model.Name = dto.FullName;
             model.Email = dto.Email;
             model.Address = dto.Address.ConvertDtoToModel();
-            model.CompanyId = dto.CompanyId;
 
             return model;
         }
@@ -96,10 +95,9 @@ namespace HireRight.BusinessLogic.Concrete
             dto.OfficeNumber = model.OfficeNumber;
             dto.IsPrimary = model.IsPrimary;
             dto.IsAdmin = model.IsAdmin;
-            dto.Id = model.Id;
+            dto.RowGuid = model.RowGuid;
             dto.CreatedUtc = model.CreatedUtc;
             dto.Email = model.Email;
-            dto.CompanyId = model.CompanyId;
             dto.Address = model.Address.ConvertModelToDto();
             dto.FirstName = model.Name.Split(' ').First();
             dto.LastName = model.Name.Split(' ').Last();

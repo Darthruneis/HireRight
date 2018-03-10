@@ -11,10 +11,9 @@ namespace HireRight.BusinessLogic.Extensions
 
             model.Notes = dto.NotesAndPositions.Notes;
             model.PositionsOfInterest = dto.NotesAndPositions.PositionsOfInterest;
-            model.ProductId = dto.ProductId;
             model.Quantity = dto.Quantity;
             model.Status = OrderStatus.Pending;
-            model.Id = dto.Id;
+            model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
 
             return model;
@@ -25,9 +24,8 @@ namespace HireRight.BusinessLogic.Extensions
             OrderDetailsDTO dto = new OrderDetailsDTO();
             dto.NotesAndPositions.Notes = model.Notes;
             dto.NotesAndPositions.PositionsOfInterest = model.PositionsOfInterest;
-            dto.ProductId = model.ProductId;
             dto.Quantity = model.Quantity;
-            dto.Id = model.Id;
+            dto.RowGuid = model.RowGuid;
             dto.CreatedUtc = model.CreatedUtc;
 
             return dto;

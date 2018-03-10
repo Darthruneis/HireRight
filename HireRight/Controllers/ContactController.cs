@@ -38,10 +38,10 @@ namespace HireRight.Controllers
                 CompanyDTO companyDto = await _companyBusinessLogic.Add(new CompanyDTO() { BillingAddress = model.Address, Name = model.CompanyName });
 
                 ContactDTO contactDto = model.ConvertToContactDTO();
-                contactDto.CompanyId = companyDto.Id;
+                contactDto.CompanyId = companyDto.RowGuid;
                 ContactDTO dto = await _contactsBusinessLogic.Add(contactDto);
 
-                await _contactsBusinessLogic.SendNewContactEmail(dto.Id, model.Message);
+                await _contactsBusinessLogic.SendNewContactEmail(dto.RowGuid, model.Message);
             }
 #pragma warning disable CS0168
             catch (Exception ex)

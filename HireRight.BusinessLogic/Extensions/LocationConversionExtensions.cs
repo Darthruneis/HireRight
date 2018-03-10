@@ -9,7 +9,6 @@ namespace HireRight.BusinessLogic.Extensions
         {
             CompanyLocation model = new CompanyLocation();
             model.Address = dto.Address.ConvertDtoToModel();
-            model.CompanyId = dto.CompanyId;
             model.Description = dto.Description;
             model.Label = dto.Label;
 

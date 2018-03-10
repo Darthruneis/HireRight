@@ -10,6 +10,6 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public DateTime CreatedUtc { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public Guid RowGuid { get; set; }
     }
 }

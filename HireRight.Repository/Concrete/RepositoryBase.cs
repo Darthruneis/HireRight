@@ -42,8 +42,11 @@ namespace HireRight.Repository.Concrete
             TModel result = dbSet.Add(itemToAdd);
             await context.SaveChangesAsync();
 
-            if (result.Id == Guid.Empty)
+            if (result.Id == 0)
                 errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " - Id was not updated."));
+
+            if (result.RowGuid == Guid.Empty)
+                errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " - RowGuid was not updated."));
 
             if (result.CreatedUtc == default(DateTime))
                 errors.Add(new ValidationResult("Failed to create " + nameof(TModel) + " CreatedUtc was not updated."));
@@ -54,7 +57,16 @@ namespace HireRight.Repository.Concrete
         protected async Task<TModel> GetBase(Guid itemGuid, IQueryable<TModel> query, params Expression<Func<TModel, object>>[] includes)
         {
             if (itemGuid == Guid.Empty)
-                throw new InvalidOperationException("An empty guid cannot be found in the repository!");
+                throw new InvalidOperationException("Id of 0 cannot be found in the repository!");
+
+            TModel item = await CheckForValidItem(query, itemGuid, includes).ConfigureAwait(false);
+            return item;
+        }
+
+        protected async Task<TModel> GetBase(long itemGuid, IQueryable<TModel> query, params Expression<Func<TModel, object>>[] includes)
+        {
+            if (itemGuid == 0)
+                throw new InvalidOperationException("Id of 0 cannot be found in the repository!");
 
             TModel item = await CheckForValidItem(query, itemGuid, includes).ConfigureAwait(false);
             return item;
@@ -107,9 +119,17 @@ namespace HireRight.Repository.Concrete
             return string.Join(Environment.NewLine, errorMessages.ToArray());
         }
 
-        private async Task<TModel> CheckForValidItem(IQueryable<TModel> query, Guid itemGuid, params Expression<Func<TModel, object>>[] includes)
+        private async Task<TModel> CheckForValidItem(IQueryable<TModel> query, long itemGuid, params Expression<Func<TModel, object>>[] includes)
         {
             TModel item = await query.Includes(includes).FirstOrDefaultAsync(x => x.Id == itemGuid).ConfigureAwait(false);
+            if (item == null)
+                throw new ApplicationException(nameof(TModel) + " was not found!");
+            return item;
+        }
+
+        private async Task<TModel> CheckForValidItem(IQueryable<TModel> query, Guid itemGuid, params Expression<Func<TModel, object>>[] includes)
+        {
+            TModel item = await query.Includes(includes).FirstOrDefaultAsync(x => x.RowGuid == itemGuid).ConfigureAwait(false);
             if (item == null)
                 throw new ApplicationException(nameof(TModel) + " was not found!");
             return item;

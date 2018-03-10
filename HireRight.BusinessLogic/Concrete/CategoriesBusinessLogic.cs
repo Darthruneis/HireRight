@@ -31,7 +31,7 @@ namespace HireRight.BusinessLogic.Concrete
         public ScaleCategory ConvertDtoToModel(CategoryDTO dto)
         {
             ScaleCategory model = new ScaleCategory(dto.Title, dto.Description);
-            model.Id = dto.Id;
+            model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
 
             return model;
@@ -40,7 +40,7 @@ namespace HireRight.BusinessLogic.Concrete
         public CategoryDTO ConvertModelToDto(ScaleCategory model)
         {
             CategoryDTO dto = new CategoryDTO(model.Title, model.Description);
-            dto.Id = model.Id;
+            dto.RowGuid = model.RowGuid;
             dto.CreatedUtc = model.CreatedUtc;
             dto.Industries = model.IndustryBinders?.Select(x => x.IndustryId).ToList() ?? new List<long>();
 

@@ -42,7 +42,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         /// </summary>
         [Required]
         [ForeignKey(nameof(Company))]
-        public Guid CompanyId { get; set; }
+        public long CompanyId { get; set; }
 
         /// <summary>
         /// The date that the order was completed.
@@ -69,7 +69,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         /// Foreign key for the product that is being purchased.
         /// </summary>
         [ForeignKey(nameof(Product))]
-        public Guid ProductId { get; set; }
+        public long ProductId { get; set; }
 
         /// <summary>
         /// The number of units being purchased of the specified product.

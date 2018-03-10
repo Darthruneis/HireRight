@@ -13,14 +13,14 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
         {
             return new List<Industry>()
                    {
-                        new Industry(Industry.Medical, "Medical"),
+                        new Industry(Industry.HealthCare, "Health Care"),
                        new Industry(Industry.Management, "Management"),
-                       new Industry(Industry.CustomerServiceSales, "Customer Service & Sales"),
-                       new Industry(Industry.Startup, "Startup"),
+                       new Industry(Industry.CustomerService, "Customer Service"),
+                       new Industry(Industry.Sales, "Sales"),
                        new Industry(Industry.Manufacturing, "Manufacturing"),
-                       new Industry(Industry.AdministrationClerical, "Administration and Clerical"),
+                       new Industry(Industry.Office, "Office"),
                        new Industry(Industry.General, "General"),
-                       new Industry(Industry.ProfessionalServices, "Professional Services"),
+                       new Industry(Industry.Pharmaceutical, "Pharmaceutical"),
                        new Industry(Industry.Other, "Other Industries"),
                    };
         }

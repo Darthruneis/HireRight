@@ -42,7 +42,7 @@ namespace HireRight.Repository.Concrete
                     query = query.Where(x => x.Description.ToLower().Contains(filter.DescriptionFilter.ToLower()));
 
                 if (filter.ItemGuids.Any())
-                    query = query.Where(x => filter.ItemGuids.Contains(x.Id));
+                    query = query.Where(x => filter.ItemGuids.Contains(x.RowGuid));
 
                 var categoriesFound = await TakePage(query, filter, x => x.Title);
                 return categoriesFound;

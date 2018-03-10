@@ -11,7 +11,7 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public AddressDTO Address { get; set; }
 
         [DataMember]
-        public Guid CompanyId { get; set; }
+        public Guid CompanyGuid { get; set; }
 
         [DataMember]
         public string Description { get; set; }
@@ -27,7 +27,7 @@ namespace DataTransferObjects.Data_Transfer_Objects
         public LocationDTO(CompanyLocation item)
         {
             Address = new AddressDTO(item.Address);
-            CompanyId = item.CompanyId;
+            CompanyGuid = item.Company.RowGuid;
             Description = item.Description;
             Label = item.Label;
         }

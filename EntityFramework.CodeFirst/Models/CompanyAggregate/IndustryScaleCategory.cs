@@ -10,7 +10,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         public long IndustryId { get; set; }
 
         [ForeignKey(nameof(Category))]
-        public Guid CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         public Industry Industry { get; private set; }
 
@@ -18,7 +18,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 
         private IndustryScaleCategory() { }
 
-        public IndustryScaleCategory(long industryId, Guid categoryId)
+        public IndustryScaleCategory(long industryId, long categoryId)
         {
             IndustryId = industryId;
             CategoryId = categoryId;

@@ -10,22 +10,25 @@ namespace HireRight.EntityFramework.CodeFirst.Abstract
     public abstract class PocoBase
     {
         /// <summary>
-        /// The time that the entity was created in the database.
-        /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreatedUtc { get; set; }
-
-        /// <summary>
         /// The unique Id of the entity.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid Id { get; set; }
+        public virtual long Id { get; set; }
 
+        /// <summary>
+        /// The time that the entity was created in the database.
+        /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public virtual DateTime CreatedUtc { get; set; }
+        
         /// <summary>
         /// The time stamp of the entity's state changes.
         /// </summary>
         [Timestamp]
         public byte[] TimeStamp { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public virtual Guid RowGuid { get; set; }
     }
 }
