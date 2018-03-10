@@ -552,6 +552,7 @@
     <Content Include="Views\Shared\NavigationMenu.cshtml" />
     <Content Include="Views\Shared\_PagingButtonsForFilter.cshtml" />
     <Content Include="Views\CustomSolutions\_CategoryCard.cshtml" />
+    <Content Include="Views\Reports\_SampleReportLink.cshtml" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

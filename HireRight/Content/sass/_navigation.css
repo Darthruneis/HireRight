@@ -13,10 +13,10 @@ a.primaryLink:hover,
 a.alternateLink:hover {
   color: #8533ff !important; }
 
-a.primaryLink {
+.primaryLink {
   color: #ff6600 !important; }
 
-a.alternateLink {
+.alternateLink {
   color: #4d79ff !important; }
 
 .navbar > .container {

@@ -23,14 +23,20 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
                 if (!context.Products.Any(x => x.Title == product.Title && x.Price == product.Price && x.Discounts.Count == product.Discounts.Count))
                     context.Products.AddOrUpdate(product);
 
-            context.Categories.AddOrUpdate(x => x.Id, ScaleCategorySeed.Seed().ToArray());
             context.Industries.AddOrUpdate(x => x.Id, IndustrySeed.Seed);
             context.SaveChanges();
 
-            ScaleCategorySeed.UpdateJsonFile(context.Categories.AsNoTracking().ToList());
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT ScaleCategory ON");
 
-            SetIndustryRelationshipsForCategories(context);
-            if(errors.Any())
+            context.Categories.AddOrUpdate(x => x.Id, ScaleCategorySeed.Seed().ToArray());
+            context.SaveChanges();
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT ScaleCategory OFF");
+            context.SaveChanges();
+
+            //ScaleCategorySeed.UpdateJsonFile(context.Categories.AsNoTracking().ToList());
+
+            //SetIndustryRelationshipsForCategories(context);
+            if (errors.Any())
                 throw new AggregateException("Encountered erors with the binders. See the inner exceptions for details.", errors);
             context.SaveChanges();
         }

@@ -1,0 +1,21 @@
+﻿@model SampleForDownloadViewModel
+
+<style>
+    p {
+        margin-bottom: 5px;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12">
+        <label>@Model.LinkText</label>
+    </div>
+    <div class="col-xs-12"><p style="margin-left: 2%;">@Model.Description</p></div>
+    <div class="col-xs-12">
+        <span style="width: 100%; margin-left: 2%;">
+            <a href="@Url.Action(Model.ActionName, "Reports")" target="_blank"
+               title="View in a new tab.">
+                Open
+            </a>
+        </span>
+    </div>
+</div>

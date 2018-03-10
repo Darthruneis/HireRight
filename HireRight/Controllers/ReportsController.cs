@@ -31,8 +31,29 @@ namespace HireRight.Controllers
         [HttpGet]
         public ViewResult Samples()
         {
-            return View(SamplesList);
+            return View("Samples", SamplesList);
         }
+        private static List<SampleForDownloadViewModel> SamplesList => new List<SampleForDownloadViewModel>()
+        {
+            new SampleForDownloadViewModel(nameof(EliteCareProfileSample), "Elite Care Profile"),
+            new SampleForDownloadViewModel(nameof(EliteCharacterProfileSample), "Elite Character Profile"),
+            new SampleForDownloadViewModel(nameof(EliteHealthcareProfileSample), "Elite Healthcare Profile"),
+            new SampleForDownloadViewModel(nameof(EliteIndustrialProfileSample), "Elite Industrial Profile"),
+            new SampleForDownloadViewModel(nameof(EliteIntellectProfileSample), "Elite Intellect Profile"),
+            new SampleForDownloadViewModel(nameof(EliteManagerProfileSample), "Elite Manager Profile"),
+            new SampleForDownloadViewModel(nameof(ElitePersonalityProfileSample), "Elite Personality Profile"),
+            new SampleForDownloadViewModel(nameof(EliteSalesProfileSample), "Elite Sales Profile"),
+            new SampleForDownloadViewModel(nameof(EliteSkillsProfileSample), "Elite Skills Profile"),
+            new SampleForDownloadViewModel(nameof(EliteTransportationProfileSample), "Elite Transportation Profile"),
+            new SampleForDownloadViewModel(nameof(EQProfileSample), "EQ (Emotional Intelligence) Profile"),
+            new SampleForDownloadViewModel(nameof(MechanicalAptitudeTestProfileSample), "Mechanical Aptitude Test"),
+            new SampleForDownloadViewModel(nameof(SalesHunterProfileTestSample), "Sales Hunter Profile Test"),
+            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSalesSample), "Situational Judgement Test - Sales"),
+            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSupervisorSample), "Situational Judgement Test - Supervisor"),
+            new SampleForDownloadViewModel(nameof(SituationalJudgementTestTeamsSample), "Situational Judgement Test - Teams"),
+            new SampleForDownloadViewModel(nameof(WorkplaceAptitudeTestSample), "Workplace Aptitude Test"),
+            new SampleForDownloadViewModel(nameof(EliteGritProfileSample), "Elite Grit Profile"),
+        };
     }
 
     /// <summary>
@@ -92,7 +113,7 @@ namespace HireRight.Controllers
 
         [HttpGet]
         public ActionResult WorkplaceAptitudeTestSample() => DownloadFromFileName("WATSample.pdf");
-        
+
         [HttpGet]
         public ActionResult EliteGritProfileSample() => DownloadFromFileName("EliteGritProfileSample.pdf");
     }
@@ -102,28 +123,6 @@ namespace HireRight.Controllers
     /// </summary>
     public partial class ReportsController
     {
-        private static List<SampleForDownloadViewModel> SamplesList => new List<SampleForDownloadViewModel>()
-        {
-            new SampleForDownloadViewModel(nameof(EliteCareProfileSample), "Elite Care Profile"),
-            new SampleForDownloadViewModel(nameof(EliteCharacterProfileSample), "Elite Character Profile"),
-            new SampleForDownloadViewModel(nameof(EliteHealthcareProfileSample), "Elite Healthcare Profile"),
-            new SampleForDownloadViewModel(nameof(EliteIndustrialProfileSample), "Elite Industrial Profile"),
-            new SampleForDownloadViewModel(nameof(EliteIntellectProfileSample), "Elite Intellect Profile"),
-            new SampleForDownloadViewModel(nameof(EliteManagerProfileSample), "Elite Manager Profile"),
-            new SampleForDownloadViewModel(nameof(ElitePersonalityProfileSample), "Elite Personality Profile"),
-            new SampleForDownloadViewModel(nameof(EliteSalesProfileSample), "Elite Sales Profile"),
-            new SampleForDownloadViewModel(nameof(EliteSkillsProfileSample), "Elite Skills Profile"),
-            new SampleForDownloadViewModel(nameof(EliteTransportationProfileSample), "Elite Transportation Profile"),
-            new SampleForDownloadViewModel(nameof(EQProfileSample), "EQ (Emotional Intelligence) Profile"),
-            new SampleForDownloadViewModel(nameof(MechanicalAptitudeTestProfileSample), "Mechanical Aptitude Test"),
-            new SampleForDownloadViewModel(nameof(SalesHunterProfileTestSample), "Sales Hunter Profile Test"),
-            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSalesSample), "Situational Judgement Test - Sales"),
-            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSupervisorSample), "Situational Judgement Test - Supervisor"),
-            new SampleForDownloadViewModel(nameof(SituationalJudgementTestTeamsSample), "Situational Judgement Test - Teams"),
-            new SampleForDownloadViewModel(nameof(WorkplaceAptitudeTestSample), "Workplace Aptitude Test"),
-            new SampleForDownloadViewModel(nameof(EliteGritProfileSample), "Elite Grit Profile"),
-        };
-
         private ActionResult Download(string filePath)
         {
             return File(filePath, MimeMapping.GetMimeMapping(filePath));
