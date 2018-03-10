@@ -31,19 +31,10 @@
     }
 
     export function bindEvents() {
-        //TODO: remove this after testing.
-        $(".categoryCard").each((index, elem) => {
-            if (parseInt($(elem).data("visibilityrank")) < 1)
-                console.log(
-                    "warning - a card has been initialized as invisible. Behavior may be unpredictable. Card: " +
-                    $(elem).data("categorytitle"));
-        });
         bindMovementButtons();
         bindContinueAndBackButtons();
         bindFormSubmit();
         bindIndustryToggles();
-        //toggleCards();
-        //throw new Error("Make sure to update the implementation to use the new method...");
     }
 
     function bindIndustryToggles() {
@@ -87,26 +78,6 @@
                 $card.hide().closest(".categoryCardRow").hide();
                 $card.data("cachedhiddenlevel", $hidden.val());
                 $hidden.val("Irrelevant");
-            }
-        });
-
-        //toggleCards();
-    }
-
-    function toggleCards() {
-        $(".categoryCard").each((index, elem) => {
-            var visibilityRank: number = parseInt($(elem).data("visibilityrank"));
-            var $elem: JQuery = $(elem);
-            const getHidden: () => JQuery = () => $elem.closest(".categoryCardRow").find("input[type='hidden']");
-
-            if (visibilityRank > 0) {
-                $elem.show().closest(".categoryCardRow").show();
-                if (getHidden().val() === "Irrelevant")
-                    getHidden().val($elem.data("cachedhiddenlevel"));
-            } else {
-                $elem.hide().closest(".categoryCardRow").hide();
-                $elem.data("cachedhiddenlevel", getHidden().val());
-                getHidden().val("Irrelevant");
             }
         });
     }
