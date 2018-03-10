@@ -5,11 +5,7 @@ namespace HireRight.EntityFramework.CodeFirst.Abstract
 {
     public class StaticPocoBase : PocoBase
     {
-        /// <summary>
-        /// The unique Id of the entity.
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public override long Id { get; set; }
+        [Index(IsUnique = true)]
+        public long StaticId { get; set; }
     }
 }

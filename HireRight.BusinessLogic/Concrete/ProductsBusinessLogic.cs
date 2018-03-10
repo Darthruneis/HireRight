@@ -30,7 +30,7 @@ namespace HireRight.BusinessLogic.Concrete
 
         public Product ConvertDtoToModel(ProductDTO dto)
         {
-            Product model = new Product(dto.Title, dto.Price, new List<Discount>());
+            Product model = new Product(dto.Title, dto.Price, dto.RowGuid, new List<Discount>());
             model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
             model.Discounts = dto.Discounts.Select(x => x.ConvertDtoToModel()).ToList();

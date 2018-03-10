@@ -8,7 +8,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
     /// <summary>
     /// A Scale Category is a type of expertise or personal trait that impacts job performance and eligibility.
     /// </summary>
-    public class ScaleCategory : PocoBase
+    public class ScaleCategory : StaticPocoBase
     {
         /// <summary>
         /// The description for this scale category.
@@ -21,9 +21,6 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         /// </summary>
         [Required]
         public string Title { get; set; }
-
-        [Index(IsUnique = true)]
-        public long StaticId { get; set; }
         
         public List<IndustryScaleCategory> IndustryBinders { get; set; }
 

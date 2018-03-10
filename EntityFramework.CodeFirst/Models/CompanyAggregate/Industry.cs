@@ -22,13 +22,6 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         public const long Other = 9;
 
         /// <summary>
-        /// The unique Id of the entity.
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public override long Id { get; set; }
-
-        /// <summary>
         /// The name of the industry.
         /// </summary>
         [Required]
@@ -45,7 +38,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 
         public Industry(long id, string name) : this()
         {
-            Id = id;
+            StaticId = id;
             Name = name;
         }
     }

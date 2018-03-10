@@ -19,9 +19,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
 
         protected override void Seed(HireRightDbContext context)
         {
-            foreach (Product product in ProductsSeed.Seed())
-                if (!context.Products.Any(x => x.Title == product.Title && x.Price == product.Price && x.Discounts.Count == product.Discounts.Count))
-                    context.Products.AddOrUpdate(product);
+            context.Products.AddOrUpdate(x => x.StaticId, ProductsSeed.Seed().ToArray());
 
             List<ScaleCategory> scaleCategories = ScaleCategorySeed.Seed();
             context.Categories.AddOrUpdate(x => x.StaticId, scaleCategories.ToArray());

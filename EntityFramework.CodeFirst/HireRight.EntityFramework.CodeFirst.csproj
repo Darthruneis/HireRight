@@ -75,17 +75,9 @@
     <Compile Include="Migrations\201706280248050_OrderNotesNotRequired.Designer.cs">
       <DependentUpon>201706280248050_OrderNotesNotRequired.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803100303078_RefactorPocoBaseAndAddIndustries.cs" />
-    <Compile Include="Migrations\201803100303078_RefactorPocoBaseAndAddIndustries.Designer.cs">
-      <DependentUpon>201803100303078_RefactorPocoBaseAndAddIndustries.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.cs" />
-    <Compile Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.Designer.cs">
-      <DependentUpon>201803101836114_ScaleCategoryStaticIdColumn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803101903540_ComputedRowGuids.cs" />
-    <Compile Include="Migrations\201803101903540_ComputedRowGuids.Designer.cs">
-      <DependentUpon>201803101903540_ComputedRowGuids.cs</DependentUpon>
+    <Compile Include="Migrations\201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.cs" />
+    <Compile Include="Migrations\201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.Designer.cs">
+      <DependentUpon>201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CompanyAggregate\Industry.cs" />
@@ -122,14 +114,8 @@
     <EmbeddedResource Include="Migrations\201706280248050_OrderNotesNotRequired.resx">
       <DependentUpon>201706280248050_OrderNotesNotRequired.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803100303078_RefactorPocoBaseAndAddIndustries.resx">
-      <DependentUpon>201803100303078_RefactorPocoBaseAndAddIndustries.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803101836114_ScaleCategoryStaticIdColumn.resx">
-      <DependentUpon>201803101836114_ScaleCategoryStaticIdColumn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803101903540_ComputedRowGuids.resx">
-      <DependentUpon>201803101903540_ComputedRowGuids.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.resx">
+      <DependentUpon>201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

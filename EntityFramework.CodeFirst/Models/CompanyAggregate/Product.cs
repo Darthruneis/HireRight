@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using HireRight.EntityFramework.CodeFirst.Abstract;
 
@@ -7,8 +8,9 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
     /// <summary>
     /// A product is an item which can be purchased through HireRight.
     /// </summary>
-    public class Product : PocoBase
+    public class Product : StaticPocoBase
     {
+        public const long AssessmentTest = 1;
         /// <summary>
         /// A collection of discounts which can be applied to this product based on volume.
         /// </summary>
@@ -27,10 +29,14 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         [Required]
         public string Title { get; set; }
 
-        public Product(string title, decimal price, List<Discount> discounts = null) : this(discounts)
+        public Product(string title, decimal price, long id, List<Discount> discounts = null) : this(title, price, discounts)
         {
-            Title = title;
-            Price = price;
+            StaticId = id;
+        }
+
+        public Product(string title, decimal price, Guid rowGuid, List<Discount> discounts = null) : this(title, price, discounts)
+        {
+            RowGuid = rowGuid;
         }
 
         public Product(List<Discount> discounts = null)
@@ -38,7 +44,13 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
             Discounts = discounts ?? new List<Discount>();
         }
 
-        public Product()
+        private Product(string title, decimal price, List<Discount> discounts = null) : this(discounts)
+        {
+            Title = title;
+            Price = price;
+        }
+
+        private Product()
         {
         }
     }

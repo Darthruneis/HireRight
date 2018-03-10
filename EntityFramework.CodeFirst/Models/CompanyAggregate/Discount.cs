@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using HireRight.EntityFramework.CodeFirst.Abstract;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
@@ -26,7 +27,10 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         /// <summary>
         /// Foreign key for the Product this Discount applies to.
         /// </summary>
-        public Guid ProductId { get; set; }
+        public long ProductId { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        public Product Product { get; set; }
 
         /// <summary>
         /// The threshold is the number of units required to be purchased in order to be eligible for this discount to be applied to your order.
