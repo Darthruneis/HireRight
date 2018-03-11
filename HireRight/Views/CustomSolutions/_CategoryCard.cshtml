@@ -5,6 +5,7 @@
 @{
     var rank = 1;
     var className = new StringBuilder("categoryCard");
+    className.Append($" {Model.Importance}");
     var style = rank < 1 ? "display: none;" : "";
     foreach (IndustryDTO industry in Model.AllIndustries)
     {
@@ -14,11 +15,13 @@
         }
     }
 }
-<div class="@className" data-categorytitle="@Model.Title" data-visibilityrank="@rank" style="@style">
+<div class="@className.ToString()" data-categorytitle="@Model.Title" data-visibilityrank="@rank" style="@style">
     <div class="row">
         <div class="col-xs-12">
             <div class="cardDetails">
-                <label>@Model.Title</label><br/>
+                <div class="cardHeader">
+                    <label>@Model.Title</label><br />
+                </div>
                 @Model.Description
             </div>
         </div>

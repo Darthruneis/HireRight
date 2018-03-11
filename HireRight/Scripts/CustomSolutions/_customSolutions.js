@@ -211,9 +211,11 @@ var CustomSolutions;
             $categoryRow.find(".lessImportantButton").show();
         }
     }
-    function moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache) {
+    function moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache, newValue) {
         cache.restoreCss($card);
         var detachedHtml = $card.detach();
+        detachedHtml.removeClass("Irrelevant LowImportance HighImportance");
+        detachedHtml.addClass(getStringImportanceLevel(newValue));
         detachedHtml.appendTo($newCategoryRow);
         //restore original height for the row
         $categoryRow.css("height", "auto");
@@ -239,7 +241,7 @@ var CustomSolutions;
         $card.animate({
             'margin-left': mLeft,
             'margin-right': mRight
-        }, 500, function () { return moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache); });
+        }, 500, function () { return moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache, newValue); });
     }
     function updateImportanceLevel($categoryRow, increase) {
         var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));

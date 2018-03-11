@@ -252,10 +252,12 @@
         }
     }
 
-    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, $card: JQuery, cache: CardCssCache) {
+    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, $card: JQuery, cache: CardCssCache, newValue: number) {
         cache.restoreCss($card);
 
         var detachedHtml = $card.detach();
+        detachedHtml.removeClass("Irrelevant LowImportance HighImportance");
+        detachedHtml.addClass(getStringImportanceLevel(newValue));
         detachedHtml.appendTo($newCategoryRow);
 
         //restore original height for the row
@@ -287,7 +289,7 @@
             'margin-right': mRight
         },
             500,
-            () => moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache));
+            () => moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache, newValue));
     }
 
     function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void {
