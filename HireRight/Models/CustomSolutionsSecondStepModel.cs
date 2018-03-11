@@ -9,13 +9,13 @@ namespace HireRight.Models
 {
     public class CustomSolutionsSecondStepModel
     {
-        public CustomSolutionsFirstStepModel PreviousInformation { get; private set; }
+        public CustomSolutionsFirstStepModel PreviousInformation { get; set; }
 
         public IList<JobAnalysisCategoryViewModel> Categories { get; set; }
 
         public List<IndustryDTO> Industries { get; set; }
 
-        private CustomSolutionsSecondStepModel()
+        public CustomSolutionsSecondStepModel()
         {
             Categories = new List<JobAnalysisCategoryViewModel>();
             PreviousInformation = new CustomSolutionsFirstStepModel();
