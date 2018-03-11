@@ -7214,10 +7214,14 @@ button[type="submit"] {
   background-color: aqua; }
 
 .lessImportantButton {
-  border-right: 1px solid black; }
+  border-right: 2px solid black;
+  margin-right: -1px;
+  border-bottom-left-radius: 4px; }
 
 .moreImportantButton {
-  border-left: 1px solid black; }
+  border-left: 2px solid black;
+  margin-left: -1px;
+  border-bottom-right-radius: 4px; }
 
 .categoryCard {
   border: 2px solid black;
@@ -7227,39 +7231,35 @@ button[type="submit"] {
 
 .cardHeader {
   border-bottom: 2px solid black;
-  margin-left: -10px;
-  margin-right: -10px;
+  margin-left: -16px;
+  margin-right: -16px;
   padding-left: 0.5em; }
   .cardHeader label {
     margin-bottom: 0; }
 
 .cardDetails {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  padding-left: 6px;
+  padding-right: 6px;
   border-top-left-radius: 4px;
-  border-top-right-radius: 4px; }
+  border-top-right-radius: 4px;
+  border-top-width: 5px;
+  border-left-width: 10px;
+  border-right-width: 10px;
+  border-bottom-width: 5px;
+  border-style: solid; }
 
 .Irrelevant .cardDetails {
-  border-top: 5px solid red;
-  border-left: 10px solid red;
-  border-right: 10px solid red;
-  border-bottom: 5px solid red; }
+  border-color: #efc83b; }
   .Irrelevant .cardDetails .cardHeader {
     font-size: 0.9em; }
 
 .LowImportance .cardDetails {
-  border-top: 5px solid yellow;
-  border-left: 10px solid yellow;
-  border-right: 10px solid yellow;
-  border-bottom: 5px solid yellow; }
+  border-color: #75ce1c; }
   .LowImportance .cardDetails .cardHeader {
     font-size: 1.1em; }
 
 .HighImportance .cardDetails {
-  border-top: 5px solid green;
-  border-left: 10px solid green;
-  border-right: 10px solid green;
-  border-bottom: 5px solid green; }
+  border-color: #1cdbc5; }
   .HighImportance .cardDetails .cardHeader {
     font-size: 1.3em; }
 
