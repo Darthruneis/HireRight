@@ -122,9 +122,16 @@ var CustomSolutions;
         });
     }
     function bindFormSubmit() {
-        $("form").on("submit", function (e) {
+        $("#FinishButton").on("click", function (e) {
             makeHiddenCardsIrrelevant();
             var counts = inspectCardCounts();
+            var isGeneralSelected = $(".generalIndustryToggle").hasClass("activeIndustry");
+            var activeToggles = $(".activeIndustry:not(.generalIndustryToggle)");
+            var selectedIndustry = 0;
+            if (activeToggles != null)
+                selectedIndustry = activeToggles.data("industryid");
+            $(this).append("<input type='hidden' name='selectedIndustry' value='" + selectedIndustry + "'/>");
+            $(this).append("<input type='hidden' name='isGeneralSelected' value='" + isGeneralSelected + "'/>");
             var result = true;
             if (counts.relevant < 1 || counts.relevant > 9) {
                 $("#notEnough").show();
@@ -138,7 +145,8 @@ var CustomSolutions;
             }
             else
                 $("#notEnoughCrits").hide();
-            return result;
+            if (result)
+                $("form").submit();
         });
     }
     function makeHiddenCardsIrrelevant() {
@@ -168,7 +176,7 @@ var CustomSolutions;
         $(".importanceHeaders").find(":not(:first-child)").toggleClass("col-xs-4 col-xs-6");
         $("#BackButton").toggle();
         $("#ContinueButton").toggle();
-        $("form input[type='submit']").closest("div").toggle();
+        $("#FinishButton").toggle();
         $("#notEnoughCrits").hide();
         $("#notEnough").hide();
         $(".categoryCardRow input[type='hidden']").each(function (index, elem) {

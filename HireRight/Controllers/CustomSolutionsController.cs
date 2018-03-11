@@ -53,7 +53,7 @@ namespace HireRight.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult> SecondStep(CustomSolutionsSecondStepModel model)
+        public async Task<ActionResult> SecondStep(CustomSolutionsSecondStepModel model, long selectedIndustry, bool isGeneralSelected)
         {
             ICollection<CategoryDTO> categories = await _categoriesBusinessLogic.GetAll();
             ICollection<IndustryDTO> industries = await _industryBusinessLogic.GetAll();
@@ -65,6 +65,8 @@ namespace HireRight.Controllers
             if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) < 3)
                 ModelState.AddModelError("", "Please select at least 3 critical scales.");
             
+            ClearIrrelevantModelstateErrorsForContactAddress();
+            //TODO: Make use of the new parameters in order to properly set up the view's state on postback.
             if (!ModelState.IsValid)
                 return View("_SecondStep", model);
 
@@ -72,6 +74,12 @@ namespace HireRight.Controllers
             return View("CustomSolutionsSuccess");
         }
 
-        
+        private void ClearIrrelevantModelstateErrorsForContactAddress()
+        {
+            ModelState["PreviousInformation.Contact.Address.City"].Errors.Clear();
+            ModelState["PreviousInformation.Contact.Address.PostalCode"].Errors.Clear();
+            ModelState["PreviousInformation.Contact.Address.State"].Errors.Clear();
+            ModelState["PreviousInformation.Contact.Address.StreetAddress"].Errors.Clear();
+        }
     }
 }

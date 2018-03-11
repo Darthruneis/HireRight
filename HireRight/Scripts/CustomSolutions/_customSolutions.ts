@@ -151,10 +151,19 @@
     }
 
     function bindFormSubmit() {
-        $("form").on("submit",
+        $("#FinishButton").on("click",
             function (e: Event) {
                 makeHiddenCardsIrrelevant();
                 var counts = inspectCardCounts();
+                var isGeneralSelected:boolean = $(".generalIndustryToggle").hasClass("activeIndustry");
+                var activeToggles:JQuery = $(".activeIndustry:not(.generalIndustryToggle)");
+                var selectedIndustry: number = 0;
+                if (activeToggles != null)
+                    selectedIndustry = activeToggles.data("industryid");
+
+                $(this).append(`<input type='hidden' name='selectedIndustry' value='${selectedIndustry}'/>`);
+                $(this).append(`<input type='hidden' name='isGeneralSelected' value='${isGeneralSelected}'/>`);
+
                 var result: boolean = true;
                 if (counts.relevant < 1 || counts.relevant > 9) {
                     $("#notEnough").show();
@@ -169,7 +178,8 @@
                 }
                 else
                     $("#notEnoughCrits").hide();
-                return result;
+                if (result)
+                    $("form").submit();
             });
     }
 
@@ -204,7 +214,7 @@
 
         $("#BackButton").toggle();
         $("#ContinueButton").toggle();
-        $("form input[type='submit']").closest("div").toggle();
+        $("#FinishButton").toggle();
 
         $("#notEnoughCrits").hide();
         $("#notEnough").hide();
