@@ -30,21 +30,34 @@
         }
     }
 
-    export function bindEvents() {
+    export function bindEvents(selectedIndustry: number = 0, isGeneralSelected: boolean = false) {
         bindMovementButtons();
         bindContinueAndBackButtons();
         bindFormSubmit();
         bindIndustryToggles();
+        if (selectedIndustry !== 0 || isGeneralSelected) {
+            if (selectedIndustry !== 0) {
+                $(`.industryToggle:not(.generalIndustryToggle)[data-industryid='${selectedIndustry}']`)
+                    .trigger("click");
+            }
+            if (isGeneralSelected) {
+                $(".generalIndustryToggle").trigger("click");
+            }
+
+            updateCardVisibilityRanks();
+            toggleIrrelevantCards();
+            $("#ContinueButton").trigger("click");
+        }
     }
 
     function bindIndustryToggles() {
         $(".industryToggle:not(.generalIndustryToggle)").on("click",
             function (e: Event) {
                 var $this = $(this);
-                
+
                 var isBeingRemoved: boolean = $this.hasClass("activeIndustry");
                 $(".industryToggle:not(.generalIndustryToggle)").removeClass("activeIndustry").find("i").hide();
-                
+
                 if (!isBeingRemoved) {
                     $this.addClass("activeIndustry");
                     $this.find("i").show();
@@ -72,7 +85,7 @@
             var $hidden: JQuery = getHidden($card);
             if (rank > 0) {
                 $card.show().closest(".categoryCardRow").show();
-                if($hidden.val() === "Irrelevant")
+                if ($hidden.val() === "Irrelevant")
                     $hidden.val($card.data("cachedhiddenlevel"));
             } else {
                 $card.hide().closest(".categoryCardRow").hide();
@@ -81,6 +94,7 @@
             }
         });
     }
+
     function getVisibilityRankForCard($card: JQuery, $toggles: Array<JQuery>): number {
         var specificCategory: string = "";
         var generalCategoryEnabled: boolean = false;
@@ -153,10 +167,11 @@
     function bindFormSubmit() {
         $("#FinishButton").on("click",
             function (e: Event) {
+                updateCardVisibilityRanks();
                 makeHiddenCardsIrrelevant();
                 var counts = inspectCardCounts();
-                var isGeneralSelected:boolean = $(".generalIndustryToggle").hasClass("activeIndustry");
-                var activeToggles:JQuery = $(".activeIndustry:not(.generalIndustryToggle)");
+                var isGeneralSelected: boolean = $(".generalIndustryToggle").hasClass("activeIndustry");
+                var activeToggles: JQuery = $(".activeIndustry:not(.generalIndustryToggle)");
                 var selectedIndustry: number = 0;
                 if (activeToggles != null)
                     selectedIndustry = activeToggles.data("industryid");
@@ -334,14 +349,14 @@
                 this.case = name;
             }
         }
-        export function runTests() : boolean {
+        export function runTests(): boolean {
             var results = new Array<CustomSolutionsTestCase>();
             generalCases(results);
             specificCases(results);
             combinedCases(results);
             noneCases(results);
-            var passed:number = 0;
-            var total:number = 0;
+            var passed: number = 0;
+            var total: number = 0;
             for (var i = 0; i < results.length; i++) {
                 if (!results[i].status())
                     console.log(results[i].print());

@@ -15,6 +15,10 @@ namespace HireRight.Models
 
         public List<IndustryDTO> Industries { get; set; }
 
+        public long SelectedIndustry { get; set; } = 0;
+
+        public bool IsGeneralSelected { get; set; } = false;
+
         public CustomSolutionsSecondStepModel()
         {
             Categories = new List<JobAnalysisCategoryViewModel>();

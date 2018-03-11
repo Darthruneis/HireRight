@@ -83,7 +83,7 @@
 <script src="~/Scripts/stickyFill.js"></script>
 <script>
     $(document).ready(function () {
-        CustomSolutions.bindEvents();
+        CustomSolutions.bindEvents(@Model.SelectedIndustry, @Model.IsGeneralSelected.ToString().ToLower());
         var togglesRow = document.getElementById("industryTogglesRow");
         Stickyfill.addOne(togglesRow);
     });

@@ -22,11 +22,25 @@ var CustomSolutions;
         };
         return CardCssCache;
     }());
-    function bindEvents() {
+    function bindEvents(selectedIndustry, isGeneralSelected) {
+        if (selectedIndustry === void 0) { selectedIndustry = 0; }
+        if (isGeneralSelected === void 0) { isGeneralSelected = false; }
         bindMovementButtons();
         bindContinueAndBackButtons();
         bindFormSubmit();
         bindIndustryToggles();
+        if (selectedIndustry !== 0 || isGeneralSelected) {
+            if (selectedIndustry !== 0) {
+                $(".industryToggle:not(.generalIndustryToggle)[data-industryid='" + selectedIndustry + "']")
+                    .trigger("click");
+            }
+            if (isGeneralSelected) {
+                $(".generalIndustryToggle").trigger("click");
+            }
+            updateCardVisibilityRanks();
+            toggleIrrelevantCards();
+            $("#ContinueButton").trigger("click");
+        }
     }
     CustomSolutions.bindEvents = bindEvents;
     function bindIndustryToggles() {
@@ -123,6 +137,7 @@ var CustomSolutions;
     }
     function bindFormSubmit() {
         $("#FinishButton").on("click", function (e) {
+            updateCardVisibilityRanks();
             makeHiddenCardsIrrelevant();
             var counts = inspectCardCounts();
             var isGeneralSelected = $(".generalIndustryToggle").hasClass("activeIndustry");
