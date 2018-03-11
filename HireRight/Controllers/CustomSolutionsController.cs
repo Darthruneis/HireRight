@@ -55,10 +55,9 @@ namespace HireRight.Controllers
         [HttpPost]
         public async Task<ActionResult> SecondStep(CustomSolutionsSecondStepModel model)
         {
-            //TODO: refresh the model with the information for each category, instead of persisting Title and Description with hidden fields.
             ICollection<CategoryDTO> categories = await _categoriesBusinessLogic.GetAll();
             ICollection<IndustryDTO> industries = await _industryBusinessLogic.GetAll();
-            model.Industries = industries.ToList();
+            model.RefreshModel(industries, categories);
 
             if (model.Categories.Count(x => x.Importance != CategoryImportance.Irrelevant) > MaximumNumberOfCategories)
                 ModelState.AddModelError("", $"Please choose 1 - {MaximumNumberOfCategories} important scales.");
@@ -73,6 +72,6 @@ namespace HireRight.Controllers
             return View("CustomSolutionsSuccess");
         }
 
-
+        
     }
 }

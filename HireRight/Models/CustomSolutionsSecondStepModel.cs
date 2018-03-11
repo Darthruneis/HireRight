@@ -42,5 +42,21 @@ namespace HireRight.Models
 
             return dto;
         }
+
+        public void RefreshModel(ICollection<IndustryDTO> industries, ICollection<CategoryDTO> categories)
+        {
+            Industries = industries.ToList();
+            foreach (JobAnalysisCategoryViewModel jobAnalysisCategoryViewModel in Categories)
+            {
+                var dto = categories.SingleOrDefault(x => x.RowGuid == jobAnalysisCategoryViewModel.Id);
+                if (dto == null)
+                    continue;
+
+                jobAnalysisCategoryViewModel.RelevantIndustries = dto.Industries;
+                jobAnalysisCategoryViewModel.Description = dto.Description;
+                jobAnalysisCategoryViewModel.Title = dto.Title;
+                jobAnalysisCategoryViewModel.AllIndustries = Industries;
+            }
+        }
     }
 }
