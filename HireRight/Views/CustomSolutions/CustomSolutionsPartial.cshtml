@@ -1,46 +1,52 @@
 ﻿@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
-@model CustomSolutionsViewModel
+@model CustomSolutionsSecondStepModel
 <script src="~/Scripts/showHideDiv.js"></script>
 <script src="~/Scripts/CustomSolutions/customSolutionsPartial.js"></script>
 <div class="row">
     <div class="col-xs-12">
-        Select the Industry for your organization if listed. For each scale rate the importance for a successful candidate.At the end of this first step, the 'Irrelevant' categories will be dropped.Then, the selection must be narrowed to at most nine (9) categories.
-        <br />
-        All tests will include a 10th category - <b>Candidness</b>.
-        <br />
-        <br />
-        When finished, click 'Continue'.
-        <br />
-        <br />
+        <ol>
+            <li>Select the Industry for your organization if listed. You may also select the General industry to see the categories that apply to many industries.</li>
+            <li>For each scale rate the importance for a successful candidate. At the end of this first step, all 'Irrelevant' categories will be dropped. When you have eliminated categories you are uninterested in, use the 'Continue' button.</li>
+            <li>Finally, narrow the selection down to at most nine (9) categories for your industry, and up to nine (9) additional General categories. You may move back and forth between this and the last step at any time using the 'Back' and 'Continue' buttons.</li>
+            <li>When finished, click 'Finish'.</li>
+        </ol>
+        @{
+            var candidness = Model.Categories.SingleOrDefault(x => x.Title == "Candidness");
+        }
+        @if (candidness != null)
+        {
+            <span>All tests will include a 10th category - <a id="candidnessLink" onclick="$('#candidnessDescription').toggle();">@(candidness.Title)</a>.</span>
+            <br />
+            <div id="candidnessDescription" style="display: none; margin-left: 5%;">@(candidness.Description)</div>
+        }
     </div>
 </div>
-<div class="row">
-    @foreach (IndustryDTO industry in Model.Industries.Where(x => x.Id != Industry.General))
-    {
-        <div class="col-xs-4 col-md-3">
-            <div class="industryToggle" data-industryid="@industry.Id" data-industryname="@industry.Name">
-                <span style="width: 100%; text-align: center; display: inline-block;">
+<div id="industryTogglesRow">
+    <div class="pad-top-5">
+        <div style="clear: both;">
+            @{ var general = @Model.Industries.Single(x => x.Id == Industry.General);}
+            <div class="industryToggle generalIndustryToggle" data-industryid="@Industry.General" data-industryname="@general.Name">
+                <span style="text-align: center; display: inline-block;">
                     <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
-                    &nbsp;&nbsp;@industry.Name
+                    &nbsp;&nbsp;@general.Name
                 </span>
             </div>
-        </div>
-    }
-    <div class="col-xs-4 col-md-3">
-        @{ var general = @Model.Industries.Single(x => x.Id == Industry.General);}
-        <div class="industryToggle generalIndustryToggle" data-industryid="@Industry.General" data-industryname="@general.Name">
-            <span style="width: 100%; text-align: center; display: inline-block;">
-                <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
-                &nbsp;&nbsp;@general.Name
-            </span>
+            @foreach (IndustryDTO industry in Model.Industries.Where(x => x.Id != Industry.General))
+            {
+                <div class="industryToggle" data-industryid="@industry.Id" data-industryname="@industry.Name">
+                    <span style="text-align: center; display: inline-block;">
+                        <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
+                        &nbsp;&nbsp;@industry.Name
+                    </span>
+                </div>
+            }
         </div>
     </div>
-</div>
-
-<div class="row importanceHeaders">
-    <h4 class="col-xs-4">Irrelevant</h4>
-    <h4 class="col-xs-4">Nice to Have</h4>
-    <h4 class="col-xs-4">Critical for Success</h4>
+    <div class="row importanceHeaders">
+        <h4 class="col-xs-4">Irrelevant</h4>
+        <h4 class="col-xs-4">Nice to Have</h4>
+        <h4 class="col-xs-4">Critical for Success</h4>
+    </div>
 </div>
 
 <div id="categoryContainerDiv">
@@ -76,94 +82,11 @@
     }
 </div>
 <script src="~/Scripts/CustomSolutions/_customSolutions.js"></script>
+<script src="~/Scripts/stickyFill.js"></script>
 <script>
     $(document).ready(function () {
         CustomSolutions.bindEvents();
+        var togglesRow = document.getElementById("industryTogglesRow");
+        Stickyfill.addOne(togglesRow);
     });
 </script>
-
-@*ORIGINAL IMPLEMENTATION BELOW
-    <div class="pad-0 marg-bottom-10">
-            @{Html.RenderPartial("CategoryFilterPartial", Model.Filter);}
-        </div>
-
-    @*The col class here is used for the padding styling rather than the positioning.*@
-@*
-    <div class="col-xs-12">
-        @*Due to using borderedRow on this div's sibling div,
-            a bottom border isn't needed because that border would be doubled up.*@
-@*
-        <div class="row borderedTop borderedLeft borderedRight">
-            <div class="col-xs-11">
-                <div class="row">
-                    <div class="col-xs-12 col-lg-2">
-                        <strong>Category</strong>
-                    </div>
-                    <div class="hidden-xs visible-lg col-lg-7">
-                        <strong>Category Description</strong>
-                    </div>
-                    <div class="hidden-xs visible-lg col-lg-3">
-                        <strong>Importance</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-1">
-                <strong class="pull-right"></strong>
-            </div>
-        </div>
-        <div class="row borderedRow">
-            <div class="col-xs-12">
-                @for (int i = 0; i < Model.Categories.Count; i++)
-                {
-                    string borderString = "borderedBottom";
-                    if ((i + 1) % Model.Filter.Filter.PageSize == 0 || (i + 1) == Model.Categories.Count)
-                    {
-                        borderString = "";
-                    }
-                    <div class="row @(borderString)">
-                        @{
-                            string rowId = "categoryRow_" + i;
-                        }
-                        <div class="col-xs-12 col-sm-11">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-2">
-                                    <span class="bold">@Model.Categories[i].Title</span>
-                                    @Html.HiddenFor(x => Model.Categories[i].Title)
-                                </div>
-                                <div class="pad-top-2 col-xs-12 col-sm-push-7 col-sm-3">
-                                    @Html.EnumDropDownListFor(x => Model.Categories[i].Importance, new { @class = "form-control categoryDropDownDiv", data_categoryId = Model.Categories[i].Id, data_categoryName = Model.Categories[i].Title })
-                                    @Html.HiddenFor(x => Model.Categories[i].Importance)
-                                </div>
-                                <div class="col-xs-12 col-sm-pull-3 col-sm-7">
-                                    <div id="@rowId">
-                                        <span class="overflow">@Model.Categories[i].Description</span>
-                                        @Html.HiddenFor(x => Model.Categories[i].Description)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hidden-xs visible-sm visible-md visible-lg col-sm-1">
-                            @Html.HiddenFor(x => Model.Categories[i].Id)
-                            @Html.CollapseButton(rowId, "Show description", "Hide description", "descriptionToggle")
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-            $("#CategoryListDiv").on("click", ".descriptionToggle", function () {
-                var $descriptionDiv = $("#" + $(this).data("toggledivid"));
-
-                if ($(this).hasClass("glyphicon-minus-sign")) {
-                    $descriptionDiv.height("14pt");
-                } else {
-                    $descriptionDiv.height("auto");
-                }
-
-                Collapsibles.swapCollapseButtonIconAndTitle($(this));
-            });
-        })
-    </script>
-*@

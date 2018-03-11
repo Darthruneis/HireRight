@@ -1,0 +1,50 @@
+﻿@model CustomSolutionsSecondStepModel
+@{
+    ViewBag.Title = "Custom Solutions";
+}
+<script src="~/Scripts/CustomSolutions/index.js"></script>
+@using (Html.BeginForm("Index", "CustomSolutions", FormMethod.Post, new { id = "CustomSolutionsIndexForm" }))
+{
+    <div class="row">
+        <div class="col-xs-9 col-md-11">
+            <h2>Choosing the Critical Scales</h2>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            @Html.CollapseButton("CategoryListDiv")
+        </div>
+    </div>
+    <div id="CategoryListDiv">
+        @Html.Partial("CustomSolutionsPartial", Model)
+    </div>
+    <div style="clear: both;">
+        <button class="btn btn-primary pull-left" type="button" style="display: none" id="BackButton">Back</button>
+        <div class="pull-left">
+            @Html.ValidationSummary(true)
+            <span class="field-validation-error" style="display: none;" id="notEnoughCrits">Please select at least 3 critical scales.<br /></span>
+            <span class="field-validation-error" style="display: none;" id="notEnough">Please choose 1 - 9 important scales.<br /></span>
+        </div>
+        <div class="pull-right" style="display: none;">@Html.SubmitButton("Finish")</div>
+        <button class="btn btn-primary pull-right" type="button" id="ContinueButton">Continue</button>
+    </div>
+    @* Hidden fields for everything that was populated in step 1. *@
+    @Html.HiddenFor(x => x.PreviousInformation.CompanyName)
+    @Html.HiddenFor(x => x.PreviousInformation.Notes)
+    @Html.HiddenFor(x => x.PreviousInformation.PositionsToFill)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.RowGuid)
+
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.CellNumber)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.CompanyGuid)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.Email)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.FirstName)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.LastName)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.OfficeNumber)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.IsAdmin)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.IsPrimary)
+
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.Address.City)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.Address.Country)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.Address.PostalCode)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.Address.State)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.Address.StreetAddress)
+    @Html.HiddenFor(x => x.PreviousInformation.Contact.Address.UnitNumber)
+}

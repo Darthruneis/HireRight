@@ -181,7 +181,8 @@
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\ContactUsViewModel.cs" />
     <Compile Include="Models\CreateOrderViewModel.cs" />
-    <Compile Include="Models\CustomSolutionsViewModel.cs" />
+    <Compile Include="Models\CustomSolutionsFirstStepModel.cs" />
+    <Compile Include="Models\CustomSolutionsSecondStepModel.cs" />
     <Compile Include="Models\JobAnalysisCategoryViewModel.cs" />
     <Compile Include="Models\NewClientsViewModel.cs" />
     <Compile Include="Models\OrdersViewModel.cs" />
@@ -485,6 +486,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\showHideDiv.js" />
+    <Content Include="Scripts\stickyFill.js" />
     <Content Include="Scripts\toggleDivsAndButtons.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -518,7 +520,7 @@
     <Content Include="Views\Order\ProductDiscountsPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AddressDTO.cshtml" />
     <Content Include="Views\Order\About.cshtml" />
-    <Content Include="Views\CustomSolutions\Index.cshtml" />
+    <Content Include="Views\CustomSolutions\_SecondStep.cshtml" />
     <Content Include="Views\Order\EditorTemplates\OrdersViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\PrimaryContactViewModel.cshtml" />
@@ -553,6 +555,7 @@
     <Content Include="Views\Shared\_PagingButtonsForFilter.cshtml" />
     <Content Include="Views\CustomSolutions\_CategoryCard.cshtml" />
     <Content Include="Views\Reports\_SampleReportLink.cshtml" />
+    <Content Include="Views\CustomSolutions\_FirstStep.cshtml" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

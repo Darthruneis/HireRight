@@ -32,16 +32,18 @@
     //these margins ensure that the border goes all the way across the top of the card
     margin-left: -10px;
     margin-right: -10px;
-    padding-left: 1em;
+    padding-left: 0.5em;
 
     & label {
         margin-bottom: 0;
     }
 }
 
-.cardDetails :not(.cardHeader) {
+.cardDetails {
     padding-left: 0.5em;
     padding-right: 0.5em;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .Irrelevant .cardDetails {
@@ -91,11 +93,17 @@
 }
 
 .industryToggle {
-    margin-bottom: 10px;
+    margin: 0.5em 1em;
+    padding: 0.25em 1em;
+    width: auto;
     border: 2px solid black;
     border-radius: 3px;
     cursor: pointer;
+    float: left;
     background-color: $site_button_color;
+    &.generalIndustryToggle {
+        margin-right: 1.5em;
+    }
 
     &:hover {
         background-color: $boldBlue-65;
@@ -112,4 +120,13 @@
     &:hover {
         background-color: $white;
     }
+}
+
+#industryTogglesRow {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 5;
+    background-color: $white;
+    //nav bar height
+    top: 52px;
 }

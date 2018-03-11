@@ -7229,13 +7229,15 @@ button[type="submit"] {
   border-bottom: 2px solid black;
   margin-left: -10px;
   margin-right: -10px;
-  padding-left: 1em; }
+  padding-left: 0.5em; }
   .cardHeader label {
     margin-bottom: 0; }
 
-.cardDetails :not(.cardHeader) {
+.cardDetails {
   padding-left: 0.5em;
-  padding-right: 0.5em; }
+  padding-right: 0.5em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px; }
 
 .Irrelevant .cardDetails {
   border-top: 5px solid red;
@@ -7272,11 +7274,16 @@ button[type="submit"] {
     text-align: center; }
 
 .industryToggle {
-  margin-bottom: 10px;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  width: auto;
   border: 2px solid black;
   border-radius: 3px;
   cursor: pointer;
+  float: left;
   background-color: #ff8533; }
+  .industryToggle.generalIndustryToggle {
+    margin-right: 1.5em; }
   .industryToggle:hover {
     background-color: #4d79ff; }
   .industryToggle span {
@@ -7286,4 +7293,11 @@ button[type="submit"] {
   background-color: #4d79ff; }
   .industryToggle.activeIndustry:hover {
     background-color: #ffffff; }
+
+#industryTogglesRow {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 5;
+  background-color: #ffffff;
+  top: 52px; }
 

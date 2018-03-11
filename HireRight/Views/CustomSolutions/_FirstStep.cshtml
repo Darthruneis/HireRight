@@ -1,0 +1,39 @@
+﻿@model CustomSolutionsFirstStepModel
+@{
+    ViewBag.Title = "Custom Solutions";
+}
+<script src="~/Scripts/CustomSolutions/index.js"></script>
+@using (Html.BeginForm("FirstStep", "CustomSolutions", FormMethod.Post, 
+                       new { id = "CustomSolutionsFirstStepForm" }))
+{
+    <div class="row">
+        <div class="col-xs-9 col-md-11">
+            <h2>Job Analysis</h2>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            @Html.CollapseButton("jobAnalysisInstructionsDiv")
+        </div>
+    </div>
+    <div id="jobAnalysisInstructionsDiv">
+        @{ Html.RenderPartial("FormInstructionsContentPartial"); }
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-9 col-md-11">
+            <h2>Required Information</h2>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            @Html.CollapseButton("contactAndCompanyInfoDiv")
+        </div>
+    </div>
+    <div id="contactAndCompanyInfoDiv">
+        @{ Html.RenderPartial("ContactAndCompanyInfoPartial", Model); }
+    </div>
+    <br />
+    <div style="clear: both;">
+        <div class="pull-left">
+            @Html.ValidationSummary(true)
+        </div>
+        <div class="pull-right">@Html.SubmitButton("Continue")</div>
+    </div>
+}

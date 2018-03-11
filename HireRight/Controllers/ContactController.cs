@@ -38,7 +38,7 @@ namespace HireRight.Controllers
                 CompanyDTO companyDto = await _companyBusinessLogic.Add(new CompanyDTO() { BillingAddress = model.Address, Name = model.CompanyName });
 
                 ContactDTO contactDto = model.ConvertToContactDTO();
-                contactDto.CompanyId = companyDto.RowGuid;
+                contactDto.CompanyGuid = companyDto.RowGuid;
                 ContactDTO dto = await _contactsBusinessLogic.Add(contactDto);
 
                 await _contactsBusinessLogic.SendNewContactEmail(dto.RowGuid, model.Message);
