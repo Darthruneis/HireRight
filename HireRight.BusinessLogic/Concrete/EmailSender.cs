@@ -63,8 +63,8 @@ namespace HireRight.BusinessLogic.Concrete
 
                 SetEmailPickupDirectory(emailClient);
 #if !DEBUG
-                emailClient.Host = SmtpHost;
-                emailClient.Port = SmtpPort;
+                emailClient.Host = _smtpHost;
+                emailClient.Port = _smtpPort;
                 emailClient.Credentials = _smtpCredentials;
 #endif
                 emailClient.Send(mailMessage);

@@ -19,6 +19,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
 
         protected override void Seed(HireRightDbContext context)
         {
+            context.Database.ExecuteSqlCommand("DELETE * FROM dbo.Discount");
             context.Products.AddOrUpdate(x => x.StaticId, ProductsSeed.Seed().ToArray());
 
             List<ScaleCategory> scaleCategories = ScaleCategorySeed.Seed();

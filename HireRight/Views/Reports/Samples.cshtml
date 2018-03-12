@@ -9,9 +9,6 @@
     @foreach (var sample in samples)
     {
         sample.IsAlternate = samples.IndexOf(sample) % 2 == 0;
-        sample.Description = @"Lorem ipsum dolor sit amet, dolor amet duis posuere libero vivamus. Placerat amet nec est, ac amet purus posuere. Enim vestibulum, massa non integer ac, velit libero ac cursus, convallis voluptatem nulla elementum morbi suspendisse. Eu nunc libero vel vestibulum interdum, praesent leo justo, non pede sed. Semper quis rhoncus vestibulum lacinia, proin nunc luctus nunc, vitae in adipisci parturient nec in aliquet, cras in est non imperdiet. Duis eget nec urna posuere volutpat. Non lectus rhoncus eget at ut. Amet molestie ut pede magna augue, mi aliquet pellentesque duis integer nunc, maecenas eos eu, purus faucibus, elit eget vel nec praesent. Dui velit magnis aenean libero in ornare.
-
-Tempus libero leo, dolor purus fusce wisi in nulla. In pellentesque, consectetuer vitae morbi ut morbi. Volutpat in pretium, facilisis pharetra molestie sodales, ultricies imperdiet integer. Diam pulvinar vivamus id vulputate nulla lacinia, lectus commodo augue id nulla. Morbi integer, nonummy integer fringilla, in at. Aliquam ex. Sem ante, suspendisse tortor, pede arcu rutrum et accumsan eros.";
         @Html.Partial("_SampleReportLink", sample)
     }
 </div>
