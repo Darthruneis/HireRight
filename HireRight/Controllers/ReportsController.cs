@@ -33,27 +33,44 @@ namespace HireRight.Controllers
         {
             return View("Samples", SamplesList);
         }
-        private static List<SampleForDownloadViewModel> SamplesList => new List<SampleForDownloadViewModel>()
-        {
-            new SampleForDownloadViewModel(nameof(EliteCareProfileSample), "Elite Care Profile"),
-            new SampleForDownloadViewModel(nameof(EliteCharacterProfileSample), "Elite Character Profile"),
-            new SampleForDownloadViewModel(nameof(EliteHealthcareProfileSample), "Elite Healthcare Profile"),
-            new SampleForDownloadViewModel(nameof(EliteIndustrialProfileSample), "Elite Industrial Profile"),
-            new SampleForDownloadViewModel(nameof(EliteIntellectProfileSample), "Elite Intellect Profile"),
-            new SampleForDownloadViewModel(nameof(EliteManagerProfileSample), "Elite Manager Profile"),
-            new SampleForDownloadViewModel(nameof(ElitePersonalityProfileSample), "Elite Personality Profile"),
-            new SampleForDownloadViewModel(nameof(EliteSalesProfileSample), "Elite Sales Profile"),
-            new SampleForDownloadViewModel(nameof(EliteSkillsProfileSample), "Elite Skills Profile"),
-            new SampleForDownloadViewModel(nameof(EliteTransportationProfileSample), "Elite Transportation Profile"),
-            new SampleForDownloadViewModel(nameof(EQProfileSample), "EQ (Emotional Intelligence) Profile"),
-            new SampleForDownloadViewModel(nameof(MechanicalAptitudeTestProfileSample), "Mechanical Aptitude Test"),
-            new SampleForDownloadViewModel(nameof(SalesHunterProfileTestSample), "Sales Hunter Profile Test"),
-            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSalesSample), "Situational Judgement Test - Sales"),
-            new SampleForDownloadViewModel(nameof(SituationalJudgementTestSupervisorSample), "Situational Judgement Test - Supervisor"),
-            new SampleForDownloadViewModel(nameof(SituationalJudgementTestTeamsSample), "Situational Judgement Test - Teams"),
-            new SampleForDownloadViewModel(nameof(WorkplaceAptitudeTestSample), "Workplace Aptitude Test"),
-            new SampleForDownloadViewModel(nameof(EliteGritProfileSample), "Elite Grit Profile"),
-        };
+
+        private static readonly List<SampleForDownloadViewModel> SamplesList =
+            new List<SampleForDownloadViewModel>()
+            {
+                new SampleForDownloadViewModel("Elite Care Profile", nameof(EliteCareProfileSample),
+                                               "The Elite Care Profile is a general indicator of the individual’s ability to engage in care-oriented behaviors across a wide range of care-focused environments (e.g. healthcare, long-term care, in home care). The profile measures a wide range of characteristics that center around being kind and caring while exhibiting conscientious and compliant behaviors."),
+                new SampleForDownloadViewModel("Elite Character Profile", nameof(EliteCharacterProfileSample),
+                                               "The Elite Character Profile is a general indicator of the individual's ability to refrain from participating in counterproductive behaviors by being trustworthy, drug-free, non-violent and compliant. This battery is appropriate for most jobs."),
+                new SampleForDownloadViewModel("Elite Healthcare Profile", nameof(EliteHealthcareProfileSample),
+                                               "The Elite Healthcare Profile is a general indicator of the individual's ability to engage in service-oriented behaviors within the Healthcare environment. This profile is appropriate for healthcare professionals who interact with patients (e.g., nurses, doctors, therapists, healthcare technicians, etc.)."),
+                new SampleForDownloadViewModel("Elite Industrial Profile", nameof(EliteIndustrialProfileSample),
+                                               "The Elite Industrial Profile is a general indicator of the individual's ability to perform the basic skills that underlie most entry-level through supervisory positions within a manufacturing or light industrial setting, such as basic math, assembly, and inspection. Other key characteristics assessed are safety, responsibility and reliable work habits."),
+                new SampleForDownloadViewModel("Elite Intellect Profile", nameof(EliteIntellectProfileSample),
+                                               "Overall Intellect; Is a general indicator of the individual's ability to think quickly and solve problems. It is also a valid indicator of an individual's training potential."),
+                new SampleForDownloadViewModel("Elite Manager Profile", nameof(EliteManagerProfileSample),
+                                               "The Elite Management Profile is a general indicator of the individual's ability to lead and manage others. Adding the Elite Intellect Profile helps identify those who can also problem solve, learn and think quickly."),
+                new SampleForDownloadViewModel("Elite Personality Profile", nameof(ElitePersonalityProfileSample),
+                                               "The Elite Personality Profile is a general indicator of the individual's strength or weakness on ten personality dimensions generally perceived to be important for a wide range of occupations. The individual scale scores offer detailed insights with respect to the applicant's personality and potential job fit."),
+                new SampleForDownloadViewModel("Elite Sales Profile", nameof(EliteSalesProfileSample),
+                                               "The Elite Sales Profile is a general indicator of the individual's ability to persuade prospects and existing customers to purchase specific products and/or services. This battery is appropriate for most sales-related jobs."),
+                new SampleForDownloadViewModel("Elite Skills Profile", nameof(EliteSkillsProfileSample),
+                                               "The Elite Skills Profile is a general indicator of the individual's ability to perform the basic skills that underlie most entry-level through supervisory positions (i.e., math skills, attention to detail, grammar and reading tables)."),
+                new SampleForDownloadViewModel("Elite Transportation Profile", nameof(EliteTransportationProfileSample),
+                                               "The Elite Transportation Profile is a general indicator of the individual's ability to behave responsibly, be safety conscious and follow rules and procedures. This profile is ideal for drivers and warehouse packers and shippers."),
+                new SampleForDownloadViewModel("Mechanical Aptitude Profile", nameof(MechanicalAptitudeTestProfileSample),
+                                               "An objective measure of an individual’s knowledge of general mechanical concepts. Consists of Electrical, Mechanical Movements, Physical Properties, Spatial Reasoning & Measurement"),
+                new SampleForDownloadViewModel("Situational Judgement Test - Sales", nameof(SituationalJudgementTestSalesSample),
+                                               "Situational Judgment Test - Sales consists of attitudinal, behavioral and situational questions aimed at assessing the candidate's ability to problem solve and use appropriate judgment while performing the sales function. The test is a general indicator of the individual's ability to persuade prospects and existing customers to purchase specific products and/or services."),
+                new SampleForDownloadViewModel("Situational Judgement Test - Supervisor", nameof(SituationalJudgementTestSupervisorSample),
+                                               "Situational Judgment Test – Supervisor consists of attitudinal, behavioral and situational questions aimed at assessing the candidate's ability to problem solve and use appropriate judgment while performing the supervisory function. The test is designed to help your business succeed by identifying those individuals with strong supervisory skills, as well as identifying potential areas for development among your management staff."),
+                new SampleForDownloadViewModel("Situational Judgement Test - Teams", nameof(SituationalJudgementTestTeamsSample),
+                                               "Situational Judgment Test – Teams consists of attitudinal, behavioral and situational questions aimed at assessing the candidate's ability to problem solve and use appropriate judgment in team environments. The test is designed to help identify those individuals who are more likely to be productive in work environments where teamwork is critical for success."),
+                new SampleForDownloadViewModel("Workplace Aptitude", nameof(WorkplaceAptitudeTestSample),
+                                               "Workplace Aptitude measures the degree to which the individual has the ability to solve typical problems encountered at work; this includes solving problems that require the use of math and reasoning and the use of basic vocabulary one might encounter in the workplace. This scale is timed, therefore quickness of thought is also important."),
+                new SampleForDownloadViewModel("EQ (Emotional Intelligence) Profile", nameof(EQProfileSample), ""),
+                new SampleForDownloadViewModel("Sales Hunter Profile", nameof(SalesHunterProfileTestSample), ""),
+                new SampleForDownloadViewModel("Elite Grit Profile", nameof(EliteGritProfileSample), ""),
+            };
     }
 
     /// <summary>

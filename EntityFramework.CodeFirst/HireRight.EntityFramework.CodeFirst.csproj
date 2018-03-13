@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.Designer.cs">
       <DependentUpon>201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803122117322_StaticDiscountIds.cs" />
+    <Compile Include="Migrations\201803122117322_StaticDiscountIds.Designer.cs">
+      <DependentUpon>201803122117322_StaticDiscountIds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CompanyAggregate\Industry.cs" />
     <Compile Include="Models\CompanyAggregate\IndustryScaleCategory.cs" />
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.resx">
       <DependentUpon>201803102059033_ReinitWithIntIdsAndStaticIdsAndComputedGuids.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803122117322_StaticDiscountIds.resx">
+      <DependentUpon>201803122117322_StaticDiscountIds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

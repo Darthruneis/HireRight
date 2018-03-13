@@ -7,7 +7,7 @@ namespace HireRight.BusinessLogic.Extensions
     {
         public static Discount ConvertDtoToModel(this DiscountDTO dto)
         {
-            Discount model = new Discount(dto.IsPercent, dto.Amount, dto.Threshold);
+            Discount model = new Discount(dto.IsPercent, dto.Amount, dto.Threshold, 0, 0);
             model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
 

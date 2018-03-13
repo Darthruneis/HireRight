@@ -8,7 +8,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
     /// <summary>
     /// A discount is a reduction in total cost or individual price of a threshold of sales. Generally thought of as a bulk discount for large orders.
     /// </summary>
-    public class Discount : PocoBase
+    public class Discount : StaticPocoBase
     {
         /// <summary>
         /// The discount amount to apply. A percentage discount will reduce the entire cost of the order by the specified amount (this amount should then
@@ -42,11 +42,13 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         {
         }
 
-        public Discount(bool isPercent, decimal amount, int threshold)
+        public Discount(bool isPercent, decimal amount, int threshold, long productId, long staticId)
         {
             IsPercent = isPercent;
             Amount = amount;
             Threshold = threshold;
+            ProductId = productId;
+            StaticId = staticId;
         }
     }
 }

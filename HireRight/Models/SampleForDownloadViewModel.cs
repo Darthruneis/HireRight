@@ -16,10 +16,11 @@ namespace HireRight.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object" /> class.
         /// </summary>
-        public SampleForDownloadViewModel(string actionName, string linkText)
+        public SampleForDownloadViewModel(string linkText, string actionName, string description)
         {
             ActionName = actionName;
             LinkText = linkText;
+            Description = description;
         }
     }
 }
