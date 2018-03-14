@@ -56,7 +56,7 @@
 }
 
 .Irrelevant .cardDetails {
-    border-color: #efc83b;
+    border-color: #f26f24;
 
     & .cardHeader {
         font-size: 0.9em;
@@ -64,7 +64,7 @@
 }
 
 .LowImportance .cardDetails {
-    border-color: #75ce1c;
+    border-color: #efc83b;
 
     & .cardHeader {
         font-size: 1.1em;
@@ -72,7 +72,7 @@
 }
 
 .HighImportance .cardDetails {
-    border-color: #1cdbc5;
+    border-color: #75ce1c;
 
     & .cardHeader {
         font-size: 1.3em;

@@ -7249,17 +7249,17 @@ button[type="submit"] {
   border-style: solid; }
 
 .Irrelevant .cardDetails {
-  border-color: #efc83b; }
+  border-color: #f26f24; }
   .Irrelevant .cardDetails .cardHeader {
     font-size: 0.9em; }
 
 .LowImportance .cardDetails {
-  border-color: #75ce1c; }
+  border-color: #efc83b; }
   .LowImportance .cardDetails .cardHeader {
     font-size: 1.1em; }
 
 .HighImportance .cardDetails {
-  border-color: #1cdbc5; }
+  border-color: #75ce1c; }
   .HighImportance .cardDetails .cardHeader {
     font-size: 1.3em; }
 
