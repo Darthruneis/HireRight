@@ -32,25 +32,24 @@
     </div>
 </div>
 <div class="row" id="reportingExplanationDiv"></div>
-<script src="~/Scripts/replacingDivContents.js"></script>
 <script>
     $(document).ready(function () {
         var $reportingExplanationDiv = $("#reportingExplanationDiv");
         var controllerName = "/Reports/";
         $("#showCategoriesListButton").click(function () {
-            replaceDivContents($reportingExplanationDiv, controllerName + "Categories");
+            Navigation.replaceDivContents($reportingExplanationDiv, controllerName + "Categories");
         });
         $("#showOverallListButton").click(function () {
-            replaceDivContents($reportingExplanationDiv, controllerName + "OverallScore");
+            Navigation.replaceDivContents($reportingExplanationDiv, controllerName + "OverallScore");
         });
         $("#showCategoryDetailsListButton").click(function () {
-            replaceDivContents($reportingExplanationDiv, controllerName + "CategoryBreakdown");
+            Navigation.replaceDivContents($reportingExplanationDiv, controllerName + "CategoryBreakdown");
         });
         $("#showManagementStrategiesListButton").click(function () {
-            replaceDivContents($reportingExplanationDiv, controllerName + "ManagementStrategies");
+            Navigation.replaceDivContents($reportingExplanationDiv, controllerName + "ManagementStrategies");
         });
         $("#showInterviewGuideListButton").click(function () {
-            replaceDivContents($reportingExplanationDiv, controllerName + "InterviewGuide");
+            Navigation.replaceDivContents($reportingExplanationDiv, controllerName + "InterviewGuide");
         });
     });
 </script>

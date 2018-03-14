@@ -6,8 +6,8 @@
     <div class="col-xs-12 col-lg-3">
         @Html.LabelFor(x => x.Order.Products) <br />
         @Html.DropDownListFor(x => x.Order.SelectedProductId,
-                                      Model.Order.Products.Select(x => new SelectListItem { Text = x.Title, Value = x.RowGuid.ToString() }).ToList(),
-                                      new { id = "listOfProducts", @class = "form-control", style = "font-size: 12pt;" }) <br />
+                                           Model.Order.Products.Select(x => new SelectListItem { Text = x.Title, Value = x.RowGuid.ToString() }).ToList(),
+                                           new { id = "listOfProducts", @class = "form-control", style = "font-size: 12pt;" }) <br />
         @Html.ValidationMessageFor(x => x.Order.SelectedProductId)
     </div>
     <div class="col-xs-12 col-sm-6 col-lg-3" id="productDiscounts"></div>
@@ -28,11 +28,7 @@
         @Html.TextAreaFor(x => Model.Order.Notes, new { style = "resize: none;", rows = "5", cols = "150", @class = "form-control" })
     </div>
 </div>
-<script src="~/Scripts/orderDetailsUpdates.js"></script>
+<script src="~/Scripts/Order/_Order.js"></script>
 <script>
-    $().ready(function () {
-        updateDiscounts();
-        $("#listOfProducts").change(updateDiscounts);
-        $("#Order_Quantity").change(updateTotal);
-    });
+    $(document).ready(Orders.bindEvents);
 </script>

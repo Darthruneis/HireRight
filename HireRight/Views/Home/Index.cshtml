@@ -40,21 +40,19 @@
 <br />
 <div id="infoDiv">
 </div>
-<script src="~/Scripts/replacingDivContents.js"></script>
-<script src="~/Scripts/showHideDiv.js"></script>
 <script>
     $(document).ready(function () {
         var $infoDiv = $("#infoDiv");
         var controllerName = "/Home/";
-        replaceDivContents($infoDiv, controllerName + "Introduction");
+        Navigation.replaceDivContents($infoDiv, controllerName + "Introduction");
         $("#showWhyUseHireRightListButton").click(function () {
-            replaceDivContents($infoDiv, controllerName + "WhyUseHireRight");
+            Navigation.replaceDivContents($infoDiv, controllerName + "WhyUseHireRight");
         });
         $("#showConsultantsListButton").click(function () {
-            replaceDivContents($infoDiv, controllerName + "Consultants");
+            Navigation.replaceDivContents($infoDiv, controllerName + "Consultants");
         });
         $("#showOccupationalCategoriesListButton").click(function () {
-            replaceDivContents($infoDiv, controllerName + "OccupationalCategories");
+            Navigation.replaceDivContents($infoDiv, controllerName + "OccupationalCategories");
         });
     });
 </script>

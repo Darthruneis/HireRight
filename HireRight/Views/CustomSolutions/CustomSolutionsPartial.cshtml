@@ -1,7 +1,5 @@
 ﻿@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 @model CustomSolutionsSecondStepModel
-<script src="~/Scripts/showHideDiv.js"></script>
-<script src="~/Scripts/CustomSolutions/customSolutionsPartial.js"></script>
 <div class="row">
     <div class="col-xs-12">
         <ol>
@@ -26,7 +24,7 @@
         <div style="clear: both;">
             @{ var general = @Model.Industries.Single(x => x.Id == Industry.General);}
             <div class="industryToggle generalIndustryToggle" data-industryid="@Industry.General" data-industryname="@general.Name">
-                <span style="text-align: center; display: inline-block;">
+                <span style="text-align: center; display: inline-block; font-weight: bold">
                     <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
                     &nbsp;&nbsp;@general.Name
                 </span>
@@ -34,7 +32,7 @@
             @foreach (IndustryDTO industry in Model.Industries.Where(x => x.Id != Industry.General))
             {
                 <div class="industryToggle" data-industryid="@industry.Id" data-industryname="@industry.Name">
-                    <span style="text-align: center; display: inline-block;">
+                    <span style="text-align: center; display: inline-block; font-weight: bold">
                         <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
                         &nbsp;&nbsp;@industry.Name
                     </span>

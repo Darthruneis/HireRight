@@ -330,12 +330,8 @@
     <Content Include="Scripts\Bootstrap\bootstrap\tab.js" />
     <Content Include="Scripts\Bootstrap\bootstrap\tooltip.js" />
     <Content Include="Scripts\Bootstrap\bootstrap\transition.js" />
-    <Content Include="Scripts\ajaxCallWithLoadingIcon.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\CustomSolutions\categoryFilterPartial.js" />
-    <Content Include="Scripts\CustomSolutions\customSolutionsPartial.js" />
-    <Content Include="Scripts\CustomSolutions\index.js" />
     <Content Include="Content\sass\_mobile-default.scss" />
     <Content Include="Content\sass\_tablet.scss" />
     <Content Include="Content\sass\_desktop.scss" />
@@ -478,16 +474,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\navbarLinksCurrentColor.js" />
-    <Content Include="Scripts\orderDetailsUpdates.js" />
-    <Content Include="Scripts\replacingDivContents.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\showHideDiv.js" />
     <Content Include="Scripts\stickyFill.js" />
-    <Content Include="Scripts\toggleDivsAndButtons.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -529,7 +520,6 @@
     <Content Include="Views\CustomSolutions\SelectTopTwelve.cshtml" />
     <Content Include="Views\CustomSolutions\MarkCategoryDtoAsTopTwelve.cshtml" />
     <Content Include="Views\Home\BackButtonPartial.cshtml" />
-    <Content Include="Views\CustomSolutions\CategoryFilterPartial.cshtml" />
     <Content Include="Views\CustomSolutions\ContactAndCompanyInfoPartial.cshtml" />
     <Content Include="Views\CustomSolutions\FormInstructionsContentPartial.cshtml" />
     <Content Include="Views\CustomSolutions\CustomSolutionsSuccess.cshtml" />
@@ -550,7 +540,6 @@
     <Content Include="Views\Reports\ExampleManagementStrategiesSectionPartial.cshtml" />
     <Content Include="Views\Reports\ExampleInterviewGuideSectionPartial.cshtml" />
     <Content Include="Views\Reports\SampleReportsIntroSectionPartial.cshtml" />
-    <Content Include="Views\Shared\SectionWithPanelHeadAndToggles.cshtml" />
     <Content Include="Views\Shared\NavigationMenu.cshtml" />
     <Content Include="Views\Shared\_PagingButtonsForFilter.cshtml" />
     <Content Include="Views\CustomSolutions\_CategoryCard.cshtml" />
@@ -584,6 +573,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\CustomSolutions\_customSolutions.ts" />
     <TypeScriptCompile Include="Scripts\Global\Collapsibles.ts" />
+    <TypeScriptCompile Include="Scripts\Navigation\_Navigation.ts" />
+    <TypeScriptCompile Include="Scripts\Order\_Order.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>

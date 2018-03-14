@@ -15,10 +15,8 @@ namespace HireRight
                 "~/Scripts/jquery.validate.min.js*",
                 "~/Scripts/jquery.validate.unobtrusive.min.js",
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
-                "~/Scripts/navbarLinksCurrentColor.js",
-                "~/Scripts/ajaxCallWithLoadingIcon.js",
-                "~/Scripts/Global/Collapsibles.js",
-                "~/Scripts/showHideDiv.js"
+                "~/Scripts/Navigation/_navigation.js",
+                "~/Scripts/Global/Collapsibles.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

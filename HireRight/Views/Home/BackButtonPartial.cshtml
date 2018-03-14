@@ -2,13 +2,12 @@
 <div style="margin: 0 auto; width: 100px;">
     <input type="button" value="Back" id="backButtonOnIndexPartialView" class="btn btn-primary" style="width: 100%" />
 </div>
-<script src="~/Scripts/replacingDivContents.js"></script>
 <script>
     $(document).ready(function () {
         var $infoDiv = $("#infoDiv");
         var controllerName = "/Home/";
         $("#backButtonOnIndexPartialView").click(function () {
-            replaceDivContents($infoDiv, controllerName + "Introduction");
+            Navigation.replaceDivContents($infoDiv, controllerName + "Introduction");
         });
     });
 </script>
