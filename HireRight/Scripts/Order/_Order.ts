@@ -1,4 +1,4 @@
-﻿export namespace Orders {
+﻿namespace Orders {
     export function bindEvents() {
         updateDiscounts();
         $("#listOfProducts").change(updateDiscounts);

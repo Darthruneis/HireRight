@@ -1,4 +1,4 @@
-﻿export namespace Navigation {
+﻿namespace Navigation {
     export function replaceDivContents(div:JQuery, url: string) {
         var $div = $(div);
         ajaxWithLoadingIcon("GET",

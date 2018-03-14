@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var Orders;
 (function (Orders) {
     function bindEvents() {
@@ -37,5 +35,5 @@ var Orders;
         });
     }
     Orders.updateTotal = updateTotal;
-})(Orders = exports.Orders || (exports.Orders = {}));
+})(Orders || (Orders = {}));
 //# sourceMappingURL=_Order.js.map

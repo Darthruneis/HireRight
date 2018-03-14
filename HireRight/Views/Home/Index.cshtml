@@ -6,13 +6,15 @@
         <div class="col-xs-12 col-md-5 col-lg-4">
             <h1 class="text-shadow-gray">Hire Right Testing</h1>
             <h3 class="text-shadow-gray pad-left-30">
-                <i>Identify, Develop, Retain Talent
-                    <br/>
-                    Hire Right, the First Time</i>
+                <i>
+                    Identify, Develop, Retain Talent
+                    <br />
+                    Hire Right, the First Time
+                </i>
             </h3>
         </div>
         <div class="col-xs-12 col-md-7 col-lg-8">
-            <br/>
+            <br />
             <h4>Hire Right Consultants can help you get it right the first time. Our testing includes discussion with our experienced consultants to identify the best assessments for you.</h4>
         </div>
     </div>
@@ -40,18 +42,23 @@
 <br />
 <div id="infoDiv">
 </div>
+<script src="~/Scripts/Navigation/_Navigation.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function ()
+    {
         var $infoDiv = $("#infoDiv");
         var controllerName = "/Home/";
         Navigation.replaceDivContents($infoDiv, controllerName + "Introduction");
-        $("#showWhyUseHireRightListButton").click(function () {
+        $("#showWhyUseHireRightListButton").click(function ()
+        {
             Navigation.replaceDivContents($infoDiv, controllerName + "WhyUseHireRight");
         });
-        $("#showConsultantsListButton").click(function () {
+        $("#showConsultantsListButton").click(function ()
+        {
             Navigation.replaceDivContents($infoDiv, controllerName + "Consultants");
         });
-        $("#showOccupationalCategoriesListButton").click(function () {
+        $("#showOccupationalCategoriesListButton").click(function ()
+        {
             Navigation.replaceDivContents($infoDiv, controllerName + "OccupationalCategories");
         });
     });

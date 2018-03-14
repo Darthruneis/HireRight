@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var Navigation;
 (function (Navigation) {
     function replaceDivContents(div, url) {
@@ -26,7 +24,7 @@ var Navigation;
         });
     }
     Navigation.ajaxWithLoadingIcon = ajaxWithLoadingIcon;
-})(Navigation = exports.Navigation || (exports.Navigation = {}));
+})(Navigation || (Navigation = {}));
 function setActiveLinkClass() {
     $('a').each(function () {
         if ($(this).prop('href') === window.location.href) {
