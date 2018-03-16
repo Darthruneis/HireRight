@@ -21,18 +21,16 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
         {
             context.Products.AddOrUpdate(x => x.StaticId, ProductsSeed.Seed().ToArray());
             context.SaveChanges();
-            context.Discounts.AddOrUpdate(x => x.StaticId, ProductsSeed.DiscountSeed().ToArray());
 
             List<ScaleCategory> scaleCategories = ScaleCategorySeed.Seed();
             context.Categories.AddOrUpdate(x => x.StaticId, scaleCategories.ToArray());
             context.Industries.AddOrUpdate(x => x.StaticId, IndustrySeed.Seed);
+            context.Discounts.AddOrUpdate(x => x.StaticId, ProductsSeed.DiscountSeed().ToArray());
             context.SaveChanges();
-
-            ScaleCategorySeed.UpdateJsonFile(context.Categories.AsNoTracking().ToList());
 
             context.Database.ExecuteSqlCommand("DELETE FROM dbo.IndustryScaleCategory");
             SetIndustryRelationshipsForCategories(context);
-            if(errors.Any())
+            if (errors.Any())
                 throw new AggregateException("Encountered erors with the binders. See the inner exceptions for details.", errors);
             context.SaveChanges();
         }
@@ -158,32 +156,32 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
 
         private void AddBinderIfMissing(HireRightDbContext context, string title, params long[] industryIds)
         {
+            if (!industryIds.Any())
+                return;
+
             try
             {
-                if (!industryIds.Any())
-                    return;
+                var category = context.Categories.AsNoTracking().Where(x => x.Title == title).Select(x => x.Id).Single();
 
-                var category = context.Categories.SingleOrDefault(x => x.Title == title);
-                if (category == null)
-                    //throw new InvalidOperationException("Category with title " + title + " was not found on the context.");
-                    return;
-
-                AddBinderIfMissing(context, category.Id, industryIds);
+                AddBinderIfMissing(context, category, industryIds);
             }
             catch (Exception ex)
             {
-                errors.Add(ex);
+                var wrappedEx = new Exception("Unable to add binder between category \'" + title + "\' and industries: " + string.Join(",", industryIds) + ".", ex);
+                errors.Add(wrappedEx);
             }
         }
 
         private void AddBinderIfMissing(HireRightDbContext context, long categoryId, params long[] industryIds)
         {
             var existingBinders = context.IndustryScaleCategoryBinders.AsNoTracking().Where(x => x.CategoryId == categoryId).ToList();
+            var industries = context.Industries.AsNoTracking().ToList();
             foreach (long id in industryIds)
             {
-                if (existingBinders.All(x => x.IndustryId != id))
+                var industry = industries.Single(x => x.StaticId == id);
+                if (existingBinders.All(x => x.IndustryId != industry.Id))
                 {
-                    var newBinder = new IndustryScaleCategory(id, categoryId);
+                    var newBinder = new IndustryScaleCategory(industry.Id, categoryId);
                     context.IndustryScaleCategoryBinders.Add(newBinder);
                     existingBinders.Add(newBinder);
                 }

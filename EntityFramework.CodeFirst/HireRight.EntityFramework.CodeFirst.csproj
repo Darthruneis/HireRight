@@ -103,9 +103,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <Content Include="ScaleCategories.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="ScaleCategories.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="InitialScaleCategories.xml">

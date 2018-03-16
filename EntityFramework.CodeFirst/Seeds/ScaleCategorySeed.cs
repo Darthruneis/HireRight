@@ -25,9 +25,15 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
             var json = GetCategoriesJson();
             var categories = JsonConvert.DeserializeObject<List<ScaleCategory>>(json);
             categories = categories.OrderBy(x => x.Title).ToList();
+            bool jsonFileOutOfDate = false;
             foreach (ScaleCategory scaleCategory in categories)
                 if (scaleCategory.StaticId != (categories.IndexOf(scaleCategory) + 1))
+                {
                     scaleCategory.StaticId = categories.IndexOf(scaleCategory) + 1;
+                    jsonFileOutOfDate = true;
+                }
+
+            if (jsonFileOutOfDate) UpdateJsonFile(categories);
 
             return categories;
         }

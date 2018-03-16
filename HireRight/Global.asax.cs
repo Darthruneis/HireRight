@@ -12,7 +12,7 @@ namespace HireRight
 {
     public class MvcApplication : HttpApplication
     {
-        private static readonly string LogFilePath = Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath("~") + @"\logs.txt");
+        private static string LogFilePath => Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath("~") + $@"\logs\{DateTime.UtcNow.Date:DD-MM-YYYY}-log.txt");
 
         public static void Log(string message)
         {
@@ -21,8 +21,7 @@ namespace HireRight
 
             using (StreamWriter writer = new StreamWriter(File.Open(LogFilePath, FileMode.Append)))
             {
-                writer.WriteLine("--- START");
-                writer.WriteLine("Log event at " + DateTime.Now);
+                writer.WriteLine("--- START - Log event at " + DateTime.Now);
                 writer.Write(message);
                 writer.WriteLine(Environment.NewLine + "--- END");
             }
@@ -59,9 +58,6 @@ namespace HireRight
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            if (!File.Exists(LogFilePath))
-                File.Create(LogFilePath);
         }
     }
 }
