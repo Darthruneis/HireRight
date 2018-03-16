@@ -472,7 +472,11 @@
     <Content Include="Content\ProfileSamples\EliteGritProfileSample.pdf" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
+    <Content Include="Scripts\CustomSolutions\_customSolutions.js.map" />
+    <Content Include="Scripts\Global\Collapsibles.js.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\CustomSolutions\_customSolutions.js" />
+    <Content Include="Scripts\Global\Collapsibles.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -487,6 +491,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Navigation\_Navigation.js" />
+    <Content Include="Scripts\Order\_Order.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -558,6 +564,8 @@
     <Content Include="Views\CustomSolutions\_CategoryCard.cshtml" />
     <Content Include="Views\Reports\_SampleReportLink.cshtml" />
     <Content Include="Views\CustomSolutions\_FirstStep.cshtml" />
+    <Content Include="Scripts\Navigation\_Navigation.js.map" />
+    <Content Include="Scripts\Order\_Order.js.map" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
