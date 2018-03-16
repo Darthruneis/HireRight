@@ -16,10 +16,11 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
         {
             return new List<Discount>
                    {
-                       new Discount(false, 05.00m, 50, Product.AssessmentTest, 1),
-                       new Discount(false, 10.00m, 100, Product.AssessmentTest, 2),
-                       new Discount(false, 25.00m, 200, Product.AssessmentTest, 3),
-                       new Discount(false, 32.00m, 500, Product.AssessmentTest, 4)
+                       new Discount(false, 5.00m, 50, Product.AssessmentTest, 1),
+                       new Discount(false, 11.00m, 100, Product.AssessmentTest, 2),
+                       new Discount(false, 18.00m, 200, Product.AssessmentTest, 3),
+                       new Discount(false, 26.00m, 500, Product.AssessmentTest, 4),
+                       new Discount(false, 40.00m, 1000, Product.AssessmentTest, 5)
                    };
         }
     }
