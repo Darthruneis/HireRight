@@ -30,6 +30,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
 
             ScaleCategorySeed.UpdateJsonFile(context.Categories.AsNoTracking().ToList());
 
+            context.Database.ExecuteSqlCommand("DELETE FROM dbo.IndustryScaleCategory");
             SetIndustryRelationshipsForCategories(context);
             if(errors.Any())
                 throw new AggregateException("Encountered erors with the binders. See the inner exceptions for details.", errors);
