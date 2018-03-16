@@ -48,7 +48,7 @@ namespace HireRight
             Log(exception);
 
             Server.ClearError();
-            Response.RedirectToRoute("Default");
+            Response.RedirectToRoute("Error");
         }
 
         protected void Application_Start()

@@ -17,8 +17,8 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
 
         static ScaleCategorySeed()
         {
-            JsonFilePath = WebConfigurationManager.AppSettings["ScaleCategoriesJsonPath"];
-            XmlFilePath = WebConfigurationManager.AppSettings["ScaleCategoriesXmlDocPath"];
+            JsonFilePath = WebConfigurationManager.AppSettings["ScaleCategoriesJsonPath"].ToLower();
+            XmlFilePath = WebConfigurationManager.AppSettings["ScaleCategoriesXmlDocPath"].ToLower();
         }
         public static List<ScaleCategory> Seed()
         {
