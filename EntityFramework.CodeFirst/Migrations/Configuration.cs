@@ -31,8 +31,22 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             context.Database.ExecuteSqlCommand("DELETE FROM dbo.IndustryScaleCategory");
             SetIndustryRelationshipsForCategories(context);
             if (errors.Any())
-                throw new AggregateException("Encountered erors with the binders. See the inner exceptions for details.", errors);
+                throw new AggregateException("Encountered erors with the configured binders. See the inner exceptions for details.", errors);
             context.SaveChanges();
+
+            BindUnboundCategoriesToOtherIndustry(context);
+            if (errors.Any())
+                throw new AggregateException("Encountered erors with the automatic binders. See the inner exceptions for details.", errors);
+            context.SaveChanges();
+        }
+
+        private void BindUnboundCategoriesToOtherIndustry(HireRightDbContext context)
+        {
+            var categories = context.Categories.AsNoTracking().Where(x => !context.IndustryScaleCategoryBinders.Select(y => y.CategoryId).Contains(x.Id)).ToList();
+            foreach (ScaleCategory scaleCategory in categories)
+            {
+                AddBinderIfMissing(context, scaleCategory.Title, Industry.Other);
+            }
         }
 
         private void SetIndustryRelationshipsForCategories(HireRightDbContext context)
