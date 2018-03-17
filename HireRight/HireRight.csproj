@@ -208,10 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\administration.jpeg" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DianaClarke.jpg" />
     <Content Include="Content\indexPicture.jpg" />
     <Content Include="Content\JanetCannon.jpg" />
@@ -240,90 +236,14 @@
     <Content Include="Content\sass\Bootstrap\_bootstrap.min.css">
       <DependentUpon>_bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="Content\sass\_%25classes.css">
-      <DependentUpon>_%25classes.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_%25classes.min.css">
-      <DependentUpon>_%25classes.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_animations.css">
-      <DependentUpon>_animations.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_animations.min.css">
-      <DependentUpon>_animations.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_borders.css">
-      <DependentUpon>_borders.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_borders.min.css">
-      <DependentUpon>_borders.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_buttons.css">
-      <DependentUpon>_buttons.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_buttons.min.css">
-      <DependentUpon>_buttons.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_desktop.css">
-      <DependentUpon>_desktop.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_desktop.min.css">
-      <DependentUpon>_desktop.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_inputs.css">
-      <DependentUpon>_inputs.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_inputs.min.css">
-      <DependentUpon>_inputs.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_mixins.css">
-      <DependentUpon>_mixins.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_mixins.min.css">
-      <DependentUpon>_mixins.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_mobile-default.css">
-      <DependentUpon>_mobile-default.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_mobile-default.min.css">
-      <DependentUpon>_mobile-default.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_navigation.css">
-      <DependentUpon>_navigation.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_navigation.min.css">
-      <DependentUpon>_navigation.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_positioning.css">
-      <DependentUpon>_positioning.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_positioning.min.css">
-      <DependentUpon>_positioning.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_tablet.css">
-      <DependentUpon>_tablet.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_tablet.min.css">
-      <DependentUpon>_tablet.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_text.css">
-      <DependentUpon>_text.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_text.min.css">
-      <DependentUpon>_text.css</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_variables.css">
-      <DependentUpon>_variables.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\sass\_variables.min.css">
-      <DependentUpon>_variables.css</DependentUpon>
-    </Content>
     <Content Include="Content\startup.jpeg" />
     <Content Include="Content\styles.css">
       <DependentUpon>styles.scss</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\styles.min.css">
       <DependentUpon>styles.css</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
@@ -351,8 +271,9 @@
     <Content Include="Content\sass\_desktop.scss" />
     <Content Include="Content\sass\_variables.scss" />
     <Content Include="Content\sass\_%25classes.scss" />
-    <Content Include="Content\sass\_mixins.scss" />
-    <Content Include="Content\styles.scss" />
+    <Content Include="Content\styles.scss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -378,10 +299,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\ProfileSamples\SalesHunterProfileSampleReport.pdf" />
     <Content Include="Content\sass\_navigation.scss" />
     <Content Include="Content\sass\_buttons.scss" />
@@ -471,6 +388,7 @@
     <Content Include="Content\sass\Bootstrap\_bootstrap.scss" />
     <Content Include="Content\sass\_customSolutions.scss" />
     <Content Include="Content\ProfileSamples\EliteGritProfileSample.pdf" />
+    <Content Include="Content\sass\_mixins.scss" />
     <None Include="Properties\PublishProfiles\File Publish.pubxml" />
     <None Include="Properties\PublishProfiles\HireRightTesting.com.pubxml" />
     <Content Include="Scripts\CustomSolutions\_customSolutions.js.map" />

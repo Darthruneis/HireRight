@@ -1,62 +1,7 @@
-﻿[
+[
   {
     "outputFile": "Content/styles.css",
-    "inputFile": "Content/styles.scss"
-  },
-  {
-    "outputFile": "Content/sass/_mobile-default.css",
-    "inputFile": "Content/sass/_mobile-default.scss"
-  },
-  {
-    "outputFile": "Content/sass/_%classes.css",
-    "inputFile": "Content/sass/_%classes.scss"
-  },
-  {
-    "outputFile": "Content/sass/_desktop.css",
-    "inputFile": "Content/sass/_desktop.scss"
-  },
-  {
-    "outputFile": "Content/sass/_mixins.css",
-    "inputFile": "Content/sass/_mixins.scss"
-  },
-  {
-    "outputFile": "Content/sass/_navigation.css",
-    "inputFile": "Content/sass/_navigation.scss"
-  },
-  {
-    "outputFile": "Content/sass/_tablet.css",
-    "inputFile": "Content/sass/_tablet.scss"
-  },
-  {
-    "outputFile": "Content/sass/_variables.css",
-    "inputFile": "Content/sass/_variables.scss"
-  },
-  {
-    "outputFile": "Content/sass/_positioning.css",
-    "inputFile": "Content/sass/_positioning.scss"
-  },
-  {
-    "outputFile": "Content/sass/_inputs.css",
-    "inputFile": "Content/sass/_inputs.scss"
-  },
-  {
-    "outputFile": "Content/sass/_buttons.css",
-    "inputFile": "Content/sass/_buttons.scss"
-  },
-  {
-    "outputFile": "Content/sass/_borders.css",
-    "inputFile": "Content/sass/_borders.scss"
-  },
-  {
-    "outputFile": "Content/sass/_animations.css",
-    "inputFile": "Content/sass/_animations.scss"
-  },
-  {
-    "outputFile": "Content/sass/_text.css",
-    "inputFile": "Content/sass/_text.scss"
-  },
-  {
-    "outputFile": "Content/sass/Bootstrap/_bootstrap.css",
-    "inputFile": "Content/sass/Bootstrap/_bootstrap.scss"
+    "inputFile": "Content/styles.scss",
+    "sourceMap": false
   }
 ]
