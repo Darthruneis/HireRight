@@ -3,7 +3,7 @@
 @import "_%classes.scss";
 
 .navbar {
-    background-color: $boldBlue-55;
+    background-color: $boldBlue-60;
     color: $black;
     border: 0;
     border-bottom: 2px solid $black;
@@ -14,11 +14,11 @@ a {
     color: $lightBlue !important;
 }
 
-a:hover, 
-a.primaryLink:hover, 
-a.alternateLink:hover {
-    color: $purple !important;
-}
+    a:hover, a:visited,
+    a.primaryLink:hover,
+    a.alternateLink:hover {
+        color: $moneyGreen-35 !important;
+    }
 
 .primaryLink {
     color: $orange-50 !important;
@@ -34,25 +34,25 @@ a.alternateLink:hover {
     padding: 0;
 }
 
-.navbar-brand,
-.navbar-nav > li > a {
+.navbar-brand, .navbar-brand:visited,
+.navbar-nav > li > a, .navbar-nav > li > a:visited {
     color: $black !important;
     font-size: 14pt !important;
 }
 
-.navbar-brand:hover,
-.navbar-nav > li > a:hover {
-    color: white !important;
-    text-shadow: $black 2px 0px 1px;
-}
+    .navbar-brand:hover, 
+    .navbar-nav > li > a:hover {
+        color: white !important;
+        text-shadow: $black 2px 0px 1px;
+    }
 
-.navbar-nav > li > a.current {
-    color: $black !important;
-}
+    .navbar-nav > li > a.current {
+        color: $black !important;
+    }
 
-.navbar-nav > li > a.current:hover {
-    color: $white !important;
-}
+        .navbar-nav > li > a.current:hover {
+            color: $white !important;
+        }
 
 .navbar-inverse .navbar-brand {
     font-size: 18pt;
@@ -63,17 +63,21 @@ a.alternateLink:hover {
     div.navbar-collapse.collapse {
         display: none !important;
     }
-    button.navbar-toggle{
+
+    button.navbar-toggle {
         display: block !important;
         right: 1px;
         position: absolute;
     }
-    .navbar-collapse.collapse.in { 
-        display: block!important;
+
+    .navbar-collapse.collapse.in {
+        display: block !important;
     }
+
     .collapsing {
-        overflow: hidden!important;
+        overflow: hidden !important;
     }
+
     ul.nav.navbar-nav > li {
         width: 100%;
         font-size: 18pt !important;

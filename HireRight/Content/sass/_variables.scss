@@ -13,6 +13,8 @@ $lightPurple: #b380ff;
 $purple: #8533ff;
 $darkPurple: #5c00e6;
 
+$boldBlue-85: #b3c6ff;
+$boldBlue-70: #668cff;
 $boldBlue-65: #4d79ff;
 $boldBlue-60: #3366ff;
 $boldBlue-55: #1a53ff;
@@ -20,6 +22,16 @@ $boldBlue-50: #0040ff;
 $boldBlue-45: #0039e6;
 $boldBlue-40: #0033cc;
 $boldBlue-35: #002db3;
+
+$mediumBlue-85: #b3d9ff;
+
+$moneyGreen-43: #12c939;
+$moneyGreen-45: #12d33c;
+$moneyGreen-50: #14eb43;
+$moneyGreen-40: #10bc35;
+$moneyGreen-35: #0ea42f;
+$moneyGreen-30: #0c8d28;
+$moneyGreen-25: #0a7521;
 
 $gray-80: #cccccc;
 $gray-75: #bfbfbf;
@@ -44,10 +56,10 @@ $orange-35: #b34700;
 
 $site_background: $white;
 $site_side_background: $white;
-$site_highlights_background: $fadedLightBlue;
+$site_highlights_background: $mediumBlue-85;
 
-$submit_button_color: $orange-60;
-$site_button_color: $orange-60;
+$submit_button_color: $moneyGreen-40;
+$site_button_color: $moneyGreen-35;
 
 $text_default: $black;
 $text_shadow_red: $darkRed 2px 0px 1px;
@@ -60,7 +72,7 @@ $large_text_size: 16pt;
 
 $text_size: 14pt;
 
-$input_background: $skyBlue;
+$input_background: $mediumBlue-85;
 $site_default_font_family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 
 $spinSpeed: 1.25s;

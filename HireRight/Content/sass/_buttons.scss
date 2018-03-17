@@ -8,6 +8,12 @@
     font-size: $normal_text_size;
     color: $text_default;
     font-weight: bold;
+    &:hover,
+    &:active,
+    &:focus{
+        background-color: $moneyGreen-25;
+        color: $white;
+    }
 }
 
 .btn.glyphicon {

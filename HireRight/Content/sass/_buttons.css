@@ -1,9 +1,9 @@
 ﻿.btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -14,6 +14,9 @@ button[type="submit"] {
   font-size: 14pt;
   color: #000000;
   font-weight: bold; }
+  .btn:hover, .btn:active, .btn:focus {
+    background-color: #0a7521;
+    color: #ffffff; }
 
 .btn.glyphicon {
   color: #0040ff; }

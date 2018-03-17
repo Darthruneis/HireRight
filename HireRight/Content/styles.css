@@ -5835,14 +5835,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -5868,21 +5868,21 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
   background-color: white !important; }
 
 .navbar {
-  background-color: #1a53ff;
+  background-color: #3366ff;
   color: #000000;
   border: 0;
   border-bottom: 2px solid #000000;
@@ -5891,10 +5891,10 @@ button[type="submit"] {
 a {
   color: #66a3ff !important; }
 
-a:hover,
+a:hover, a:visited,
 a.primaryLink:hover,
 a.alternateLink:hover {
-  color: #8533ff !important; }
+  color: #0ea42f !important; }
 
 .primaryLink {
   color: #ff6600 !important; }
@@ -5907,8 +5907,8 @@ a.alternateLink:hover {
   margin-right: 1%;
   padding: 0; }
 
-.navbar-brand,
-.navbar-nav > li > a {
+.navbar-brand, .navbar-brand:visited,
+.navbar-nav > li > a, .navbar-nav > li > a:visited {
   color: #000000 !important;
   font-size: 14pt !important; }
 
@@ -5962,14 +5962,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -6007,14 +6007,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -6094,14 +6094,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -6112,6 +6112,9 @@ button[type="submit"] {
   font-size: 14pt;
   color: #000000;
   font-weight: bold; }
+  .btn:hover, .btn:active, .btn:focus {
+    background-color: #0a7521;
+    color: #ffffff; }
 
 .btn.glyphicon {
   color: #0040ff; }
@@ -6151,14 +6154,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -6228,14 +6231,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -7013,14 +7016,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -7145,14 +7148,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -7178,14 +7181,14 @@ body {
   background-color: #ffffff; }
 
 .form-control {
-  background-color: #b3daff; }
+  background-color: #b3d9ff; }
 
 .btn, .btn-primary {
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
 
 input[type="submit"],
 button[type="submit"] {
-  background-color: #ff8533; }
+  background-color: #10bc35; }
 
 .collapseIcon, .pagingButton, .descriptionToggle {
   font-size: 11pt !important;
@@ -7281,7 +7284,7 @@ button[type="submit"] {
   border-radius: 3px;
   cursor: pointer;
   float: left;
-  background-color: #ff8533; }
+  background-color: #0ea42f; }
   .industryToggle.generalIndustryToggle {
     margin-right: 1.5em; }
   .industryToggle:hover {
