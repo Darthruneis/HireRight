@@ -8,7 +8,7 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
 {
     public class IndustryScaleCategorySeed
     {
-        private List<Exception> _errors = new List<Exception>();
+        private readonly List<Exception> _errors = new List<Exception>();
 
         public void SeedRelationships(HireRightDbContext context)
         {
