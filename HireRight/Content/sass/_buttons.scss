@@ -3,16 +3,19 @@
 @import "_%classes.scss";
 
 .btn {
-    border: 2px solid black;
     @extend %site_button_color;
+    background-color: $submit_button_color;
+    border: 2px solid $black;
     font-size: $normal_text_size;
     color: $text_default;
     font-weight: bold;
+
     &:hover,
     &:active,
-    &:focus{
-        background-color: $moneyGreen-25;
-        color: $white;
+    &:focus {
+        background-color: $site-button-hover;
+        color: $site-button-hover-text;
+        border: 2px solid $black;
     }
 }
 
@@ -27,7 +30,14 @@
 input[type="submit"],
 button[type="submit"] {
     float: right;
-    @extend %submit_button_color;
+    background-color: $submit_button_color;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: $submit-button-hover;
+        color: $submit-button-hover-text;
+    }
 }
 
 .horizontal-List-Button {

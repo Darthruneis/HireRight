@@ -29,12 +29,13 @@ hr {
 
 .footer {
     @extend %site_main_background;
-    min-height: 20px;
-    clear: both;
+    @extend %centered;
+    height: $footer-height !important;
     width: 100%;
-    position: relative;
+    position: fixed;
     bottom: 0;
-    padding-bottom: 4px;
+    left: 0;
+    z-index: 5;
 }
 
 .body-content {

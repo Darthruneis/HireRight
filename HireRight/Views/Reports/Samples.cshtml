@@ -5,7 +5,7 @@
     var samples = Model.OrderBy(x => x.ActionName).ToList();
 }
 
-<div style="max-height: 84vh; max-width: 100%; overflow-y: scroll; overflow-x: hidden;">
+<div>
     @foreach (var sample in samples)
     {
         sample.IsAlternate = samples.IndexOf(sample) % 2 == 0;

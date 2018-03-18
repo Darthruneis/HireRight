@@ -9,9 +9,9 @@
     @Scripts.Render("~/bundles/scripts")
 </head>
 <body>
-    <header>
-        @{Html.RenderPartial("NavigationMenu");}
-    </header>
+    @*<header>*@
+    @{Html.RenderPartial("NavigationMenu");}
+    @*</header>*@
     <div class="body-content container-fluid">
         @*<div>
                 outside of a row
@@ -34,13 +34,12 @@
                 Uncomment the above example code to see exactly this behavior in the positioning of any other content on the screen.*@
             @RenderBody()
         </div>
-        <div class="footer">
-            <br />
-            <hr />
-            <div>
-                &copy; 2016 - @DateTime.Now.Year <br />
-                Hire Right Consultants&trade;
-            </div>
+    </div>
+    <div class="footer">
+        <br />
+        <hr />
+        <div class="pad-left-15 pad-right-15 pad-top-10 centered">
+            Hire Right Consultants&trade;&nbsp;&copy; 2016 - @DateTime.Now.Year
         </div>
     </div>
     <div id="processing" class="processingIcon">
@@ -51,7 +50,8 @@
     </div>
     @RenderSection("scripts", required: false)
     <script>
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             Collapsibles.bindCollapsibles();
         });
     </script>

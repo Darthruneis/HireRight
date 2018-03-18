@@ -3,8 +3,10 @@
 @import "_%classes.scss";
 
 body {
-    padding: 20px 5% 0 5%;
-    /*height: 100%;*/
+    margin-top: $navbar-height !important;
+    margin-bottom: $footer-height !important;
+    border-top: 2px solid $navbar-border-line;
+    padding: 10px 5% 0 5%;
 }
 
 .list-item-no-bullet {
@@ -44,6 +46,7 @@ body {
 
 .centered {
     @extend %centered;
+    text-align: center;
 }
 
 .informationalDiv {

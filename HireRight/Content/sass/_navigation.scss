@@ -3,56 +3,61 @@
 @import "_%classes.scss";
 
 .navbar {
-    background-color: $boldBlue-60;
-    color: $black;
+    background-color: $navbar-background;
+    color: $navbar-text;
+    height: $navbar-height;
     border: 0;
-    border-bottom: 2px solid $black;
     margin: 0;
+
+    & .container {
+        margin-left: $gutter;
+        margin-right: $gutter;
+        padding: 0;
+    }
 }
 
 a {
-    color: $lightBlue !important;
-}
+    color: $navbar-alt-link !important;
 
-    a:hover, a:visited,
-    a.primaryLink:hover,
-    a.alternateLink:hover {
-        color: $moneyGreen-35 !important;
+    &:hover, &:visited {
+        color: $navbar-link-hover !important;
     }
-
-.primaryLink {
-    color: $orange-50 !important;
 }
 
-.alternateLink {
-    color: $boldBlue-65 !important;
-}
-
-.navbar > .container {
-    margin-left: $gutter;
-    margin-right: $gutter;
-    padding: 0;
-}
-
-.navbar-brand, .navbar-brand:visited,
-.navbar-nav > li > a, .navbar-nav > li > a:visited {
-    color: $black !important;
+.navbar-brand,
+.navbar-brand:visited {
+    color: $navbar-brand-text !important;
     font-size: 14pt !important;
+
+    &:hover {
+        color: $navbar-brand-hover !important;
+        border-right: 2px solid $white;
+    }
 }
 
-    .navbar-brand:hover, 
-    .navbar-nav > li > a:hover {
-        color: white !important;
-        text-shadow: $black 2px 0px 1px;
+.navbar-nav > li > a,
+.navbar-nav > li > a:visited {
+    color: $navbar-link !important;
+    font-size: 14pt !important;
+
+    &:hover {
+        color: $navbar-link-hover !important;
+        text-shadow: $navbar-brand-hover-shadow 2px 0px 1px;
+        font-weight: bold;
+        border-left: 2px solid $white;
+        border-right: 2px solid $white;
     }
 
-    .navbar-nav > li > a.current {
-        color: $black !important;
-    }
+    &.current {
+        color: $navbar-current-link !important;
 
-        .navbar-nav > li > a.current:hover {
-            color: $white !important;
+        &:hover {
+            color: $navbar-current-link-hover;
+            text-shadow: none;
+            font-weight: normal;
         }
+    }
+}
 
 .navbar-inverse .navbar-brand {
     font-size: 18pt;
