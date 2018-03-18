@@ -51,9 +51,9 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
 
         private void SetIndustryRelationshipsForCategories(HireRightDbContext context)
         {
-            AddBinderIfMissing(context, "Achievement Drive", Industry.General);
+            AddBinderIfMissing(context, "Achievement Drive", Industry.General, Industry.Management);
             AddBinderIfMissing(context, "Artistic", Industry.General);
-            AddBinderIfMissing(context, "Assertiveness", Industry.General);
+            AddBinderIfMissing(context, "Assertiveness", Industry.General, Industry.Management);
             AddBinderIfMissing(context, "Attention to Detail", Industry.General);
 
             AddBinderIfMissing(context, "C5 Business: Commitment", Industry.Management);
@@ -86,7 +86,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             AddBinderIfMissing(context, "Enterprising", Industry.Management, Industry.Sales);
             AddBinderIfMissing(context, "Extraversion", Industry.General);
 
-            AddBinderIfMissing(context, "Flexibility", Industry.General);
+            AddBinderIfMissing(context, "Flexibility", Industry.General, Industry.Management);
 
             AddBinderIfMissing(context, "Good Citizen", Industry.General);
 
@@ -94,7 +94,7 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             AddBinderIfMissing(context, "Healthcare - Patient Relations", Industry.HealthCare);
             AddBinderIfMissing(context, "Healthcare - Stress Tolerance", Industry.HealthCare);
             AddBinderIfMissing(context, "Healthcare - Team Player", Industry.HealthCare);
-            AddBinderIfMissing(context, "Helping Disposition", Industry.General);
+            AddBinderIfMissing(context, "Helping Disposition", Industry.General, Industry.Management);
 
             AddBinderIfMissing(context, "Inspection", Industry.Manufacturing);
             AddBinderIfMissing(context, "Interpersonal Skills", Industry.General);
@@ -155,13 +155,13 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             AddBinderIfMissing(context, "SJT - Team - Trust", Industry.General);
             AddBinderIfMissing(context, "Social", Industry.General);
             AddBinderIfMissing(context, "Spatial Reasoning", Industry.Manufacturing);
-            AddBinderIfMissing(context, "Stress Management", Industry.General);
+            AddBinderIfMissing(context, "Stress Management", Industry.General, Industry.Management);
             AddBinderIfMissing(context, "Supervision", Industry.Management);
 
             AddBinderIfMissing(context, "Tables", Industry.General);
             AddBinderIfMissing(context, "Team Care", Industry.General);
             AddBinderIfMissing(context, "Team Player", Industry.General);
-            AddBinderIfMissing(context, "Trustworthiness", Industry.General);
+            AddBinderIfMissing(context, "Trustworthiness", Industry.General, Industry.Management);
 
             AddBinderIfMissing(context, "Verbal Reasoning", Industry.General);
 
