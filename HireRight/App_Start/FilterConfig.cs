@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics;
+using System.Web.Mvc;
 
 namespace HireRight
 {
@@ -7,6 +8,9 @@ namespace HireRight
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+#if !DEBUG
+            filters.Add(new RequireHttpsAttribute());
+#endif
         }
     }
 }
