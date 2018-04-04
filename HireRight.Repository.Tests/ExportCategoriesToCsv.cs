@@ -48,7 +48,7 @@ namespace HireRight.Repository.Tests
         [Test]
         public void ExportAllRelationshipsBetweenCategoryAndIndustryToCsvFile()
         {
-            var seed = new IndustryScaleCategorySeed().CreateRelationshipsUsingStaticIds();
+            var seed = IndustryScaleCategorySeed.CreateRelationshipsUsingStaticIds();
 
             StringBuilder csvBuilder = new StringBuilder();
             csvBuilder.AppendLine("\"RandomGuid\",\"StaticIndustryId\",\"StaticCategoryId\"");
