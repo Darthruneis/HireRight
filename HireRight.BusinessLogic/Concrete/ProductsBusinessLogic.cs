@@ -54,7 +54,13 @@ namespace HireRight.BusinessLogic.Concrete
         {
             Product product = await _productsRepository.Get(productGuid).ConfigureAwait(false);
 
-            return ConvertModelToDto(product);
+            return product == null ? null : ConvertModelToDto(product);
+        }
+
+        public async Task<ICollection<DiscountDTO>> GetDiscountsForPoduct(Guid productGuid)
+        {
+            var discounts = await _productsRepository.GetDiscountsForProduct(productGuid);
+            return discounts.Select(x => new DiscountDTO() {RowGuid = x.RowGuid, Amount = x.Amount, IsPercent = x.IsPercent, Threshold = x.Threshold}).ToList();
         }
 
         public async Task<PagingResultDTO<ProductDTO>> Get(ProductFilter filterParameters)

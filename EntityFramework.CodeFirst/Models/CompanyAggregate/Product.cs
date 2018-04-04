@@ -50,7 +50,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
             Price = price;
         }
 
-        private Product()
+        internal Product()
         {
         }
     }

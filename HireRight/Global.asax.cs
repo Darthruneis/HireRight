@@ -12,14 +12,27 @@ namespace HireRight
 {
     public class MvcApplication : HttpApplication
     {
-        private static string LogFilePath => Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath("~") + $@"\logs\{DateTime.UtcNow.Date:DD-MM-YYYY}-log.txt");
+        private static readonly string LogFileDirectory = Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath("~") + @"\logs");
+        private static string LogFilePath => Path.GetFullPath($@"{LogFileDirectory}\{DateTime.UtcNow.Date:dd-MM-yyyy}-log.txt");
 
         public static void Log(string message)
         {
-            if (!File.Exists(LogFilePath))
-                File.Create(LogFilePath);
+            if (!Directory.Exists(LogFileDirectory))
+                Directory.CreateDirectory(LogFileDirectory);
 
-            using (StreamWriter writer = new StreamWriter(File.Open(LogFilePath, FileMode.Append)))
+            //cache the path in case the date changes during this method, and to avoid mapping the path multiple times in one log statement
+            var path = LogFilePath;
+            if (!File.Exists(path))
+                using (var file = File.Create(path))
+                    WriteToLogFile(file, message);
+            else
+                using(var file = File.Open(path, FileMode.Append))
+                    WriteToLogFile(file, message);
+        }
+
+        private static void WriteToLogFile(Stream stream, string message)
+        {
+            using (StreamWriter writer = new StreamWriter(stream))
             {
                 writer.WriteLine("--- START - Log event at " + DateTime.Now);
                 writer.Write(message);

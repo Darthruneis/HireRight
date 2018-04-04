@@ -35,6 +35,8 @@ namespace HireRight.Controllers
         public async Task<PartialViewResult> GetDiscounts(Guid itemSelected)
         {
             ProductDTO product = await _productsBusinessLogic.Get(itemSelected);
+            if(product == null)
+                throw new NullReferenceException("Product with guid " + itemSelected + " could not be loaded for discount information.");
 
             return PartialView("ProductDiscountsPartial", product);
         }
@@ -93,7 +95,7 @@ namespace HireRight.Controllers
                 model = new CreateOrderViewModel();
 
             ProductFilter assessmentTestFilter = new ProductFilter(1, 10);
-            assessmentTestFilter.Title = "test";
+            assessmentTestFilter.Title = "assessment";
             PagingResultDTO<ProductDTO> products = await _productsBusinessLogic.Get(assessmentTestFilter);
 
             model.Order.Products = products.PageResult.ToList();

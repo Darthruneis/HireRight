@@ -1,26 +1,24 @@
 ﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="logo" onclick="location.href = '@Url.Action("Index", "Home")'">
-                <img src="~/Content/Images/HireRight Logo Trimmed.PNG" alt="logo"/>
-            </div>
-            @*@Html.ActionLink("Hire Right Testing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", title="Return to the home page." })*@
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="logo" onclick="location.href = '@Url.Action("Index", "Home")'">
+            <img src="~/Content/Images/HireRight Logo Trimmed.PNG" alt="logo" />
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("New Clients", "NewClients", "Client")</li>
-                <li>@Html.ActionLink("Build a Custom Test", "Index", "CustomSolutions")</li>
-                @*<li>@Html.ActionLink("Order Info", "About", "Order")</li>*@
-                <li>@Html.ActionLink("Ordering", "Index", "Order")</li>
-                <li>@Html.ActionLink("Get in Touch", "Contact", "Contact")</li>
-                <li>@Html.ActionLink("Reporting", "Index", "Reports")</li>
-                <li>@Html.ActionLink("Sample Reports", "Samples", "Reports")</li>
-            </ul>
-        </div>
+        @*@Html.ActionLink("Hire Right Testing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", title="Return to the home page." })*@
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("New Clients", "NewClients", "Client")</li>
+            <li>@Html.ActionLink("Build a Custom Test", "Index", "CustomSolutions")</li>
+            @*<li>@Html.ActionLink("Order Info", "About", "Order")</li>*@
+            <li>@Html.ActionLink("Ordering", "Index", "Order")</li>
+            <li>@Html.ActionLink("Get in Touch", "Contact", "Contact")</li>
+            <li>@Html.ActionLink("Reporting", "Index", "Reports")</li>
+            <li>@Html.ActionLink("Sample Reports", "Samples", "Reports")</li>
+        </ul>
     </div>
 </div>

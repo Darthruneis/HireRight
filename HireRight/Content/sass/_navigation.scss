@@ -8,6 +8,7 @@
     height: $navbar-height;
     border: 0;
     margin: 0;
+    min-width: 390px;
 
     & .container,
     & .container-fluid {
@@ -20,13 +21,14 @@
 
 .logo {
     cursor: pointer;
-    max-width: 300px;
-    margin-right: $gutter;
+    width: 300px;
+    margin-right: 10px;
 
     & img {
-        max-width: 300px;
+        width: 300px;
         height: $navbar-height;
         margin: 0;
+        padding: 0;
         background-color: transparent;
         border: none;
     }
@@ -128,5 +130,9 @@ a, a:visited {
     ul.nav.navbar-nav > li {
         width: 100%;
         font-size: 18pt !important;
+    }
+
+    .logo {
+        margin-right: 80px;
     }
 }

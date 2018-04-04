@@ -32,7 +32,7 @@ namespace HireRight.Repository.Concrete
         {
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                IQueryable<Discount> discountsQuery = context.Discounts;
+                IQueryable<Discount> discountsQuery = context.Discounts.Where(x => x.IsActive);
 
                 discountsQuery = FilterByAmount(discountsQuery, filter.Amount, filter.AmountComparator);
 

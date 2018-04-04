@@ -75,23 +75,42 @@ namespace HireRight.Repository.Concrete
         protected Task<PageResult<TModel>> TakePage(IQueryable<TModel> query, FilterBase filterParameters, params Expression<Func<TModel, object>>[] includes)
             => TakePage(query, filterParameters, x => x.Id, includes);
 
-        protected async Task<PageResult<TModel>> TakePage<T>(IQueryable<TModel> query, FilterBase filterParameters,
-                                                             Expression<Func<TModel, T>> orderBy = null, params Expression<Func<TModel, object>>[] includes)
+        protected async Task<PageResult<TM>> TakePage <TM, TO>(IQueryable<TM> query, FilterBase filterParameters, 
+                                                           Expression<Func<TM, TO>> orderBy = null, 
+                                                           params Expression<Func<TM, object>>[] includes)
+        where TM: class
         {
             query = query.Includes(includes);
-            query = orderBy == null
-                ? query.OrderBy(x => x.Id)
-                : query.OrderBy(orderBy);
+            if (orderBy != null)
+                query = query.OrderBy(orderBy);
 
             var count = query.Count();
 
-            PageResult<TModel> CreateResult(List<TModel> collection) => PageResult<TModel>.Ok(count, collection, filterParameters.PageNumber, filterParameters.PageSize);
+            PageResult<TM> CreateResult(List<TM> collection) => PageResult<TM>.Ok(count, collection, filterParameters.PageNumber, filterParameters.PageSize);
 
             if (filterParameters.PageNumber > 1 && count < filterParameters.PageNumber * filterParameters.PageSize)
                 return CreateResult(await query.Skip(count - filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
 
             return CreateResult(await query.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
         }
+
+        //protected async Task<PageResult<TModel>> TakePage<T>(IQueryable<TModel> query, FilterBase filterParameters,
+        //                                                     Expression<Func<TModel, T>> orderBy = null, params Expression<Func<TModel, object>>[] includes)
+        //{
+        //    query = query.Includes(includes);
+        //    query = orderBy == null
+        //        ? query.OrderBy(x => x.Id)
+        //        : query.OrderBy(orderBy);
+
+        //    var count = query.Count();
+
+        //    PageResult<TModel> CreateResult(List<TModel> collection) => PageResult<TModel>.Ok(count, collection, filterParameters.PageNumber, filterParameters.PageSize);
+
+        //    if (filterParameters.PageNumber > 1 && count < filterParameters.PageNumber * filterParameters.PageSize)
+        //        return CreateResult(await query.Skip(count - filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
+
+        //    return CreateResult(await query.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize).Take(filterParameters.PageSize).ToListAsync());
+        //}
 
         protected async Task<TModel> UpdateBase(TModel itemToUpdate, DbSet<TModel> dbSet, HireRightDbContext context, params Expression<Func<TModel, object>>[] includes)
         {

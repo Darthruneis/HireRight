@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
 {
+
     public class ProductsRepository : RepositoryBase<Product>, IProductsRepository
     {
         public ProductsRepository() : base(() => new HireRightDbContext())
@@ -35,15 +37,15 @@ namespace HireRight.Repository.Concrete
             {
                 using (HireRightDbContext context = ContextFunc.Invoke())
                 {
-                    IQueryable<Product> productsQuery = context.Products.Include(x => x.Discounts);
+                    var productsQuery = context.Products.Where(x => x.IsActive)
+                                               .Select(x => new { x.Id, x.Title, Discounts = x.Discounts.Where(y => y.IsActive), x.RowGuid, x.Price, x.StaticId });
 
                     if (!string.IsNullOrWhiteSpace(filter.Title))
                         productsQuery = productsQuery.Where(x => x.Title.Contains(filter.Title));
 
-                    productsQuery = FilterByPrice(productsQuery, filter.Price, filter.PriceComparator);
-
-                    PageResult<Product> products = await TakePage(productsQuery, filter).ConfigureAwait(false);
-                    return products;
+                    //productsQuery = FilterByPrice(productsQuery, filter.Price, filter.PriceComparator);
+                    var products = await TakePage(productsQuery, filter, x => x.Id).ConfigureAwait(false);
+                    return PageResult<Product>.Ok(products.TotalMatchingResults, products.Results.Select(x => new Product() { Discounts = x.Discounts.ToList(), Id = x.Id, Title = x.Title, StaticId = x.StaticId, RowGuid = x.RowGuid, Price = x.Price }).ToList(), products.PageNumber, products.PageSize);
                 }
             }
             catch (Exception ex)
@@ -54,14 +56,27 @@ namespace HireRight.Repository.Concrete
 
         public async Task<Product> Get(Guid itemGuid)
         {
-            Product product;
-
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                product = await GetBase(itemGuid, context.Products.Include(x => x.Discounts)).ConfigureAwait(false);
-            }
+                var product = await context.Products
+                                           .Where(x => x.IsActive)
+                                           .Where(x => x.RowGuid == itemGuid)
+                                           .Select(x => new {x.Id, x.StaticId, x.RowGuid, x.Title, x.Price, Discounts = x.Discounts.Where(y => y.IsActive)})
+                                           .FirstOrDefaultAsync();
 
-            return product;
+                if (product == null)
+                    return null;
+
+                return new Product(product.Title, product.Price, product.RowGuid, product.Discounts.ToList());
+            }
+        }
+
+        public async Task<ICollection<Discount>> GetDiscountsForProduct(Guid productGuid)
+        {
+            using (HireRightDbContext context = ContextFunc.Invoke())
+            {
+                return await context.Discounts.Where(x => x.IsActive).Where(x => x.Product.RowGuid == productGuid).ToListAsync();
+            }
         }
 
         public async Task<Product> Update(Product itemToUpdate)

@@ -28,6 +28,8 @@ namespace HireRight.EntityFramework.CodeFirst.Migrations
             context.Assessments.AddOrUpdate(x => x.Title, AssessmentSeed.Seed);
             context.Categories.AddOrUpdate(x => x.StaticId, scaleCategories.ToArray());
             context.Industries.AddOrUpdate(x => x.StaticId, IndustrySeed.Seed);
+            //ensure that any discounts not in the seed are deactivated
+            context.Database.ExecuteSqlCommand("UPDATE dbo.Discount SET IsActive = 0");
             context.Discounts.AddOrUpdate(x => x.StaticId, ProductsSeed.DiscountSeed().ToArray());
             context.SaveChanges();
 

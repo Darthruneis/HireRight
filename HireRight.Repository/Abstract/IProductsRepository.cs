@@ -16,5 +16,7 @@ namespace HireRight.Repository.Abstract
         Task<Product> Get(Guid itemGuid);
 
         Task<Product> Update(Product itemToUpdate);
+
+        Task<ICollection<Discount>> GetDiscountsForProduct(Guid productGuid);
     }
 }

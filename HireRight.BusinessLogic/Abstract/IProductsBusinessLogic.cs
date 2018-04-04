@@ -16,5 +16,7 @@ namespace HireRight.BusinessLogic.Abstract
         Task<PagingResultDTO<ProductDTO>> Get(ProductFilter filterParameters);
 
         Task<ProductDTO> Update(ProductDTO productDto);
+
+        Task<ICollection<DiscountDTO>> GetDiscountsForPoduct(Guid productGuid);
     }
 }
