@@ -21,5 +21,11 @@ namespace HireRight.BusinessLogic.Concrete
             var industries = await _industryRepository.GetAll();
             return industries.Select(x => new IndustryDTO(x.Name, x.Id)).ToList();
         }
+
+        public async Task<ICollection<IndustryWithAssessmentsDto>> GetAllWithAssessments()
+        {
+            var industries = await _industryRepository.GetAllWithAssessments();
+            return industries.Select(x => new IndustryWithAssessmentsDto() {Id = x.StaticId, Title = x.Name, Assessments = x.Assessments.Where(y => y.IsActive && y.Assessment.IsActive).Select(y => y.Assessment.Title).ToList()}).ToList();
+        }
     }
 }

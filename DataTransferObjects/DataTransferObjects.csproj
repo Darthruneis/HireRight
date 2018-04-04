@@ -66,6 +66,7 @@
     <Compile Include="Data Transfer Objects\DataTransferObjectBase.cs" />
     <Compile Include="Data Transfer Objects\DiscountDTO.cs" />
     <Compile Include="Data Transfer Objects\IndustryDTO.cs" />
+    <Compile Include="Data Transfer Objects\IndustryWithAssessmentsDto.cs" />
     <Compile Include="Data Transfer Objects\LocationDTO.cs" />
     <Compile Include="Data Transfer Objects\NewOrderDTO.cs" />
     <Compile Include="Data Transfer Objects\NotesPositionsDto.cs" />

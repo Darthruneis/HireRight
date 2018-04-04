@@ -7,5 +7,7 @@ namespace HireRight.BusinessLogic.Abstract
     public interface IIndustryBusinessLogic
     {
         Task<ICollection<IndustryDTO>> GetAll();
+
+        Task<ICollection<IndustryWithAssessmentsDto>> GetAllWithAssessments();
     }
 }

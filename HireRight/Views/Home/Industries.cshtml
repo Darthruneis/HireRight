@@ -1,0 +1,73 @@
+﻿@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+@model List<IndustryWithAssessmentsDto>
+
+<div class="row">
+    @foreach (var dto in Model.OrderBy(x => x.Title))
+    {
+        string imgPath;
+        switch (dto.Id)
+        {
+            case Industry.Manufacturing:
+                imgPath = "../../Content/manufacturing.jpeg";
+                break;
+            case Industry.Office:
+                imgPath = "../../Content/administration.jpeg";
+                break;
+            case Industry.Other:
+                imgPath = "../../Content/otherIndustries.jpeg";
+                break;
+            case Industry.Management:
+                imgPath = "../../Content/management.jpeg";
+                break;
+            case Industry.HealthCare:
+                imgPath = "../../Content/Medical.jpeg";
+                break;
+            case Industry.Sales:
+                imgPath = "../../Content/Sales.jpeg";
+                break;
+            case Industry.CustomerService:
+                imgPath = "../../Content/professional.jpeg";
+                break;
+            default:
+                continue;
+        }
+        string divId = $"{dto.Title.Replace(" ", "_").Replace("&", "_")}InfoDiv";
+        <div class="col-xs-12 col-lg-4 categoryContainer pad-5">
+            <div class="industryToggleImg" data-toggledivid="@divId" style="cursor: pointer;">
+                <div class="pull-left">
+                    <h3>@dto.Title</h3>
+                    <div class="imgDiv" style="height: 300px; width: 300px; margin: 0 auto; background: url(@imgPath); background-size: 300px 300px;"></div>
+                </div>
+            </div>
+            <div id="@divId" hidden="hidden" class="informationalDiv pull-left">
+                The following have been pre-compiled, but there is also the option of creating a @Html.ActionLink("Custom Test", "Index", "CustomSolutions")
+                <br />
+                <ul>
+                    @foreach (var assessment in dto.Assessments)
+                    {
+                        <li>@assessment</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+@{ Html.RenderPartial("BackButtonPartial"); }
+<script>
+    $(document).ready(function ()
+    {
+        $(".industryToggleImg").on("click",
+            function ()
+            {
+                var $container = $(this).closest(".categoryContainer");
+                $container.toggleClass("col-lg-4");
+                if (!$container.hasClass("col-lg-4"))
+                {
+                    $('html,body').animate({
+                        scrollTop: $container.offset().top - 60
+                    }, 250);
+                }
+                $("#" + $(this).data("toggledivid")).toggle();
+            });
+    });
+</script>

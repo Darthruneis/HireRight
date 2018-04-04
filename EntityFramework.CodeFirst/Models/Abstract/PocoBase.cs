@@ -37,5 +37,10 @@ namespace HireRight.EntityFramework.CodeFirst.Models.Abstract
         /// </summary>
         [DefaultValue(true)]
         public bool IsActive { get; set; }
+
+        protected PocoBase()
+        {
+            IsActive = true;
+        }
     }
 }

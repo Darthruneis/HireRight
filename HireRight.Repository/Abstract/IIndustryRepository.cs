@@ -7,5 +7,7 @@ namespace HireRight.Repository.Abstract
     public interface IIndustryRepository
     {
         Task<ICollection<Industry>> GetAll();
+
+        Task<ICollection<Industry>> GetAllWithAssessments();
     }
 }
