@@ -12,5 +12,12 @@ namespace HireRight.Controllers
         {
             return View("GenericErrorPage");
         }
+
+#if DEBUG
+        public ActionResult Test()
+        {
+            throw new Exception("Testing");
+        }
+#endif
     }
 }
