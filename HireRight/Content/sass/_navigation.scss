@@ -9,17 +9,40 @@
     border: 0;
     margin: 0;
 
-    & .container {
-        margin-left: $gutter;
+    & .container,
+    & .container-fluid {
+        margin-left: 0;
         margin-right: $gutter;
         padding: 0;
     }
+
 }
 
-a {
-    color: $navbar-alt-link !important;
+.logo {
+    cursor: pointer;
+    max-width: 300px;
+    margin-right: $gutter;
 
-    &:hover, &:visited {
+    & img {
+        max-width: 300px;
+        height: $navbar-height;
+        margin: 0;
+        background-color: transparent;
+        border: none;
+    }
+}
+
+.nav li a {
+    padding: 5px !important;
+    margin: 10px 5px;
+    /*margin-left: 10px;
+    margin-right: 10px;*/
+}
+
+a, a:visited {
+    color: $navbar-link !important;
+
+    &:hover {
         color: $navbar-link-hover !important;
     }
 }
@@ -42,10 +65,10 @@ a {
 
     &:hover {
         color: $navbar-link-hover !important;
-        text-shadow: $navbar-brand-hover-shadow 2px 0px 1px;
+        /*text-shadow: $navbar-brand-hover-shadow 2px 0px 1px;*/
         font-weight: bold;
-        border-left: 2px solid $white;
-        border-right: 2px solid $white;
+        /*border-left: 2px solid $white;
+        border-right: 2px solid $white;*/
     }
 
     &.current {
@@ -64,7 +87,7 @@ a {
     font-weight: bold;
 }
 
-@media (min-width: 768px) and (max-width: 1252px) {
+@media (max-width: 1252px) {
     div.navbar-collapse.collapse {
         display: none !important;
     }
@@ -73,10 +96,29 @@ a {
         display: block !important;
         right: 1px;
         position: absolute;
+
+        & .icon-bar {
+            background-color: $navbar-link !important;
+        }
+
+        &:hover {
+            background-color: $logo-blue !important;
+
+            & .icon-bar {
+                background-color: $white !important;
+            }
+        }
     }
 
     .navbar-collapse.collapse.in {
         display: block !important;
+        background-color: $white !important;
+        z-index: 999 !important;
+
+            & li {
+                padding-left: 5px;
+                padding-right: 5px;
+            }        
     }
 
     .collapsing {
@@ -86,5 +128,19 @@ a {
     ul.nav.navbar-nav > li {
         width: 100%;
         font-size: 18pt !important;
+    }
+
+    .logo {
+        cursor: pointer;
+        max-width: 1000px;
+        margin-right: 100px;
+
+        & img {
+            max-width: 100%;
+            height: $navbar-height;
+            margin: 0;
+            background-color: transparent;
+            border: none;
+        }
     }
 }

@@ -72,32 +72,35 @@ $site_default_font_family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 $spinSpeed: 1.25s;
 $gutter: 1%;
 
+$logo-blue: #3264aa;
+$logo-green: #5cc311;
+
 //original color scheme:
 $site_background: $white;
 $site_side_background: $white;
 $site_highlights_background: $mediumBlue-85;
 
-$navbar-background: $boldBlue-60;
-$navbar-text: $black;
+$navbar-background: $white;
+$navbar-text: $logo-blue;
 $navbar-border-line: $black;
-$navbar-link: $black;
-$navbar-link-hover: $moneyGreen-35;
+$navbar-link: $logo-blue;
+$navbar-link-hover: $logo-green;
 $navbar-primary-link: $orange-50;
 $navbar-alt-link: $boldBlue-65;
-$navbar-current-link: $white;
-$navbar-current-link-hover: $white;
+$navbar-current-link: $black;
+$navbar-current-link-hover: $black;
 $navbar-brand-text: $black;
 $navbar-brand-hover: $white;
 $navbar-brand-hover-shadow: $black;
 
 $input_background: #e6ffff;
 
-$submit_button_color: $moneyGreen-40;
-$submit-button-hover: $moneyGreen-30;
+$submit_button_color: $logo-green;
+$submit-button-hover: $logo-blue;
 $submit-button-hover-text: $white;
 
-$site_button_color: $moneyGreen-35;
-$site-button-hover: $moneyGreen-25;
+$site_button_color: $logo-green;
+$site-button-hover: $logo-blue;
 $site-button-hover-text: $white;
 
 //Green theme: http://paletton.com/palette.php?uid=42B0u0kllllbGu%2Bgwqaqagwu%2BbG

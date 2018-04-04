@@ -35,6 +35,7 @@ textarea {
     border-radius: 3px;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     transition: border-color ease-in-out .5s, box-shadow ease-in-out .5s;
+    color: $black;
 }
 
 .field-validation-error {

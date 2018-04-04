@@ -116,6 +116,7 @@
     <Compile Include="CompanyRepositoryTests.cs" />
     <Compile Include="ContactsRepositoryTests.cs" />
     <Compile Include="DiscountsRepositoryTests.cs" />
+    <Compile Include="ExportCategoriesToCsv.cs" />
     <Compile Include="LocationsRepositoryTests.cs" />
     <Compile Include="OrdersRepositoryTests.cs" />
     <Compile Include="ProductsRepositoryTests.cs" />
