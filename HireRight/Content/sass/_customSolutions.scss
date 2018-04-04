@@ -87,13 +87,14 @@
 .importanceHeaders {
     border-bottom: 3px solid black;
     margin-bottom: 0.5em;
+    clear: both;
     & h4 {
         text-align: center;
     }
 }
 
 .industryToggle {
-    margin: 0.5em 1em;
+    margin: 5px;
     padding: 0.25em 1em;
     width: auto;
     border: 2px solid black;
@@ -101,9 +102,6 @@
     cursor: pointer;
     float: left;
     background-color: $site_button_color;
-    &.generalIndustryToggle {
-        margin-right: 1.5em;
-    }
 
     &:hover {
         background-color: $boldBlue-65;
@@ -128,5 +126,5 @@
     z-index: 5;
     background-color: $white;
     //nav bar height
-    top: 52px;
+    top: 50px;
 }

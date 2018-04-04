@@ -129,18 +129,4 @@ a, a:visited {
         width: 100%;
         font-size: 18pt !important;
     }
-
-    .logo {
-        cursor: pointer;
-        max-width: 1000px;
-        margin-right: 100px;
-
-        & img {
-            max-width: 100%;
-            height: $navbar-height;
-            margin: 0;
-            background-color: transparent;
-            border: none;
-        }
-    }
 }
