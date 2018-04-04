@@ -51,6 +51,14 @@ namespace HireRight.EntityFramework.CodeFirst.Database_Context
 
         public virtual DbSet<IndustryScaleCategory> IndustryScaleCategoryBinders { get; set; }
 
+        public virtual DbSet<AssessmentType> AssessmentTypes { get; set; }
+
+        public virtual DbSet<Assessment> Assessments { get; set; }
+
+        public virtual DbSet<IndustryAssessmentBinder> IndustryAssessmentBinders { get; set; }
+
+        public virtual DbSet<AssessmentScaleCategoryBinder> AssessmentScaleCategoryBinders { get; set; }
+
         /// <summary>
         /// Initializes the context based off the connection string name set in the class.
         /// </summary>

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HireRight.EntityFramework.CodeFirst.Abstract
+namespace HireRight.EntityFramework.CodeFirst.Models.Abstract
 {
     /// <summary>
     /// Defines a basic Plain Old CLR Object entity that will be stored in the database.
@@ -30,5 +31,11 @@ namespace HireRight.EntityFramework.CodeFirst.Abstract
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public virtual Guid RowGuid { get; set; }
+
+        /// <summary>
+        /// Indicates whether this database row is intended to be used.
+        /// </summary>
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
     }
 }

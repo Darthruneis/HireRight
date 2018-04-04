@@ -1,5 +1,4 @@
 ﻿using DataTransferObjects.Filters.Abstract;
-using HireRight.EntityFramework.CodeFirst.Abstract;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HireRight.EntityFramework.CodeFirst.Models;
+using HireRight.EntityFramework.CodeFirst.Models.Abstract;
 
 namespace HireRight.Repository.Concrete
 {

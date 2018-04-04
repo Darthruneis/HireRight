@@ -1,52 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using HireRight.EntityFramework.CodeFirst.Database_Context;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace HireRight.EntityFramework.CodeFirst.Seeds
 {
-    public class IndustryScaleCategorySeed
+    public static class IndustryScaleCategorySeed
     {
-        private readonly List<ScaleCategory> CategoriesFromSeed = ScaleCategorySeed.Seed();
+        private static readonly List<ScaleCategory> CategoriesFromSeed = ScaleCategorySeed.Seed();
 
-        public void SeedRelationships(HireRightDbContext context)
+        public static IndustryScaleCategory[] SeedRelationships(HireRightDbContext context)
         {
-            context.Database.ExecuteSqlCommand("DELETE FROM dbo.IndustryScaleCategory");
-            try
-            {
-                AddBindersIfMissing(context, CreateRelationshipsUsingStaticIds());
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new AggregateException("Encountered erors with the configured binders. See the inner exceptions for details.", ex);
-            }
+            List<IndustryScaleCategory> seedData = CreateRelationshipsUsingStaticIds();
+            seedData.BindUnboundCategoriesToOtherIndustryUsingStaticIds(context);
 
-            try
+            return seedData.Where(x => context.IndustryScaleCategoryBinders.All(y => y.CategoryId != x.CategoryId && y.IndustryId != x.IndustryId)).ToArray();
+        }
+
+        private static void BindUnboundCategoriesToOtherIndustryUsingStaticIds(this List<IndustryScaleCategory> seedData, HireRightDbContext context)
+        {
+            var categories = context.Categories.AsNoTracking().ToList();
+            foreach (ScaleCategory scaleCategory in categories.Where(x => seedData.All(y => y.CategoryId != x.Id)))
             {
-                AddBindersIfMissing(context, BindUnboundCategoriesToOtherIndustryUsingStaticIds(context));
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new AggregateException("Encountered erors with the automatic binders. See the inner exceptions for details.", ex);
+                seedData.AddRange(CreateBindersFromStaticIds(scaleCategory.Title, Industry.Other));
             }
         }
 
-        public List<IndustryScaleCategory> BindUnboundCategoriesToOtherIndustryUsingStaticIds(HireRightDbContext context)
-        {
-            var categories = context.Categories.AsNoTracking().Where(x => !context.IndustryScaleCategoryBinders.Select(y => y.CategoryId).Contains(x.Id)).ToList();
-            var bindersWithStaticIds = new List<IndustryScaleCategory>();
-            foreach (ScaleCategory scaleCategory in categories)
-            {
-                bindersWithStaticIds.AddRange(CreateBindersFromStaticIds(scaleCategory.Title, Industry.Other));
-            }
-
-            return bindersWithStaticIds;
-        }
-
-        public List<IndustryScaleCategory> CreateRelationshipsUsingStaticIds()
+        public static List<IndustryScaleCategory> CreateRelationshipsUsingStaticIds()
         {
             var bindersWithStaticIds = new List<IndustryScaleCategory>();
 
@@ -169,20 +151,7 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
             return bindersWithStaticIds;
         }
 
-        private void AddBindersIfMissing(HireRightDbContext context, List<IndustryScaleCategory> bindersWithStaticIds)
-        {
-            foreach (IndustryScaleCategory industryScaleCategory in bindersWithStaticIds)
-            {
-                var categoryFromStaticId = context.Categories.AsNoTracking().Single(x => x.StaticId == industryScaleCategory.CategoryId);
-                var industryFromStaticId = context.Industries.AsNoTracking().Single(x => x.StaticId == industryScaleCategory.IndustryId);
-
-                var existingBinder = context.IndustryScaleCategoryBinders.FirstOrDefault(x => x.CategoryId == categoryFromStaticId.Id && x.IndustryId == industryFromStaticId.Id);
-                if (existingBinder == null)
-                    context.IndustryScaleCategoryBinders.Add(new IndustryScaleCategory(industryFromStaticId.Id, categoryFromStaticId.Id));
-            }
-        }
-
-        private List<IndustryScaleCategory> CreateBindersFromStaticIds(string title, params long[] industryIds)
+        private static List<IndustryScaleCategory> CreateBindersFromStaticIds(string title, params long[] industryIds)
         {
             var binders = new List<IndustryScaleCategory>();
             if (!industryIds.Any())

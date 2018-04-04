@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Models.Abstract;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
@@ -31,9 +31,12 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         
         public virtual List<IndustryScaleCategory> CategoryBinders { get; set; }
 
+        public ICollection<IndustryAssessmentBinder> Assessments { get; private set; }
+
         private Industry()
         {
             CategoryBinders = new List<IndustryScaleCategory>();
+            Assessments = new List<IndustryAssessmentBinder>();
         }
 
         public Industry(long id, string name) : this()

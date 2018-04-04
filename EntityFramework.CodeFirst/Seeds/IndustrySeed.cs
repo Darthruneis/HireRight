@@ -18,10 +18,10 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
                        new Industry(Industry.CustomerService, "Customer Service"),
                        new Industry(Industry.Sales, "Sales"),
                        new Industry(Industry.Manufacturing, "Manufacturing"),
-                       new Industry(Industry.Office, "Office"),
+                       new Industry(Industry.Office, "Admin & Clerical"),
                        new Industry(Industry.General, "General"),
                        new Industry(Industry.Pharmaceutical, "Pharmaceutical"),
-                       new Industry(Industry.Other, "Other Industries"),
+                       new Industry(Industry.Other, "Other"),
                    };
         }
     }

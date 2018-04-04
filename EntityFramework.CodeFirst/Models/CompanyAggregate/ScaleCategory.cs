@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HireRight.EntityFramework.CodeFirst.Abstract;
+using HireRight.EntityFramework.CodeFirst.Models.Abstract;
 
 namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 {
@@ -22,11 +22,13 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         [Required]
         public string Title { get; set; }
         
-        public List<IndustryScaleCategory> IndustryBinders { get; set; }
+        public List<IndustryScaleCategory> IndustryBinders { get; private set; }
+        public ICollection<AssessmentScaleCategoryBinder> Assessments { get; private set; }
 
         public ScaleCategory()
         {
             IndustryBinders = new List<IndustryScaleCategory>();
+            Assessments = new List<AssessmentScaleCategoryBinder>();
         }
 
         public ScaleCategory(string title, string description) : this()

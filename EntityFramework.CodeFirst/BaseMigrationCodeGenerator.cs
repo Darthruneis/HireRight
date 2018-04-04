@@ -20,6 +20,8 @@ namespace HireRight.EntityFramework.CodeFirst
                             column.DefaultValueSql = "GETUTCDATE()";
                         else if ((column.ClrType == typeof(Guid)) && guidColumnNamesToSetDefaultSqlValue.Contains(column.Name))
                             column.DefaultValueSql = "NEWID()";
+                        else if ((column.ClrType == typeof(bool)) && column.Name.Equals("IsActive"))
+                            column.DefaultValue = true;
                 }
                 else if (operation is AddColumnOperation)
                 {
@@ -29,6 +31,8 @@ namespace HireRight.EntityFramework.CodeFirst
                         column.DefaultValueSql = "GETUTCDATE()";
                     else if ((column.ClrType == typeof(Guid)) && guidColumnNamesToSetDefaultSqlValue.Contains(column.Name))
                         column.DefaultValueSql = "NEWID()";
+                    else if ((column.ClrType == typeof(bool)) && column.Name.Equals("IsActive"))
+                        column.DefaultValue = true;
                 }
 
             CSharpMigrationCodeGenerator generator = new CSharpMigrationCodeGenerator();

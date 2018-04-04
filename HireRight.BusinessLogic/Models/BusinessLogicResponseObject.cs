@@ -1,6 +1,6 @@
-﻿using HireRight.EntityFramework.CodeFirst.Abstract;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using HireRight.EntityFramework.CodeFirst.Models.Abstract;
 
 namespace HireRight.BusinessLogic.Models
 {

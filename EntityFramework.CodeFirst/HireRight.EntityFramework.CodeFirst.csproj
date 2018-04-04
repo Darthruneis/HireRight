@@ -63,8 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\PocoBase.cs" />
-    <Compile Include="Abstract\StaticPocoBase.cs" />
+    <Compile Include="Migrations\201804040158382_IsActiveFlagOnAllPocos.cs" />
+    <Compile Include="Migrations\201804040158382_IsActiveFlagOnAllPocos.Designer.cs">
+      <DependentUpon>201804040158382_IsActiveFlagOnAllPocos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abstract\PocoBase.cs" />
+    <Compile Include="Models\Abstract\StaticPocoBase.cs" />
     <Compile Include="BaseMigrationCodeGenerator.cs" />
     <Compile Include="Database Context\HireRightDbContext.cs" />
     <Compile Include="Migrations\201703230045294_initializeDatabase.cs" />
@@ -84,7 +88,11 @@
       <DependentUpon>201803122117322_StaticDiscountIds.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CompanyAggregate\Assessment.cs" />
+    <Compile Include="Models\CompanyAggregate\AssessmentScaleCategoryBinder.cs" />
+    <Compile Include="Models\CompanyAggregate\AssessmentType.cs" />
     <Compile Include="Models\CompanyAggregate\Industry.cs" />
+    <Compile Include="Models\CompanyAggregate\IndustryAssessmentBinder.cs" />
     <Compile Include="Models\CompanyAggregate\IndustryScaleCategory.cs" />
     <Compile Include="Models\CompanyAggregate\ScaleCategory.cs" />
     <Compile Include="Models\CompanyAggregate\Value Objects\Address.cs" />
@@ -96,6 +104,9 @@
     <Compile Include="Models\CompanyAggregate\Product.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seeds\AssessmentSeed.cs" />
+    <Compile Include="Seeds\AssessmentTypeSeed.cs" />
+    <Compile Include="Seeds\IndustryAssessmentBinder.cs" />
     <Compile Include="Seeds\IndustryScaleCategorySeed.cs" />
     <Compile Include="Seeds\IndustrySeed.cs" />
     <Compile Include="Seeds\ProductsSeed.cs" />
@@ -126,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803122117322_StaticDiscountIds.resx">
       <DependentUpon>201803122117322_StaticDiscountIds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804040158382_IsActiveFlagOnAllPocos.resx">
+      <DependentUpon>201804040158382_IsActiveFlagOnAllPocos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
