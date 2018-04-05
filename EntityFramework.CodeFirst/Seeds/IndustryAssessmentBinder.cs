@@ -56,9 +56,7 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
             seed.AddBinderIfAssessmentExists(assessments.SingleOrDefault(x => x.Title.Equals("Elite Retail Profile")), Industry.Other);
             seed.AddBinderIfAssessmentExists(assessments.SingleOrDefault(x => x.Title.Equals("Elite Banking Profile")), Industry.Other);
 
-            return seed
-                   .Where(x => context.IndustryAssessmentBinders.All(y => y.AssessmentId != x.AssessmentId && y.IndustryId != x.IndustryId))
-                   .ToArray();
+            return seed.ToArray();
         }
 
         private static void AddBinderIfAssessmentExists(this List<IndustryAssessmentBinder> seed, Assessment assessment, params long[] industryIds)

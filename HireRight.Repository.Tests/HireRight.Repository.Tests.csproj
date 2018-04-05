@@ -121,6 +121,7 @@
     <Compile Include="OrdersRepositoryTests.cs" />
     <Compile Include="ProductsRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeedTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

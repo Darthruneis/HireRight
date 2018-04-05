@@ -14,17 +14,17 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
         public static IndustryScaleCategory[] SeedRelationships(HireRightDbContext context)
         {
             List<IndustryScaleCategory> seedData = CreateRelationshipsUsingStaticIds();
-            seedData.BindUnboundCategoriesToOtherIndustryUsingStaticIds(context);
+            seedData.BindUnboundCategoriesUsingStaticIds(context);
 
-            return seedData.Where(x => context.IndustryScaleCategoryBinders.All(y => y.CategoryId != x.CategoryId && y.IndustryId != x.IndustryId)).ToArray();
+            return seedData.ToArray();
         }
 
-        private static void BindUnboundCategoriesToOtherIndustryUsingStaticIds(this List<IndustryScaleCategory> seedData, HireRightDbContext context)
+        private static void BindUnboundCategoriesUsingStaticIds(this List<IndustryScaleCategory> seedData, HireRightDbContext context)
         {
             var categories = context.Categories.AsNoTracking().ToList();
             foreach (ScaleCategory scaleCategory in categories.Where(x => seedData.All(y => y.CategoryId != x.Id)))
             {
-                seedData.AddRange(CreateBindersFromStaticIds(scaleCategory.Title, Industry.Other));
+                seedData.AddRange(CreateBindersFromStaticIds(scaleCategory.Title, Industry.General));
             }
         }
 
@@ -59,7 +59,7 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
             bindersWithStaticIds.AddRange(CreateBindersFromStaticIds("Candidness", Industry.General));
             bindersWithStaticIds.AddRange(CreateBindersFromStaticIds("Conventional", Industry.Office));
             bindersWithStaticIds.AddRange(CreateBindersFromStaticIds("Creativity", Industry.General));
-            bindersWithStaticIds.AddRange(CreateBindersFromStaticIds("Customer Care", Industry.Pharmaceutical, Industry.CustomerService, Industry.Office));
+            bindersWithStaticIds.AddRange(CreateBindersFromStaticIds("Customer Care", Industry.CustomerService, Industry.Office));
 
             bindersWithStaticIds.AddRange(CreateBindersFromStaticIds("Drug Free Attitudes", Industry.General));
 
@@ -160,7 +160,8 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
             var category = CategoriesFromSeed.Single(x => x.Title.ToLower() == title.ToLower());
             foreach (long industryId in industryIds)
             {
-                binders.Add(new IndustryScaleCategory(industryId, category.StaticId));
+                var binder = new IndustryScaleCategory(industryId, category.StaticId);
+                binders.Add(binder);
             }
             return binders;
         }

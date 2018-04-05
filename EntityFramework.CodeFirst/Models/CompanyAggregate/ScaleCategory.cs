@@ -22,7 +22,7 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         [Required]
         public string Title { get; set; }
         
-        public List<IndustryScaleCategory> IndustryBinders { get; private set; }
+        public List<IndustryScaleCategory> IndustryBinders { get; internal set; }
         public ICollection<AssessmentScaleCategoryBinder> Assessments { get; private set; }
 
         public ScaleCategory()

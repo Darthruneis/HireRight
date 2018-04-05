@@ -71,6 +71,7 @@ namespace HireRight.BusinessLogic.Concrete
         public async Task<ICollection<CategoryDTO>> GetAll()
         {
             var categories = await _categoriesRepository.GetAll();
+            categories.ToList().ForEach(x => x.IndustryBinders = x.IndustryBinders.Where(y => y.IsActive).ToList());
 
             return categories.Select(ConvertModelToDto).ToList();
         }

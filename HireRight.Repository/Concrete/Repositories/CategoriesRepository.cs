@@ -69,7 +69,12 @@ namespace HireRight.Repository.Concrete
         public async Task<ICollection<ScaleCategory>> GetAll()
         {
             using (var context = ContextFunc())
-                return await context.Categories.Where(x => x.IsActive).Include(x => x.IndustryBinders).OrderBy(x => x.Title).ToListAsync();
+                return await context.Categories
+                                    .Include(x => x.IndustryBinders)
+                                    .Where(x => x.IsActive)
+                                    .Where(x => context.IndustryScaleCategoryBinders.Any(y => y.IsActive && y.CategoryId == x.Id))
+                                    .OrderBy(x => x.Title)
+                                    .ToListAsync();
         }
     }
 }

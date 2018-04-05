@@ -20,7 +20,7 @@ namespace HireRight.EntityFramework.CodeFirst.Seeds
                        new Industry(Industry.Manufacturing, "Manufacturing"),
                        new Industry(Industry.Office, "Admin & Clerical"),
                        new Industry(Industry.General, "General"),
-                       new Industry(Industry.Pharmaceutical, "Pharmaceutical"),
+                       new Industry(Industry.Pharmaceutical, "Pharmaceutical") { IsActive = false},
                        new Industry(Industry.Other, "Other"),
                    };
         }

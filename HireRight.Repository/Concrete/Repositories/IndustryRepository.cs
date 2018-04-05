@@ -16,7 +16,7 @@ namespace HireRight.Repository.Concrete
         public async Task<ICollection<Industry>> GetAll()
         {
             using (var context = ContextFunc())
-                return await context.Industries.Include(x => x.CategoryBinders).ToListAsync();
+                return await context.Industries.Where(x => x.IsActive).Include(x => x.CategoryBinders).ToListAsync();
         }
 
         public async Task<ICollection<Industry>> GetAllWithAssessments()
