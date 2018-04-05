@@ -493,6 +493,7 @@
     <Content Include="Scripts\Order\_Order.js.map" />
     <Content Include="Views\Error\GenericErrorPage.cshtml" />
     <Content Include="Views\Home\Industries.cshtml" />
+    <Content Include="Views\Shared\_ReasonsToUseHireRight.cshtml" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

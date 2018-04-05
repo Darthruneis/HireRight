@@ -4,24 +4,31 @@
 }
 @using (Html.BeginForm("SubmitNewClients", "Client", FormMethod.Post, new { style = "margin: 0; padding: 3px;" }))
 {
-    <div class="row">
-        <div class="col-xs-12">
-            <h2 class="marg-bottom-10">Hire Right the First Time</h2>
-        </div>
-        <div class="col-xs-12 col-lg-6">
-            <p>Janet and Diana are very interested in your company and your needs. Schedule a free 30 minute consultation to discuss your specific needs, issues and frustrations. We will assist you in identifying the types of testing and solutions that will work best for you. Our menu includes both standardized testing, which often has norms for your roles and custom screening for positions. Our highly experienced consultants can assist you with many frustrating issues faced in today’s business world.</p>
-        </div>
-        <div class="col-xs-12 col-lg-6">
-            <p>In addition to testing, we offer:</p>
-            <ul>
-                <li>Custom hiring solutions for any position</li>
-                <li>Identification and resolution suggestions for issues leading to turnover</li>
-                <li>Structured interviews</li>
-                <li>Staff training</li>
-                <li>Executive coaching and selection</li>
-            </ul>
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-push-6">
+        @{ Html.RenderPartial("_ReasonsToUseHireRight");}
+    </div>
+    <div class="col-xs-12 col-md-6 col-md-pull-6">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="marg-bottom-10">Hire Right the First Time</h2>
+            </div>
+            <div class="col-xs-12">
+                <p>Janet and Diana are very interested in your company and your needs. Schedule a free 30 minute consultation to discuss your specific needs, issues and frustrations. We will assist you in identifying the types of testing and solutions that will work best for you. Our menu includes both standardized testing, which often has norms for your roles and custom screening for positions. Our highly experienced consultants can assist you with many frustrating issues faced in today’s business world.</p>
+            </div>
+            <div class="col-xs-12">
+                <p>In addition to testing, we offer:</p>
+                <ul>
+                    <li>Custom hiring solutions for any position</li>
+                    <li>Identification and resolution suggestions for issues leading to turnover</li>
+                    <li>Structured interviews</li>
+                    <li>Staff training</li>
+                    <li>Executive coaching and selection</li>
+                </ul>
+            </div>
         </div>
     </div>
+</div>
     <div class="row">
         <div class="col-xs-12">
             <h4>What would you like to do? Check all that apply.</h4>
@@ -29,7 +36,7 @@
     </div>
     <div class="row">
         <div class="col-xs-6">
-            @Html.CheckBoxFor(x => x.ToTalkToConsultant, new { @class = "newClientsCheckbox"}) @Html.LabelFor(x => x.ToTalkToConsultant, "Contact Us to talk with a Consultant", new Dictionary<string, object> { { "class", "checkboxLabelFor" } })
+            @Html.CheckBoxFor(x => x.ToTalkToConsultant, new { @class = "newClientsCheckbox" }) @Html.LabelFor(x => x.ToTalkToConsultant, "Contact Us to talk with a Consultant", new Dictionary<string, object> { { "class", "checkboxLabelFor" } })
             <br />
             <div id="contactInfo" hidden="hidden" style="padding-left: 20px;">
                 Office of Diana Clarke: (330) 239-1646
@@ -86,14 +93,17 @@
     </div>
 }
 <script>
-    function registerCheckboxHandler(checkbox, hiddenDiv) {
-        $(checkbox).change(function () {
+    function registerCheckboxHandler(checkbox, hiddenDiv)
+    {
+        $(checkbox).change(function ()
+        {
             $(hiddenDiv).toggle("hidden");
             registerFormDisplayHandler();
         });
     }
 
-    function registerFormDisplayHandler() {
+    function registerFormDisplayHandler()
+    {
         var toTalkChecked = $("#ToTalkToConsultant").is(':checked');
         var toScheduleChecked = $("#ToScheduleDemo").is(':checked');
         var toTakeSampleChecked = $("#ToTakeSampleAssesment").is(':checked');
@@ -102,18 +112,22 @@
         if (toTalkChecked === true ||
             toScheduleChecked === true ||
             toTakeSampleChecked === true ||
-            toReceiveSampleChecked === true) {
+            toReceiveSampleChecked === true)
+        {
             $('#contactInfoForm').show();
-        } else {
+        } else
+        {
             $('#contactInfoForm').hide();
         }
     }
 
-    function wireCheckboxes() {
+    function wireCheckboxes()
+    {
         registerCheckboxHandler("#ToTalkToConsultant", "#contactInfo");
     }
 
-    $(document).ready(function () {
+    $(document).ready(function ()
+    {
         wireCheckboxes();
     });
 </script>
