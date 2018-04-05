@@ -494,6 +494,7 @@
     <Content Include="Views\Error\GenericErrorPage.cshtml" />
     <Content Include="Views\Home\Industries.cshtml" />
     <Content Include="Views\Shared\_ReasonsToUseHireRight.cshtml" />
+    <Content Include="Views\Shared\_ContactInformation.cshtml" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

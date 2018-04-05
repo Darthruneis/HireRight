@@ -1,4 +1,6 @@
 ﻿@model ContactUsViewModel
+
+@{ Html.RenderPartial("_ContactInformation");}
 <div class="row">
     <div class="col-xs-12">
         <h2>How can we help you?</h2>
@@ -12,7 +14,7 @@
         @Html.ValidatedEditorWithLabelFor(x => Model.PositionAtCompany, true)
     </div>
 </div>
-<br/>
+<br />
 <div class="row">
     <div class="col-xs-12 col-md-6">
         @Html.ValidatedEditorWithLabelFor(x => Model.FirstName, true)
