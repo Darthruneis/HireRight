@@ -1,7 +1,7 @@
-namespace HireRight.EntityFramework.CodeFirst.Migrations
-{
-    using System.Data.Entity.Migrations;
+using System.Data.Entity.Migrations;
 
+namespace HireRight.Persistence.Migrations
+{
     public partial class initializeDatabase : DbMigration
     {
         public override void Down()

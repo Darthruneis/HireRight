@@ -2,7 +2,6 @@
 using System;
 using System.Runtime.Serialization;
 using System.Text;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace DataTransferObjects.Filters.Concrete
 {
@@ -26,7 +25,7 @@ namespace DataTransferObjects.Filters.Concrete
     }
 
     [Serializable]
-    public class DiscountFilter : Filter<Discount>
+    public class DiscountFilter : Filter
     {
         [DataMember]
         public decimal? Amount { get; set; }
@@ -50,7 +49,7 @@ namespace DataTransferObjects.Filters.Concrete
         {
         }
 
-        public override string CreateQuery(bool addBaseQuery = true)
+        protected override string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
             return query.ToString();

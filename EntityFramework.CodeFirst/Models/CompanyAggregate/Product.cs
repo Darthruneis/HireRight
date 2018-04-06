@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using HireRight.EntityFramework.CodeFirst.Models.Abstract;
+using System.Linq;
+using HireRight.Persistence.Models.Abstract;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+namespace HireRight.Persistence.Models.CompanyAggregate
 {
     /// <summary>
     /// A product is an item which can be purchased through HireRight.
@@ -29,17 +30,11 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
         [Required]
         public string Title { get; set; }
 
-        public Product(string title, decimal price, long id, List<Discount> discounts = null) : this(title, price, discounts)
+        internal Product()
         {
-            StaticId = id;
         }
 
-        public Product(string title, decimal price, Guid rowGuid, List<Discount> discounts = null) : this(title, price, discounts)
-        {
-            RowGuid = rowGuid;
-        }
-
-        public Product(List<Discount> discounts = null)
+        private Product(List<Discount> discounts = null) : this()
         {
             Discounts = discounts ?? new List<Discount>();
         }
@@ -50,8 +45,22 @@ namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
             Price = price;
         }
 
-        internal Product()
+        public Product(string title, decimal price, long id, List<Discount> discounts = null) : this(title, price, discounts)
         {
+            StaticId = id;
+        }
+
+        public Product(string title, decimal price, Guid rowGuid, List<Discount> discounts = null) : this(title, price, discounts)
+        {
+            RowGuid = rowGuid;
+        }
+
+        public Discount GetHighestDiscountForQuantity(long quantity)
+        {
+            return Discounts?
+                   .Where(x => x.IsActive)
+                   .OrderByDescending(x => x.Threshold)
+                   .FirstOrDefault(x => x.Threshold <= quantity);
         }
     }
 }

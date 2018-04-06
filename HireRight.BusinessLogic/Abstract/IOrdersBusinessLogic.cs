@@ -1,9 +1,8 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters.Concrete;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Abstract
 {

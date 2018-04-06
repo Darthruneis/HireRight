@@ -73,6 +73,7 @@
     <Compile Include="Data Transfer Objects\OrderDetailsDTO.cs" />
     <Compile Include="Data Transfer Objects\ProductDTO.cs" />
     <Compile Include="Data Transfer Objects\SubmitCardsDTO.cs" />
+    <Compile Include="Filters\Abstract\StaticFilterBase.cs" />
     <Compile Include="Filters\Concrete\AddressFilter.cs" />
     <Compile Include="Filters\Concrete\CategoryFilter.cs" />
     <Compile Include="Filters\Concrete\CompanyFilter.cs" />
@@ -85,12 +86,6 @@
     <Compile Include="Filters\Concrete\ProductFilter.cs" />
     <Compile Include="Filters\Abstract\FilterBase.cs" />
     <Compile Include="Filters\Abstract\Filter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EntityFramework.CodeFirst\HireRight.EntityFramework.CodeFirst.csproj">
-      <Project>{0abe87b8-761f-4d4c-9391-27034ad058d9}</Project>
-      <Name>HireRight.EntityFramework.CodeFirst</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

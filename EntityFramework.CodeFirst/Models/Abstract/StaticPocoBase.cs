@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.Abstract
+namespace HireRight.Persistence.Models.Abstract
 {
     public class StaticPocoBase : PocoBase
     {

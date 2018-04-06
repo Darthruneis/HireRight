@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace DataTransferObjects.Filters.Concrete
 {
@@ -26,7 +25,7 @@ namespace DataTransferObjects.Filters.Concrete
     }
 
     [Serializable]
-    public class OrderFilter : Filter<Order>
+    public class OrderFilter : Filter
     {
         [DataMember]
         public DateTime? Completed { get; set; }
@@ -38,7 +37,7 @@ namespace DataTransferObjects.Filters.Concrete
         public string Notes { get; set; }
 
         [DataMember]
-        public IEnumerable<OrderStatus> OrderStatus { get; set; }
+        public IEnumerable<long> OrderStatus { get; set; }
 
         [DataMember]
         public List<string> PositionsOfInterest { get; set; }
@@ -56,7 +55,7 @@ namespace DataTransferObjects.Filters.Concrete
         {
         }
 
-        public override string CreateQuery(bool addBaseQuery = true)
+        protected override string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
             return query.ToString();

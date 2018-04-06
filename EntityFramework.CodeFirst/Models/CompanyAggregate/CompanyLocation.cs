@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HireRight.EntityFramework.CodeFirst.Models.Abstract;
+using HireRight.Persistence.Models.Abstract;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+namespace HireRight.Persistence.Models.CompanyAggregate
 {
     /// <summary>
     /// A location is a physical address where a company does business. For example, a call center, or corporate office, or retail store.

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.Abstract
+namespace HireRight.Persistence.Models.Abstract
 {
     /// <summary>
     /// Defines a basic Plain Old CLR Object entity that will be stored in the database.

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using HireRight.EntityFramework.CodeFirst.Models.Abstract;
+using HireRight.Persistence.Models.Abstract;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+namespace HireRight.Persistence.Models.CompanyAggregate
 {
     public class IndustryAssessmentBinder : PocoBase
     {

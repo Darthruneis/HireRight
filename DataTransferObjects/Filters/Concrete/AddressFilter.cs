@@ -1,11 +1,10 @@
-﻿using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters.Abstract;
+﻿using DataTransferObjects.Filters.Abstract;
 using System;
 using System.Text;
 
 namespace DataTransferObjects.Filters.Concrete
 {
-    public class AddressFilter : Filter<AddressDTO>
+    public class AddressFilter : Filter
     {
         public string City { get; set; }
         public string Country { get; set; }

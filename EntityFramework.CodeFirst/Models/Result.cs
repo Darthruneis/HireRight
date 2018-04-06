@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HireRight.EntityFramework.CodeFirst.Models
+namespace HireRight.Persistence.Models
 {
     public class PageResult<T> : Result
         where T : class

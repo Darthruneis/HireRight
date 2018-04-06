@@ -1,5 +1,5 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Extensions
 {
@@ -12,7 +12,15 @@ namespace HireRight.BusinessLogic.Extensions
 
         public static AddressDTO ConvertModelToDto(this Address model)
         {
-            return new AddressDTO(model);
+            return new AddressDTO
+                   {
+                       City = model.City,
+                       Country = model.Country,
+                       PostalCode = model.PostalCode,
+                       State = model.State,
+                       StreetAddress = model.StreetAddress,
+                       UnitNumber = model.UnitNumber
+                   };
         }
     }
 }

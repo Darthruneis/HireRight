@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Tests
 {

@@ -2,7 +2,6 @@
 using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
-using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,8 +10,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using HireRight.BusinessLogic.Extensions;
-using HireRight.EntityFramework.CodeFirst.Models;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence;
+using HireRight.Persistence.Abstract;
+using HireRight.Persistence.Models;
+using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
 {
@@ -22,13 +23,17 @@ namespace HireRight.BusinessLogic.Concrete
         private readonly IEmailSender _emailSender;
         private readonly IOrdersRepository _ordersRepository;
         private readonly IProductsBusinessLogic _productsBusinessLogic;
+        private readonly IProductsRepository _productsRepository;
 
-        public OrdersBusinessLogic(IOrdersRepository repo, IProductsBusinessLogic productBll, ICategoriesBusinessLogic categoriesBusinessLogic, IEmailSender emailSender)
+        public OrdersBusinessLogic(IOrdersRepository repo, IProductsBusinessLogic productBll, 
+                                   ICategoriesBusinessLogic categoriesBusinessLogic, IEmailSender emailSender, 
+                                   IProductsRepository productsRepository)
         {
             _ordersRepository = repo;
             _productsBusinessLogic = productBll;
             _categoriesBusinessLogic = categoriesBusinessLogic;
             _emailSender = emailSender;
+            _productsRepository = productsRepository;
         }
 
         public async Task<OrderDetailsDTO> Add(OrderDetailsDTO objectDto)
@@ -39,26 +44,27 @@ namespace HireRight.BusinessLogic.Concrete
 
         public async Task<decimal> CalculatePrice(Guid productGuid, long quantity)
         {
-            ProductDTO product = await _productsBusinessLogic.Get(productGuid);
+            Maybe<Product> product = await _productsRepository.GetWithDiscounts(productGuid);
+            if (product.HasNoValue)
+                return default(decimal);
 
-            if (!product.Discounts.Any()) return product.Price * quantity;
+            if (!product.Value.Discounts.Any())
+                return product.Value.Price * quantity;
 
-            DiscountDTO discountToApply = null;
+            var discountToApply = product.Value.GetHighestDiscountForQuantity(quantity);
 
-            foreach (DiscountDTO discount in product.Discounts)
-            {
-                if (quantity >= discount.Threshold)
-                {
-                    if (discountToApply == null) discountToApply = discount;
-                    if (discount.Threshold > discountToApply.Threshold) discountToApply = discount;
-                }
-            }
+            //foreach (DiscountDTO discount in product.Value.Discounts)
+            //    if (quantity >= discount.Threshold)
+            //        //if no discount has yet been applied, or a higher discount has been found for the quantity, apply the current discount
+            //        if (discountToApply == null || discount.Threshold > discountToApply.Threshold)
+            //            discountToApply = discount;
 
-            if (discountToApply == null) return product.Price * quantity;
+            if (discountToApply == null)
+                return product.Value.Price * quantity;
 
             decimal discountedPrice = discountToApply.IsPercent
-                ? product.Price * (1.00m - discountToApply.Amount)
-                                          : product.Price - discountToApply.Amount;
+                ? product.Value.Price * (1.00m - discountToApply.Amount)
+                                          : product.Value.Price - discountToApply.Amount;
 
             decimal orderTotal = quantity * discountedPrice;
             return Math.Round(orderTotal, 2);
@@ -92,13 +98,12 @@ namespace HireRight.BusinessLogic.Concrete
         {
             StringBuilder message = new StringBuilder($"An order has just been placed for assessment testing for " +
                 $"{model.PrimaryContact.FullName} of {model.Company.Name}. The details of this order are shown below.");
-
-            ProductDTO dto = await _productsBusinessLogic.Get(model.Order.ProductId).ConfigureAwait(false);
-            decimal total = await CalculatePrice(dto.RowGuid, model.Order.Quantity);
+            
+            decimal total = await CalculatePrice(model.Order.ProductId, model.Order.Quantity);
 
             message.AppendLine()
                    .AppendLine($"Quantity: {model.Order.Quantity}")
-                   .AppendLine($"Subtotal: {total.ToString("C2")}")
+                   .AppendLine($"Subtotal: {total:C2}")
                    .AppendLine("Positions of Interest:");
             foreach (string position in model.Order.NotesAndPositions.PositionsOfInterest)
                 message.AppendLine(position);

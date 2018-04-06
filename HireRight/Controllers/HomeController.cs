@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.BusinessLogic.Abstract;
 
 namespace HireRight.Controllers

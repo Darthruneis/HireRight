@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.BusinessLogic.Abstract;
-using HireRight.Repository.Abstract;
+using HireRight.Persistence.Abstract;
 
 namespace HireRight.BusinessLogic.Concrete
 {

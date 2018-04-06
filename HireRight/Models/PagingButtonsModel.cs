@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using DataTransferObjects.Filters.Abstract;
+﻿using DataTransferObjects.Filters.Abstract;
 
 namespace HireRight.Models
 {

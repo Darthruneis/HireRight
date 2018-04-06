@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using HireRight.EntityFramework.CodeFirst.Database_Context;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Models.CompanyAggregate;
 
-namespace HireRight.EntityFramework.CodeFirst.Seeds
+namespace HireRight.Persistence.Seeds
 {
     public class IndustrySeed
     {

@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Web.Configuration;
 using System.Xml;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Models.CompanyAggregate;
 using Newtonsoft.Json;
 
-namespace HireRight.EntityFramework.CodeFirst.Seeds
+namespace HireRight.Persistence.Seeds
 {
     public static class ScaleCategorySeed
     {

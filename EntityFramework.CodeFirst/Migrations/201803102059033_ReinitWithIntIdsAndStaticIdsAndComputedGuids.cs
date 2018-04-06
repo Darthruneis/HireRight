@@ -1,11 +1,9 @@
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Data.Entity.Migrations.Model;
 
-namespace HireRight.EntityFramework.CodeFirst.Migrations
+namespace HireRight.Persistence.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-
     public partial class ReinitWithIntIdsAndStaticIdsAndComputedGuids : DbMigration
     {
         private void DropDefault(IDbMigration migration, string table, string col)

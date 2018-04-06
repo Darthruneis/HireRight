@@ -1,16 +1,11 @@
 ﻿using DataTransferObjects;
 using HireRight.Models;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataTransferObjects.Data_Transfer_Objects;
-using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
-using WebGrease.Css.Extensions;
 
 namespace HireRight.Controllers
 {

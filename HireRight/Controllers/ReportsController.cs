@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using HireRight.Models;

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using HireRight.EntityFramework.CodeFirst.Database_Context;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
-using HireRight.EntityFramework.CodeFirst.Seeds;
+using HireRight.Persistence.Models.CompanyAggregate;
+using HireRight.Persistence.Seeds;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
-namespace HireRight.Repository.Tests
+namespace HireRight.Persistence.Tests
 {
     [TestFixture, Explicit]
     public class ExportCategoriesToCsv

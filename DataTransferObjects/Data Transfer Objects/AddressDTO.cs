@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace DataTransferObjects.Data_Transfer_Objects
 {
@@ -34,45 +33,9 @@ namespace DataTransferObjects.Data_Transfer_Objects
         [Display(Name = "Unit")]
         public string UnitNumber { get; set; }
 
-        public AddressDTO(Address address)
-        {
-            City = address.City;
-            Country = address.Country;
-            PostalCode = address.PostalCode;
-            State = address.State;
-            StreetAddress = address.StreetAddress;
-            UnitNumber = address.UnitNumber;
-        }
-
         public AddressDTO()
         {
             Country = "United States";
-        }
-
-        public string CreateQuery(string propertyName)
-        {
-            string prefix = $"&filter.{propertyName}.";
-            StringBuilder query = new StringBuilder("");
-
-            if (!string.IsNullOrWhiteSpace(City))
-                query.Append(prefix + $"{nameof(City)}={City}");
-
-            if (!string.IsNullOrWhiteSpace(Country))
-                query.Append(prefix + $"{nameof(Country)}={Country}");
-
-            if (!string.IsNullOrWhiteSpace(PostalCode))
-                query.Append(prefix + $"{nameof(PostalCode)}={PostalCode}");
-
-            if (!string.IsNullOrWhiteSpace(State))
-                query.Append(prefix + $"{nameof(State)}={State}");
-
-            if (!string.IsNullOrWhiteSpace(StreetAddress))
-                query.Append(prefix + $"{nameof(StreetAddress)}={StreetAddress}");
-
-            if (!string.IsNullOrWhiteSpace(UnitNumber))
-                query.Append(prefix + $"{nameof(UnitNumber)}={UnitNumber}");
-
-            return query.Append("}").ToString();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace HireRight.Repository.Tests
+﻿namespace HireRight.Persistence.Tests
 {
     public class CompanyRepositoryTests
     {

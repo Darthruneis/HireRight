@@ -511,13 +511,13 @@
       <Project>{e7a9f677-8d39-461b-810d-304b0b12e5dd}</Project>
       <Name>DataTransferObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EntityFramework.CodeFirst\HireRight.Persistence.csproj">
+      <Project>{0abe87b8-761f-4d4c-9391-27034ad058d9}</Project>
+      <Name>HireRight.Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HireRight.BusinessLogic\HireRight.BusinessLogic.csproj">
       <Project>{0f27556c-6b57-4533-a447-586270c17d65}</Project>
       <Name>HireRight.BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HireRight.Repository\HireRight.Repository.csproj">
-      <Project>{cc106c16-4063-4847-a186-814ee33b9775}</Project>
-      <Name>HireRight.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.EntityFramework.CodeFirst.Models;
 using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
@@ -15,8 +16,14 @@ namespace HireRight.Repository.Abstract
 
         Task<Product> Get(Guid itemGuid);
 
+        Task<Maybe<Product>> GetWithDiscounts(Guid productGuid);
+
         Task<Product> Update(Product itemToUpdate);
 
-        Task<ICollection<Discount>> GetDiscountsForProduct(Guid productGuid);
+        Task<ICollection<DiscountDTO>> GetDiscountsForProduct(Guid productGuid);
+
+        Task<Maybe<ProductDTO>> GetDto(Guid productGuid);
+
+        Task<Maybe<ProductDTO>> GetDtoWithDiscounts(Guid productGuid);
     }
 }

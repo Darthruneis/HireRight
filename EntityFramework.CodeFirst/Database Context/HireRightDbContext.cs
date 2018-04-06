@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Models.CompanyAggregate;
 
-namespace HireRight.EntityFramework.CodeFirst.Database_Context
+namespace HireRight.Persistence.Database_Context
 {
     /// <summary>
     /// Database context class for the Hire Right Database.

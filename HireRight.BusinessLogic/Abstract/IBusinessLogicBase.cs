@@ -1,5 +1,5 @@
 using DataTransferObjects.Data_Transfer_Objects;
-using HireRight.EntityFramework.CodeFirst.Models.Abstract;
+using HireRight.Persistence.Models.Abstract;
 
 namespace HireRight.BusinessLogic.Abstract
 {

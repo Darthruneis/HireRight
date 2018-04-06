@@ -1,7 +1,7 @@
 var CustomSolutions;
 (function (CustomSolutions) {
     "use strict";
-    var CardCategoryCounts = /** @class */ (function () {
+    var CardCategoryCounts = (function () {
         function CardCategoryCounts(rel, crit) {
             this.relevant = rel;
             this.critical = crit;
@@ -9,7 +9,7 @@ var CustomSolutions;
         }
         return CardCategoryCounts;
     }());
-    var CardCssCache = /** @class */ (function () {
+    var CardCssCache = (function () {
         function CardCssCache(left, right, pos) {
             this.mLeft = left;
             this.mRight = right;
@@ -211,7 +211,6 @@ var CustomSolutions;
                 return 2;
             case "LowImportance":
             default:
-                //reset to middle column
                 return 1;
         }
     }
@@ -240,25 +239,20 @@ var CustomSolutions;
         detachedHtml.removeClass("Irrelevant LowImportance HighImportance");
         detachedHtml.addClass(getStringImportanceLevel(newValue));
         detachedHtml.appendTo($newCategoryRow);
-        //restore original height for the row
         $categoryRow.css("height", "auto");
     }
     function animateCardMovement($categoryRow, $newCategoryRow, original, newValue) {
         if (original === newValue)
             return;
         var $card = $categoryRow.find(".categoryCard");
-        //padding on columns is 15 - moving will always cross 2, so 15 + 15 = 30
         var distanceToMove = parseInt($card.css("width")) + 30;
         var cache = new CardCssCache($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
         var mLeft = distanceToMove;
         var mRight = distanceToMove;
         if (original > newValue)
-            //moving to the right
             mLeft *= -1;
         else
-            //moving to the left
             mRight *= -1;
-        //preserve the height of the entire row during the animation
         $categoryRow.css("height", $card.css("height"));
         $card.css("position", "absolute");
         $card.animate({
@@ -276,7 +270,7 @@ var CustomSolutions;
     }
     var Tests;
     (function (Tests) {
-        var CustomSolutionsTestCase = /** @class */ (function () {
+        var CustomSolutionsTestCase = (function () {
             function CustomSolutionsTestCase(res, exp, name) {
                 this.result = res;
                 this.expected = exp;

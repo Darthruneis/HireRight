@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
-using HireRight.EntityFramework.CodeFirst.Database_Context;
-using HireRight.EntityFramework.CodeFirst.Seeds;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Data.Entity;
-using HireRight.EntityFramework.CodeFirst.Models.Abstract;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Database_Context;
+using HireRight.Persistence.Models.CompanyAggregate;
+using HireRight.Persistence.Seeds;
 
-namespace HireRight.EntityFramework.CodeFirst.Migrations
+namespace HireRight.Persistence.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<HireRightDbContext>
     {

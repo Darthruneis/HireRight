@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using HireRight.EntityFramework.CodeFirst.Models.Abstract;
+using HireRight.Persistence.Models.Abstract;
 
-namespace HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
+namespace HireRight.Persistence.Models.CompanyAggregate
 {
     /// <summary>
     /// A company is a named relationship between a primary billing address, and a collection of clients and locations (if there are more than a single location).

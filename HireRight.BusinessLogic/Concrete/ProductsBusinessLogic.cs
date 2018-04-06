@@ -2,13 +2,14 @@
 using DataTransferObjects.Filters.Concrete;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Extensions;
-using HireRight.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HireRight.EntityFramework.CodeFirst.Models;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence;
+using HireRight.Persistence.Abstract;
+using HireRight.Persistence.Models;
+using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Concrete
 {
@@ -50,18 +51,14 @@ namespace HireRight.BusinessLogic.Concrete
             return dto;
         }
 
-        public async Task<ProductDTO> Get(Guid productGuid)
-        {
-            Product product = await _productsRepository.Get(productGuid).ConfigureAwait(false);
-
-            return product == null ? null : ConvertModelToDto(product);
-        }
-
         public async Task<ICollection<DiscountDTO>> GetDiscountsForPoduct(Guid productGuid)
         {
             var discounts = await _productsRepository.GetDiscountsForProduct(productGuid);
             return discounts.Select(x => new DiscountDTO() {RowGuid = x.RowGuid, Amount = x.Amount, IsPercent = x.IsPercent, Threshold = x.Threshold}).ToList();
         }
+
+        public Task<Maybe<ProductDTO>> GetDto(Guid productGuid) => _productsRepository.GetDto(productGuid);
+        public Task<Maybe<ProductDTO>> GetDtoWithDiscounts(Guid productGuid) => _productsRepository.GetDtoWithDiscounts(productGuid);
 
         public async Task<PagingResultDTO<ProductDTO>> Get(ProductFilter filterParameters)
         {

@@ -2,12 +2,11 @@
 using System;
 using System.Runtime.Serialization;
 using System.Text;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace DataTransferObjects.Filters.Concrete
 {
     [Serializable]
-    public class ProductFilter : Filter<Product>
+    public class ProductFilter : Filter
     {
         [DataMember]
         public decimal? Price { get; set; }

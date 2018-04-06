@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using DataTransferObjects.Data_Transfer_Objects;
 using DataTransferObjects.Filters.Abstract;
 
 namespace DataTransferObjects.Filters.Concrete
 {
-    public class CategoryFilter : Filter<CategoryDTO>
+    public class CategoryFilter : Filter
     {
         [Display(Name = "Description")]
         public string DescriptionFilter { get; set; }
@@ -28,7 +27,7 @@ namespace DataTransferObjects.Filters.Concrete
             TitleFilter = title;
         }
 
-        public override string CreateQuery(bool addBaseQuery = true)
+        protected override string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery(true) : "");
 

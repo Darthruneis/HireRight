@@ -1,8 +1,6 @@
 ﻿using DataTransferObjects.Data_Transfer_Objects;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web.Mvc;
 using DataTransferObjects;
 
 namespace HireRight.Models

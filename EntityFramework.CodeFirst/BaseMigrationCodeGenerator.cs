@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations.Design;
 using System.Data.Entity.Migrations.Model;
 
-namespace HireRight.EntityFramework.CodeFirst
+namespace HireRight.Persistence
 {
     public class BaseMigrationCodeGenerator : MigrationCodeGenerator
     {

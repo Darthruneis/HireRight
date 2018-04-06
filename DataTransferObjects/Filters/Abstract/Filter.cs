@@ -7,7 +7,7 @@ using System.Text;
 namespace DataTransferObjects.Filters.Abstract
 {
     [Serializable]
-    public abstract class Filter<TModel> : FilterBase
+    public abstract class Filter : FilterBase
     {
         [DataMember]
         public List<Guid> ItemGuids { get; set; }
@@ -20,7 +20,7 @@ namespace DataTransferObjects.Filters.Abstract
                 ItemGuids.Add(itemGuid);
         }
 
-        public virtual string CreateQuery(bool addBaseQuery = true)
+        protected virtual string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery() : "");
 

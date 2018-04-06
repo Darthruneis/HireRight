@@ -1,4 +1,4 @@
-﻿using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+﻿using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Models
 {

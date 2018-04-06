@@ -7,8 +7,8 @@
     <ProjectGuid>{0ABE87B8-761F-4D4C-9391-27034AD058D9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HireRight.EntityFramework.CodeFirst</RootNamespace>
-    <AssemblyName>HireRight.EntityFramework.CodeFirst</AssemblyName>
+    <RootNamespace>HireRight.Persistence</RootNamespace>
+    <AssemblyName>HireRight.Persistence</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -63,6 +63,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICategoriesRepository.cs" />
+    <Compile Include="Abstract\ICompanyRepository.cs" />
+    <Compile Include="Abstract\IContactsRepository.cs" />
+    <Compile Include="Abstract\IDiscountsRepository.cs" />
+    <Compile Include="Abstract\IIndustryRepository.cs" />
+    <Compile Include="Abstract\IOrdersRepository.cs" />
+    <Compile Include="Abstract\IProductsRepository.cs" />
+    <Compile Include="Concrete\Repositories\CategoriesRepository.cs" />
+    <Compile Include="Concrete\Repositories\CompanyRepository.cs" />
+    <Compile Include="Concrete\Repositories\ContactsRepository.cs" />
+    <Compile Include="Concrete\Repositories\DiscountsRepository.cs" />
+    <Compile Include="Concrete\Repositories\IndustryRepository.cs" />
+    <Compile Include="Concrete\Repositories\OrdersRepository.cs" />
+    <Compile Include="Concrete\Repositories\ProductsRepository.cs" />
+    <Compile Include="Concrete\RepositoryBase.cs" />
+    <Compile Include="Concrete\RepositoryResponseObject.cs" />
+    <Compile Include="Maybe.cs" />
     <Compile Include="Migrations\201804040158382_IsActiveFlagOnAllPocos.cs" />
     <Compile Include="Migrations\201804040158382_IsActiveFlagOnAllPocos.Designer.cs">
       <DependentUpon>201804040158382_IsActiveFlagOnAllPocos.cs</DependentUpon>
@@ -141,6 +158,12 @@
     <EmbeddedResource Include="Migrations\201804040158382_IsActiveFlagOnAllPocos.resx">
       <DependentUpon>201804040158382_IsActiveFlagOnAllPocos.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTransferObjects\DataTransferObjects.csproj">
+      <Project>{e7a9f677-8d39-461b-810d-304b0b12e5dd}</Project>
+      <Name>DataTransferObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -92,6 +92,7 @@
     <Compile Include="Concrete\Repositories\OrdersRepository.cs" />
     <Compile Include="Concrete\Repositories\ProductsRepository.cs" />
     <Compile Include="Concrete\RepositoryResponseObject.cs" />
+    <Compile Include="Maybe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

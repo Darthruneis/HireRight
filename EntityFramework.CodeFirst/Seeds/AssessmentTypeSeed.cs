@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence.Models.CompanyAggregate;
 
-namespace HireRight.EntityFramework.CodeFirst.Seeds
+namespace HireRight.Persistence.Seeds
 {
     public static class AssessmentTypeSeed
     {

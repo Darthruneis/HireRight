@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.EntityFramework.CodeFirst.Models;
 
 namespace HireRight.Repository.Concrete
@@ -15,13 +16,8 @@ namespace HireRight.Repository.Concrete
 
     public class ProductsRepository : RepositoryBase<Product>, IProductsRepository
     {
-        public ProductsRepository() : base(() => new HireRightDbContext())
-        {
-        }
-
-        public ProductsRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc)
-        {
-        }
+        public ProductsRepository() : base(() => new HireRightDbContext()) { }
+        public ProductsRepository(Func<HireRightDbContext> contextFunc) : base(contextFunc) { }
 
         public async Task<Product> Add(Product itemToAdd)
         {
@@ -61,7 +57,7 @@ namespace HireRight.Repository.Concrete
                 var product = await context.Products
                                            .Where(x => x.IsActive)
                                            .Where(x => x.RowGuid == itemGuid)
-                                           .Select(x => new {x.Id, x.StaticId, x.RowGuid, x.Title, x.Price, Discounts = x.Discounts.Where(y => y.IsActive)})
+                                           .Select(x => new { x.Id, x.StaticId, x.RowGuid, x.Title, x.Price, Discounts = x.Discounts.Where(y => y.IsActive) })
                                            .FirstOrDefaultAsync();
 
                 if (product == null)
@@ -71,11 +67,63 @@ namespace HireRight.Repository.Concrete
             }
         }
 
-        public async Task<ICollection<Discount>> GetDiscountsForProduct(Guid productGuid)
+        public async Task<Maybe<Product>> GetWithDiscounts(Guid productGuid)
+        {
+            using (var context = ContextFunc())
+            {
+                return await context.Products
+                                    .Where(x => x.IsActive)
+                                    .Where(x => x.RowGuid == productGuid)
+                                    .Include(x => x.Discounts)
+                                    .FirstOrDefaultAsync();
+            }
+        }
+
+        public async Task<Maybe<ProductDTO>> GetDto(Guid productGuid)
         {
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
-                return await context.Discounts.Where(x => x.IsActive).Where(x => x.Product.RowGuid == productGuid).ToListAsync();
+                return await context.Products
+                                           .Where(x => x.IsActive)
+                                           .Where(x => x.RowGuid == productGuid)
+                                           .Select(x => new ProductDTO { Title = x.Title, RowGuid = x.RowGuid, Price = x.Price })
+                                           .FirstOrDefaultAsync();
+            }
+        }
+
+        public async Task<Maybe<ProductDTO>> GetDtoWithDiscounts(Guid productGuid)
+        {
+            using (HireRightDbContext context = ContextFunc.Invoke())
+            {
+                return await context.Products
+                                    .Where(x => x.IsActive)
+                                    .Where(x => x.RowGuid == productGuid)
+                                    .Select(x => new ProductDTO()
+                                                 {
+                                                     Title = x.Title,
+                                                     RowGuid = x.RowGuid,
+                                                     Price = x.Price,
+                                                     Discounts = x.Discounts.Select(y => new DiscountDTO()
+                                                                                         {
+                                                                                             Amount = y.Amount,
+                                                                                             IsPercent = y.IsPercent,
+                                                                                             RowGuid = y.RowGuid,
+                                                                                             Threshold = y.Threshold
+                                                                                         }).ToList(),
+                                                 })
+                                    .FirstOrDefaultAsync();
+            }
+        }
+
+        public async Task<ICollection<DiscountDTO>> GetDiscountsForProduct(Guid productGuid)
+        {
+            using (HireRightDbContext context = ContextFunc.Invoke())
+            {
+                return await context.Discounts
+                                    .Where(x => x.IsActive)
+                                    .Where(x => x.Product.RowGuid == productGuid)
+                                    .Select(x => new DiscountDTO() { RowGuid = x.RowGuid, Threshold = x.Threshold, Amount = x.Amount, IsPercent = x.IsPercent })
+                                    .ToListAsync();
             }
         }
 
@@ -84,32 +132,6 @@ namespace HireRight.Repository.Concrete
             using (HireRightDbContext context = ContextFunc.Invoke())
             {
                 return await UpdateBase(itemToUpdate, context.Products, context).ConfigureAwait(false);
-            }
-        }
-
-        private IQueryable<Product> FilterByPrice(IQueryable<Product> query, decimal? value, NumericSearchComparators? comparator)
-        {
-            if (value == null || comparator == null) return query;
-
-            switch (comparator)
-            {
-                case NumericSearchComparators.GreaterThan:
-                    return query.Where(x => x.Price > value.Value);
-
-                case NumericSearchComparators.GreaterThanOrEqualTo:
-                    return query.Where(x => x.Price >= value.Value);
-
-                case NumericSearchComparators.EqualTo:
-                    return query.Where(x => x.Price == value.Value);
-
-                case NumericSearchComparators.LessThanOrEqualTo:
-                    return query.Where(x => x.Price <= value.Value);
-
-                case NumericSearchComparators.LessThan:
-                    return query.Where(x => x.Price < value.Value);
-
-                default:
-                    return query;
             }
         }
     }

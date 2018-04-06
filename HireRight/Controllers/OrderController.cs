@@ -2,7 +2,6 @@
 using DataTransferObjects.Filters.Concrete;
 using HireRight.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -34,11 +33,11 @@ namespace HireRight.Controllers
         [HttpGet]
         public async Task<PartialViewResult> GetDiscounts(Guid itemSelected)
         {
-            ProductDTO product = await _productsBusinessLogic.Get(itemSelected);
-            if(product == null)
+            var product = await _productsBusinessLogic.GetDtoWithDiscounts(itemSelected);
+            if(product.HasNoValue)
                 throw new NullReferenceException("Product with guid " + itemSelected + " could not be loaded for discount information.");
 
-            return PartialView("ProductDiscountsPartial", product);
+            return PartialView("ProductDiscountsPartial", product.Value);
         }
 
         [HttpGet]
@@ -99,7 +98,6 @@ namespace HireRight.Controllers
             PagingResultDTO<ProductDTO> products = await _productsBusinessLogic.Get(assessmentTestFilter);
 
             model.Order.Products = products.PageResult.ToList();
-
             model.Order.SelectedProduct = model.Order.Products.First();
 
             return model;

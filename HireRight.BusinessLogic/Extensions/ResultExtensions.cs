@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataTransferObjects.Filters.Concrete;
-using HireRight.EntityFramework.CodeFirst.Models;
-using HireRight.EntityFramework.CodeFirst.Models.Abstract;
+using HireRight.Persistence.Models;
+using HireRight.Persistence.Models.Abstract;
 
 namespace HireRight.BusinessLogic.Extensions
 {

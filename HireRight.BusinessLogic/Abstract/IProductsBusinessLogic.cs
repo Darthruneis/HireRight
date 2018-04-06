@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataTransferObjects.Filters.Concrete;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
+using HireRight.Persistence;
+using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Abstract
 {
@@ -11,12 +12,14 @@ namespace HireRight.BusinessLogic.Abstract
     {
         Task<ProductDTO> Add(ProductDTO productDto);
 
-        Task<ProductDTO> Get(Guid productGuid);
-
         Task<PagingResultDTO<ProductDTO>> Get(ProductFilter filterParameters);
 
         Task<ProductDTO> Update(ProductDTO productDto);
 
         Task<ICollection<DiscountDTO>> GetDiscountsForPoduct(Guid productGuid);
+
+        Task<Maybe<ProductDTO>> GetDto(Guid productGuid);
+
+        Task<Maybe<ProductDTO>> GetDtoWithDiscounts(Guid productGuid);
     }
 }

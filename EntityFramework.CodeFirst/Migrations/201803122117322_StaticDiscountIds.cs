@@ -1,8 +1,7 @@
-namespace HireRight.EntityFramework.CodeFirst.Migrations
+using System.Data.Entity.Migrations;
+
+namespace HireRight.Persistence.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class StaticDiscountIds : DbMigration
     {
         public override void Up()

@@ -5,8 +5,8 @@ using System.IO;
 using System.Web.Mvc;
 using HireRight.BusinessLogic.Abstract;
 using HireRight.BusinessLogic.Concrete;
-using HireRight.Repository.Abstract;
-using HireRight.Repository.Concrete;
+using HireRight.Persistence.Abstract;
+using HireRight.Persistence.Concrete.Repositories;
 using Ninject.Activation;
 
 namespace HireRight

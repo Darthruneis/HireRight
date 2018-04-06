@@ -2,12 +2,11 @@
 using System;
 using System.Runtime.Serialization;
 using System.Text;
-using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate;
 
 namespace DataTransferObjects.Filters.Concrete
 {
     [Serializable]
-    public class LocationFilter : Filter<CompanyLocation>
+    public class LocationFilter : Filter
     {
         [DataMember]
         public AddressFilter AddressFilter { get; set; }
@@ -25,7 +24,7 @@ namespace DataTransferObjects.Filters.Concrete
         {
         }
 
-        public override string CreateQuery(bool addBaseQuery = true)
+        protected override string CreateQuery(bool addBaseQuery = true)
         {
             StringBuilder query = new StringBuilder(addBaseQuery ? base.CreateQuery(true) : "");
 
