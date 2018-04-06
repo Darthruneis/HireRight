@@ -40,9 +40,9 @@ namespace HireRight.BusinessLogic.Concrete
 #endif
 #pragma warning disable 162
             // ReSharper disable HeuristicUnreachableCode
-            SendFormattedEmail(DianaEmail, "Diana", message, subject, replyTo);
-            SendFormattedEmail(JanetEmail, "Janet", message, subject, replyTo);
-            SendFormattedEmail("darthruneis@hotmail.com", "Chris", message, subject, replyTo);
+            //SendFormattedEmail(DianaEmail, "Diana", message, subject, replyTo);
+            //SendFormattedEmail(JanetEmail, "Janet", message, subject, replyTo);
+            SendFormattedEmail("info@HireRightTesting.com", "All", message, subject, replyTo);
             // ReSharper restore HeuristicUnreachableCode
 #pragma warning restore 162
         }
@@ -57,7 +57,7 @@ namespace HireRight.BusinessLogic.Concrete
                     subject,
                     //Replace normal line breaks with HTML break statements
                     body.Replace("\r\n", "<br/>"))
-                { IsBodyHtml = true };
+                { IsBodyHtml = true, CC = { "" }};
                 if (replyTo != null)
                     mailMessage.ReplyToList.Add(replyTo);
 
