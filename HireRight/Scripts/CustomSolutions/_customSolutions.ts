@@ -1,46 +1,57 @@
-﻿namespace CustomSolutions {
+﻿namespace CustomSolutions
+{
     "use strict";
-    class CardCategoryCounts {
+    class CardCategoryCounts
+    {
         relevant: number;
         critical: number;
         nice: number;
 
-        constructor(rel: number, crit: number) {
+        constructor(rel: number, crit: number)
+        {
             this.relevant = rel;
             this.critical = crit;
             this.nice = rel - crit;
         }
     }
 
-    class CardCssCache {
+    class CardCssCache
+    {
         mLeft: string;
         mRight: string;
         position: string;
 
-        restoreCss($card: JQuery): void {
+        restoreCss($card: JQuery): void
+        {
             $card.css("position", this.position);
             $card.css("margin-left", this.mLeft);
             $card.css("margin-right", this.mRight);
         }
 
-        constructor(left: string, right: string, pos: string) {
+        constructor(left: string, right: string, pos: string)
+        {
             this.mLeft = left;
             this.mRight = right;
             this.position = pos;
         }
     }
 
-    export function bindEvents(selectedIndustry: number = 0, isGeneralSelected: boolean = false) {
+    export function bindEvents(selectedIndustry: number = 0, isGeneralSelected: boolean = false,
+                               minCriticals: number = 3, maxCriticals: number = 18, maxNice: number = 12) : void
+    {
         bindMovementButtons();
-        bindContinueAndBackButtons();
-        bindFormSubmit();
+        bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice);
+        bindFormSubmit(minCriticals, maxCriticals, maxNice);
         bindIndustryToggles();
-        if (selectedIndustry !== 0 || isGeneralSelected) {
-            if (selectedIndustry !== 0) {
+        if (selectedIndustry !== 0 || isGeneralSelected)
+        {
+            if (selectedIndustry !== 0)
+            {
                 $(`.industryToggle:not(.generalIndustryToggle)[data-industryid='${selectedIndustry}']`)
                     .trigger("click");
             }
-            if (isGeneralSelected) {
+            if (isGeneralSelected)
+            {
                 $(".generalIndustryToggle").trigger("click");
             }
 
@@ -50,15 +61,18 @@
         }
     }
 
-    function bindIndustryToggles() {
+    function bindIndustryToggles(): void
+    {
         $(".industryToggle:not(.generalIndustryToggle)").on("click",
-            function (e: Event) {
+            function (e: Event)
+            {
                 var $this = $(this);
 
                 var isBeingRemoved: boolean = $this.hasClass("activeIndustry");
                 $(".industryToggle:not(.generalIndustryToggle)").removeClass("activeIndustry").find("i").hide();
 
-                if (!isBeingRemoved) {
+                if (!isBeingRemoved)
+                {
                     $this.addClass("activeIndustry");
                     $this.find("i").show();
                 }
@@ -66,7 +80,8 @@
             });
 
         $(".generalIndustryToggle").on("click",
-            function (e: Event) {
+            function (e: Event)
+            {
                 var $this = $(this);
                 $this.toggleClass("activeIndustry");
                 $this.find("i").toggle();
@@ -74,20 +89,24 @@
             });
     }
 
-    function updateCardVisibilityRanks() {
+    function updateCardVisibilityRanks(): void
+    {
         var $toggles: Array<JQuery> = $(".activeIndustry").toArray().map((value, index, array) => $(value));
         const getHidden: ($card: JQuery) => JQuery = ($card: JQuery) => $card.closest(".categoryCardRow").find("input[type='hidden']");
 
-        $(".categoryCard").each((index, elem) => {
+        $(".categoryCard").each((index, elem) =>
+        {
             var $card = $(elem);
             var rank: number = getVisibilityRankForCard($card, $toggles);
             $card.data("visibilityrank", rank);
             var $hidden: JQuery = getHidden($card);
-            if (rank > 0) {
+            if (rank > 0)
+            {
                 $card.show().closest(".categoryCardRow").show();
                 if ($hidden.val() === "Irrelevant")
                     $hidden.val($card.data("cachedhiddenlevel"));
-            } else {
+            } else
+            {
                 $card.hide().closest(".categoryCardRow").hide();
                 $card.data("cachedhiddenlevel", $hidden.val());
                 $hidden.val("Irrelevant");
@@ -95,11 +114,13 @@
         });
     }
 
-    function getVisibilityRankForCard($card: JQuery, $toggles: Array<JQuery>): number {
+    function getVisibilityRankForCard($card: JQuery, $toggles: Array<JQuery>): number
+    {
         var specificCategory: string = "";
         var generalCategoryEnabled: boolean = false;
         var rankOfCard: number = 1;
-        for (var i = 0; i < $toggles.length; i++) {
+        for (var i = 0; i < $toggles.length; i++)
+        {
             var $toggle = $toggles[i];
             if ($toggle.hasClass("generalIndustryToggle"))
                 generalCategoryEnabled = true;
@@ -126,50 +147,64 @@
         return rankOfCard;
     }
 
-    function bindMovementButtons() {
+    function bindMovementButtons(): void
+    {
         $("#categoryContainerDiv").on("click",
             ".lessImportantButton",
-            function (e) {
+            function (e)
+            {
                 updateImportanceLevel($(this).closest(".categoryCardRow"), false);
             });
 
         $("#categoryContainerDiv").on("click",
             ".moreImportantButton",
-            function (e) {
+            function (e)
+            {
                 updateImportanceLevel($(this).closest(".categoryCardRow"), true);
             });
     }
 
-    function bindContinueAndBackButtons() {
+    function checkForCardCountErrors(minCriticals: number, maxCriticals: number, maxNice: number): boolean
+    {
+        var results: CardCategoryCounts = inspectCardCounts();
+
+        var isValid: boolean = true;
+        if (results.relevant === 0 || results.critical > 18 || results.nice > 12)
+        {
+            $("#notEnough").show();
+            isValid = false;
+        }
+
+        if (results.critical < 3)
+        {
+            $("#notEnoughCrits").show();
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    function bindContinueAndBackButtons(minCriticals: number, maxCriticals: number, maxNice: number): void
+    {
         $("#ContinueButton").on("click",
-            function () {
-                var results: CardCategoryCounts = inspectCardCounts();
-
-                var isValid: boolean = true;
-                if (results.relevant === 0 || results.relevant > 9) {
-                    $("#notEnough").show();
-                    isValid = false;
-                }
-                if (results.critical < 3) {
-                    $("#notEnoughCrits").show();
-                    isValid = false;
-                }
-
-                if (isValid)
+            function ()
+            {
+                if (checkForCardCountErrors(minCriticals, maxCriticals, maxNice))
                     toggleIrrelevantCards();
             });
 
-        $("#BackButton").on("click", () => {
+        $("#BackButton").on("click", () =>
+        {
             toggleIrrelevantCards();
         });
     }
 
-    function bindFormSubmit() {
+    function bindFormSubmit(minCriticals: number, maxCriticals: number, maxNice: number): void
+    {
         $("#FinishButton").on("click",
-            function (e: Event) {
+            function (e: Event)
+            {
                 updateCardVisibilityRanks();
                 makeHiddenCardsIrrelevant();
-                var counts = inspectCardCounts();
                 var isGeneralSelected: boolean = $(".generalIndustryToggle").hasClass("activeIndustry");
                 var activeToggles: JQuery = $(".activeIndustry:not(.generalIndustryToggle)");
                 var selectedIndustry: number = 0;
@@ -179,41 +214,38 @@
                 $(this).append(`<input type='hidden' name='selectedIndustry' value='${selectedIndustry}'/>`);
                 $(this).append(`<input type='hidden' name='isGeneralSelected' value='${isGeneralSelected}'/>`);
 
-                var result: boolean = true;
-                if (counts.relevant < 1 || counts.relevant > 9) {
-                    $("#notEnough").show();
-                    result = false;
-                }
-                else
-                    $("#notEnough").hide();
-
-                if (counts.critical < 3) {
-                    $("#notEnoughCrits").show();
-                    result = false;
-                }
-                else
-                    $("#notEnoughCrits").hide();
+                var result: boolean = checkForCardCountErrors(minCriticals, maxCriticals, maxNice);
                 if (result)
+                {
+                    $("#notEnough").hide();
+                    $("#notEnoughCrits").hide();
                     $("form").submit();
+                }
             });
     }
 
-    function makeHiddenCardsIrrelevant() {
-        $("#categoryContainerDiv").find(".categoryCardRow").each((index, elem) => {
+    function makeHiddenCardsIrrelevant(): void
+    {
+        $("#categoryContainerDiv").find(".categoryCardRow").each((index, elem) =>
+        {
             var $card = $(elem).find(".categoryCard");
             var visibilityRank = parseInt($card.data("visibilityrank"));
-            if (visibilityRank <= 0) {
+            if (visibilityRank <= 0)
+            {
                 $card.find("input[type='hidden']").val("Irrelevant");
             }
         });
     }
 
-    function inspectCardCounts(): CardCategoryCounts {
+    function inspectCardCounts(): CardCategoryCounts
+    {
         var numberOfRelevantCards: number = 0;
         var numberOfCriticalCards: number = 0;
-        $(".categoryCardRow input[type='hidden']").each((index, elem) => {
+        $(".categoryCardRow input[type='hidden']").each((index, elem) =>
+        {
             var hiddenValue = $(elem).val();
-            if (hiddenValue !== "Irrelevant") {
+            if (hiddenValue !== "Irrelevant")
+            {
                 numberOfRelevantCards++;
                 if (hiddenValue === "HighImportance")
                     numberOfCriticalCards++;
@@ -223,7 +255,8 @@
         return new CardCategoryCounts(numberOfRelevantCards, numberOfCriticalCards);
     }
 
-    function toggleIrrelevantCards(): void {
+    function toggleIrrelevantCards(): void
+    {
         $(".importanceHeaders").find(":first-child").toggle();
         $(".importanceHeaders").find(":not(:first-child)").toggleClass("col-xs-4 col-xs-6");
 
@@ -234,18 +267,22 @@
         $("#notEnoughCrits").hide();
         $("#notEnough").hide();
 
-        $(".categoryCardRow input[type='hidden']").each((index, elem) => {
+        $(".categoryCardRow input[type='hidden']").each((index, elem) =>
+        {
             var $row = $(elem).closest(".categoryCardRow");
             $row.find(".categoryColumn").toggleClass("col-xs-4 col-xs-6");
             $row.find(".categoryColumn.lowestCategory").toggle();
         });
     }
 
-    function getImportanceLevel($categoryRow: JQuery): string {
+    function getImportanceLevel($categoryRow: JQuery): string
+    {
         return $categoryRow.find("input[type='hidden']").val();
     }
-    function getNumericImportanceLevel(stringValue: string): number {
-        switch (stringValue) {
+    function getNumericImportanceLevel(stringValue: string): number
+    {
+        switch (stringValue)
+        {
             case "Irrelevant":
                 return 0;
             case "HighImportance":
@@ -257,7 +294,8 @@
                 return 1;
         }
     }
-    function getStringImportanceLevel(intValue: number): string {
+    function getStringImportanceLevel(intValue: number): string
+    {
         if (intValue >= 2)
             return "HighImportance";
         if (intValue <= 0)
@@ -265,19 +303,24 @@
         return "LowImportance";
     }
 
-    function toggleButtonsBasedOnImportance($categoryRow: JQuery, newValue: string): void {
-        if (newValue === "HighImportance") {
+    function toggleButtonsBasedOnImportance($categoryRow: JQuery, newValue: string): void
+    {
+        if (newValue === "HighImportance")
+        {
             $categoryRow.find(".moreImportantButton").hide();
         }
-        else if (newValue === "Irrelevant") {
+        else if (newValue === "Irrelevant")
+        {
             $categoryRow.find(".lessImportantButton").hide();
-        } else {
+        } else
+        {
             $categoryRow.find(".moreImportantButton").show();
             $categoryRow.find(".lessImportantButton").show();
         }
     }
 
-    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, $card: JQuery, cache: CardCssCache, newValue: number) {
+    function moveCardToNewColumn($categoryRow: JQuery, $newCategoryRow: JQuery, $card: JQuery, cache: CardCssCache, newValue: number): void
+    {
         cache.restoreCss($card);
 
         var detachedHtml = $card.detach();
@@ -289,7 +332,8 @@
         $categoryRow.css("height", "auto");
     }
 
-    function animateCardMovement($categoryRow: JQuery, $newCategoryRow: JQuery, original: number, newValue: number) {
+    function animateCardMovement($categoryRow: JQuery, $newCategoryRow: JQuery, original: number, newValue: number): void
+    {
         if (original === newValue) return;
 
         var $card = $categoryRow.find(".categoryCard");
@@ -317,7 +361,8 @@
             () => moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache, newValue));
     }
 
-    function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void {
+    function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void
+    {
         var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
         var current = increase ? original + 1 : original - 1;
 
@@ -329,27 +374,33 @@
         animateCardMovement($categoryRow, $($categoryRow.find(".categoryColumn")[getNumericImportanceLevel(newValue)]), original, current);
     }
 
-    export namespace Tests {
-        class CustomSolutionsTestCase {
+    export namespace Tests
+    {
+        class CustomSolutionsTestCase
+        {
             result: number;
             expected: number;
             case: string;
 
-            status(): boolean {
+            status(): boolean
+            {
                 return this.result === this.expected;
             }
-            print(): string {
+            print(): string
+            {
                 var passOrFail = this.status() ? "PASS" : "FAIL";
                 return `${passOrFail} - r: ${this.result} e:${this.expected} - ${this.case}`;
             }
 
-            constructor(res: number, exp: number, name: string) {
+            constructor(res: number, exp: number, name: string)
+            {
                 this.result = res;
                 this.expected = exp;
                 this.case = name;
             }
         }
-        export function runTests(): boolean {
+        export function runTests(): boolean
+        {
             var results = new Array<CustomSolutionsTestCase>();
             generalCases(results);
             specificCases(results);
@@ -357,7 +408,8 @@
             noneCases(results);
             var passed: number = 0;
             var total: number = 0;
-            for (var i = 0; i < results.length; i++) {
+            for (var i = 0; i < results.length; i++)
+            {
                 if (!results[i].status())
                     console.log(results[i].print());
                 else
@@ -367,10 +419,12 @@
             console.log(passed + "/" + total + " test cases passed");
             return passed === total;
         }
-        function generalCases(results: CustomSolutionsTestCase[]): void {
+        function generalCases(results: CustomSolutionsTestCase[]): void
+        {
             results.push(bar1(), bar2(), bar3(), bar4());
         }
-        function bar1() {
+        function bar1()
+        {
             var $card: JQuery = $("<i class='categoryCard' id='test-bar1-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i class='generalIndustryToggle'></i>"));
@@ -378,14 +432,16 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 0, "case 1: general applied, card for no industries");
         }
-        function bar2() {
+        function bar2()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General' id='test-bar2-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i class='generalIndustryToggle'></i>"));
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 2, "case 2: general applied, card for general and no other industries");
         }
-        function bar3() {
+        function bar3()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-Artistic' id='test-bar3-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i class='generalIndustryToggle'></i>"));
@@ -393,7 +449,8 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 0, "case 3: general applied, card for other industry");
         }
-        function bar4() {
+        function bar4()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General industry-Artistic' id='test-bar4-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i class='generalIndustryToggle'></i>"));
@@ -401,10 +458,12 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 2, "case 4: general applied, card for general and other industries");
         }
-        function specificCases(results: CustomSolutionsTestCase[]): void {
+        function specificCases(results: CustomSolutionsTestCase[]): void
+        {
             results.push(bar5(), bar6(), bar7(), bar8(), bar9(), bar10());
         }
-        function bar5() {
+        function bar5()
+        {
             var $card: JQuery = $("<i class='categoryCard' id='test-bar5-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -412,7 +471,8 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 0, "case 5: specific applied, card for no industries");
         }
-        function bar6() {
+        function bar6()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General' id='test-bar6-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -420,7 +480,8 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 0, "case 6: specific applied, card for general and no other industries");
         }
-        function bar7() {
+        function bar7()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-Manufacturing' id='test-bar7-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -428,7 +489,8 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 0, "case 7: specific applied, card for other industry");
         }
-        function bar8() {
+        function bar8()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General industry-Manufacturing' id='test-bar8-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -436,7 +498,8 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 0, "case 8: specific applied, card for general and other industries");
         }
-        function bar9() {
+        function bar9()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General industry-Artistic industry-Manufacturing' id='test-bar9-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -444,7 +507,8 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 2, "case 9: specific applied, card for general and same industry and other industries");
         }
-        function bar10() {
+        function bar10()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-Artistic' id='test-bar10-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -452,10 +516,12 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 2, "case 10: specific applied, card for same industry");
         }
-        function combinedCases(results: CustomSolutionsTestCase[]): void {
+        function combinedCases(results: CustomSolutionsTestCase[]): void
+        {
             results.push(bar11(), bar12());
         }
-        function bar11() {
+        function bar11()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-Artistic' id='test-bar11-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -464,7 +530,8 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 1, "case 11: general and specific applied, card for same industry");
         }
-        function bar12() {
+        function bar12()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General industry-Artistic' id='test-bar12-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
             $toggles.push($("<i data-industryname='Artistic'></i>"));
@@ -473,38 +540,44 @@
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 2, "case 12: general and specific applied, card for general and same industry");
         }
-        function noneCases(results: CustomSolutionsTestCase[]): void {
+        function noneCases(results: CustomSolutionsTestCase[]): void
+        {
             results.push(barNone1(), barNone2(), barNone3(), barNone4(), barNone5());
         }
-        function barNone1() {
+        function barNone1()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General industry-Artistic' id='test-barn1-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
 
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 1, "case n1: none applied, card for general and industry");
         }
-        function barNone2() {
+        function barNone2()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-General ' id='test-barn2-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
 
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 1, "case n2: none applied, card for general");
         }
-        function barNone3() {
+        function barNone3()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-Artistic' id='test-barn3-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
 
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 1, "case n3: none applied, card for industry");
         }
-        function barNone4() {
+        function barNone4()
+        {
             var $card: JQuery = $("<i class='categoryCard industry-Manufacturing industry-Artistic' id='test-barn4-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
 
             var result = getVisibilityRankForCard($card, $toggles);
             return new CustomSolutionsTestCase(result, 1, "case n4: none applied, card for industries");
         }
-        function barNone5() {
+        function barNone5()
+        {
             var $card: JQuery = $("<i class='categoryCard' id='test-barn5-i-tag'></i>");
             var $toggles: Array<JQuery> = new Array<JQuery>();
 

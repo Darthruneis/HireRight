@@ -22,6 +22,9 @@ namespace HireRight.BusinessLogic.Concrete
         private readonly IEmailSender _emailSender;
         private readonly IOrdersRepository _ordersRepository;
         private readonly IProductsBusinessLogic _productsBusinessLogic;
+        public const int MaxCriticalCategories = 18;
+        public const int MinCriticalCategories = 3;
+        public const int MaxNiceCategories = 12;
 
         public OrdersBusinessLogic(IOrdersRepository repo, IProductsBusinessLogic productBll, ICategoriesBusinessLogic categoriesBusinessLogic, IEmailSender emailSender)
         {

@@ -1,7 +1,7 @@
 var CustomSolutions;
 (function (CustomSolutions) {
     "use strict";
-    var CardCategoryCounts = /** @class */ (function () {
+    var CardCategoryCounts = (function () {
         function CardCategoryCounts(rel, crit) {
             this.relevant = rel;
             this.critical = crit;
@@ -9,7 +9,7 @@ var CustomSolutions;
         }
         return CardCategoryCounts;
     }());
-    var CardCssCache = /** @class */ (function () {
+    var CardCssCache = (function () {
         function CardCssCache(left, right, pos) {
             this.mLeft = left;
             this.mRight = right;
@@ -22,12 +22,15 @@ var CustomSolutions;
         };
         return CardCssCache;
     }());
-    function bindEvents(selectedIndustry, isGeneralSelected) {
+    function bindEvents(selectedIndustry, isGeneralSelected, minCriticals, maxCriticals, maxNice) {
         if (selectedIndustry === void 0) { selectedIndustry = 0; }
         if (isGeneralSelected === void 0) { isGeneralSelected = false; }
+        if (minCriticals === void 0) { minCriticals = 3; }
+        if (maxCriticals === void 0) { maxCriticals = 18; }
+        if (maxNice === void 0) { maxNice = 12; }
         bindMovementButtons();
-        bindContinueAndBackButtons();
-        bindFormSubmit();
+        bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice);
+        bindFormSubmit(minCriticals, maxCriticals, maxNice);
         bindIndustryToggles();
         if (selectedIndustry !== 0 || isGeneralSelected) {
             if (selectedIndustry !== 0) {
@@ -116,30 +119,32 @@ var CustomSolutions;
             updateImportanceLevel($(this).closest(".categoryCardRow"), true);
         });
     }
-    function bindContinueAndBackButtons() {
+    function checkForCardCountErrors(minCriticals, maxCriticals, maxNice) {
+        var results = inspectCardCounts();
+        var isValid = true;
+        if (results.relevant === 0 || results.critical > 18 || results.nice > 12) {
+            $("#notEnough").show();
+            isValid = false;
+        }
+        if (results.critical < 3) {
+            $("#notEnoughCrits").show();
+            isValid = false;
+        }
+        return isValid;
+    }
+    function bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice) {
         $("#ContinueButton").on("click", function () {
-            var results = inspectCardCounts();
-            var isValid = true;
-            if (results.relevant === 0 || results.relevant > 9) {
-                $("#notEnough").show();
-                isValid = false;
-            }
-            if (results.critical < 3) {
-                $("#notEnoughCrits").show();
-                isValid = false;
-            }
-            if (isValid)
+            if (checkForCardCountErrors(minCriticals, maxCriticals, maxNice))
                 toggleIrrelevantCards();
         });
         $("#BackButton").on("click", function () {
             toggleIrrelevantCards();
         });
     }
-    function bindFormSubmit() {
+    function bindFormSubmit(minCriticals, maxCriticals, maxNice) {
         $("#FinishButton").on("click", function (e) {
             updateCardVisibilityRanks();
             makeHiddenCardsIrrelevant();
-            var counts = inspectCardCounts();
             var isGeneralSelected = $(".generalIndustryToggle").hasClass("activeIndustry");
             var activeToggles = $(".activeIndustry:not(.generalIndustryToggle)");
             var selectedIndustry = 0;
@@ -147,21 +152,12 @@ var CustomSolutions;
                 selectedIndustry = activeToggles.data("industryid");
             $(this).append("<input type='hidden' name='selectedIndustry' value='" + selectedIndustry + "'/>");
             $(this).append("<input type='hidden' name='isGeneralSelected' value='" + isGeneralSelected + "'/>");
-            var result = true;
-            if (counts.relevant < 1 || counts.relevant > 9) {
-                $("#notEnough").show();
-                result = false;
-            }
-            else
+            var result = checkForCardCountErrors(minCriticals, maxCriticals, maxNice);
+            if (result) {
                 $("#notEnough").hide();
-            if (counts.critical < 3) {
-                $("#notEnoughCrits").show();
-                result = false;
-            }
-            else
                 $("#notEnoughCrits").hide();
-            if (result)
                 $("form").submit();
+            }
         });
     }
     function makeHiddenCardsIrrelevant() {
@@ -211,7 +207,6 @@ var CustomSolutions;
                 return 2;
             case "LowImportance":
             default:
-                //reset to middle column
                 return 1;
         }
     }
@@ -240,25 +235,20 @@ var CustomSolutions;
         detachedHtml.removeClass("Irrelevant LowImportance HighImportance");
         detachedHtml.addClass(getStringImportanceLevel(newValue));
         detachedHtml.appendTo($newCategoryRow);
-        //restore original height for the row
         $categoryRow.css("height", "auto");
     }
     function animateCardMovement($categoryRow, $newCategoryRow, original, newValue) {
         if (original === newValue)
             return;
         var $card = $categoryRow.find(".categoryCard");
-        //padding on columns is 15 - moving will always cross 2, so 15 + 15 = 30
         var distanceToMove = parseInt($card.css("width")) + 30;
         var cache = new CardCssCache($card.css("margin-left"), $card.css("margin-right"), $card.css("position"));
         var mLeft = distanceToMove;
         var mRight = distanceToMove;
         if (original > newValue)
-            //moving to the right
             mLeft *= -1;
         else
-            //moving to the left
             mRight *= -1;
-        //preserve the height of the entire row during the animation
         $categoryRow.css("height", $card.css("height"));
         $card.css("position", "absolute");
         $card.animate({
@@ -276,7 +266,7 @@ var CustomSolutions;
     }
     var Tests;
     (function (Tests) {
-        var CustomSolutionsTestCase = /** @class */ (function () {
+        var CustomSolutionsTestCase = (function () {
             function CustomSolutionsTestCase(res, exp, name) {
                 this.result = res;
                 this.expected = exp;
