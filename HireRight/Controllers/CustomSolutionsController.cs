@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataTransferObjects.Data_Transfer_Objects;
 using HireRight.BusinessLogic.Abstract;
+using HireRight.BusinessLogic.Concrete;
 
 namespace HireRight.Controllers
 {
@@ -14,7 +15,6 @@ namespace HireRight.Controllers
         private readonly ICategoriesBusinessLogic _categoriesBusinessLogic;
         private readonly IOrdersBusinessLogic _ordersBusinessLogic;
         private readonly IIndustryBusinessLogic _industryBusinessLogic;
-        private const int MaximumNumberOfCategories = 9;
 
         public CustomSolutionsController(ICategoriesBusinessLogic categoriesBusinessLogic, IOrdersBusinessLogic ordersBusinessLogic, IIndustryBusinessLogic industryBusinessLogic)
         {
@@ -57,11 +57,14 @@ namespace HireRight.Controllers
             model.IsGeneralSelected = isGeneralSelected;
             model.SelectedIndustry = selectedIndustry;
 
-            if (model.Categories.Count(x => x.Importance != CategoryImportance.Irrelevant) > MaximumNumberOfCategories)
-                ModelState.AddModelError("", $"Please choose 1 - {MaximumNumberOfCategories} important scales.");
+            if (model.Categories.Count(x => x.Importance == CategoryImportance.LowImportance) > OrdersBusinessLogic.MaxNiceCategories)
+                ModelState.AddModelError("", $"Please choose 1 - {OrdersBusinessLogic.MaxNiceCategories} important categories.");
 
-            if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) < 3)
-                ModelState.AddModelError("", "Please select at least 3 critical scales.");
+            if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) < OrdersBusinessLogic.MinCriticalCategories)
+                ModelState.AddModelError("", $"Please select at least {OrdersBusinessLogic.MinCriticalCategories} critical categories.");
+
+            if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) > OrdersBusinessLogic.MaxCriticalCategories)
+                ModelState.AddModelError("", $"Please choose 1 - {OrdersBusinessLogic.MaxCriticalCategories} critical categories.");
             
             //ClearIrrelevantModelstateErrorsForContactAddress();
             if (!ModelState.IsValid)

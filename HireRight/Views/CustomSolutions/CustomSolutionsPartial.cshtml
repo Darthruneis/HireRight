@@ -1,4 +1,5 @@
-﻿@using HireRight.Persistence.Models.CompanyAggregate
+﻿@using HireRight.BusinessLogic.Concrete
+@using HireRight.EntityFramework.CodeFirst.Models.CompanyAggregate
 @model CustomSolutionsSecondStepModel
 
 <div style="min-width: 800px; width: 100%">
@@ -84,7 +85,7 @@
 <script src="~/Scripts/stickyFill.js"></script>
 <script>
     $(document).ready(function () {
-        CustomSolutions.bindEvents(@Model.SelectedIndustry, @Model.IsGeneralSelected.ToString().ToLower());
+        CustomSolutions.bindEvents(@Model.SelectedIndustry, @Model.IsGeneralSelected.ToString().ToLower(), @OrdersBusinessLogic.MinCriticalCategories, @OrdersBusinessLogic.MaxCriticalCategories, @OrdersBusinessLogic.MaxNiceCategories);
         var togglesRow = document.getElementById("industryTogglesRow");
         Stickyfill.addOne(togglesRow);
     });

@@ -22,12 +22,15 @@ var CustomSolutions;
         };
         return CardCssCache;
     }());
-    function bindEvents(selectedIndustry, isGeneralSelected) {
+    function bindEvents(selectedIndustry, isGeneralSelected, minCriticals, maxCriticals, maxNice) {
         if (selectedIndustry === void 0) { selectedIndustry = 0; }
         if (isGeneralSelected === void 0) { isGeneralSelected = false; }
+        if (minCriticals === void 0) { minCriticals = 3; }
+        if (maxCriticals === void 0) { maxCriticals = 18; }
+        if (maxNice === void 0) { maxNice = 12; }
         bindMovementButtons();
-        bindContinueAndBackButtons();
-        bindFormSubmit();
+        bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice);
+        bindFormSubmit(minCriticals, maxCriticals, maxNice);
         bindIndustryToggles();
         if (selectedIndustry !== 0 || isGeneralSelected) {
             if (selectedIndustry !== 0) {
@@ -116,30 +119,32 @@ var CustomSolutions;
             updateImportanceLevel($(this).closest(".categoryCardRow"), true);
         });
     }
-    function bindContinueAndBackButtons() {
+    function checkForCardCountErrors(minCriticals, maxCriticals, maxNice) {
+        var results = inspectCardCounts();
+        var isValid = true;
+        if (results.relevant === 0 || results.critical > 18 || results.nice > 12) {
+            $("#notEnough").show();
+            isValid = false;
+        }
+        if (results.critical < 3) {
+            $("#notEnoughCrits").show();
+            isValid = false;
+        }
+        return isValid;
+    }
+    function bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice) {
         $("#ContinueButton").on("click", function () {
-            var results = inspectCardCounts();
-            var isValid = true;
-            if (results.relevant === 0 || results.relevant > 9) {
-                $("#notEnough").show();
-                isValid = false;
-            }
-            if (results.critical < 3) {
-                $("#notEnoughCrits").show();
-                isValid = false;
-            }
-            if (isValid)
+            if (checkForCardCountErrors(minCriticals, maxCriticals, maxNice))
                 toggleIrrelevantCards();
         });
         $("#BackButton").on("click", function () {
             toggleIrrelevantCards();
         });
     }
-    function bindFormSubmit() {
+    function bindFormSubmit(minCriticals, maxCriticals, maxNice) {
         $("#FinishButton").on("click", function (e) {
             updateCardVisibilityRanks();
             makeHiddenCardsIrrelevant();
-            var counts = inspectCardCounts();
             var isGeneralSelected = $(".generalIndustryToggle").hasClass("activeIndustry");
             var activeToggles = $(".activeIndustry:not(.generalIndustryToggle)");
             var selectedIndustry = 0;
@@ -147,21 +152,12 @@ var CustomSolutions;
                 selectedIndustry = activeToggles.data("industryid");
             $(this).append("<input type='hidden' name='selectedIndustry' value='" + selectedIndustry + "'/>");
             $(this).append("<input type='hidden' name='isGeneralSelected' value='" + isGeneralSelected + "'/>");
-            var result = true;
-            if (counts.relevant < 1 || counts.relevant > 9) {
-                $("#notEnough").show();
-                result = false;
-            }
-            else
+            var result = checkForCardCountErrors(minCriticals, maxCriticals, maxNice);
+            if (result) {
                 $("#notEnough").hide();
-            if (counts.critical < 3) {
-                $("#notEnoughCrits").show();
-                result = false;
-            }
-            else
                 $("#notEnoughCrits").hide();
-            if (result)
                 $("form").submit();
+            }
         });
     }
     function makeHiddenCardsIrrelevant() {
