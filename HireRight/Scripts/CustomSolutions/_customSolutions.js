@@ -29,7 +29,7 @@ var CustomSolutions;
         if (maxCriticals === void 0) { maxCriticals = 18; }
         if (maxNice === void 0) { maxNice = 12; }
         bindMovementButtons();
-        bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice);
+        bindContinueAndBackButtons();
         bindFormSubmit(minCriticals, maxCriticals, maxNice);
         bindIndustryToggles();
         if (selectedIndustry !== 0 || isGeneralSelected) {
@@ -119,23 +119,26 @@ var CustomSolutions;
             updateImportanceLevel($(this).closest(".categoryCardRow"), true);
         });
     }
-    function checkForCardCountErrors(minCriticals, maxCriticals, maxNice) {
+    function cardCountsAreValid(minCriticals, maxCriticals, maxNice) {
         var results = inspectCardCounts();
         var isValid = true;
-        if (results.relevant === 0 || results.critical > 18 || results.nice > 12) {
-            $("#notEnough").show();
+        if (results.critical > maxCriticals) {
+            isValid = false;
+            $("#tooManyCrits").show();
+        }
+        if (results.nice > maxNice) {
+            $("#tooManyNice").show();
             isValid = false;
         }
-        if (results.critical < 3) {
+        if (results.critical < minCriticals) {
             $("#notEnoughCrits").show();
             isValid = false;
         }
         return isValid;
     }
-    function bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice) {
+    function bindContinueAndBackButtons() {
         $("#ContinueButton").on("click", function () {
-            if (checkForCardCountErrors(minCriticals, maxCriticals, maxNice))
-                toggleIrrelevantCards();
+            toggleIrrelevantCards();
         });
         $("#BackButton").on("click", function () {
             toggleIrrelevantCards();
@@ -152,7 +155,7 @@ var CustomSolutions;
                 selectedIndustry = activeToggles.data("industryid");
             $(this).append("<input type='hidden' name='selectedIndustry' value='" + selectedIndustry + "'/>");
             $(this).append("<input type='hidden' name='isGeneralSelected' value='" + isGeneralSelected + "'/>");
-            var result = checkForCardCountErrors(minCriticals, maxCriticals, maxNice);
+            var result = cardCountsAreValid(minCriticals, maxCriticals, maxNice);
             if (result) {
                 $("#notEnough").hide();
                 $("#notEnoughCrits").hide();

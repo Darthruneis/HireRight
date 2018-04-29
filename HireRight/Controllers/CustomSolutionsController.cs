@@ -58,13 +58,13 @@ namespace HireRight.Controllers
             model.SelectedIndustry = selectedIndustry;
 
             if (model.Categories.Count(x => x.Importance == CategoryImportance.LowImportance) > OrdersBusinessLogic.MaxNiceCategories)
-                ModelState.AddModelError("", $"Please choose 1 - {OrdersBusinessLogic.MaxNiceCategories} important categories.");
+                ModelState.AddModelError("", $"Please select at most {OrdersBusinessLogic.MaxNiceCategories} 'Nice to Have' categories. You have selected {model.Categories.Count(x => x.Importance == CategoryImportance.LowImportance)}.");
 
             if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) < OrdersBusinessLogic.MinCriticalCategories)
-                ModelState.AddModelError("", $"Please select at least {OrdersBusinessLogic.MinCriticalCategories} critical categories.");
+                ModelState.AddModelError("", $"Please select at least {OrdersBusinessLogic.MinCriticalCategories} 'Critical' categories. You have selected {model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance)}.");
 
             if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) > OrdersBusinessLogic.MaxCriticalCategories)
-                ModelState.AddModelError("", $"Please choose 1 - {OrdersBusinessLogic.MaxCriticalCategories} critical categories.");
+                ModelState.AddModelError("", $"Please choose at most {OrdersBusinessLogic.MaxCriticalCategories} 'Critical' categories. You have selected {model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance)}.");
             
             //ClearIrrelevantModelstateErrorsForContactAddress();
             if (!ModelState.IsValid)

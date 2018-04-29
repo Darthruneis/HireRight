@@ -37,10 +37,10 @@
     }
 
     export function bindEvents(selectedIndustry: number = 0, isGeneralSelected: boolean = false,
-                               minCriticals: number = 3, maxCriticals: number = 18, maxNice: number = 12) : void
+        minCriticals: number = 3, maxCriticals: number = 18, maxNice: number = 12): void
     {
         bindMovementButtons();
-        bindContinueAndBackButtons(minCriticals, maxCriticals, maxNice);
+        bindContinueAndBackButtons();
         bindFormSubmit(minCriticals, maxCriticals, maxNice);
         bindIndustryToggles();
         if (selectedIndustry !== 0 || isGeneralSelected)
@@ -164,32 +164,35 @@
             });
     }
 
-    function checkForCardCountErrors(minCriticals: number, maxCriticals: number, maxNice: number): boolean
+    function cardCountsAreValid(minCriticals: number, maxCriticals: number, maxNice: number): boolean
     {
         var results: CardCategoryCounts = inspectCardCounts();
-
         var isValid: boolean = true;
-        if (results.relevant === 0 || results.critical > 18 || results.nice > 12)
+        if (results.critical > maxCriticals)
         {
-            $("#notEnough").show();
+            isValid = false;
+            $("#tooManyCrits").show();
+        }
+        if (results.nice > maxNice)
+        {
+            $("#tooManyNice").show();
             isValid = false;
         }
-
-        if (results.critical < 3)
+        if (results.critical < minCriticals)
         {
             $("#notEnoughCrits").show();
             isValid = false;
         }
+
         return isValid;
     }
 
-    function bindContinueAndBackButtons(minCriticals: number, maxCriticals: number, maxNice: number): void
+    function bindContinueAndBackButtons(): void
     {
         $("#ContinueButton").on("click",
             function ()
             {
-                if (checkForCardCountErrors(minCriticals, maxCriticals, maxNice))
-                    toggleIrrelevantCards();
+                toggleIrrelevantCards();
             });
 
         $("#BackButton").on("click", () =>
@@ -214,7 +217,7 @@
                 $(this).append(`<input type='hidden' name='selectedIndustry' value='${selectedIndustry}'/>`);
                 $(this).append(`<input type='hidden' name='isGeneralSelected' value='${isGeneralSelected}'/>`);
 
-                var result: boolean = checkForCardCountErrors(minCriticals, maxCriticals, maxNice);
+                var result: boolean = cardCountsAreValid(minCriticals, maxCriticals, maxNice);
                 if (result)
                 {
                     $("#notEnough").hide();
