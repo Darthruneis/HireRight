@@ -1,0 +1,12 @@
+﻿/CustomSolutions/*.js
+/CustomSolutions/*.js.map
+/CustomSolutions/*.d.ts
+/Global/*.js
+/Global/*.js.map
+/Global/*.d.ts
+/Navigation/*.js
+/Navigation/*.js.map
+/Navigation/*.d.ts
+/Order/*.js
+/Order/*.js.map
+/Order/*.d.ts
