@@ -11,12 +11,12 @@ $sides: (top, bottom, left, right);
 
 @each $width in $borderwidths {
     @each $side in $sides {
-        %border-#{$side}-#{$width} {
-            border-#{$side}-width: #{$width}px;
+        .border-#{$side}-#{$width}px {
+            border-#{$side}-width: #{$width} px;
         }
 
         .border-#{$side}-solid {
-            border-#{$side}-width: #{$width}px;
+            border-#{$side}-style: solid;
         }
 
         .border-#{$side}-blue {

@@ -1,0 +1,80 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Text
+@using HireRight.BusinessLogic.Concrete
+@using HireRight.Persistence.Models.CompanyAggregate
+@model CustomSolutionsSecondStepModel
+@{
+    List<CategoryImportance> importanceOptions = Enum.GetValues(typeof(CategoryImportance)).Cast<CategoryImportance>().ToList();
+    Type categoryImportance = typeof(CategoryImportance);
+}
+<div style="min-width: 800px; width: 100%">
+    @Html.Partial("_Instructions", Model)
+    @Html.Partial("_IndustryToggles", Model)
+    <div id="categoryContainerDiv" class="marg-top-10">
+        @for (int i = 0; i < Model.Categories.Count(); i++)
+        {
+            <div class="categoryContainer">
+                @{
+                    JobAnalysisCategoryViewModel category = Model.Categories[i];
+                    string className = $"{category.Importance}";
+                    foreach (IndustryDTO industry in category.AllIndustries)
+                    {
+                        if (category.RelevantIndustries.Contains(industry.Id))
+                        {
+                            className += $" industry-{industry.Name}";
+                        }
+                    }
+                }
+                @Html.HiddenFor(x => x.Categories[i].Id)
+                <div class="row @(className)">
+                    <div class="col-xs-3">
+                        <a class="categoryDescriptionToggle">@category.Title</a>
+                    </div>
+                    @foreach (CategoryImportance option in importanceOptions)
+                    {
+                        <div class="col-xs-3 pad-right-10">
+                            <label class="text-black" style="font-weight: normal;">
+                                @Html.RadioButtonFor(x => x.Categories[i].Importance, option)
+                                @(categoryImportance.GetMember(option.ToString()).First().GetCustomAttribute<DisplayAttribute>().Name)
+                            </label>
+                        </div>
+                    }
+                    @Html.ValidationMessageFor(x => x.Categories[i].Importance)
+                </div>
+                <p class="categoryDescription" style="display: none; margin-left: 5%;">@category.Description</p>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-primary pull-left" type="button" style="display: none" id="BackButton">Back</button>
+        <div class="pull-left" id="validationErrors">
+            @Html.ValidationSummary(true)
+            <span class="field-validation-error" style="display: none;" id="notEnoughCrits">Please select at least @(OrdersBusinessLogic.MinCriticalCategories) 'Critical' categories.<br /></span>
+            <span class="field-validation-error" style="display: none;" id="tooManyCrits">Please choose at most @(OrdersBusinessLogic.MaxCriticalCategories) 'Critical' categories.<br /></span>
+            <span class="field-validation-error" style="display: none;" id="tooManyNice">Please choose at most @(OrdersBusinessLogic.MaxNiceCategories) 'Nice to Have' categories.<br /></span>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary pull-right" />
+    </div>
+</div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <script>
+        $(document).ready(function() {
+            var validationErrorsElement = document.getElementById("validationErrors");
+            validationErrorsElement.scrollIntoView();
+        })
+    </script>
+}
+
+<script src="~/Scripts/CustomSolutions/_customSolutions.js"></script>
+<script src="~/Scripts/stickyFill.js"></script>
+<script>
+    $(document).ready(function () {
+        CustomSolutions.RadioButtons.bindEvents();
+        var togglesRow = document.getElementById("industryTogglesRow");
+        Stickyfill.addOne(togglesRow);
+    });
+</script>

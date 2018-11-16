@@ -1,0 +1,23 @@
+﻿@using HireRight.BusinessLogic.Concrete
+@model CustomSolutionsSecondStepModel
+
+    <div class="row">
+        <div class="col-xs-12">
+            <ol>
+                <li>Select the Industry for your organization if listed. You may also select the General industry to see the categories that apply to many industries.</li>
+                <li>For each scale rate the importance for a successful candidate. At the end of this first step, all 'Irrelevant' categories will be dropped. When you have eliminated categories you are uninterested in, use the 'Continue' button.</li>
+                <li>Finally, narrow the selection down to @(OrdersBusinessLogic.MinCriticalCategories)-@(OrdersBusinessLogic.MaxCriticalCategories) 'Critical' categories for your industry, and up to @(OrdersBusinessLogic.MaxNiceCategories) additional 'Nice to Have' categories. You may move back and forth between this and the last step at any time using the 'Back' and 'Continue' buttons.</li>
+                <li>When finished, click 'Finish'.</li>
+            </ol>
+            @{
+                JobAnalysisCategoryViewModel candidness = Model.Categories.SingleOrDefault(x => x.Title == "Candidness");
+            }
+            @if (candidness != null)
+            {
+                <div class="categoryContainer pad-left-5">
+                    <span>All tests will include a 10th category - <a class="categoryDescriptionToggle">@(candidness.Title)</a>.</span>
+                    <p class="categoryDescription" id="candidnessDescription" style="display: none; margin-left: 5%;">@(candidness.Description)</p>
+                </div>
+            }
+        </div>
+    </div>

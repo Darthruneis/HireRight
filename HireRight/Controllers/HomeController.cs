@@ -15,7 +15,7 @@ namespace HireRight.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult Consultants() => PartialView("ConsultantsInformationPartial");
+        public PartialViewResult Consultants() => PartialView("_ConsultantsInformation");
 
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -26,10 +26,10 @@ namespace HireRight.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult Introduction() => PartialView("IntroductionPartial");
+        public PartialViewResult Introduction() => PartialView("_Introduction");
 
         [HttpGet]
-        public PartialViewResult OccupationalCategories() => PartialView("WhoWeServePartial");
+        public PartialViewResult OccupationalCategories() => PartialView("_WhoWeServe");
 
         public async Task<ActionResult> Industries()
         {
@@ -39,6 +39,6 @@ namespace HireRight.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult WhyUseHireRight() => PartialView("WhyUseHireRightPartial");
+        public PartialViewResult WhyUseHireRight() => PartialView("_WhyUseHireRight");
     }
 }

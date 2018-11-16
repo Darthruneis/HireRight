@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es5",
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "noErrorTruncation": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "pretty": true
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "Scripts/typings"
+  ]
+}

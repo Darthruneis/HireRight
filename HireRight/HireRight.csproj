@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
@@ -27,7 +28,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
-    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -46,7 +47,7 @@
     <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
     <TypeScriptOutFile />
     <TypeScriptOutDir />
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
     <TypeScriptMapRoot />
@@ -442,19 +443,19 @@
     <Content Include="Views\Contact\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Home\ManufacturingInformationPartial.cshtml" />
-    <Content Include="Views\Home\CustomerServiceInformationPartial.cshtml" />
-    <Content Include="Views\Home\ManagersInformationPartial.cshtml" />
-    <Content Include="Views\Home\MedicalInformationPartial.cshtml" />
-    <Content Include="Views\Home\ConsultantsInformationPartial.cshtml" />
-    <Content Include="Views\Home\WhoWeServePartial.cshtml" />
-    <Content Include="Views\Home\StartUpInformationPartial.cshtml" />
-    <Content Include="Views\Home\AdministrationAndClericalInformationPartial.cshtml" />
-    <Content Include="Views\Home\ProfessionalServicesInformationPartial.cshtml" />
-    <Content Include="Views\Home\OtherIndustriesInformationPartial.cshtml" />
+    <Content Include="Views\Home\_ManufacturingInformation.cshtml" />
+    <Content Include="Views\Home\_CustomerServiceInformation.cshtml" />
+    <Content Include="Views\Home\_ManagersInformation.cshtml" />
+    <Content Include="Views\Home\_MedicalInformation.cshtml" />
+    <Content Include="Views\Home\_ConsultantsInformation.cshtml" />
+    <Content Include="Views\Home\_WhoWeServe.cshtml" />
+    <Content Include="Views\Home\_StartUpInformation.cshtml" />
+    <Content Include="Views\Home\_AdministrationAndClericalInformation.cshtml" />
+    <Content Include="Views\Home\_ProfessionalServicesInformation.cshtml" />
+    <Content Include="Views\Home\_OtherIndustriesInformation.cshtml" />
     <Content Include="Views\Client\NewClients.cshtml" />
-    <Content Include="Views\Home\WhyUseHireRightPartial.cshtml" />
-    <Content Include="Views\Contact\ContactUsInfoPartial.cshtml" />
+    <Content Include="Views\Home\_WhyUseHireRight.cshtml" />
+    <Content Include="Views\Contact\_ContactUsInfo.cshtml" />
     <Content Include="Views\Contact\Success.cshtml" />
     <Content Include="Views\Client\Success.cshtml" />
     <Content Include="Views\Order\ProductDiscountsPartial.cshtml" />
@@ -465,14 +466,14 @@
     <Content Include="Views\Order\EditorTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\PrimaryContactViewModel.cshtml" />
     <Content Include="Views\Order\EditorTemplates\AdminViewModel.cshtml" />
-    <Content Include="Views\CustomSolutions\CustomSolutionsPartial.cshtml" />
+    <Content Include="Views\CustomSolutions\_CustomSolutions_Cards.cshtml" />
     <Content Include="Views\CustomSolutions\SelectTopTwelve.cshtml" />
     <Content Include="Views\CustomSolutions\MarkCategoryDtoAsTopTwelve.cshtml" />
-    <Content Include="Views\Home\BackButtonPartial.cshtml" />
-    <Content Include="Views\CustomSolutions\ContactAndCompanyInfoPartial.cshtml" />
-    <Content Include="Views\CustomSolutions\FormInstructionsContentPartial.cshtml" />
+    <Content Include="Views\Home\_BackButton.cshtml" />
+    <Content Include="Views\CustomSolutions\_ContactAndCompanyInfo.cshtml" />
+    <Content Include="Views\CustomSolutions\_FormInstructionsContent.cshtml" />
     <Content Include="Views\CustomSolutions\CustomSolutionsSuccess.cshtml" />
-    <Content Include="Views\Home\IntroductionPartial.cshtml" />
+    <Content Include="Views\Home\_Introduction.cshtml" />
     <Content Include="Views\Home\UnhappyEmployeesArePoison.cshtml" />
     <Content Include="Views\Home\SalesPitch.cshtml" />
     <Content Include="Views\Home\Turnover.cshtml" />
@@ -493,7 +494,6 @@
     <Content Include="Views\Shared\_PagingButtonsForFilter.cshtml" />
     <Content Include="Views\CustomSolutions\_CategoryCard.cshtml" />
     <Content Include="Views\Reports\_SampleReportLink.cshtml" />
-    <Content Include="Views\CustomSolutions\_FirstStep.cshtml" />
     <Content Include="Scripts\Navigation\_Navigation.js.map" />
     <Content Include="Scripts\Order\_Order.js.map" />
     <Content Include="Views\Error\GenericErrorPage.cshtml" />
@@ -501,6 +501,13 @@
     <Content Include="Views\Shared\_ReasonsToUseHireRight.cshtml" />
     <Content Include="Views\Shared\_ContactInformation.cshtml" />
     <Content Include="Views\CustomSolutions\_Review.cshtml" />
+    <Content Include="Views\CustomSolutions\_FirstStep.cshtml" />
+    <Content Include="Views\CustomSolutions\_SecondStepHiddenFields.cshtml" />
+    <Content Include="Views\CustomSolutions\_CustomSolutions_RadioButtons.cshtml" />
+    <Content Include="Views\CustomSolutions\_Instructions.cshtml" />
+    <Content Include="Views\CustomSolutions\_IndustryToggles.cshtml" />
+    <Content Include="Views\CustomSolutions\_Headers.cshtml" />
+    <Content Include="Scripts\tsconfig.json" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -509,7 +516,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
@@ -580,7 +589,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.targets'))" />
   </Target>
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.3.1.5\build\Microsoft.TypeScript.MSBuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -10,7 +10,10 @@
             });
     }
 
-    export function ajaxWithLoadingIcon(method: string, url: string, dataType: string, $loadingIconDiv: JQuery = $("#processing"), successFn:  (data: any, textStatus: string, jqXHR: JQueryXHR) => void = null) {
+    export function ajaxWithLoadingIcon(method: string, url: string, dataType: string,
+        $loadingIconDiv: JQuery = $("#processing"),
+        successFn?: (data: any, textStatus: string, jqXHR: JQueryXHR) => void)
+    {
         $.ajax({
             method: method.toUpperCase(),
             url: url,

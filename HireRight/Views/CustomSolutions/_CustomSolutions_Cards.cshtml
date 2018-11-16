@@ -1,0 +1,59 @@
+﻿@using HireRight.BusinessLogic.Concrete
+@model CustomSolutionsSecondStepModel
+
+<div style="min-width: 800px; width: 100%">
+    @Html.Partial("_Instructions", Model)
+    @Html.Partial("_IndustryToggles", Model)
+    @Html.Partial("_Headers")
+    <div id="categoryContainerDiv" class="marg-top-10">
+        @for (int i = 0; i < Model.Categories.Count(); i++)
+        {
+            var category = Model.Categories[i];
+            @Html.HiddenFor(x => x.Categories[i].Id)
+
+            <div class="row categoryCardRow" data-ismoving="false">
+                <div class="col-xs-4 categoryColumn lowestCategory">
+                    @if (category.Importance == CategoryImportance.Irrelevant)
+                    {
+                        @Html.Partial("_CategoryCard", category)
+                    }
+                </div>
+                <div class="col-xs-4 categoryColumn">
+                    @if (category.Importance == CategoryImportance.LowImportance)
+                    {
+                        @Html.Partial("_CategoryCard", category)
+                    }
+                </div>
+                <div class="col-xs-4 categoryColumn">
+                    @if (category.Importance == CategoryImportance.HighImportance)
+                    {
+                        @Html.Partial("_CategoryCard", category)
+                    }
+                </div>
+                @*This needs to remain the only hidden field that is inside of the 'categoryCardRow' element.*@
+                @Html.HiddenFor(x => x.Categories[i].Importance)
+            </div>
+        }
+    </div>
+</div>
+<div style="clear: both;">
+    <button class="btn btn-primary pull-left" type="button" style="display: none" id="BackButton">Back</button>
+    <div class="pull-left">
+        @Html.ValidationSummary(true)
+        <span class="field-validation-error" style="display: none;" id="notEnoughCrits">Please select at least @(OrdersBusinessLogic.MinCriticalCategories) 'Critical' categories.<br /></span>
+        <span class="field-validation-error" style="display: none;" id="tooManyCrits">Please choose at most @(OrdersBusinessLogic.MaxCriticalCategories) 'Critical' categories.<br /></span>
+        <span class="field-validation-error" style="display: none;" id="tooManyNice">Please choose at most @(OrdersBusinessLogic.MaxNiceCategories) 'Nice to Have' categories.<br /></span>
+    </div>
+    <input type='button' value='Review' style="display: none;" class='btn btn-primary pull-right' id="ReviewButton" />
+    <button class="btn btn-primary pull-right" type="button" id="ContinueButton">Continue</button>
+</div>
+
+<script src="~/Scripts/CustomSolutions/_customSolutions.js"></script>
+<script src="~/Scripts/stickyFill.js"></script>
+<script>
+    $(document).ready(function () {
+        CustomSolutions.Cards.bindEvents(@Model.SelectedIndustry, @Model.IsGeneralSelected.ToString().ToLower(), @OrdersBusinessLogic.MinCriticalCategories, @OrdersBusinessLogic.MaxCriticalCategories, @OrdersBusinessLogic.MaxNiceCategories);
+        var togglesRow = document.getElementById("industryTogglesRow");
+        Stickyfill.addOne(togglesRow);
+    });
+</script>

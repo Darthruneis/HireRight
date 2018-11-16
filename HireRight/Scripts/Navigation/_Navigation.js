@@ -1,3 +1,4 @@
+"use strict";
 var Navigation;
 (function (Navigation) {
     function replaceDivContents(div, url) {
@@ -9,7 +10,6 @@ var Navigation;
     Navigation.replaceDivContents = replaceDivContents;
     function ajaxWithLoadingIcon(method, url, dataType, $loadingIconDiv, successFn) {
         if ($loadingIconDiv === void 0) { $loadingIconDiv = $("#processing"); }
-        if (successFn === void 0) { successFn = null; }
         $.ajax({
             method: method.toUpperCase(),
             url: url,

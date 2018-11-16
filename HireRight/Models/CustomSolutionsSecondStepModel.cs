@@ -7,6 +7,7 @@ namespace HireRight.Models
 {
     public class CustomSolutionsSecondStepModel
     {
+        public const bool ShowHeaders = false;
         public CustomSolutionsFirstStepModel PreviousInformation { get; set; }
 
         public IList<JobAnalysisCategoryViewModel> Categories { get; set; }

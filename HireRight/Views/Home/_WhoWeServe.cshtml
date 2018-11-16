@@ -1,0 +1,27 @@
+﻿<p class="centeredHeaderText">Eight Major Categories</p>
+<div class="row">
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_ManufacturingInformation");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_StartUpInformation");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_AdministrationAndClericalInformation");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_CustomerServiceInformation");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_ProfessionalServicesInformation"); }</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_MedicalInformation");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_OtherIndustriesInformation");}</div>
+    <div class="col-xs-12 col-lg-4 categoryContainer pad-5">@{ Html.RenderPartial("_ManagersInformation");}</div>
+</div>
+@*@{ Html.RenderPartial("BackButtonPartial"); }*@
+<script>
+    $(document).ready(function () {
+        $(".industryToggleImg").on("click",
+            function () {
+                var $container = $(this).closest(".categoryContainer");
+                $container.toggleClass("col-lg-4");
+                if (!$container.hasClass("col-lg-4")) {
+                    $('html,body').animate({
+                        scrollTop: $container.offset().top - 60
+                    }, 250);
+                }
+                $("#" + $(this).data("toggledivid")).toggle();
+            });
+    });
+</script>

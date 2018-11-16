@@ -1,3 +1,4 @@
+"use strict";
 var Orders;
 (function (Orders) {
     function bindEvents() {

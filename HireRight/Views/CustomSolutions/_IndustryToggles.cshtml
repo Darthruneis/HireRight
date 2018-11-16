@@ -1,0 +1,35 @@
+﻿@using HireRight.Persistence.Models.CompanyAggregate
+@model CustomSolutionsSecondStepModel
+
+<div id="industryTogglesRow" class="pad-bottom-5">
+    <div class="row">
+        <div class="col-xs-12">
+        @{ IndustryDTO general = @Model.Industries.Single(x => x.Id == Industry.General);}
+        <div class="industryToggle pull-left pointer-hover generalIndustryToggle" data-industryid="@Industry.General" data-industryname="@general.Name">
+            <span style="text-align: center; display: inline-block; font-weight: bold">
+                <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
+                @general.Name
+            </span>
+        </div>
+        @foreach (IndustryDTO industry in Model.Industries.Where(x => x.Id != Industry.General))
+        {
+            <div class="industryToggle pull-left pointer-hover" data-industryid="@industry.Id" data-industryname="@industry.Name">
+                <span class="text-center bold" style="display: inline-block;">
+                    <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
+                    @industry.Name
+                </span>
+            </div>
+        }
+        </div>
+    </div>
+    @* Stickyfill will make this entire partial view static as needed, the headers should be too. *@
+    @if (CustomSolutionsSecondStepModel.ShowHeaders)
+    {
+        @Html.Partial("_Headers")
+    }
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="border-bottom-black border-bottom-solid border-bottom-3px"></div>
+        </div>
+    </div>
+</div>

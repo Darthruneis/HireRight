@@ -24,7 +24,7 @@ namespace HireRight.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult FirstStep()
         {
             return View("_FirstStep", new CustomSolutionsFirstStepModel());
         }
