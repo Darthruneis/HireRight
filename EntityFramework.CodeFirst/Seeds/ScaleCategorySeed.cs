@@ -20,6 +20,7 @@ namespace HireRight.Persistence.Seeds
             JsonFilePath = WebConfigurationManager.AppSettings["ScaleCategoriesJsonPath"].ToLower();
             XmlFilePath = WebConfigurationManager.AppSettings["ScaleCategoriesXmlDocPath"].ToLower();
         }
+
         public static List<ScaleCategory> Seed()
         {
             var json = GetCategoriesJson();

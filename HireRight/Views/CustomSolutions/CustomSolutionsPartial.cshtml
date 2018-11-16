@@ -55,7 +55,7 @@
             var category = Model.Categories[i];
             @Html.HiddenFor(x => x.Categories[i].Id)
 
-            <div class="row categoryCardRow">
+            <div class="row categoryCardRow" data-ismoving="false">
                 <div class="col-xs-4 categoryColumn lowestCategory">
                     @if (category.Importance == CategoryImportance.Irrelevant)
                     {

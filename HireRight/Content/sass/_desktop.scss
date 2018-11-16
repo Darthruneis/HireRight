@@ -3,17 +3,6 @@
 @import "_%classes.scss";
 
 @media only screen and (min-width: 64.25em) {
-    body {
-        font-size: $small_text_size;
-    }
-
-    .btn{
-        font-size: $small_text_size;
-    }
-
-    .form-control{
-        font-size: $small_text_size;
-    }
 }
 
 @media only screen and (min-width: 1200px){

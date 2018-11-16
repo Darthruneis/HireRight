@@ -74,8 +74,8 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <h2>Additional Information (optional)</h2>
-                @Html.TextAreaFor(x => Model.AdditionalInfo, new { style = "resize: none;", placeholder = "Anything else you'd like us to know?", rows = "5", cols = "150", @class = "form-control" })
+                @Html.LabelFor(x => x.AdditionalInfo, "Additional Information (optional)")
+                @Html.TextAreaFor(x => x.AdditionalInfo, new {style = "resize: none;", placeholder = "Anything else you'd like us to know?", rows = "5", cols = "150"})
             </div>
         </div>
         <br />

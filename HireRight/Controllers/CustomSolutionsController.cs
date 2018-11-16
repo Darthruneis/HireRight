@@ -66,9 +66,34 @@ namespace HireRight.Controllers
             if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) > OrdersBusinessLogic.MaxCriticalCategories)
                 ModelState.AddModelError("", $"Please choose at most {OrdersBusinessLogic.MaxCriticalCategories} 'Critical' categories. You have selected {model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance)}.");
             
-            //ClearIrrelevantModelstateErrorsForContactAddress();
+            ClearIrrelevantModelstateErrorsForContactAddress();
             if (!ModelState.IsValid)
                 return View("_SecondStep", model);
+            
+            return View("_Review", model);
+        }
+
+        public async Task<ActionResult> Resume(CustomSolutionsSecondStepModel model, long selectedIndustry, bool isGeneralSelected)
+        {
+            ICollection<CategoryDTO> categories = await _categoriesBusinessLogic.GetAll();
+            ICollection<IndustryDTO> industries = await _industryBusinessLogic.GetAll();
+            model.RefreshModel(industries, categories);
+            model.IsGeneralSelected = isGeneralSelected;
+            model.SelectedIndustry = selectedIndustry;
+
+            return View("_SecondStep", model);
+        }
+
+        public async Task<ActionResult> Finish(CustomSolutionsSecondStepModel model, long selectedIndustry, bool isGeneralSelected)
+        {
+            ICollection<CategoryDTO> categories = await _categoriesBusinessLogic.GetAll();
+            ICollection<IndustryDTO> industries = await _industryBusinessLogic.GetAll();
+            model.RefreshModel(industries, categories);
+            model.IsGeneralSelected = isGeneralSelected;
+            model.SelectedIndustry = selectedIndustry;
+            ClearIrrelevantModelstateErrorsForContactAddress();
+            if (!ModelState.IsValid)
+                return View("_Review", model);
 
             await _ordersBusinessLogic.SubmitCards(model.CreateSubmitCardsDTO());
             return View("CustomSolutionsSuccess");

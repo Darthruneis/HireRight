@@ -4,9 +4,17 @@
     margin: 0 auto;
 }
 
+%text-blue {
+    color: $logo-blue;
+}
+
 %headerText {
-    color: $black;
     font-weight: bold;
+    padding-bottom: .1em;
+    padding-top: .2em;
+    margin-bottom: .1em;
+    display: inline-block;
+    width: 100%;
 }
 
 %listItemBefore {

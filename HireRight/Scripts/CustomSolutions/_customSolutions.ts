@@ -203,7 +203,7 @@
 
     function bindFormSubmit(minCriticals: number, maxCriticals: number, maxNice: number): void
     {
-        $("#FinishButton").on("click",
+        $("#ReviewButton").on("click",
             function (e: Event)
             {
                 updateCardVisibilityRanks();
@@ -214,8 +214,8 @@
                 if (activeToggles != null)
                     selectedIndustry = activeToggles.data("industryid");
 
-                $(this).append(`<input type='hidden' name='selectedIndustry' value='${selectedIndustry}'/>`);
-                $(this).append(`<input type='hidden' name='isGeneralSelected' value='${isGeneralSelected}'/>`);
+                $("#SelectedIndustry").val(selectedIndustry);
+                $("#IsGeneralSelected").val(isGeneralSelected.toString());
 
                 var result: boolean = cardCountsAreValid(minCriticals, maxCriticals, maxNice);
                 if (result)
@@ -265,7 +265,7 @@
 
         $("#BackButton").toggle();
         $("#ContinueButton").toggle();
-        $("#FinishButton").toggle();
+        $("#ReviewButton").toggle();
 
         $("#notEnoughCrits").hide();
         $("#notEnough").hide();
@@ -333,6 +333,7 @@
 
         //restore original height for the row
         $categoryRow.css("height", "auto");
+        $categoryRow.data("ismoving", "false");
     }
 
     function animateCardMovement($categoryRow: JQuery, $newCategoryRow: JQuery, original: number, newValue: number): void
@@ -364,8 +365,12 @@
             () => moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache, newValue));
     }
 
-    function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void
-    {
+    function updateImportanceLevel($categoryRow: JQuery, increase: boolean): void {
+        var isMoving: boolean = $categoryRow.data("ismoving").toString().toLower() === "true";
+        if (isMoving)
+            return;
+
+        $categoryRow.data("ismoving", "true");
         var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
         var current = increase ? original + 1 : original - 1;
 

@@ -29,40 +29,53 @@ body {
     text-shadow: $text_shadow_gray;
 }
 
-h1 {
+.text-header {
     @extend %headerText;
-    font-size: 40pt;
-    margin: 0;
+}
+
+.text-blue {
+    color: $logo-blue;
+}
+
+.text-green {
+    color: $logo-green;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    @extend %text-blue;
+    @extend %headerText;
+    border-bottom-style: solid;
+    border-bottom-color: $logo-blue;
+    border-bottom-width: 2px;    
+}
+
+h1 {
+    font-size: 1.6em;
 }
 
 h2 {
-    @extend %headerText;
-    font-size: 20pt;
-    margin: 0;
+    font-size: 1.5em;
 }
 
 h3 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 18pt;
+    font-size: 1.4em;
 }
 
 h4 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 16pt;
+    font-size: 1.3em;
 }
 
 h5 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 14pt;
+    font-size: 1.2em;
 }
 
 h6 {
-    @extend %headerText;
-    margin: 0;
-    font-size: 13pt;
+    font-size: 1.1em;
 }
 
 .bold {
@@ -74,4 +87,40 @@ h6 {
     text-overflow: ellipsis;
     height: auto;
     padding-bottom: 4px;
+}
+
+.asterisk-required {
+    color: red;
+    position: relative;
+    top: -0.1em;
+    display: inline-block;
+}
+
+label {
+    color: $logo-blue;
+    font-weight: bold;
+    margin-top: .5em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.list-item-no-bullet {
+    li:before {
+        display: none;
+    }
+}
+
+.list-item-root {
+    li:before {
+        @extend %listItemBefore;
+    }
+}
+
+.list-item-nested {
+    li:before {
+        @extend %listItemBefore;
+        content: "- ";
+    }
 }

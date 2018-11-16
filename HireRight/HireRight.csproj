@@ -69,6 +69,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Monads, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Darthruneis.Monads.1.0.3\lib\netstandard1.0\Monads.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -424,7 +427,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\stickyFill.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -495,6 +500,7 @@
     <Content Include="Views\Home\Industries.cshtml" />
     <Content Include="Views\Shared\_ReasonsToUseHireRight.cshtml" />
     <Content Include="Views\Shared\_ContactInformation.cshtml" />
+    <Content Include="Views\CustomSolutions\_Review.cshtml" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -558,7 +564,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63408</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63408/</IISUrl>
+          <IISUrl>http://localhost:63409/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

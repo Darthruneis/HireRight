@@ -18,9 +18,11 @@ namespace HireRight.Controllers
         public PartialViewResult Consultants() => PartialView("ConsultantsInformationPartial");
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var industriesWithAssessments = await _industryBusinessLogic.GetAllWithAssessments();
+            
+            return View("Index", industriesWithAssessments.ToList());
         }
 
         [HttpGet]

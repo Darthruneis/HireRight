@@ -59,9 +59,9 @@ $text_shadow_red: $darkRed 2px 0px 1px;
 $text_shadow_black: $black 2px 0px 1px;
 $text_shadow_gray: $lightGray 2px 0px 1px;
 
-$small_text_size: 12pt;
-$normal_text_size: 14pt;
-$large_text_size: 16pt;
+$small_text_size: .75em;
+$normal_text_size: 1em;
+$large_text_size: 1.25em;
 
 $navbar-height: 50px;
 $footer-height: 65px;
@@ -93,9 +93,9 @@ $navbar-brand-text: $black;
 $navbar-brand-hover: $white;
 $navbar-brand-hover-shadow: $black;
 
-$input_background: #e6ffff;
+$input_background: lighten($logo-green, 25%);
 
-$submit_button_color: $logo-green;
+$submit_button_color: lighten($logo-green, 10%);
 $submit-button-hover: $logo-blue;
 $submit-button-hover-text: $white;
 

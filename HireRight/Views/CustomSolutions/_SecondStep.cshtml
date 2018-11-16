@@ -21,9 +21,12 @@
             <span class="field-validation-error" style="display: none;" id="tooManyCrits">Please choose at most @(OrdersBusinessLogic.MaxCriticalCategories) 'Critical' categories.<br /></span>
             <span class="field-validation-error" style="display: none;" id="tooManyNice">Please choose at most @(OrdersBusinessLogic.MaxNiceCategories) 'Nice to Have' categories.<br /></span>
         </div>
-        <input type='button' value='Finish' style="display: none;" class='btn btn-primary pull-right' id="FinishButton" />
+        <input type='button' value='Review' style="display: none;" class='btn btn-primary pull-right' id="ReviewButton" />
         <button class="btn btn-primary pull-right" type="button" id="ContinueButton">Continue</button>
     </div>
+    @Html.HiddenFor(x => x.IsGeneralSelected)
+    @Html.HiddenFor(x => x.SelectedIndustry)
+
     @* Hidden fields for everything that was populated in step 1. *@
     @Html.HiddenFor(x => x.PreviousInformation.CompanyName)
     @Html.HiddenFor(x => x.PreviousInformation.Notes)

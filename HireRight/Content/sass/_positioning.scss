@@ -9,25 +9,6 @@ body {
     padding: 10px 5% 0 5%;
 }
 
-.list-item-no-bullet {
-    li:before {
-        display: none;
-    }
-}
-
-.list-item-root {
-    li:before {
-        @extend %listItemBefore;
-    }
-}
-
-.list-item-nested {
-    li:before {
-        @extend %listItemBefore;
-        content: "- ";
-    }
-}
-
 .divider {
     border-bottom: 1px solid $darkNavyBlue;
 }
@@ -37,29 +18,21 @@ body {
     overflow-x: scroll;
 }
 
-.centeredHeaderText {
-    font-weight: bold;
-    width: 100%;
-    text-align: center;
-    font-size: 18pt;
-}
-
-.centered {
-    @extend %centered;
-    text-align: center;
-}
-
 .informationalDiv {
     margin-left: 20px;
 }
 
-//Padding and Margin classes
+.centered {
+    margin: 0 auto;
+}
+
+//Start - Padding and Margin classes
 //source: https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9
 //see also: https://gist.github.com/jareware/4738651
-$spaceamounts: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 75, 100);
+$spaceamounts: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 75, 100);
 $sides: (top, bottom, left, right);
 
-//Having these for each side is pointless, so left 0 out of the $spaceamounts array.
+//Convenient for setting all to 0 with 1 class instead of 4
 .pad-0 {
     padding: 0;
 }

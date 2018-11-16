@@ -1,68 +1,66 @@
-﻿@{
+﻿@using HireRight.Persistence.Models.CompanyAggregate
+@model List<IndustryWithAssessmentsDto>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="row">
-    <div class="col-xs-12">
-        <div style="width: 480px; margin: 0 auto; text-align: center;">
-            <h1 class="text-shadow-gray">Hire Right Testing</h1>
-            <h3 class="text-shadow-gray">
-                <i>
-                    Identify, Develop, Retain Talent
-                    <br />
-                    Hire Right, the First Time
-                </i>
-            </h3>
-        </div>
+    <div class="col-xs-6">
+        <img style="max-height: 120px;" src="~/Content/Images/HireRight Logo Trimmed.PNG" alt="logo" />
+    </div>
+    <div class="col-xs-6 bold marg-top-10">
+        <p>Identify, Develop, Retain Talent</p>
+        <p>Hire Right, the First Time</p>
+        <p>Hire Right Testing can help you get it right the first time. Our testing includes discussion with our experienced consultants to identify the best assessments for you.</p>
     </div>
 </div>
-<div class="row">
-    <div class="col-xs-12">
-        <br />
-        <h4>Hire Right Testing can help you get it right the first time. Our testing includes discussion with our experienced consultants to identify the best assessments for you.</h4>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-4">
-        <div class="btn btn-default horizontal-List-Button"
-             id="showWhyUseHireRightListButton">
-            Why Use Hire Right Testing?
+@*<div class="row">
+        <div class="col-xs-12 col-md-4">
+            <div class="btn btn-default horizontal-List-Button"
+                 id="showWhyUseHireRightListButton">
+                Why Use Hire Right Testing?
+            </div>
         </div>
-    </div>
-    <div class="col-xs-12 col-md-4">
-        <div class="btn btn-default horizontal-List-Button"
-             id="showConsultantsListButton">
-            Consultants
+        <div class="col-xs-12 col-md-4">
+            <div class="btn btn-default horizontal-List-Button"
+                 id="showConsultantsListButton">
+                Consultants
+            </div>
         </div>
-    </div>
-    <div class="col-xs-12 col-md-4">
-        <div class="btn btn-default horizontal-List-Button"
-             id="showOccupationalCategoriesListButton">
-            Industries
+        <div class="col-xs-12 col-md-4">
+            <div class="btn btn-default horizontal-List-Button"
+                 id="showOccupationalCategoriesListButton">
+                Industries
+            </div>
         </div>
-    </div>
-</div>
-<br />
-<div id="infoDiv">
-</div>
-<script src="~/Scripts/Navigation/_Navigation.js"></script>
-<script>
-    $(document).ready(function ()
-    {
-        var $infoDiv = $("#infoDiv");
-        var controllerName = "/Home/";
-        Navigation.replaceDivContents($infoDiv, controllerName + "Introduction");
-        $("#showWhyUseHireRightListButton").click(function ()
+    </div>*@
+@*<br />
+    <div id="infoDiv">
+    </div>*@
+@Html.Partial("IntroductionPartial")
+@Html.Partial("WhyUseHireRightPartial")
+<div class="marg-bottom-10"></div>
+@Html.Partial("ConsultantsInformationPartial")
+@Html.Partial("Industries", Model)
+@*<script src="~/Scripts/Navigation/_Navigation.js"></script>
+    <script>
+        $(document).ready(function ()
         {
-            Navigation.replaceDivContents($infoDiv, controllerName + "WhyUseHireRight");
+            var $infoDiv = $("#infoDiv");
+            var controllerName = "/Home/";
+            Navigation.replaceDivContents($infoDiv, controllerName + "Introduction");
+            $("#showWhyUseHireRightListButton").click(function ()
+            {
+                Navigation.replaceDivContents($infoDiv, controllerName + "WhyUseHireRight");
+            });
+            $("#showConsultantsListButton").click(function ()
+            {
+                Navigation.replaceDivContents($infoDiv, controllerName + "Consultants");
+            });
+            $("#showOccupationalCategoriesListButton").click(function ()
+            {
+                Navigation.replaceDivContents($infoDiv, controllerName + "Industries");
+            });
         });
-        $("#showConsultantsListButton").click(function ()
-        {
-            Navigation.replaceDivContents($infoDiv, controllerName + "Consultants");
-        });
-        $("#showOccupationalCategoriesListButton").click(function ()
-        {
-            Navigation.replaceDivContents($infoDiv, controllerName + "Industries");
-        });
-    });
-</script>
+    </script>*@

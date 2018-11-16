@@ -56,10 +56,10 @@ namespace HireRight.Infrastructure
             object htmlattributes = htmlAttributes;
 
             MvcHtmlString labelString = helper.LabelFor(expression);
-            MvcHtmlString editorString = helper.EditorFor(expression, new { htmlAttributes = htmlattributes ?? new { @class = "form-control", style = "width: 100%;" } });
+            MvcHtmlString editorString = helper.EditorFor(expression, new { htmlAttributes = htmlattributes ?? new { style = "width: 100%;" } });
             MvcHtmlString validationString = helper.ValidationMessageFor(expression);
 
-            return new MvcHtmlString(labelString + (isRequired ? "<span style=\"color: red; font-size: 6pt; position: absolute; top: 2px;\" class=\"glyphicon glyphicon-asterisk\"></span>" : string.Empty) + "<br />" + editorString + validationString);
+            return new MvcHtmlString($"{labelString}{(isRequired ? "<span class='asterisk-required'>*</span>" : string.Empty)}<br />{editorString}{validationString}");
         }
 
         public static MvcHtmlString CollapseButton(this HtmlHelper helper, string divToToggleId, string expandTitle = "Expand this section", string collapseTitle = "Collapse this section", string customClass = "collapseIcon")

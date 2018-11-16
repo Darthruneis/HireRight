@@ -7,7 +7,7 @@
         @Html.LabelFor(x => x.Order.Products) <br />
         @Html.DropDownListFor(x => x.Order.SelectedProductId,
                                            Model.Order.Products.Select(x => new SelectListItem { Text = x.Title, Value = x.RowGuid.ToString() }).ToList(),
-                                           new { id = "listOfProducts", @class = "form-control", style = "font-size: 12pt;" }) <br />
+                                           new { id = "listOfProducts" }) <br />
         @Html.ValidationMessageFor(x => x.Order.SelectedProductId)
     </div>
     <div class="col-xs-12 col-sm-6 col-lg-3" id="productDiscounts"></div>
@@ -24,8 +24,8 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <h2>Notes (optional)</h2>
-        @Html.TextAreaFor(x => Model.Order.Notes, new { style = "resize: none;", rows = "5", cols = "150", @class = "form-control" })
+        @Html.LabelFor(x => x.Order.Notes, "Notes (optional)")
+        @Html.TextAreaFor(x => Model.Order.Notes, new {style = "resize: none;", rows = "5", cols = "150", @class = "fixed-horizontal", placeholder = "Anything else you'd like us to know?"})
     </div>
 </div>
 <script src="~/Scripts/Order/_Order.js"></script>

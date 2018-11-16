@@ -2,6 +2,39 @@
 @import "_mixins.scss";
 @import "_%classes.scss";
 
+//Start - Border Classes by side
+
+//source: https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9
+//see also: https://gist.github.com/jareware/4738651
+$borderwidths: (0, 1, 2, 3, 4, 5);
+$sides: (top, bottom, left, right);
+
+@each $width in $borderwidths {
+    @each $side in $sides {
+        %border-#{$side}-#{$width} {
+            border-#{$side}-width: #{$width}px;
+        }
+
+        .border-#{$side}-solid {
+            border-#{$side}-width: #{$width}px;
+        }
+
+        .border-#{$side}-blue {
+            border-#{$side}-color: $logo-blue;
+        }
+
+        .border-#{$side}-green {
+            border-#{$side}-color: $logo-green;
+        }
+
+        .border-#{$side}-black {
+            border-#{$side}-color: $black;
+        }
+    }
+}
+
+// End - Border Classes by side
+
 .borderedTop {
     border-top: 2px solid $black;
 }

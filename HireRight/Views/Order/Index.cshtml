@@ -4,34 +4,34 @@
 }
 @using (Html.BeginForm("Index", "Order", FormMethod.Post))
 {
-    <div class="row" style="padding-bottom: 10px;">
+    <div class="row">
         <div class="col-xs-12 col-lg-5">
             <div class="row">
                 <div class="col-xs-12">
                     <h3>Company</h3>
                 </div>
             </div>
-            <div id="companyInfoDiv" style="padding-bottom: 10px;">
+            <div id="companyInfoDiv">
                 @{
                     Html.RenderPartial("~/Views/Order/EditorTemplates/CompanyViewModel.cshtml", Model);
                 }
             </div>
         </div>
         <div class="col-xs-12 col-lg-7">
-            <div id="contactsInfoDiv" style="padding-bottom: 10px;">
+            <div id="contactsInfoDiv">
                 @{
                     Html.RenderPartial("Contacts", Model);
                 }
             </div>
         </div>
     </div>
-    <div style="padding-top: 5px;">
+    <div>
         <div class="row">
             <div class="col-xs-12">
                 <h3>Order Details</h3>
             </div>
         </div>
-        <div style="padding-bottom: 10px; clear: both;" id="orderDetailsDiv">
+        <div id="orderDetailsDiv">
             @{
                 Html.RenderPartial("~/Views/Order/EditorTemplates/OrdersViewModel.cshtml", Model);
             }

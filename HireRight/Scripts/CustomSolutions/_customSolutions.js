@@ -145,7 +145,7 @@ var CustomSolutions;
         });
     }
     function bindFormSubmit(minCriticals, maxCriticals, maxNice) {
-        $("#FinishButton").on("click", function (e) {
+        $("#ReviewButton").on("click", function (e) {
             updateCardVisibilityRanks();
             makeHiddenCardsIrrelevant();
             var isGeneralSelected = $(".generalIndustryToggle").hasClass("activeIndustry");
@@ -153,8 +153,8 @@ var CustomSolutions;
             var selectedIndustry = 0;
             if (activeToggles != null)
                 selectedIndustry = activeToggles.data("industryid");
-            $(this).append("<input type='hidden' name='selectedIndustry' value='" + selectedIndustry + "'/>");
-            $(this).append("<input type='hidden' name='isGeneralSelected' value='" + isGeneralSelected + "'/>");
+            $("#SelectedIndustry").val(selectedIndustry);
+            $("#IsGeneralSelected").val(isGeneralSelected.toString());
             var result = cardCountsAreValid(minCriticals, maxCriticals, maxNice);
             if (result) {
                 $("#notEnough").hide();
@@ -190,7 +190,7 @@ var CustomSolutions;
         $(".importanceHeaders").find(":not(:first-child)").toggleClass("col-xs-4 col-xs-6");
         $("#BackButton").toggle();
         $("#ContinueButton").toggle();
-        $("#FinishButton").toggle();
+        $("#ReviewButton").toggle();
         $("#notEnoughCrits").hide();
         $("#notEnough").hide();
         $(".categoryCardRow input[type='hidden']").each(function (index, elem) {
@@ -239,6 +239,7 @@ var CustomSolutions;
         detachedHtml.addClass(getStringImportanceLevel(newValue));
         detachedHtml.appendTo($newCategoryRow);
         $categoryRow.css("height", "auto");
+        $categoryRow.data("ismoving", "false");
     }
     function animateCardMovement($categoryRow, $newCategoryRow, original, newValue) {
         if (original === newValue)
@@ -260,6 +261,10 @@ var CustomSolutions;
         }, 500, function () { return moveCardToNewColumn($categoryRow, $newCategoryRow, $card, cache, newValue); });
     }
     function updateImportanceLevel($categoryRow, increase) {
+        var isMoving = $categoryRow.data("ismoving").toString().toLower() === "true";
+        if (isMoving)
+            return;
+        $categoryRow.data("ismoving", "true");
         var original = getNumericImportanceLevel(getImportanceLevel($categoryRow));
         var current = increase ? original + 1 : original - 1;
         var newValue = getStringImportanceLevel(current);
