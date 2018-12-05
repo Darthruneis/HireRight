@@ -1,5 +1,10 @@
 ﻿@model CustomSolutionsFirstStepModel
 <div class="row">
+    <div class="col-xs-12">
+        <h3 role="heading">Required Information</h3>
+    </div>
+</div>
+<div class="row">
     <div class="col-xs-12 col-lg-6">
         @Html.ValidatedEditorWithLabelFor(x => x.CompanyName, true)
     </div>
@@ -9,19 +14,19 @@
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-6">
-        @Html.ValidatedEditorWithLabelFor(x => x.Contact.FirstName)
+        @Html.ValidatedEditorWithLabelFor(x => x.FirstName, true)
     </div>
     <div class="col-xs-12 col-md-6">
-        @Html.ValidatedEditorWithLabelFor(x => x.Contact.LastName)
+        @Html.ValidatedEditorWithLabelFor(x => x.LastName, true)
     </div>
     <div class="col-xs-12 col-md-6 col-lg-4">
-        @Html.ValidatedEditorWithLabelFor(x => x.Contact.OfficeNumber)
+        @Html.ValidatedEditorWithLabelFor(x => x.OfficeNumber)
     </div>
     <div class="col-xs-12 col-md-6 col-lg-4">
-        @Html.ValidatedEditorWithLabelFor(x => x.Contact.CellNumber)
+        @Html.ValidatedEditorWithLabelFor(x => x.CellNumber)
     </div>
     <div class="col-xs-12 col-md-6 col-lg-4">
-        @Html.ValidatedEditorWithLabelFor(x => x.Contact.Email)
+        @Html.ValidatedEditorWithLabelFor(x => x.Email)
     </div>
 </div>
 <div class="row">

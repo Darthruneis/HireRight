@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col-xs-12">
         @{ IndustryDTO general = @Model.Industries.Single(x => x.Id == Industry.General);}
-        <div class="industryToggle pull-left pointer-hover generalIndustryToggle" data-industryid="@Industry.General" data-industryname="@general.Name">
+            <div class="industryToggle pull-left pointer-hover generalIndustryToggle" data-industryid="@Industry.General" data-industryname="@general.Name"
+                 aria-role="button" role="button">
             <span style="text-align: center; display: inline-block; font-weight: bold">
                 <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
                 @general.Name
@@ -13,7 +14,8 @@
         </div>
         @foreach (IndustryDTO industry in Model.Industries.Where(x => x.Id != Industry.General))
         {
-            <div class="industryToggle pull-left pointer-hover" data-industryid="@industry.Id" data-industryname="@industry.Name">
+            <div class="industryToggle pull-left pointer-hover" data-industryid="@industry.Id" data-industryname="@industry.Name"
+                 aria-role="button" role="button">
                 <span class="text-center bold" style="display: inline-block;">
                     <i class="glyphicon glyphicon-ok" style="display: none; color: green;"></i>
                     @industry.Name

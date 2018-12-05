@@ -36,11 +36,18 @@ namespace HireRight.Models
         {
             SubmitCardsDTO dto = new SubmitCardsDTO();
             dto.Categories = Categories.Where(x => x.Importance != CategoryImportance.Irrelevant)
-                                       .Select(x => new CategoryDTO(x.Title, x.Description) { Importance = x.Importance, RowGuid = x.Id })
+                                       .Select(x => new CategoryDTO(x.Title, x.Description) {Importance = x.Importance, RowGuid = x.Id})
                                        .ToList();
             dto.CompanyName = PreviousInformation.CompanyName;
             dto.Positions = PreviousInformation.Positions;
-            dto.Contact = PreviousInformation.Contact;
+            dto.Contact = new ContactDTO()
+            {
+                Email = PreviousInformation.Email,
+                CellNumber = PreviousInformation.CellNumber,
+                OfficeNumber = PreviousInformation.OfficeNumber,
+                FirstName = PreviousInformation.FirstName,
+                LastName = PreviousInformation.LastName,
+            };
             dto.Notes = PreviousInformation.Notes;
 
             return dto;

@@ -53,10 +53,8 @@ namespace HireRight.Infrastructure
 
         public static MvcHtmlString ValidatedEditorWithLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, bool isRequired = false, object htmlAttributes = null)
         {
-            object htmlattributes = htmlAttributes;
-
             MvcHtmlString labelString = helper.LabelFor(expression);
-            MvcHtmlString editorString = helper.EditorFor(expression, new { htmlAttributes = htmlattributes ?? new { style = "width: 100%;" } });
+            MvcHtmlString editorString = helper.EditorFor(expression, htmlAttributes);
             MvcHtmlString validationString = helper.ValidationMessageFor(expression);
 
             return new MvcHtmlString($"{labelString}{(isRequired ? "<span class='asterisk-required'>*</span>" : string.Empty)}<br />{editorString}{validationString}");
@@ -69,7 +67,7 @@ namespace HireRight.Infrastructure
 
         public static MvcHtmlString SubmitButton(this HtmlHelper helper, string buttonText = "Submit")
         {
-            return new MvcHtmlString($"<input type='submit' value='{buttonText}' class='btn btn-primary pull-right' />");
+            return new MvcHtmlString($"<input type='submit' value='{buttonText}' class='btn btn-primary pull-right' role='button' />");
         }
     }
 }

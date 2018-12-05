@@ -1,11 +1,12 @@
 ﻿@using HireRight.Persistence.Models.CompanyAggregate
 @model List<IndustryWithAssessmentsDto>
 
+@{ var orderedModel = Model.OrderBy(x => x.Title).ToList();}
 <div class="row">
-    @foreach (IndustryWithAssessmentsDto dto in Model.OrderBy(x => x.Title))
+    @for (int i = 0; i < orderedModel.Count; i++)
     {
         string imgPath;
-        switch (dto.Id)
+        switch (orderedModel[i].Id)
         {
             case Industry.Manufacturing:
                 imgPath = "../../Content/manufacturing.jpeg";
@@ -31,20 +32,19 @@
             default:
                 continue;
         }
-        string divId = $"{dto.Title.Replace(" ", "_").Replace("&", "_")}InfoDiv";
-        <div class="col-xs-12 col-lg-4 categoryContainer pad-5">
-            <h3 class="text-center centered">@dto.Title</h3>
-            <div style="display: flex; margin-top: 1em;">
+        string divId = $"{orderedModel[i].Title.Replace(" ", "_").Replace("&", "_")}InfoDiv";
+        <div class="col-xs-12 col-lg-3 categoryContainer">
+            <h5 class="text-center">@orderedModel[i].Title</h5>
+            <div style="display: flex; margin-top: 1em; margin-bottom: 1em;">
                 <div class="industryToggleImg" data-toggledivid="@divId" style="cursor: pointer; margin: 0 auto;">
                     <div class="pull-left">
                         <div class="imgDiv" style="height: 300px; width: 300px; margin: 0 auto; background: url(@imgPath); background-size: 300px 300px;"></div>
                     </div>
                 </div>
                 <div id="@divId" style="width: 50%;" hidden="hidden" class="informationalDiv pull-left">
-                    The following have been pre-compiled, but there is also the option of creating a @Html.ActionLink("Custom Test", "FirstStep", "CustomSolutions")
-                    <br/>
+                    <br />
                     <ul>
-                        @foreach (string assessment in dto.Assessments)
+                        @foreach (string assessment in orderedModel[i].Assessments)
                         {
                             <li>@assessment</li>
                         }
@@ -54,22 +54,20 @@
         </div>
     }
 </div>
-@*@{ Html.RenderPartial("BackButtonPartial"); }*@
 <script>
-    $(document).ready(function ()
-    {
+    $(document).ready(function () {
         $(".industryToggleImg").on("click",
-            function ()
-            {
+            function () {
                 var $container = $(this).closest(".categoryContainer");
-                $container.toggleClass("col-lg-4");
-                if (!$container.hasClass("col-lg-4"))
-                {
+                $container.toggleClass("col-lg-3 background-white");
+                if (!$container.hasClass("col-lg-3")) {
                     $('html,body').animate({
-                        scrollTop: $container.offset().top - 60
-                    }, 250);
+                        scrollTop: $container.offset().top - 48
+                    },
+                        250);
                 }
                 $("#" + $(this).data("toggledivid")).toggle();
-            });
+            }
+        );
     });
 </script>

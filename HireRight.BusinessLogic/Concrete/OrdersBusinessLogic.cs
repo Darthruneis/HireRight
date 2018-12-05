@@ -148,10 +148,34 @@ namespace HireRight.BusinessLogic.Concrete
             return orders.PageResultToDto(ConvertModelToDto);
         }
 
-        public async Task SubmitCards(SubmitCardsDTO cardsToSubmit)
+        public async Task<Result> SubmitCards(SubmitCardsDTO cardsToSubmit)
         {
+            string errorMessage = "";
+            var crits = cardsToSubmit.Categories.Count(x => x.Importance == CategoryImportance.HighImportance);
+            var nices = cardsToSubmit.Categories.Count(x => x.Importance == CategoryImportance.LowImportance);
+
+            if (crits > MaxCriticalCategories)
+            {
+                errorMessage += Environment.NewLine + $"Please select at most {MaxNiceCategories} 'Nice to Have' categories. You have selected {crits}.";
+            }
+            else if (crits < MinCriticalCategories)
+            {
+                errorMessage += Environment.NewLine + $"Please select at least {MinCriticalCategories} 'Critical' categories. You have selected {crits}.";
+            }
+
+            if (nices > MaxNiceCategories)
+            {
+                errorMessage += Environment.NewLine + $"Please choose at most {MaxCriticalCategories} 'Critical' categories. You have selected {nices}.";
+            }
+
+            if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                return Result.Fail(errorMessage.TrimStart(Environment.NewLine.ToCharArray()));
+            }
+
             string message = await CreateEmailMessageFromDto(cardsToSubmit);
             _emailSender.EmailConsultants(message, "New Custom Test Request");
+            return Result.Ok();
         }
 
         public async Task<OrderDetailsDTO> Update(OrderDetailsDTO objectDto)

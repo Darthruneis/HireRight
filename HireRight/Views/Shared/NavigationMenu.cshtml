@@ -1,24 +1,23 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
+﻿<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" role="button">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <div class="logo" onclick="location.href = '@Url.Action("Index", "Home")'">
+        <div class="logo" onclick="location.href = '@Url.Action("Index", "Home")'" role="button">
             <img src="~/Content/Images/HireRight Logo Trimmed.PNG" alt="logo" />
         </div>
-        @*@Html.ActionLink("Hire Right Testing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", title="Return to the home page." })*@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("New Clients", "NewClients", "Client")</li>
-            <li>@Html.ActionLink("Build a Custom Test", "FirstStep", "CustomSolutions")</li>
-            @*<li>@Html.ActionLink("Order Info", "About", "Order")</li>*@
-            <li>@Html.ActionLink("Ordering", "Index", "Order")</li>
-            <li>@Html.ActionLink("Get in Touch", "Contact", "Contact")</li>
-            <li>@Html.ActionLink("Reporting", "Index", "Reports")</li>
-            <li>@Html.ActionLink("Sample Reports", "Samples", "Reports")</li>
+            <li>@Html.ActionLink("New Clients", "NewClients", "Client", null, new { role = "link" })</li>
+            <li>@Html.ActionLink("Build a Custom Test", "FirstStep", "CustomSolutions", null, new { role = "link" })</li>
+            @*<li>@Html.ActionLink("Order Info", "About", "Order", null, new { role="link"})</li>*@
+            <li>@Html.ActionLink("Ordering", "Index", "Order", null, new { role = "link" })</li>
+            <li>@Html.ActionLink("Get in Touch", "Contact", "Contact", null, new { role = "link" })</li>
+            <li>@Html.ActionLink("Reporting", "Index", "Reports", null, new { role = "link" })</li>
+            <li>@Html.ActionLink("Sample Reports", "Samples", "Reports", null, new { role = "link" })</li>
         </ul>
     </div>
 </div>

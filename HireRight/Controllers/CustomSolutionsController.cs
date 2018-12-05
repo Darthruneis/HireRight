@@ -32,17 +32,29 @@ namespace HireRight.Controllers
         [HttpPost]
         public async Task<ActionResult> FirstStep(CustomSolutionsFirstStepModel model)
         {
+            if (string.IsNullOrWhiteSpace(model.CellNumber)
+                && string.IsNullOrWhiteSpace(model.OfficeNumber)
+                && string.IsNullOrWhiteSpace(model.Email))
+            {
+                ModelState.AddModelError(nameof(model.CellNumber), "Please provide at least one method of contact.");
+                ModelState.AddModelError(nameof(model.OfficeNumber), "Please provide at least one method of contact.");
+                ModelState.AddModelError(nameof(model.Email), "Please provide at least one method of contact.");
+                ModelState.AddModelError("", "Please provide at least one method of contact: Office Phone, Personal Phone, or Email.");
+            }
+
             if(!ModelState.IsValid)
                 return View("_FirstStep", model);
 
             ICollection<CategoryDTO> categories = await _categoriesBusinessLogic.GetAll();
-            var industries = await _industryBusinessLogic.GetAll();
+            ICollection<IndustryDTO> industries = await _industryBusinessLogic.GetAll();
             industries = industries.Where(x => categories.SelectMany(y => y.Industries).Contains(x.Id)).ToList();
 
             JobAnalysisCategoryViewModel createCategoryModel(CategoryDTO category)
-                => new JobAnalysisCategoryViewModel(category.Description, category.Title, category.RowGuid,
-                                                    industries.Where(y => category.Industries.Contains(y.Id)).Select(y => y.Id).ToList(),
-                                                    industries.ToList());
+            {
+                return new JobAnalysisCategoryViewModel(category.Description, category.Title, category.RowGuid,
+                    industries.Where(y => category.Industries.Contains(y.Id)).Select(y => y.Id).ToList(),
+                    industries.ToList());
+            }
 
             CustomSolutionsSecondStepModel nextModel = new CustomSolutionsSecondStepModel(model, categories.Select(createCategoryModel).OrderBy(x => x.Title), industries);
             return View("_SecondStep", nextModel);
@@ -66,7 +78,6 @@ namespace HireRight.Controllers
             if (model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance) > OrdersBusinessLogic.MaxCriticalCategories)
                 ModelState.AddModelError("", $"Please choose at most {OrdersBusinessLogic.MaxCriticalCategories} 'Critical' categories. You have selected {model.Categories.Count(x => x.Importance == CategoryImportance.HighImportance)}.");
             
-            ClearIrrelevantModelstateErrorsForContactAddress();
             if (!ModelState.IsValid)
                 return View("_SecondStep", model);
             
@@ -91,20 +102,12 @@ namespace HireRight.Controllers
             model.RefreshModel(industries, categories);
             model.IsGeneralSelected = isGeneralSelected;
             model.SelectedIndustry = selectedIndustry;
-            ClearIrrelevantModelstateErrorsForContactAddress();
             if (!ModelState.IsValid)
                 return View("_Review", model);
 
-            await _ordersBusinessLogic.SubmitCards(model.CreateSubmitCardsDTO());
-            return View("CustomSolutionsSuccess");
-        }
+            var result = await _ordersBusinessLogic.SubmitCards(model.CreateSubmitCardsDTO());
 
-        private void ClearIrrelevantModelstateErrorsForContactAddress()
-        {
-            ModelState["PreviousInformation.Contact.Address.City"].Errors.Clear();
-            ModelState["PreviousInformation.Contact.Address.PostalCode"].Errors.Clear();
-            ModelState["PreviousInformation.Contact.Address.State"].Errors.Clear();
-            ModelState["PreviousInformation.Contact.Address.StreetAddress"].Errors.Clear();
+            return View("CustomSolutionsSuccess");
         }
     }
 }

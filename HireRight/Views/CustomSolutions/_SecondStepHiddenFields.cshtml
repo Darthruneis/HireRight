@@ -1,24 +1,12 @@
-﻿@using HireRight.BusinessLogic.Concrete
-@model CustomSolutionsSecondStepModel
+﻿@model CustomSolutionsSecondStepModel
 
 @* Hidden fields for everything that was populated in step 1. *@
 @Html.HiddenFor(x => x.PreviousInformation.CompanyName)
 @Html.HiddenFor(x => x.PreviousInformation.Notes)
 @Html.HiddenFor(x => x.PreviousInformation.PositionsToFill)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.RowGuid)
 
-@Html.HiddenFor(x => x.PreviousInformation.Contact.CellNumber)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.CompanyGuid)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.Email)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.FirstName)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.LastName)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.OfficeNumber)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.IsAdmin)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.IsPrimary)
-
-@Html.HiddenFor(x => x.PreviousInformation.Contact.Address.City)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.Address.Country)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.Address.PostalCode)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.Address.State)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.Address.StreetAddress)
-@Html.HiddenFor(x => x.PreviousInformation.Contact.Address.UnitNumber)
+@Html.HiddenFor(x => x.PreviousInformation.CellNumber)
+@Html.HiddenFor(x => x.PreviousInformation.Email)
+@Html.HiddenFor(x => x.PreviousInformation.FirstName)
+@Html.HiddenFor(x => x.PreviousInformation.LastName)
+@Html.HiddenFor(x => x.PreviousInformation.OfficeNumber)

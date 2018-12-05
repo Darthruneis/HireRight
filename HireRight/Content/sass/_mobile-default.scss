@@ -64,11 +64,6 @@ img {
     white-space: normal;
 }
 
-.noPadNoMarg {
-    margin: 0;
-    padding: 0;
-}
-
 .categoryDropDownDiv {
     font-size: 11pt !important;
     margin-bottom: 3px;
@@ -77,4 +72,30 @@ img {
 
 .pointer-hover {
     cursor: pointer;
+}
+
+.background-blue {
+    background-color: $logo-blue;
+}
+
+.background-green {
+    background-color: $logo-green;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.background-fixed {
+    background-attachment: fixed;
+}
+
+.background-image {    
+    background-origin: padding-box;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }

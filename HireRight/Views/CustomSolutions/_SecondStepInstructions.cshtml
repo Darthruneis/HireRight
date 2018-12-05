@@ -9,13 +9,16 @@
                 <li>Finally, narrow the selection down to @(OrdersBusinessLogic.MinCriticalCategories)-@(OrdersBusinessLogic.MaxCriticalCategories) 'Critical' categories for your industry, and up to @(OrdersBusinessLogic.MaxNiceCategories) additional 'Nice to Have' categories. You may move back and forth between this and the last step at any time using the 'Back' and 'Continue' buttons.</li>
                 <li>When finished, click 'Finish'.</li>
             </ol>
+            <div class="pad-left-5">
+                <p><b>Note:</b> click on a category title for details about that category.</p>
+            </div>
             @{
                 JobAnalysisCategoryViewModel candidness = Model.Categories.SingleOrDefault(x => x.Title == "Candidness");
             }
             @if (candidness != null)
             {
                 <div class="categoryContainer pad-left-5">
-                    <span>All tests will include a 10th category - <a class="categoryDescriptionToggle">@(candidness.Title)</a>.</span>
+                    <span>All tests will include a 10th category - <a class="categoryDescriptionToggle pointer-hover">@(candidness.Title)</a>.</span>
                     <p class="categoryDescription" id="candidnessDescription" style="display: none; margin-left: 5%;">@(candidness.Description)</p>
                 </div>
             }

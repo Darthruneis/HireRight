@@ -2,6 +2,7 @@
 using DataTransferObjects.Filters.Concrete;
 using System;
 using System.Threading.Tasks;
+using HireRight.Persistence.Models;
 using HireRight.Persistence.Models.CompanyAggregate;
 
 namespace HireRight.BusinessLogic.Abstract
@@ -18,7 +19,7 @@ namespace HireRight.BusinessLogic.Abstract
 
         Task<PagingResultDTO<OrderDetailsDTO>> Get(OrderFilter filter);
 
-        Task SubmitCards(SubmitCardsDTO cardsToSubmit);
+        Task<Result> SubmitCards(SubmitCardsDTO cardsToSubmit);
 
         Task<OrderDetailsDTO> Update(OrderDetailsDTO orderDto);
     }

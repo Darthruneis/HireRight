@@ -2,65 +2,54 @@
 @model List<IndustryWithAssessmentsDto>
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Hire Right the First Time";
 }
 
-<div class="row">
-    <div class="col-xs-6">
-        <img style="max-height: 120px;" src="~/Content/Images/HireRight Logo Trimmed.PNG" alt="logo" />
+<div class="z-level-0 display-block background-fixed background-image"
+     style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('../../Content/Images/mountain-climb-infront-of-sun-original.jpg');">
+    <div class="row">
+        <div class="col-xs-12" style="padding-top: 80px; padding-bottom: 10vh;">
+            <div class="text-center text-upper" style="font-size: 1.5em;">
+                <span>Taking Employee Testing to New Heights</span>
+            </div>
+            <div class="text-center text-upper" style="font-size: 4em;">
+                <span class="text-blue">Hire</span> <span class="text-green">Right</span>
+            </div>
+            <div class="text-center text-upper" style="font-size: 3.5em;">
+                <span class="text-blue">The First Time</span>
+            </div>
+            <div class="text-center pad-top-75" style="width: 100%;">
+                <button type="button" class="btn btn-default marg-right-75 pad-right-40 pad-left-40 text-blue" style="display: inline-block;"
+                        onclick="window.location.href = '#industries'">
+                    Review Pre-Assembled Tests
+                </button>
+                <button class="btn btn-default marg-left-75 pad-right-40 pad-left-40 text-blue" style="display: inline-block;"
+                        onclick="window.location.href = '/CustomSolutions/FirstStep'">
+                    Build Custom Test
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="col-xs-6 bold marg-top-10">
-        <p>Identify, Develop, Retain Talent</p>
-        <p>Hire Right, the First Time</p>
-        <p>Hire Right Testing can help you get it right the first time. Our testing includes discussion with our experienced consultants to identify the best assessments for you.</p>
+    <div class="marg-left-25 marg-right-25">
+        <div class="background-white z-level-1 pad-left-10 pad-right-10">
+            <div class="pad-bottom-20"></div>
+            @*@Html.Partial("_Introduction")*@
+            @Html.Partial("_WhyUseHireRight")
+            @Html.Partial("_ConsultantsInformation")
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Pre-Assembled Tests</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>The following have been pre-compiled, but there is also the option of creating a @Html.ActionLink("Custom Test", "FirstStep", "CustomSolutions").</p>
+                </div>
+            </div>
+        </div>
+        <div id="industries" class="pad-left-10 pad-right-10">
+            @Html.Partial("Industries", Model)
+        </div>
+        <div class="pad-bottom-20"></div>
     </div>
 </div>
-@*<div class="row">
-        <div class="col-xs-12 col-md-4">
-            <div class="btn btn-default horizontal-List-Button"
-                 id="showWhyUseHireRightListButton">
-                Why Use Hire Right Testing?
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="btn btn-default horizontal-List-Button"
-                 id="showConsultantsListButton">
-                Consultants
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="btn btn-default horizontal-List-Button"
-                 id="showOccupationalCategoriesListButton">
-                Industries
-            </div>
-        </div>
-    </div>*@
-@*<br />
-    <div id="infoDiv">
-    </div>*@
-@Html.Partial("_Introduction")
-@Html.Partial("_WhyUseHireRight")
-<div class="marg-bottom-10"></div>
-@Html.Partial("_ConsultantsInformation")
-@Html.Partial("Industries", Model)
-@*<script src="~/Scripts/Navigation/_Navigation.js"></script>
-    <script>
-        $(document).ready(function ()
-        {
-            var $infoDiv = $("#infoDiv");
-            var controllerName = "/Home/";
-            Navigation.replaceDivContents($infoDiv, controllerName + "Introduction");
-            $("#showWhyUseHireRightListButton").click(function ()
-            {
-                Navigation.replaceDivContents($infoDiv, controllerName + "WhyUseHireRight");
-            });
-            $("#showConsultantsListButton").click(function ()
-            {
-                Navigation.replaceDivContents($infoDiv, controllerName + "Consultants");
-            });
-            $("#showOccupationalCategoriesListButton").click(function ()
-            {
-                Navigation.replaceDivContents($infoDiv, controllerName + "Industries");
-            });
-        });
-    </script>*@

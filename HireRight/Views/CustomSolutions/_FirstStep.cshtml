@@ -5,24 +5,12 @@
 @using (Html.BeginForm("FirstStep", "CustomSolutions", FormMethod.Post, 
                        new { id = "CustomSolutionsFirstStepForm" }))
 {
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>Job Analysis</h2>
-        </div>
-    </div>
     <div id="jobAnalysisInstructionsDiv">
-        @{ Html.RenderPartial("_FormInstructionsContent"); }
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>Required Information</h2>
-        </div>
+        @{ Html.RenderPartial("_FirstStepInstructions"); }
     </div>
     <div id="contactAndCompanyInfoDiv">
         @{ Html.RenderPartial("_ContactAndCompanyInfo", Model); }
     </div>
-    <br />
     <div style="clear: both;">
         <div class="pull-left">
             @Html.ValidationSummary(true)
@@ -30,3 +18,13 @@
         <div class="pull-right">@Html.SubmitButton("Continue")</div>
     </div>
 }
+<script>
+    $("#CellNumber,#OfficeNumber,#Email").on("blur",
+        function() {
+            $("#CellNumber,#OfficeNumber,#Email").each(function(i, e) {
+                $(e).removeClass("input-validation-error");
+                var id = $(e).prop("id");
+                $(`.field-validation-error[data-valmsg-for='${id}']`).hide();
+            });
+        });
+</script>

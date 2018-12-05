@@ -9,27 +9,27 @@
 $borderwidths: (0, 1, 2, 3, 4, 5);
 $sides: (top, bottom, left, right);
 
-@each $width in $borderwidths {
-    @each $side in $sides {
+@each $side in $sides {
+    @each $width in $borderwidths {
         .border-#{$side}-#{$width}px {
             border-#{$side}-width: #{$width} px;
         }
+    }
 
-        .border-#{$side}-solid {
-            border-#{$side}-style: solid;
-        }
+    .border-#{$side}-solid {
+        border-#{$side}-style: solid;
+    }
 
-        .border-#{$side}-blue {
-            border-#{$side}-color: $logo-blue;
-        }
+    .border-#{$side}-blue {
+        border-#{$side}-color: $logo-blue;
+    }
 
-        .border-#{$side}-green {
-            border-#{$side}-color: $logo-green;
-        }
+    .border-#{$side}-green {
+        border-#{$side}-color: $logo-green;
+    }
 
-        .border-#{$side}-black {
-            border-#{$side}-color: $black;
-        }
+    .border-#{$side}-black {
+        border-#{$side}-color: $black;
     }
 }
 

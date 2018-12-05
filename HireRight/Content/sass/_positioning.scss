@@ -26,6 +26,34 @@ body {
     margin: 0 auto;
 }
 
+.position-relative {
+    position: relative;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.display-inline-block {
+    display: inline-block;
+}
+
+.display-none {
+    display: none;
+}
+
 //Start - Padding and Margin classes
 //source: https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9
 //see also: https://gist.github.com/jareware/4738651
@@ -36,8 +64,14 @@ $sides: (top, bottom, left, right);
 .pad-0 {
     padding: 0;
 }
+
 .marg-0 {
     margin: 0;
+}
+
+.noPadNoMarg {
+    margin: 0;
+    padding: 0;
 }
 
 @each $space in $spaceamounts {
@@ -60,3 +94,15 @@ $sides: (top, bottom, left, right);
     }
 }
 // End - Padding and Margin classes
+
+//Start - z-index classes
+//source: https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9
+//see also: https://gist.github.com/jareware/4738651
+$zLevels: (-999, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 999);
+
+@each $zLevel in $zLevels {
+    .z-level-#{$zLevel} {
+        z-index: $zLevel;
+    }
+}
+// End - z-index classes

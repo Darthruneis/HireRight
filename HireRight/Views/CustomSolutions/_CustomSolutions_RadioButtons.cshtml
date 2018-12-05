@@ -9,7 +9,7 @@
     Type categoryImportance = typeof(CategoryImportance);
 }
 <div style="min-width: 800px; width: 100%">
-    @Html.Partial("_Instructions", Model)
+    @Html.Partial("_SecondStepInstructions", Model)
     @Html.Partial("_IndustryToggles", Model)
     <div id="categoryContainerDiv" class="marg-top-10">
         @for (int i = 0; i < Model.Categories.Count(); i++)
@@ -29,12 +29,12 @@
                 @Html.HiddenFor(x => x.Categories[i].Id)
                 <div class="row @(className)">
                     <div class="col-xs-3">
-                        <a class="categoryDescriptionToggle">@category.Title</a>
+                        <a class="categoryDescriptionToggle pointer-hover">@category.Title</a>
                     </div>
                     @foreach (CategoryImportance option in importanceOptions)
                     {
                         <div class="col-xs-3 pad-right-10">
-                            <label class="text-black" style="font-weight: normal;">
+                            <label class="text-black" style="font-weight: normal;" role="button" aria-role="button">
                                 @Html.RadioButtonFor(x => x.Categories[i].Importance, option)
                                 @(categoryImportance.GetMember(option.ToString()).First().GetCustomAttribute<DisplayAttribute>().Name)
                             </label>

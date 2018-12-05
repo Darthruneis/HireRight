@@ -45,6 +45,22 @@ body {
     color: $black;
 }
 
+.text-white {
+    color: white;
+}
+
+.text-upper {
+    text-transform: uppercase;
+}
+
+.text-lower {
+    text-transform: lowercase;
+}
+
+.text-capitalize{
+    text-transform: capitalize
+}
+
 h1,
 h2,
 h3,

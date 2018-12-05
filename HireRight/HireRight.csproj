@@ -217,6 +217,8 @@
     <Content Include="Content\Images\HireRight Logo.jpg" />
     <Content Include="Content\Images\HireRightHomeScreen.jpg" />
     <Content Include="Content\Images\HireRightLogo Original.jpg" />
+    <Content Include="Content\Images\lakeside-mountains-original.jpg" />
+    <Content Include="Content\Images\mountain-climb-infront-of-sun-original.jpg" />
     <Content Include="Content\Images\WhyUseHireRight Original.jpg" />
     <Content Include="Content\Images\WhyUseHireRight2.jpg" />
     <Content Include="Content\indexPicture.jpg" />
@@ -466,7 +468,7 @@
     <Content Include="Views\CustomSolutions\MarkCategoryDtoAsTopTwelve.cshtml" />
     <Content Include="Views\Home\_BackButton.cshtml" />
     <Content Include="Views\CustomSolutions\_ContactAndCompanyInfo.cshtml" />
-    <Content Include="Views\CustomSolutions\_FormInstructionsContent.cshtml" />
+    <Content Include="Views\CustomSolutions\_FirstStepInstructions.cshtml" />
     <Content Include="Views\CustomSolutions\CustomSolutionsSuccess.cshtml" />
     <Content Include="Views\Home\_Introduction.cshtml" />
     <Content Include="Views\Home\UnhappyEmployeesArePoison.cshtml" />
@@ -497,7 +499,7 @@
     <Content Include="Views\CustomSolutions\_FirstStep.cshtml" />
     <Content Include="Views\CustomSolutions\_SecondStepHiddenFields.cshtml" />
     <Content Include="Views\CustomSolutions\_CustomSolutions_RadioButtons.cshtml" />
-    <Content Include="Views\CustomSolutions\_Instructions.cshtml" />
+    <Content Include="Views\CustomSolutions\_SecondStepInstructions.cshtml" />
     <Content Include="Views\CustomSolutions\_IndustryToggles.cshtml" />
     <Content Include="Views\CustomSolutions\_Headers.cshtml" />
     <Content Include="Scripts\tsconfig.json" />

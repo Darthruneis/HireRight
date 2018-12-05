@@ -42,10 +42,10 @@
 }
 
 a, a:visited {
-    color: $navbar-link !important;
+    color: $navbar-link;
 
     &:hover {
-        color: $navbar-link-hover !important;
+        color: $navbar-link-hover;
     }
 }
 
