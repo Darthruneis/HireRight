@@ -213,12 +213,17 @@
   <ItemGroup>
     <Content Include="Content\administration.jpeg" />
     <Content Include="Content\DianaClarke.jpg" />
+    <Content Include="Content\Images\climbing-mountain-peak-ocean-cropped-center.jpg" />
+    <Content Include="Content\Images\climbing-mountain-peak-ocean-original.jpg" />
     <Content Include="Content\Images\HireRight Logo Trimmed.PNG" />
     <Content Include="Content\Images\HireRight Logo.jpg" />
     <Content Include="Content\Images\HireRightHomeScreen.jpg" />
     <Content Include="Content\Images\HireRightLogo Original.jpg" />
     <Content Include="Content\Images\lakeside-mountains-original.jpg" />
     <Content Include="Content\Images\mountain-climb-infront-of-sun-original.jpg" />
+    <Content Include="Content\Images\mountain-peak-under-sky-writing-cropped-bottom.jpg" />
+    <Content Include="Content\Images\mountain-peak-under-sky-writing-original.jpg" />
+    <Content Include="Content\Images\sunset-waves.jpg" />
     <Content Include="Content\Images\WhyUseHireRight Original.jpg" />
     <Content Include="Content\Images\WhyUseHireRight2.jpg" />
     <Content Include="Content\indexPicture.jpg" />
@@ -503,6 +508,10 @@
     <Content Include="Views\CustomSolutions\_IndustryToggles.cshtml" />
     <Content Include="Views\CustomSolutions\_Headers.cshtml" />
     <Content Include="Scripts\tsconfig.json" />
+    <Content Include="Views\Shared\_LayoutWithContainer.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithNav.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithGutter.cshtml" />
+    <Content Include="Views\Shared\_LayoutDefaultBackground.cshtml" />
     <None Include="Web.Live.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

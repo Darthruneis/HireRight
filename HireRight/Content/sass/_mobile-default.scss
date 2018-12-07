@@ -39,7 +39,7 @@ hr {
 }
 
 .body-content {
-    @extend %site_main_background;    
+    //@extend %site_main_background;    
 }
 
 img {
@@ -90,7 +90,7 @@ img {
     background-attachment: fixed;
 }
 
-.background-image {    
+.background-image {
     background-origin: padding-box;
     background-position-x: 50%;
     background-position-y: 50%;
@@ -98,4 +98,8 @@ img {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    min-height: calc(100vh - #{$navbar-height} - #{$footer-height} - 2px);
+    min-height: -o-calc(100vh - #{$navbar-height} - #{$footer-height} - 2px); /* opera */
+    min-height: -webkit-calc(100vh - #{$navbar-height} - #{$footer-height} - 2px); /* google, safari */
+    min-height: -moz-calc(100vh - #{$navbar-height} - #{$footer-height} - 2px); /* firefox */
 }
