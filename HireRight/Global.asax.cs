@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using HireRight.Persistence.Database_Context;
 
 namespace HireRight
 {
@@ -71,6 +72,11 @@ namespace HireRight
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            using (var context = new HireRightDbContext())
+            {
+                context.Database.Initialize(true);
+            }
         }
     }
 }

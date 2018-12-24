@@ -8,32 +8,37 @@
 
 <div class="z-level-0 display-block background-fixed background-image"
      style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('../../Content/Images/climbing-mountain-peak-ocean-cropped-center.jpg');">
-    <div class="row">
-        <div class="col-xs-12" style="padding-top: 80px; padding-bottom: 10vh;">
-            <div class="text-center text-upper" style="font-size: 1.5em;">
+    <div class="row full-screen-height">
+        <div class="col-xs-12">
+            <div class="text-center text-upper pad-top-125" style="font-size: 1.5em;">
                 <span>Taking Employee Testing to New Heights</span>
             </div>
-            <div class="text-center text-upper" style="font-size: 4em;">
+            <div class="text-center text-upper pad-top-40" style="font-size: 4em;">
                 <span class="text-blue">Hire</span> <span class="text-green">Right</span>
             </div>
-            <div class="text-center text-upper" style="font-size: 3.5em;">
+            <div class="text-center text-upper pad-top-40" style="font-size: 3.5em;">
                 <span class="text-blue">The First Time</span>
             </div>
-            <div class="text-center pad-top-75" style="width: 100%;">
-                <button type="button" class="btn btn-default marg-right-75 pad-right-40 pad-left-40 text-blue" style="display: inline-block;"
+            <div class="text-center pad-top-80" style="display: flex; margin-right: 30%; margin-left: 30%;">
+                <button type="button" class="btn btn-default centered pad-right-40 pad-left-40 display-inline-block" style="min-width: 15vw;"
                         onclick="window.location.href = '#industries'">
                     Review Pre-Assembled Tests
                 </button>
-                <button class="btn btn-default marg-left-75 pad-right-40 pad-left-40 text-blue" style="display: inline-block;"
+                <button type="button" class="btn btn-default centered pad-right-40 pad-left-40 display-inline-block" style="min-width: 15vw;"
                         onclick="window.location.href = '/CustomSolutions/FirstStep'">
                     Build Custom Test
                 </button>
             </div>
+            <div class="text-center pad-top-125" style="width: 100%;">
+                <button type="button" class="btn btn-default centered pad-right-40 pad-left-40 display-inline-block" style="min-width: 15vw;"
+                        onclick="window.location.href = '#industries'">
+                    Schedule a Demo
+                </button>
+            </div>
         </div>
     </div>
-    <div class="marg-bottom-100"></div>
     <div class="marg-left-25 marg-right-25">
-        <div class="background-white z-level-1 pad-left-10 pad-right-10">
+        <div class="background-white-0_75 z-level-1 pad-left-10 pad-right-10">
             <div class="pad-bottom-20"></div>
             @*@Html.Partial("_Introduction")*@
             @Html.Partial("_WhyUseHireRight")
@@ -48,9 +53,9 @@
                     <p>The following have been pre-compiled, but there is also the option of creating a @Html.ActionLink("Custom Test", "FirstStep", "CustomSolutions").</p>
                 </div>
             </div>
-        </div>
         <div id="industries" class="pad-left-10 pad-right-10">
             @Html.Partial("Industries", Model)
+        </div>
         </div>
         <div class="pad-bottom-20"></div>
     </div>

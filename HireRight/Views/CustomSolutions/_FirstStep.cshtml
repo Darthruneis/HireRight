@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Custom Solutions";
 }
-@using (Html.BeginForm("FirstStep", "CustomSolutions", FormMethod.Post, 
+
+@using (Html.BeginForm("FirstStep", "CustomSolutions", FormMethod.Post,
                        new { id = "CustomSolutionsFirstStepForm" }))
 {
     <div id="jobAnalysisInstructionsDiv">
@@ -11,17 +12,19 @@
     <div id="contactAndCompanyInfoDiv">
         @{ Html.RenderPartial("_ContactAndCompanyInfo", Model); }
     </div>
-    <div style="clear: both;">
-        <div class="pull-left">
-            @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-xs-12 marg-top-10">
+            <div class="pull-left">
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="pull-right">@Html.SubmitButton("Continue")</div>
         </div>
-        <div class="pull-right">@Html.SubmitButton("Continue")</div>
     </div>
 }
 <script>
     $("#CellNumber,#OfficeNumber,#Email").on("blur",
-        function() {
-            $("#CellNumber,#OfficeNumber,#Email").each(function(i, e) {
+        function () {
+            $("#CellNumber,#OfficeNumber,#Email").each(function (i, e) {
                 $(e).removeClass("input-validation-error");
                 var id = $(e).prop("id");
                 $(`.field-validation-error[data-valmsg-for='${id}']`).hide();

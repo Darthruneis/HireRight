@@ -1,36 +1,18 @@
 ﻿using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Net.Mail;
-using System.Web.Configuration;
 using HireRight.BusinessLogic.Abstract;
 
 namespace HireRight.BusinessLogic.Concrete
 {
     public class EmailSender : IEmailSender
     {
-        private readonly string _emailTemplatePath;
-        private readonly string DianaEmail;
-        private readonly string JanetEmail;
-        private readonly string MailServiceEmailAddress;
-#pragma warning disable 414
-        // ReSharper disable NotAccessedField.Local
-        private readonly NetworkCredential _smtpCredentials;
-        private readonly string _smtpHost;
-        private readonly int _smtpPort;
-        // ReSharper restore NotAccessedField.Local
-#pragma warning restore 414
+        private readonly IEmailSettings _emailSettings;
 
-        public EmailSender()
+        public EmailSender(IEmailSettings emailSettings)
         {
-            MailServiceEmailAddress = WebConfigurationManager.AppSettings["MailServiceEmailAddress"];
-            _smtpCredentials = new NetworkCredential(MailServiceEmailAddress, WebConfigurationManager.AppSettings["MailAccountPassword"]);
-            DianaEmail = WebConfigurationManager.AppSettings["DianaEmail"];
-            JanetEmail = WebConfigurationManager.AppSettings["JanetEmail"];
-            _smtpPort = 25;
-            _smtpHost = WebConfigurationManager.AppSettings["SmtpHost"];
-            _emailTemplatePath = WebConfigurationManager.AppSettings["EmailTemplatePath"];
+            _emailSettings = emailSettings;
         }
 
         public void EmailConsultants(string message, string subject, string replyTo = null)
@@ -40,8 +22,12 @@ namespace HireRight.BusinessLogic.Concrete
 #endif
 #pragma warning disable 162
             // ReSharper disable HeuristicUnreachableCode
-            SendFormattedEmail(DianaEmail, "Diana", message, subject, replyTo);
-            SendFormattedEmail(JanetEmail, "Janet", message, subject, replyTo);
+            foreach (var email in _emailSettings.ConsultantEmailAddresses)
+            {
+                SendFormattedEmail(email.email, email.name, message, subject, replyTo);
+                SendFormattedEmail(email.email, email.name, message, subject, replyTo);
+            }
+            
             SendFormattedEmail("info@HireRightTesting.com", "All", message, subject, replyTo);
             // ReSharper restore HeuristicUnreachableCode
 #pragma warning restore 162
@@ -52,7 +38,7 @@ namespace HireRight.BusinessLogic.Concrete
             using (SmtpClient emailClient = new SmtpClient())
             {
                 MailMessage mailMessage = new MailMessage(
-                    MailServiceEmailAddress,
+                    _emailSettings.SenderEmailAddress,
                     recipient,
                     subject,
                     //Replace normal line breaks with HTML break statements
@@ -63,9 +49,9 @@ namespace HireRight.BusinessLogic.Concrete
 
                 SetEmailPickupDirectory(emailClient);
 #if !DEBUG
-                emailClient.Host = _smtpHost;
-                emailClient.Port = _smtpPort;
-                emailClient.Credentials = _smtpCredentials;
+                emailClient.Host = _emailSettings.SmtpSettings.Host;
+                emailClient.Port = _emailSettings.SmtpSettings.Port;
+                emailClient.Credentials = _emailSettings.SmtpSettings.SmtpCredentials;
 #endif
                 emailClient.Send(mailMessage);
             }
@@ -74,7 +60,7 @@ namespace HireRight.BusinessLogic.Concrete
         public void SendFormattedEmail(string email, string greeting, string message, string subject, string replyTo = null)
         {
             string body;
-            using (StreamReader reader = new StreamReader(_emailTemplatePath))
+            using (StreamReader reader = new StreamReader(_emailSettings.EmailTemplatePath))
             {
                 body = reader.ReadToEnd();
             }

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Web.Configuration;
 using FluentAssertions;
 using HireRight.Persistence.Database_Context;
 using HireRight.Persistence.Models.CompanyAggregate;
@@ -52,19 +55,15 @@ namespace HireRight.Persistence.Tests
             }
         }
 
-        [TestFixture, Explicit]
+        [TestFixture]
         public class CategorySeedTests
         {
             [Test]
             public void DoesNotThrow()
             {
-                var result = ScaleCategorySeed.Seed();
-            }
+                Action action = () => ScaleCategorySeed.Seed();
 
-            [Test]
-            public void ToJsonStringTesting()
-            {
-                ScaleCategorySeed.UpdateJsonFile(ScaleCategorySeed.Seed());
+                action.ShouldNotThrow();
             }
         }
     }

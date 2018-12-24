@@ -28,8 +28,8 @@
 }
 
 input[type="submit"],
-button[type="submit"] {
-    float: right;
+input[type="button"],
+button {
     background-color: $submit_button_color;
 
     &:hover,

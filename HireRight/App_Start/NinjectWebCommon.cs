@@ -15,6 +15,16 @@ namespace HireRight
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
+        private static IKernel _instance;
+        public static IKernel Kernel
+        {
+            get
+            {
+                _instance = _instance ?? CreateKernel();
+                return _instance;
+            }
+        }
+
         /// <summary>
         /// Starts the application
         /// </summary>
@@ -22,7 +32,7 @@ namespace HireRight
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
-            bootstrapper.Initialize(CreateKernel);
+            bootstrapper.Initialize(() => Kernel);
         }
 
         /// <summary>

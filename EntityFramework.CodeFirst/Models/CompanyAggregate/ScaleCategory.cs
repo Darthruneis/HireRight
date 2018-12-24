@@ -30,10 +30,11 @@ namespace HireRight.Persistence.Models.CompanyAggregate
             Assessments = new List<AssessmentScaleCategoryBinder>();
         }
 
-        public ScaleCategory(string title, string description) : this()
+        public ScaleCategory(long id, string title, string description) : this()
         {
             Title = title;
             Description = description;
+            StaticId = id;
         }
 
         /// <summary>Returns a string that represents the current object.</summary>

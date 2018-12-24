@@ -83,7 +83,11 @@ img {
 }
 
 .background-white {
-    background-color: white;
+    background-color: $white;
+}
+
+.background-white-0_75 {
+    background-color: rgba($white, .75);
 }
 
 .background-fixed {
@@ -98,6 +102,9 @@ img {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+}
+
+.full-screen-height {
     min-height: calc(100vh - #{$navbar-height} - #{$footer-height} - 2px);
     min-height: -o-calc(100vh - #{$navbar-height} - #{$footer-height} - 2px); /* opera */
     min-height: -webkit-calc(100vh - #{$navbar-height} - #{$footer-height} - 2px); /* google, safari */

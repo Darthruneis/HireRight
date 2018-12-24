@@ -75,12 +75,8 @@ namespace HireRight
             kernel.Bind<ICategoriesBusinessLogic>().To<CategoriesBusinessLogic>();
             kernel.Bind<IIndustryBusinessLogic>().To<IndustryBusinessLogic>();
 
-            Func<IContext, object> getEmailTemplatePath = context =>
-                            {
-                                string baseDir = System.Web.HttpContext.Current.Server.MapPath("~");
-                                return Path.GetFullPath(baseDir + @"\EmailBase.cshtml");
-                            };
-            kernel.Bind<IEmailSender>().To<EmailSender>().WithConstructorArgument("emailTemplatePath", getEmailTemplatePath);
+            kernel.Bind<IEmailSettings>().To<WebConfigEmailSettings>();
+            kernel.Bind<IEmailSender>().To<EmailSender>();
         }
     }
 }

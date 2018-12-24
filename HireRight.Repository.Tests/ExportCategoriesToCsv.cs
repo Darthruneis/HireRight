@@ -961,7 +961,7 @@ namespace HireRight.Persistence.Tests
                 {
                     csvBuilder.AppendLine($"\"{wixScaleCategory.ID}\",\"{wixScaleCategory.Owner}\",{wixScaleCategory.DateCreated},{DateTime.UtcNow:u},\"{wixScaleCategory.Title}\",\"{wixScaleCategory.Description.Replace("\"", "'")}\",\"{wixScaleCategory.StaticId}\"");
                 }
-                if(subSet.Any())
+                if (subSet.Any())
                     File.WriteAllText($@"C:\Users\Chris\Documents\GitHubVisualStudio\HireRight\HireRight.Repository.Tests\UpdatedCategoriesWithDescriptions-{i}.csv", csvBuilder.ToString());
             }
         }

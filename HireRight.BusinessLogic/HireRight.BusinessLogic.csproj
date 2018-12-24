@@ -58,6 +58,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -71,6 +74,9 @@
     <Compile Include="Abstract\IBusinessLogicBase.cs" />
     <Compile Include="Abstract\ICompanyBusinessLogic.cs" />
     <Compile Include="Abstract\IContactsBusinessLogic.cs" />
+    <Compile Include="Abstract\IEmailSettings.cs" />
+    <Compile Include="Abstract\ISmtpSettings.cs" />
+    <Compile Include="Concrete\SmtpSettings.cs" />
     <Compile Include="Concrete\CategoriesBusinessLogic.cs" />
     <Compile Include="Concrete\CompanyBusinessLogic.cs" />
     <Compile Include="Concrete\ContactsBusinessLogic.cs" />

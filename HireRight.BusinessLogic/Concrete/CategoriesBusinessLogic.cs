@@ -30,7 +30,7 @@ namespace HireRight.BusinessLogic.Concrete
 
         public ScaleCategory ConvertDtoToModel(CategoryDTO dto)
         {
-            ScaleCategory model = new ScaleCategory(dto.Title, dto.Description);
+            ScaleCategory model = new ScaleCategory(1, dto.Title, dto.Description);
             model.RowGuid = dto.RowGuid;
             model.CreatedUtc = dto.CreatedUtc;
 
